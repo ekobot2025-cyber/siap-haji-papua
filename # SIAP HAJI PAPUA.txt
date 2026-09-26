@@ -1,0 +1,2603 @@
+# SIAP HAJI PAPUA
+
+## Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji Provinsi Papua
+
+---
+
+# 1. PERAN ANDA
+
+Bertindak sebagai:
+
+* Senior System Analyst
+* Senior Full-Stack Developer
+* Database Architect
+* UI/UX Designer
+* Information Security Engineer
+* Government Digital Service Designer
+
+Bangun aplikasi web bernama sementara:
+
+# SIAP HAJI PAPUA
+
+**Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji Provinsi Papua**
+
+Aplikasi ditujukan sebagai platform digital untuk membantu instansi penyelenggara haji tingkat Provinsi Papua dalam:
+
+* monitoring jamaah;
+* administrasi kepesertaan;
+* monitoring kesiapan;
+* koordinasi kabupaten/kota;
+* monitoring dokumen;
+* monitoring kesehatan secara administratif;
+* manasik;
+* pengelolaan kelompok dan kloter;
+* keberangkatan dan kepulangan;
+* pelayanan informasi;
+* pengaduan/helpdesk;
+* pelaporan;
+* dashboard pimpinan.
+
+PENTING:
+
+Identitas instansi, logo, nama kementerian/lembaga, nomenklatur organisasi, alamat, kontak, dan branding harus dibuat **configurable melalui System Settings**.
+
+Jangan hard-code nama kementerian/lembaga karena nomenklatur organisasi dapat berubah.
+
+Aplikasi ini bukan pengganti sistem nasional pemerintah.
+
+Data nasional/resmi hanya boleh dinyatakan sebagai data resmi jika berasal dari sumber/integrasi resmi.
+
+---
+
+# 2. FILOSOFI SISTEM
+
+SIAP HAJI PAPUA bukan sekadar database jamaah.
+
+Bangun sebagai:
+
+> **Hajj Provincial Monitoring & Service Command Center**
+
+Sistem harus dapat menjawab dengan cepat:
+
+* Berapa jumlah jamaah Papua?
+* Berapa yang sudah siap?
+* Berapa yang belum siap?
+* Kabupaten/kota mana yang memerlukan perhatian?
+* Apa penyebab jamaah belum siap?
+* Berapa dokumen yang belum lengkap?
+* Bagaimana progres pemeriksaan?
+* Bagaimana progres manasik?
+* Bagaimana kesiapan setiap kloter?
+* Siapa jamaah yang membutuhkan tindak lanjut?
+* Apa kegiatan penting berikutnya?
+* Apa masalah pelayanan yang belum terselesaikan?
+
+---
+
+# 3. STRUKTUR ORGANISASI SISTEM
+
+Gunakan struktur hierarki:
+
+PROVINSI PAPUA
+↓
+KABUPATEN / KOTA
+↓
+PETUGAS / KELOMPOK / KLOTER
+↓
+JAMAAH
+
+Struktur wilayah tidak boleh hard-coded.
+
+Buat master:
+
+**Master Wilayah**
+
+agar administrator dapat menambah, mengubah, mengaktifkan, atau menonaktifkan wilayah sesuai kebutuhan organisasi.
+
+---
+
+# 4. ROLE-BASED ACCESS CONTROL
+
+Implementasikan RBAC secara penuh.
+
+## ROLE 1 — SUPER ADMIN PROVINSI
+
+Akses:
+
+* seluruh sistem;
+* user;
+* roles;
+* permissions;
+* master data;
+* system settings;
+* audit log;
+* integrasi;
+* keamanan;
+* konfigurasi readiness;
+* seluruh data wilayah.
+
+---
+
+## ROLE 2 — PIMPINAN
+
+Fokus:
+
+**Executive Monitoring**
+
+Akses utama bersifat read-only.
+
+Dapat melihat:
+
+* Executive Dashboard;
+* statistik provinsi;
+* kesiapan kabupaten/kota;
+* readiness index;
+* early warning;
+* monitoring kloter;
+* laporan;
+* tren;
+* pengaduan strategis.
+
+Pimpinan tidak perlu melihat data sensitif jamaah secara default.
+
+---
+
+## ROLE 3 — ADMIN PROVINSI
+
+Dapat:
+
+* monitoring seluruh wilayah;
+* mengelola jamaah sesuai kewenangan;
+* verifikasi;
+* mengelola kloter;
+* mengelola informasi;
+* mengelola manasik tingkat provinsi;
+* mengelola laporan;
+* koordinasi kabupaten/kota;
+* menangani tindak lanjut.
+
+---
+
+## ROLE 4 — ADMIN KABUPATEN/KOTA
+
+Hanya dapat mengakses wilayahnya.
+
+Dapat:
+
+* melihat jamaah wilayah;
+* menambah/memperbarui data sesuai izin;
+* memverifikasi dokumen;
+* memperbarui status administrasi;
+* mengelola manasik lokal;
+* monitoring kesiapan;
+* melihat laporan wilayah.
+
+Tidak boleh mengakses jamaah wilayah lain.
+
+---
+
+## ROLE 5 — PETUGAS / KLOTER
+
+Hanya dapat melihat jamaah atau kloter yang menjadi tanggung jawabnya.
+
+Akses:
+
+* daftar jamaah;
+* status kesiapan;
+* jadwal;
+* checklist;
+* tindak lanjut;
+* informasi perjalanan.
+
+---
+
+## ROLE 6 — JAMAAH
+
+Hanya dapat melihat data dirinya sendiri.
+
+Akses:
+
+* Dashboard Saya;
+* Status Saya;
+* Dokumen Saya;
+* Manasik;
+* Jadwal;
+* Kloter;
+* Pengumuman;
+* Pusat Informasi;
+* Pengaduan/Bantuan;
+* Notifikasi.
+
+---
+
+# 5. AUTHENTICATION
+
+Buat halaman login modern:
+
+**SIAP HAJI PAPUA**
+
+"Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji Provinsi Papua"
+
+Field:
+
+* Username / Email
+* Password
+* Show Password
+* Remember Me
+* Lupa Password
+
+Tambahkan:
+
+* secure authentication;
+* password hashing;
+* session timeout;
+* rate limiting;
+* RBAC;
+* audit login;
+* failed login monitoring;
+* logout.
+
+Siapkan fondasi MFA untuk akun administratif.
+
+---
+
+# 6. EXECUTIVE DASHBOARD
+
+Ini merupakan dashboard utama Pimpinan.
+
+Header:
+
+**Dashboard Penyelenggaraan Haji Provinsi Papua**
+
+Subheader:
+
+**Musim Haji [Hijriah] H / [Masehi] M**
+
+---
+
+## KPI UTAMA
+
+Tampilkan:
+
+TOTAL JAMAAH
+
+SIAP BERANGKAT
+
+DALAM PROSES
+
+PERLU TINDAK LANJUT
+
+TOTAL KABUPATEN/KOTA
+
+TOTAL KLOTER
+
+DOKUMEN LENGKAP
+
+PEMERIKSAAN SELESAI
+
+MANAJEMEN DATA HARUS REAL-TIME DARI DATABASE.
+
+Jangan gunakan angka statis.
+
+---
+
+# 7. PROVINCIAL READINESS INDEX
+
+Buat:
+
+# INDEKS KESIAPAN HAJI PAPUA
+
+Contoh:
+
+**91%**
+
+██████████████████░░
+
+Komponen readiness dapat meliputi:
+
+* Verifikasi Identitas
+* Administrasi
+* Dokumen
+* Pemeriksaan
+* Manasik
+* Kloter
+* Persiapan keberangkatan
+
+Bobot tidak boleh hard-coded.
+
+Buat:
+
+**Readiness Configuration**
+
+Super Admin dapat menentukan bobot.
+
+Contoh:
+
+Identitas        10%
+Administrasi     20%
+Dokumen          20%
+Kesehatan        20%
+Manasik          15%
+Kloter           15%
+
+Total harus tervalidasi 100%.
+
+---
+
+# 8. MONITORING KABUPATEN/KOTA
+
+Buat widget:
+
+# KESIAPAN PER KABUPATEN/KOTA
+
+Contoh:
+
+Kota Jayapura     ███████████████████ 97%
+
+Kab. Jayapura     ██████████████████░ 94%
+
+Keerom             █████████████████░░ 91%
+
+Sarmi              ████████████████░░░ 87%
+
+Biak Numfor        ███████████████░░░░ 83%
+
+Tampilkan:
+
+* wilayah;
+* jumlah jamaah;
+* siap;
+* belum siap;
+* readiness score;
+* dokumen;
+* pemeriksaan;
+* manasik;
+* warning.
+
+Klik wilayah membuka:
+
+**Dashboard Kabupaten/Kota**
+
+---
+
+# 9. DASHBOARD KABUPATEN/KOTA
+
+Tampilkan:
+
+Nama Kabupaten/Kota
+
+Total Jamaah
+
+Laki-Laki
+
+Perempuan
+
+Siap
+
+Belum Siap
+
+Dokumen
+
+Administrasi
+
+Pemeriksaan
+
+Manasik
+
+Kloter
+
+Pengaduan
+
+Tampilkan:
+
+**Readiness Index Wilayah**
+
+dan daftar:
+
+**Jamaah Memerlukan Tindak Lanjut**
+
+---
+
+# 10. PETA SEBARAN JAMAAH
+
+Buat:
+
+# PETA JAMAAH HAJI PAPUA
+
+Gunakan peta interaktif Papua.
+
+Kabupaten/kota ditampilkan dengan marker atau visualisasi yang relevan.
+
+Ketika dipilih:
+
+Nama Wilayah
+
+Jumlah Jamaah
+
+Siap
+
+Belum Siap
+
+Readiness %
+
+Kloter
+
+Gunakan peta sebagai visualisasi agregat.
+
+Jangan tampilkan lokasi rumah jamaah.
+
+---
+
+# 11. EARLY WARNING SYSTEM
+
+Buat modul penting:
+
+# EARLY WARNING
+
+Kategori:
+
+🔴 CRITICAL
+
+🟠 WARNING
+
+🟡 ATTENTION
+
+🟢 NORMAL
+
+Contoh rule:
+
+CRITICAL:
+
+Keberangkatan < 14 hari DAN persyaratan wajib belum selesai.
+
+WARNING:
+
+Keberangkatan < 30 hari DAN readiness < 80%.
+
+ATTENTION:
+
+Dokumen belum lengkap.
+
+NORMAL:
+
+Seluruh tahapan selesai.
+
+Rule harus configurable.
+
+---
+
+# 12. ACTION CENTER
+
+Dashboard harus memiliki:
+
+# PERLU TINDAK LANJUT
+
+Contoh:
+
+⚠ 21 Jamaah — Dokumen
+
+⚠ 17 Jamaah — Pemeriksaan
+
+⚠ 19 Jamaah — Administrasi
+
+⚠ 8 Jamaah — Manasik
+
+⚠ 5 Jamaah — Verifikasi Data
+
+Klik angka membuka filtered list.
+
+Admin dapat:
+
+* assign ke petugas;
+* menambahkan catatan;
+* menetapkan deadline;
+* mengubah status tindak lanjut.
+
+Status:
+
+Open
+
+In Progress
+
+Resolved
+
+Escalated
+
+---
+
+# 13. DATA JAMAAH
+
+Buat Data Table profesional.
+
+Kolom:
+
+Foto
+
+Nomor Porsi
+
+Nama
+
+NIK (masked)
+
+Kabupaten/Kota
+
+Jenis Kelamin
+
+Usia
+
+Estimasi Keberangkatan
+
+Kloter
+
+Readiness
+
+Status
+
+Warning
+
+Action
+
+Fitur:
+
+Search
+
+Advanced Filter
+
+Sort
+
+Pagination
+
+Column Selector
+
+Export
+
+Bulk Action
+
+Filter:
+
+Kabupaten/Kota
+
+Kloter
+
+Gender
+
+Usia
+
+Status
+
+Dokumen
+
+Pemeriksaan
+
+Manasik
+
+Readiness
+
+---
+
+# 14. PROFIL JAMAAH 360°
+
+Buat halaman:
+
+# JAMAAH 360°
+
+Header:
+
+Foto
+
+Nama
+
+Nomor Porsi
+
+Kabupaten/Kota
+
+Kloter
+
+Status
+
+---
+
+## READINESS SCORE
+
+Contoh:
+
+**96% — SIAP**
+
+███████████████████░
+
+Checklist:
+
+✓ Identitas
+
+✓ Administrasi
+
+✓ Dokumen
+
+✓ Pemeriksaan
+
+✓ Manasik
+
+✓ Kloter
+
+⚠ Tindak Lanjut
+
+---
+
+Gunakan tabs:
+
+OVERVIEW
+
+BIODATA
+
+DOKUMEN
+
+ADMINISTRASI
+
+KESEHATAN
+
+MANASIK
+
+KLOTER
+
+LAYANAN
+
+TIMELINE
+
+---
+
+# 15. BIODATA JAMAAH
+
+Data:
+
+Nomor Porsi
+
+NIK
+
+Nomor KK
+
+Nama
+
+Tempat Lahir
+
+Tanggal Lahir
+
+Jenis Kelamin
+
+Alamat
+
+Kabupaten/Kota
+
+Kecamatan
+
+Kelurahan
+
+No HP
+
+Email
+
+Kontak Keluarga
+
+Tahun Pendaftaran
+
+Estimasi Keberangkatan
+
+Data sensitif harus masked sesuai permission.
+
+---
+
+# 16. JAMAAH TIMELINE
+
+Buat:
+
+# RIWAYAT PERJALANAN JAMAAH
+
+Contoh:
+
+12/09 — Biodata diverifikasi
+
+14/09 — Manasik hadir
+
+17/09 — Pemeriksaan selesai
+
+20/09 — Dokumen diverifikasi
+
+22/09 — Kloter ditetapkan
+
+Timeline otomatis berasal dari event/audit system.
+
+---
+
+# 17. DOKUMEN
+
+Modul:
+
+# MONITORING DOKUMEN
+
+Jenis dokumen configurable.
+
+Contoh:
+
+KTP
+
+KK
+
+Paspor
+
+Visa
+
+Foto
+
+Dokumen Administrasi
+
+Dokumen Kesehatan
+
+Dokumen Perjalanan
+
+Status:
+
+Belum Ada
+
+Uploaded
+
+Menunggu Verifikasi
+
+Terverifikasi
+
+Perlu Perbaikan
+
+Admin dapat:
+
+Upload
+
+Preview
+
+Verify
+
+Reject
+
+Add Note
+
+Catat:
+
+Uploader
+
+Verifier
+
+Timestamp
+
+Reason
+
+---
+
+# 18. ADMINISTRASI
+
+Buat:
+
+# MONITORING ADMINISTRASI
+
+Status:
+
+Belum
+
+Dalam Proses
+
+Menunggu Verifikasi
+
+Selesai
+
+Perlu Tindak Lanjut
+
+Tampilkan:
+
+Jamaah
+
+Nomor Porsi
+
+Wilayah
+
+Status
+
+Tanggal
+
+Referensi
+
+Verifier
+
+Catatan
+
+Data yang belum berasal dari integrasi resmi harus diberi label jelas.
+
+---
+
+# 19. MONITORING KESEHATAN
+
+Buat:
+
+# MONITORING KESIAPAN KESEHATAN
+
+Fokus pada status administratif.
+
+Tampilkan:
+
+Belum Pemeriksaan
+
+Dalam Proses
+
+Selesai
+
+Perlu Tindak Lanjut
+
+Data:
+
+Tanggal
+
+Lokasi
+
+Tahapan
+
+Status
+
+Jadwal Berikutnya
+
+Status tindak lanjut
+
+Jangan menampilkan diagnosis pada dashboard umum.
+
+Data medis sensitif harus memiliki permission khusus.
+
+---
+
+# 20. MANAJEMEN MANASIK
+
+Buat:
+
+# MANAJEMEN MANASIK
+
+Dashboard:
+
+Total Kegiatan
+
+Total Peserta
+
+Kehadiran
+
+Tidak Hadir
+
+Rata-rata Kehadiran
+
+Admin dapat membuat:
+
+Judul
+
+Tanggal
+
+Jam
+
+Lokasi
+
+Wilayah
+
+Narasumber
+
+Materi
+
+Target Peserta
+
+Tambahkan:
+
+QR Attendance
+
+Manual Attendance
+
+Status:
+
+Hadir
+
+Tidak Hadir
+
+Izin
+
+---
+
+# 21. KELOMPOK & KLOTER
+
+Buat:
+
+# MONITORING KLOTER
+
+Cards:
+
+KLOTER 01
+
+Jumlah: 350
+
+Readiness: 98%
+
+███████████████████░
+
+KLOTER 02
+
+Jumlah: 340
+
+Readiness: 92%
+
+█████████████████░░
+
+Data:
+
+Nomor Kloter
+
+Embarkasi
+
+Ketua Kloter
+
+Petugas
+
+Jumlah Jamaah
+
+Jadwal Masuk Asrama
+
+Keberangkatan
+
+Kepulangan
+
+Maskapai
+
+Flight
+
+Status
+
+---
+
+# 22. KLOTER COMMAND CENTER
+
+Klik kloter membuka:
+
+# KLOTER COMMAND CENTER
+
+Tampilkan:
+
+Total Jamaah
+
+Siap
+
+Belum Siap
+
+Dokumen
+
+Pemeriksaan
+
+Manasik
+
+Warning
+
+Jadwal
+
+Petugas
+
+Manifest Internal
+
+Daftar Jamaah
+
+Filter:
+
+Ready
+
+Not Ready
+
+Critical
+
+---
+
+# 23. MONITORING KEBERANGKATAN
+
+Buat timeline:
+
+Pendaftaran
+
+↓
+
+Verifikasi
+
+↓
+
+Dokumen
+
+↓
+
+Pemeriksaan
+
+↓
+
+Manasik
+
+↓
+
+Kloter
+
+↓
+
+Asrama
+
+↓
+
+Keberangkatan
+
+↓
+
+Arab Saudi
+
+↓
+
+Kepulangan
+
+↓
+
+Selesai
+
+Tahapan configurable.
+
+---
+
+# 24. JADWAL & CALENDAR
+
+Buat kalender terpadu:
+
+# KALENDER HAJI PAPUA
+
+Event:
+
+Manasik
+
+Verifikasi
+
+Pemeriksaan
+
+Dokumen
+
+Rapat
+
+Masuk Asrama
+
+Keberangkatan
+
+Kepulangan
+
+Filter:
+
+Provinsi
+
+Kabupaten/Kota
+
+Kloter
+
+---
+
+# 25. PENGUMUMAN
+
+Admin dapat membuat:
+
+Judul
+
+Isi
+
+Kategori
+
+Tanggal
+
+Lampiran
+
+Target
+
+Target dapat:
+
+Semua
+
+Kabupaten/Kota
+
+Kloter
+
+Petugas
+
+Jamaah tertentu
+
+Kategori:
+
+Penting
+
+Dokumen
+
+Manasik
+
+Pemeriksaan
+
+Keberangkatan
+
+Informasi
+
+---
+
+# 26. PUSAT DOKUMEN
+
+Buat:
+
+# PUSAT DOKUMEN HAJI
+
+Kategori:
+
+Regulasi
+
+Surat Edaran
+
+SOP
+
+Panduan
+
+Formulir
+
+Materi
+
+Jadwal
+
+Dokumen Internal
+
+Setiap dokumen:
+
+Judul
+
+Nomor
+
+Tanggal
+
+Kategori
+
+File
+
+Sumber
+
+Status
+
+Versi
+
+---
+
+# 27. HELP DESK & PENGADUAN
+
+Buat:
+
+# LAYANAN & PENGADUAN
+
+Jamaah dapat membuat tiket.
+
+Field:
+
+Kategori
+
+Subjek
+
+Deskripsi
+
+Lampiran
+
+Status:
+
+Open
+
+Assigned
+
+In Progress
+
+Resolved
+
+Closed
+
+SLA indicator:
+
+Normal
+
+Warning
+
+Overdue
+
+Admin dapat assign tiket ke petugas.
+
+---
+
+# 28. NOTIFICATION CENTER
+
+Notifikasi:
+
+Dokumen belum lengkap
+
+Manasik
+
+Pemeriksaan
+
+Kloter
+
+Keberangkatan
+
+Pengaduan
+
+Pengumuman
+
+Action Center
+
+Status:
+
+Unread
+
+Read
+
+Important
+
+Siapkan adapter untuk integrasi:
+
+Email
+
+WhatsApp
+
+SMS
+
+Push Notification
+
+Jika API belum tersedia:
+
+JANGAN buat integrasi palsu.
+
+Gunakan:
+
+Demo / Mock Provider.
+
+---
+
+# 29. PORTAL JAMAAH
+
+Buat UI sederhana dan mobile-first.
+
+Header:
+
+**Assalamu'alaikum, [Nama]**
+
+Nomor Porsi: ******1234
+
+Kloter: 05
+
+---
+
+## STATUS KESIAPAN
+
+**85%**
+
+█████████████████░░░
+
+✓ Biodata
+
+✓ Administrasi
+
+✓ Dokumen
+
+⏳ Pemeriksaan
+
+✓ Manasik
+
+○ Kloter
+
+Button utama:
+
+# APA YANG HARUS SAYA SELESAIKAN?
+
+Ketika diklik:
+
+Tampilkan seluruh outstanding task.
+
+---
+
+# 30. MENU JAMAAH
+
+Beranda
+
+Status Saya
+
+Dokumen Saya
+
+Manasik
+
+Jadwal
+
+Kloter & Perjalanan
+
+Pengumuman
+
+Pusat Informasi
+
+Pengaduan
+
+Notifikasi
+
+Profil
+
+---
+
+# 31. PUSAT INFORMASI
+
+Kategori:
+
+Persyaratan
+
+Dokumen
+
+Kesehatan
+
+Manasik
+
+Bagasi
+
+Keberangkatan
+
+Makkah
+
+Madinah
+
+Arafah
+
+Muzdalifah
+
+Mina
+
+Kepulangan
+
+FAQ
+
+Setiap artikel:
+
+Judul
+
+Konten
+
+Tanggal Update
+
+Sumber
+
+URL sumber
+
+Status:
+
+Internal
+
+Verified
+
+Official External
+
+---
+
+# 32. AI ASSISTANT
+
+Buat:
+
+# ASISTEN HAJI PAPUA
+
+Floating button:
+
+**Tanya Asisten Haji**
+
+Contoh:
+
+"Kapan jadwal manasik saya?"
+
+"Dokumen saya apa yang belum lengkap?"
+
+"Saya kloter berapa?"
+
+"Kapan jadwal keberangkatan?"
+
+"Bagaimana status kesiapan saya?"
+
+AI hanya boleh menggunakan:
+
+* Knowledge Base;
+* data pengguna yang diizinkan;
+* pengumuman;
+* jadwal;
+* sumber resmi yang telah diverifikasi.
+
+AI tidak boleh:
+
+* mengarang;
+* memberikan nomor porsi palsu;
+* mengubah data;
+* mengarang jadwal;
+* mengarang aturan;
+* memberikan diagnosis;
+* membuka data jamaah lain.
+
+Fallback:
+
+"Maaf, informasi tersebut belum tersedia pada SIAP HAJI PAPUA. Silakan menghubungi petugas atau melihat sumber resmi yang tersedia."
+
+---
+
+# 33. REPORTING CENTER
+
+Buat:
+
+# LAPORAN HAJI PAPUA
+
+Laporan:
+
+Rekap Jamaah Provinsi
+
+Rekap Kabupaten/Kota
+
+Kesiapan Jamaah
+
+Dokumen
+
+Administrasi
+
+Pemeriksaan
+
+Manasik
+
+Kloter
+
+Early Warning
+
+Pengaduan
+
+Filter:
+
+Musim Haji
+
+Kabupaten/Kota
+
+Kloter
+
+Gender
+
+Usia
+
+Status
+
+Readiness
+
+Export:
+
+PDF
+
+Excel
+
+Print
+
+---
+
+# 34. EXECUTIVE REPORT
+
+Buat laporan khusus pimpinan:
+
+# EXECUTIVE HAJJ READINESS REPORT
+
+Isi:
+
+Executive Summary
+
+Total Jamaah
+
+Readiness Index
+
+Kesiapan Wilayah
+
+Kesiapan Kloter
+
+Critical Issues
+
+Top Outstanding Problems
+
+Trend
+
+Action Required
+
+Laporan harus dapat dicetak menjadi PDF profesional.
+
+---
+
+# 35. ANALYTICS
+
+Dashboard analytics:
+
+Trend kesiapan
+
+Dokumen
+
+Pemeriksaan
+
+Manasik
+
+Kloter
+
+Pengaduan
+
+Kabupaten/Kota
+
+Gunakan chart sederhana.
+
+Jangan menggunakan chart hanya untuk dekorasi.
+
+Setiap visual harus membantu pengambilan keputusan.
+
+---
+
+# 36. GLOBAL SEARCH
+
+Search:
+
+Nama
+
+Nomor Porsi
+
+NIK
+
+No HP
+
+Kloter
+
+Kabupaten/Kota
+
+Hasil mengikuti permission.
+
+Gunakan masking data sensitif.
+
+---
+
+# 37. AUDIT TRAIL
+
+Catat:
+
+Login
+
+Logout
+
+View sensitive data
+
+Create
+
+Update
+
+Delete
+
+Verify
+
+Reject
+
+Export
+
+Print
+
+Role Change
+
+Permission Change
+
+Data:
+
+Actor
+
+Action
+
+Module
+
+Record
+
+Timestamp
+
+IP
+
+Before
+
+After
+
+Audit Log tidak boleh diubah oleh Admin biasa.
+
+---
+
+# 38. MASTER DATA
+
+Buat:
+
+Wilayah
+
+Musim Haji
+
+Embarkasi
+
+Kloter
+
+Jenis Dokumen
+
+Status Jamaah
+
+Tahapan
+
+Kategori Manasik
+
+Kategori Pengumuman
+
+Kategori Pengaduan
+
+Lokasi
+
+Readiness Components
+
+Early Warning Rules
+
+Jangan hard-code master data.
+
+---
+
+# 39. SYSTEM SETTINGS
+
+Buat halaman:
+
+# PENGATURAN SISTEM
+
+Admin dapat mengubah:
+
+Nama Aplikasi
+
+Nama Instansi
+
+Logo Instansi
+
+Logo Aplikasi
+
+Alamat
+
+Website
+
+Email
+
+Telepon
+
+Footer
+
+Musim Haji Aktif
+
+Format Nomor
+
+Timezone
+
+Branding
+
+Nama kementerian/lembaga tidak boleh hard-coded.
+
+---
+
+# 40. DATABASE ARCHITECTURE
+
+Gunakan PostgreSQL.
+
+Minimal entities:
+
+users
+
+roles
+
+permissions
+
+user_roles
+
+role_permissions
+
+regions
+
+hajj_seasons
+
+jamaah
+
+jamaah_contacts
+
+jamaah_status_history
+
+document_types
+
+jamaah_documents
+
+document_verifications
+
+administration_records
+
+health_monitoring
+
+manasik_events
+
+manasik_attendance
+
+groups
+
+kloter
+
+kloter_members
+
+officers
+
+travel_stages
+
+travel_schedules
+
+announcements
+
+announcement_targets
+
+notifications
+
+information_articles
+
+helpdesk_tickets
+
+ticket_messages
+
+ticket_assignments
+
+readiness_components
+
+readiness_scores
+
+warning_rules
+
+warning_events
+
+action_items
+
+audit_logs
+
+system_settings
+
+Gunakan:
+
+UUID
+
+foreign keys
+
+indexes
+
+constraints
+
+created_at
+
+updated_at
+
+created_by
+
+soft delete jika relevan.
+
+---
+
+# 41. SECURITY & PRIVACY
+
+Ini adalah aplikasi pemerintahan yang memproses data pribadi.
+
+Implementasikan:
+
+RBAC
+
+Least Privilege
+
+Row-Level Authorization
+
+Secure Password Hashing
+
+Session Security
+
+MFA-ready
+
+Rate Limiting
+
+Input Validation
+
+Sanitization
+
+Secure Upload
+
+File Type Validation
+
+File Size Restriction
+
+Audit Logging
+
+Sensitive Data Masking
+
+Encryption
+
+Backup Strategy
+
+Secure API
+
+Authorization setiap endpoint
+
+Data Export Permission
+
+Jangan tampilkan NIK penuh kecuali role memiliki izin.
+
+Jangan simpan data sensitif dalam URL.
+
+---
+
+# 42. UI/UX DESIGN SYSTEM
+
+Gunakan gaya:
+
+# MODERN GOVERNMENT HAJJ COMMAND CENTER
+
+Bukan website pemerintahan lama.
+
+Tampilan:
+
+Modern
+
+Minimal
+
+Premium
+
+Profesional
+
+Human-centered
+
+Accessible
+
+Gunakan kombinasi:
+
+Deep Emerald
+
+Emerald
+
+Warm White
+
+Neutral Gray
+
+Gold sebagai accent
+
+Gunakan gold secukupnya.
+
+Components:
+
+Cards
+
+Data Tables
+
+Status Badge
+
+Progress
+
+Timeline
+
+Charts
+
+Map
+
+Drawer
+
+Modal
+
+Toast
+
+Command Search
+
+Skeleton Loading
+
+Empty State
+
+---
+
+# 43. AKSESIBILITAS
+
+Perhatikan jamaah usia lanjut.
+
+Gunakan:
+
+Font mudah dibaca
+
+Kontras tinggi
+
+Minimum touch target 44px
+
+Icon + Text
+
+Button besar
+
+Bahasa sederhana
+
+Jangan hanya mengandalkan warna
+
+Sediakan:
+
+**Mode Teks Besar**
+
+Portal Jamaah harus mobile-first.
+
+---
+
+# 44. SIDEBAR ADMIN
+
+Gunakan struktur:
+
+DASHBOARD
+
+EXECUTIVE MONITORING
+
+JAMAAH
+
+WILAYAH
+
+DOKUMEN
+
+ADMINISTRASI
+
+KESEHATAN
+
+MANASIK
+
+KELOMPOK & KLOTER
+
+PERJALANAN
+
+KALENDER
+
+ACTION CENTER
+
+PENGUMUMAN
+
+PUSAT DOKUMEN
+
+PENGADUAN
+
+NOTIFIKASI
+
+LAPORAN
+
+ANALYTICS
+
+USERS & ROLES
+
+AUDIT LOG
+
+MASTER DATA
+
+PENGATURAN
+
+Gunakan grouping agar sidebar tidak terlalu panjang.
+
+---
+
+# 45. EXECUTIVE DASHBOARD WIREFRAME
+
+Gunakan struktur:
+
+SIAP HAJI PAPUA
+Musim Haji 144X H / 20XX M
+
+[ TOTAL JAMAAH ]
+[ SIAP ]
+[ DALAM PROSES ]
+[ PERLU TINDAK LANJUT ]
+[ KLOTER ]
+
+---
+
+INDEKS KESIAPAN HAJI PAPUA
+
+91%
+
+██████████████████░░
+
+---
+
+KESIAPAN PER WILAYAH
+
+Kota Jayapura     97%
+
+Kab. Jayapura     94%
+
+Keerom            91%
+
+Sarmi             87%
+
+---
+
+PETA SEBARAN JAMAAH
+
+[ PAPUA MAP ]
+
+---
+
+EARLY WARNING
+
+🔴 7 Critical
+
+🟠 18 Warning
+
+🟡 31 Attention
+
+---
+
+MONITORING KLOTER
+
+Kloter 01     98%
+
+Kloter 02     92%
+
+Kloter 03     87%
+
+---
+
+ACTION CENTER
+
+21 Dokumen
+
+17 Pemeriksaan
+
+8 Manasik
+
+4 Administrasi
+
+---
+
+AGENDA TERDEKAT
+
+---
+
+PENGUMUMAN
+
+---
+
+# 46. DEMO DATA
+
+Buat data sintetis untuk prototype.
+
+Minimal:
+
+200 jamaah
+
+Beberapa kabupaten/kota
+
+4–6 kloter
+
+Petugas
+
+Dokumen
+
+Administrasi
+
+Status pemeriksaan
+
+Manasik
+
+Warnings
+
+Pengaduan
+
+Notifications
+
+Gunakan label:
+
+# DATA DEMO
+
+Jangan gunakan NIK atau identitas orang nyata.
+
+---
+
+# 47. STATUS SUMBER DATA
+
+Setiap data penting harus memungkinkan metadata:
+
+INTERNAL
+
+DEMO
+
+VERIFIED
+
+OFFICIAL EXTERNAL
+
+Tampilkan badge jika relevan.
+
+Jangan menyebut data sebagai "resmi" jika belum berasal dari integrasi resmi.
+
+---
+
+# 48. INTEGRATION ARCHITECTURE
+
+Siapkan integration layer untuk kemungkinan integrasi masa depan.
+
+Gunakan adapter architecture.
+
+Contoh:
+
+National Hajj System Adapter
+
+WhatsApp Adapter
+
+SMS Adapter
+
+Email Adapter
+
+Maps Adapter
+
+Payment/Administration Adapter
+
+Identity Verification Adapter
+
+Jangan mengarang API.
+
+Jika credential/API tidak tersedia:
+
+status = NOT CONNECTED.
+
+---
+
+# 49. PERFORMANCE
+
+Implementasikan:
+
+Server-side pagination
+
+Database indexing
+
+Lazy loading
+
+Caching
+
+Image optimization
+
+Code splitting
+
+Efficient queries
+
+Dashboard tidak boleh melakukan query besar tanpa pagination/agregasi.
+
+---
+
+# 50. RESPONSIVE
+
+Desktop:
+
+Sidebar + Header + Command Center
+
+Tablet:
+
+Collapsible Sidebar
+
+Mobile Admin:
+
+Drawer
+
+Mobile Jamaah:
+
+Bottom Navigation
+
+Portal jamaah harus sangat nyaman digunakan melalui smartphone.
+
+---
+
+# 51. ERROR & SYSTEM STATES
+
+Buat:
+
+Loading Skeleton
+
+Empty State
+
+Error State
+
+Unauthorized
+
+Forbidden
+
+Not Found
+
+Network Error
+
+Session Expired
+
+Maintenance
+
+No Data
+
+No Search Result
+
+Integration Offline
+
+Jangan meninggalkan halaman kosong.
+
+---
+
+# 52. DEVELOPMENT ARCHITECTURE
+
+Gunakan modular architecture.
+
+Pisahkan:
+
+auth
+
+users
+
+jamaah
+
+regions
+
+documents
+
+administration
+
+health
+
+manasik
+
+kloter
+
+travel
+
+notifications
+
+helpdesk
+
+reports
+
+analytics
+
+readiness
+
+warning
+
+audit
+
+settings
+
+integrations
+
+AI
+
+Jangan membuat monolithic file besar.
+
+---
+
+# 53. READINESS ENGINE
+
+Buat service khusus:
+
+**Readiness Engine**
+
+Input:
+
+Status setiap komponen.
+
+Output:
+
+0–100.
+
+Kategori:
+
+90–100 = SIAP
+
+75–89 = HAMPIR SIAP
+
+50–74 = PERLU TINDAK LANJUT
+
+<50 = PRIORITAS
+
+Kategori dan threshold harus configurable.
+
+Readiness dihitung otomatis ketika komponen berubah.
+
+---
+
+# 54. WARNING ENGINE
+
+Buat:
+
+**Early Warning Engine**
+
+Engine membaca:
+
+Readiness
+
+Dokumen
+
+Administrasi
+
+Pemeriksaan
+
+Manasik
+
+Kloter
+
+Tanggal keberangkatan
+
+Outstanding Task
+
+Kemudian menghasilkan warning otomatis.
+
+Semua rule harus dapat dilacak:
+
+Rule
+
+Reason
+
+Severity
+
+Created At
+
+Resolved At
+
+Resolved By
+
+---
+
+# 55. DEVELOPMENT PHASE
+
+Jangan membuat seluruh sistem sekaligus.
+
+## PHASE 1 — FOUNDATION
+
+Kerjakan terlebih dahulu:
+
+Authentication
+
+RBAC
+
+Database
+
+Master Wilayah
+
+Musim Haji
+
+Jamaah
+
+Jamaah 360
+
+Dashboard
+
+Readiness Engine
+
+Audit Log
+
+System Settings
+
+---
+
+## PHASE 2 — OPERATIONAL
+
+Dokumen
+
+Administrasi
+
+Kesehatan
+
+Manasik
+
+Kloter
+
+Calendar
+
+Warning Engine
+
+Action Center
+
+---
+
+## PHASE 3 — SERVICES
+
+Portal Jamaah
+
+Pengumuman
+
+Notification
+
+Helpdesk
+
+Pusat Informasi
+
+Pusat Dokumen
+
+Reporting
+
+---
+
+## PHASE 4 — INTELLIGENCE
+
+Executive Analytics
+
+Advanced Reporting
+
+AI Assistant
+
+QR Attendance
+
+Map Analytics
+
+---
+
+## PHASE 5 — INTEGRATION
+
+Hanya jika API resmi tersedia:
+
+Government/National System
+
+WhatsApp
+
+SMS
+
+Email
+
+Maps
+
+Identity Services
+
+External Data
+
+---
+
+# 56. OUTPUT PERTAMA YANG WAJIB DIBUAT
+
+JANGAN LANGSUNG CODING.
+
+Sebelum implementasi, tampilkan:
+
+1. Executive System Concept
+2. System Architecture
+3. Sitemap
+4. Role & Permission Matrix
+5. User Flow
+6. ERD
+7. Database Schema
+8. API Architecture
+9. Readiness Engine Logic
+10. Early Warning Logic
+11. Security Architecture
+12. Admin Dashboard Wireframe
+13. Executive Dashboard Wireframe
+14. Kabupaten/Kota Dashboard Wireframe
+15. Jamaah 360 Wireframe
+16. Portal Jamaah Wireframe
+17. UI Design System
+18. Development Roadmap
+
+Setelah rancangan tersebut selesai dan konsisten, baru implementasikan:
+
+# PHASE 1
+
+---
+
+# 57. PRINSIP PENGEMBANGAN
+
+Gunakan prinsip:
+
+**REAL FUNCTION > VISUAL DEMO**
+
+Semua:
+
+Button
+
+Form
+
+Search
+
+Filter
+
+Pagination
+
+Navigation
+
+Modal
+
+Export
+
+Progress
+
+Warning
+
+Notification
+
+harus memiliki fungsi.
+
+Jangan membuat tombol dekoratif.
+
+Jangan membuat fake API.
+
+Jangan membuat fake integration.
+
+Jangan membuat fake analytics.
+
+Jangan membuat data medis palsu sebagai data nyata.
+
+Gunakan data demo hanya untuk prototype dan beri label jelas.
+
+---
+
+# 58. TUJUAN AKHIR
+
+SIAP HAJI PAPUA harus berkembang menjadi:
+
+> **Pusat Monitoring, Koordinasi, Informasi, dan Pelayanan Penyelenggaraan Haji Provinsi Papua**
+
+Sistem harus membantu:
+
+**Pimpinan**
+
+melihat kondisi penyelenggaraan secara cepat.
+
+**Petugas Provinsi**
+
+mengkoordinasikan pelayanan.
+
+**Kabupaten/Kota**
+
+mengelola dan menyelesaikan kesiapan jamaah.
+
+**Petugas Kloter**
+
+memantau jamaah yang menjadi tanggung jawabnya.
+
+**Jamaah**
+
+mengetahui status dan mendapatkan layanan dengan mudah.
+
+Fokus utama:
+
+# SATU DATA — SATU MONITORING — SATU LAYANAN — HAJI PAPUA SIAP
+
+
+
+
+IMPORTANT EXECUTION INSTRUCTION
+
+Do not attempt to build the entire application in one iteration.
+
+Treat the MASTER PROMPT above as the primary product specification
+for the SIAP HAJI PAPUA project.
+
+For this first iteration:
+
+1. Analyze the complete specification.
+2. Do NOT start coding yet.
+3. Produce all 18 planning outputs defined in Section 56.
+4. Check consistency between:
+   - roles and permissions
+   - sitemap
+   - user flows
+   - database/ERD
+   - API architecture
+   - readiness engine
+   - early warning engine
+   - dashboard requirements
+   - security architecture
+
+5. Clearly identify:
+   - assumptions
+   - missing requirements
+   - technical risks
+   - security/privacy risks
+   - features requiring external APIs
+   - features that should NOT be implemented yet.
+
+6. Separate:
+   - REAL INTERNAL DATA
+   - DEMO DATA
+   - VERIFIED DATA
+   - OFFICIAL EXTERNAL DATA
+
+7. Do not invent government APIs or integrations.
+
+8. Do not hard-code:
+   - institution name
+   - ministry name
+   - regions
+   - hajj season
+   - kloter
+   - readiness weights
+   - warning thresholds.
+
+9. Design the system to support future organizational or regulatory
+   changes without requiring major source-code changes.
+
+10. Wait for my approval before implementing PHASE 1.
+
+The first response should be a SYSTEM DESIGN DOCUMENT,
+not application code.

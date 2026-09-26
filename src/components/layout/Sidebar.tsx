@@ -1,0 +1,166 @@
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  LayoutDashboard,
+  Users,
+  FileCheck,
+  CreditCard,
+  HeartPulse,
+  BookOpen,
+  Plane,
+  AlertCircle,
+  Settings,
+  Database,
+  History,
+  ShieldAlert,
+  Calendar,
+  Compass,
+  Sparkles,
+  Tv,
+  QrCode,
+  FileText,
+} from 'lucide-react';
+import type { UserSessionPayload } from '@/infrastructure/security/jwt';
+
+interface SidebarProps {
+  session: UserSessionPayload | null;
+}
+
+export function Sidebar({ session }: SidebarProps) {
+  const pathname = usePathname();
+
+  const isSuperAdmin = session?.roles.includes('SUPER_ADMIN');
+  const isJamaah = session?.roles.includes('JAMAAH');
+
+  const navSections = isJamaah
+    ? [
+        {
+          title: 'PORTAL JAMAAH MANDIRI',
+          items: [
+            { label: 'Kesiapan & Status Saya', href: '/portal-jamaah', icon: LayoutDashboard, active: pathname === '/portal-jamaah' },
+            { label: 'Smart Hajj Pass (Digital)', href: '/portal-jamaah#hajj-pass', icon: QrCode, active: false, badge: 'KARTU', badgeColor: 'bg-[#D4AF37] text-gray-950 font-bold' },
+            { label: 'Kelengkapan Dokumen', href: '/portal-jamaah#dokumen', icon: FileCheck, active: false },
+            { label: 'Jadwal Manasik Haji', href: '/portal-jamaah#manasik', icon: BookOpen, active: false },
+            { label: 'Kontak Petugas Kloter', href: '/portal-jamaah#petugas', icon: Plane, active: false },
+          ],
+        },
+        {
+          title: 'LAYANAN TERBUKA',
+          items: [
+            { label: 'Cek Porsi Mandiri', href: '/cek-porsi', icon: QrCode, active: pathname === '/cek-porsi', badge: 'PUBLIK', badgeColor: 'bg-emerald-500 text-white' },
+          ],
+        },
+      ]
+    : [
+        {
+          title: 'COMMAND CENTER',
+          items: [
+            { label: 'Executive Dashboard', href: '/', icon: LayoutDashboard, active: pathname === '/' },
+            { label: 'Action Center', href: '/action-center', icon: AlertCircle, active: pathname.startsWith('/action-center'), badge: '65', badgeColor: 'bg-rose-500 text-white' },
+            { label: 'Early Warning Engine', href: '/monitoring/early-warning', icon: ShieldAlert, active: pathname.startsWith('/monitoring/early-warning'), badge: 'RISIKO', badgeColor: 'bg-amber-500 text-white' },
+            { label: 'Peta Spasial Papua', href: '/monitoring/peta-wilayah', icon: Compass, active: pathname.startsWith('/monitoring/peta-wilayah') },
+            { label: 'Mode Video Wall', href: '/video-wall', icon: Tv, active: pathname === '/video-wall', badge: 'BIG SCREEN', badgeColor: 'bg-[#D4AF37] text-gray-950 font-bold' },
+            { label: 'Laporan & Rekap Resmi', href: '/laporan', icon: FileText, active: pathname === '/laporan', badge: 'RESMI', badgeColor: 'bg-emerald-500 text-white' },
+            { label: 'Kalender Operasional', href: '/kalender', icon: Calendar, active: pathname.startsWith('/kalender') },
+          ],
+        },
+        {
+          title: 'OPERASIONAL TAHAPAN',
+          items: [
+            { label: 'Data Jamaah', href: '/jamaah', icon: Users, active: pathname.startsWith('/jamaah') },
+            { label: 'Dokumen & Paspor', href: '/dokumen', icon: FileCheck, active: pathname.startsWith('/dokumen'), badge: '21', badgeColor: 'bg-amber-500/20 text-amber-300' },
+            { label: 'Administrasi BPIH', href: '/administrasi', icon: CreditCard, active: pathname.startsWith('/administrasi'), badge: '19', badgeColor: 'bg-blue-500/20 text-blue-300' },
+            { label: 'Monitoring Kesehatan', href: '/kesehatan', icon: HeartPulse, active: pathname.startsWith('/kesehatan'), badge: '17', badgeColor: 'bg-rose-500/20 text-rose-300' },
+            { label: 'Bimbingan Manasik', href: '/manasik', icon: BookOpen, active: pathname.startsWith('/manasik'), badge: '8', badgeColor: 'bg-purple-500/20 text-purple-300' },
+            { label: 'Manajemen Kloter', href: '/kloter', icon: Plane, active: pathname.startsWith('/kloter'), badge: '4 Kloter', badgeColor: 'bg-emerald-500/20 text-emerald-300' },
+            { label: 'Simulasi Kuota Cadangan', href: '/monitoring/simulasi-kuota', icon: Sparkles, active: pathname.startsWith('/monitoring/simulasi-kuota'), badge: 'DSS', badgeColor: 'bg-purple-500/20 text-purple-300' },
+          ],
+        },
+        {
+          title: 'LAYANAN PUBLIK',
+          items: [
+            { label: 'Portal Cek Porsi Mandiri', href: '/cek-porsi', icon: QrCode, active: pathname === '/cek-porsi', badge: 'WARGA', badgeColor: 'bg-emerald-500 text-white' },
+          ],
+        },
+        {
+          title: 'SISTEM & AUDIT',
+          items: [
+            { label: 'Audit Trail', href: '/system/audit-logs', icon: History, active: pathname === '/system/audit-logs' },
+            { label: 'Master Data', href: '/system/master-data', icon: Database, active: pathname === '/system/master-data' },
+            ...(isSuperAdmin
+              ? [{ label: 'Pengaturan Sistem', href: '/system/settings', icon: Settings, active: pathname === '/system/settings' }]
+              : []),
+          ],
+        },
+      ];
+
+  return (
+    <aside className="w-64 bg-[#0A3E2F] text-slate-200 border-r border-[#D4AF37]/20 flex flex-col shrink-0 min-h-[calc(100vh-5.75rem)] select-none">
+      {/* Scope Info Card */}
+      <div className="p-4 mx-3 my-3 rounded-xl bg-black/25 border border-white/10 text-xs">
+        <span className="text-[10px] uppercase font-bold text-[#D4AF37] block mb-1">
+          {isJamaah ? 'Akun Calon Jamaah Haji' : 'Lingkup Otorisasi Data'}
+        </span>
+        <div className="font-semibold text-white truncate">
+          {isJamaah
+            ? (session?.fullName || 'Jamaah Papua')
+            : (session?.regionName ? session.regionName : 'Seluruh Provinsi Papua')}
+        </div>
+        <div className="text-[11px] text-slate-300 mt-0.5">
+          {isJamaah ? (
+            <span className="text-emerald-300 font-medium">Musim Haji 1447H / 2026M</span>
+          ) : (
+            <>Peran: <strong className="text-white">{session?.roles[0] || 'GUEST'}</strong></>
+          )}
+        </div>
+      </div>
+
+      {/* Navigation Sections */}
+      <nav className="flex-1 px-3 space-y-6 overflow-y-auto pb-6">
+        {navSections.map((section) => (
+          <div key={section.title}>
+            <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-[#D4AF37]">
+              {section.title}
+            </div>
+            <ul className="space-y-1">
+              {section.items.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+                        item.active
+                          ? 'bg-[#15803D] text-white shadow-xs border-l-4 border-[#D4AF37]'
+                          : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Icon className={`w-4 h-4 ${item.active ? 'text-[#D4AF37]' : 'text-slate-400'}`} />
+                        <span>{item.label}</span>
+                      </div>
+                      {item.badge && (
+                        <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${item.badgeColor || 'bg-white/10 text-white'}`}>
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </nav>
+
+      {/* Footer Branding Notice */}
+      <div className="p-3 border-t border-white/10 text-[10px] text-slate-400 text-center font-mono">
+        SIAP HAJI PAPUA • v1.0 ENTERPRISE
+      </div>
+    </aside>
+  );
+}

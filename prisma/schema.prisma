@@ -1,0 +1,512 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. PENGATURAN SISTEM DINAMIS (INSTITUTION-AGNOSTIC SYSTEM SETTINGS)
+model SystemSetting {
+  id           String   @id @default(uuid())
+  settingKey   String   @unique
+  settingValue String
+  settingGroup String   @default("GENERAL") // GENERAL, BRANDING, SECURITY, HAJJ
+  description  String?
+  isPublic     Boolean  @default(false)
+  updatedAt    DateTime @updatedAt
+  updatedBy    String?
+}
+
+// 2. MASTER WILAYAH (REGIONS) - HIERARKI PAPUA FLEKSIBEL
+model Region {
+  id        String   @id @default(uuid())
+  code      String   @unique // e.g., REG-JPR-KOTA, REG-BIAK
+  name      String   // Kota Jayapura, Kab. Jayapura, Kab. Biak Numfor, dll.
+  type      String   @default("KABUPATEN") // PROVINSI, KOTA, KABUPATEN
+  parentId  String?
+  parent    Region?  @relation("RegionHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children  Region[] @relation("RegionHierarchy")
+  latitude  Float?
+  longitude Float?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users         User[]
+  jamaah        Jamaah[]
+  manasikEvents ManasikEvent[]
+  warningEvents WarningEvent[]
+
+  @@index([code])
+}
+
+// 3. MUSIM HAJI (HAJJ SEASONS)
+model HajjSeason {
+  id                 String    @id @default(uuid())
+  yearHijri          Int       // e.g., 1447
+  yearGregorian      Int       // e.g., 2026
+  seasonName         String    // e.g., Musim Haji 1447 H / 2026 M
+  quotaTotal         Int       @default(0)
+  quotaRegular       Int       @default(0)
+  quotaReserved      Int       @default(0)
+  departureStartDate DateTime?
+  returnEndDate      DateTime?
+  isActive           Boolean   @default(false)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  jamaah          Jamaah[]
+  readinessRules  ReadinessRule[]
+  readinessScores ReadinessScore[]
+  manasikEvents   ManasikEvent[]
+  kloter          Kloter[]
+  officers        Officer[]
+}
+
+// 4. USERS & RBAC
+model User {
+  id                  String    @id @default(uuid())
+  username            String    @unique
+  email               String    @unique
+  passwordHash        String
+  fullName            String
+  phoneNumber         String?
+  regionId            String?
+  region              Region?   @relation(fields: [regionId], references: [id], onDelete: SetNull)
+  avatarUrl           String?
+  isActive            Boolean   @default(true)
+  isMfaEnabled        Boolean   @default(false)
+  lastLoginAt         DateTime?
+  failedLoginAttempts Int       @default(0)
+  lockoutUntil        DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
+
+  roles                UserRole[]
+  jamaah               Jamaah?
+  auditLogs            AuditLog[]
+  documentVerifications DocumentVerification[]
+  adminVerifications   AdministrationRecord[]
+  manasikVerifications ManasikAttendance[]
+  resolvedWarnings     WarningEvent[]
+  assignedTasks        ActionItem[] @relation("ActionAssignedTo")
+  delegatedTasks       ActionItem[] @relation("ActionAssignedBy")
+  officerRecord        Officer?
+
+  @@index([regionId])
+  @@index([username])
+}
+
+model Role {
+  id           String   @id @default(uuid())
+  code         String   @unique // SUPER_ADMIN, PROV_ADMIN, REGION_ADMIN, OFFICER, LEADER, JAMAAH
+  name         String
+  description  String?
+  isSystemRole Boolean  @default(true)
+
+  users       UserRole[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String  @id @default(uuid())
+  code        String  @unique // e.g. jamaah:read, jamaah:write, document:verify, action:manage
+  module      String  // JAMAAH, DOCUMENT, HEALTH, MANASIK, KLOTER, ACTION_CENTER, SYSTEM
+  description String?
+
+  roles RolePermission[]
+}
+
+model UserRole {
+  userId String
+  roleId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+// 5. MASTER DATA JAMAAH (PILGRIMS)
+model Jamaah {
+  id                     String      @id @default(uuid())
+  userId                 String?     @unique
+  user                   User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  seasonId               String
+  season                 HajjSeason  @relation(fields: [seasonId], references: [id], onDelete: Restrict)
+  regionId               String
+  region                 Region      @relation(fields: [regionId], references: [id], onDelete: Restrict)
+  porsiNumber            String      @unique // 10 Digit Nomor Porsi
+  nikEncrypted           String      // Terenkripsi AES-256-GCM
+  nikHash                String      // SHA-256 blind index untuk pencarian cepat
+  kkNumberEncrypted      String?
+  fullName               String
+  birthPlace             String
+  birthDate              DateTime
+  gender                 String      // MALE, FEMALE
+  maritalStatus          String      @default("MARRIED")
+  address                String
+  district               String?     // Kecamatan
+  subDistrict            String?     // Kelurahan
+  postalCode             String?
+  phoneEncrypted         String?
+  bloodType              String?
+  occupation             String?
+  registrationYear       Int
+  estimatedDepartureYear Int?
+  status                 String      @default("TERDAFTAR") // TERDAFTAR, BERKAS_LENGKAP, SIAP_BERANGKAT, TUNDA, WAFAT
+  dataSource             String      @default("DEMO") // DEMO, INTERNAL, VERIFIED, OFFICIAL_EXTERNAL
+  isPriorityElderly      Boolean     @default(false)
+  elderlyAge             Int?
+  createdAt              DateTime    @default(now())
+  updatedAt              DateTime    @updatedAt
+  deletedAt              DateTime?
+
+  readinessScore        ReadinessScore?
+  documents             JamaahDocument[]
+  administrationRecords AdministrationRecord[]
+  healthRecords         HealthMonitoring[]
+  manasikAttendances    ManasikAttendance[]
+  kloterMembership      KloterMember?
+  warningEvents         WarningEvent[]
+  actionItems           ActionItem[]
+
+  @@index([seasonId, regionId])
+  @@index([porsiNumber])
+  @@index([nikHash])
+  @@index([status])
+}
+
+// 6. DOKUMEN & VERIFIKASI (PHASE 2)
+model DocumentType {
+  id                String   @id @default(uuid())
+  code              String   @unique // PASPOR, VISA, KTP, KK, AKTA, FOTO, VAKSIN
+  name              String
+  isRequired        Boolean  @default(true)
+  maxFileSizeMb     Int      @default(5)
+  allowedExtensions String   @default("pdf,jpg,jpeg,png")
+  sortOrder         Int      @default(0)
+
+  documents JamaahDocument[]
+}
+
+model JamaahDocument {
+  id             String       @id @default(uuid())
+  jamaahId       String
+  jamaah         Jamaah       @relation(fields: [jamaahId], references: [id], onDelete: Cascade)
+  documentTypeId String
+  documentType   DocumentType @relation(fields: [documentTypeId], references: [id], onDelete: Restrict)
+  filePath       String?
+  fileSizeBytes  Int?
+  mimeType       String?
+  documentNumber String?      // misal: Nomor Paspor
+  issuedDate     DateTime?
+  expiryDate     DateTime?
+  status         String       @default("BELUM_ADA") // BELUM_ADA, UPLOADED, MENUNGGU_VERIFIKASI, TERVERIFIKASI, DITOLAK
+  rejectionReason String?
+  notes          String?
+  dataSource     String       @default("INTERNAL") // DEMO, INTERNAL, VERIFIED
+  uploadedAt     DateTime?
+  uploadedBy     String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  verifications DocumentVerification[]
+
+  @@unique([jamaahId, documentTypeId])
+  @@index([status])
+}
+
+model DocumentVerification {
+  id               String         @id @default(uuid())
+  jamaahDocumentId String
+  jamaahDocument   JamaahDocument @relation(fields: [jamaahDocumentId], references: [id], onDelete: Cascade)
+  action           String         // VERIFY, REJECT, NEED_REVISION
+  notes            String?
+  verifiedById     String
+  verifiedBy       User           @relation(fields: [verifiedById], references: [id], onDelete: Restrict)
+  createdAt        DateTime       @default(now())
+}
+
+// 7. ADMINISTRASI & KEUANGAN (BPIH & SPPH - PHASE 2)
+model AdministrationRecord {
+  id               String     @id @default(uuid())
+  jamaahId         String
+  jamaah           Jamaah     @relation(fields: [jamaahId], references: [id], onDelete: Cascade)
+  stageName        String     // SETORAN_AWAL, PELUNASAN_BPIH, SPPH, BIOMETRIK_BIOVISA
+  amountPaid       Float      @default(0.0)
+  paymentReference String?
+  status           String     @default("BELUM") // BELUM, DALAM_PROSES, MENUNGGU_VERIFIKASI, SELESAI, PERLU_TINDAK_LANJUT
+  completionDate   DateTime?
+  notes            String?
+  dataSource       String     @default("INTERNAL")
+  verifiedById     String?
+  verifiedBy       User?      @relation(fields: [verifiedById], references: [id], onDelete: SetNull)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@unique([jamaahId, stageName])
+  @@index([status])
+}
+
+// 8. MONITORING KESEHATAN ADMINISTRATIF (NON-MEDIS & PRIVASI - PHASE 2)
+model HealthMonitoring {
+  id                   String    @id @default(uuid())
+  jamaahId             String
+  jamaah               Jamaah    @relation(fields: [jamaahId], references: [id], onDelete: Cascade)
+  checkupStage         String    // TAHAP_1_PUSKESMAS, TAHAP_2_RSUD, TAHAP_3_EMBARKASI
+  examinationDate      DateTime?
+  locationName         String?
+  istithaahStatus      String    @default("BELUM_PEMERIKSAAN") // MEMENUHI_SYARAT, MEMENUHI_DENGAN_PENDAMPING, TIDAK_MEMENUHI, DITUNDA
+  isVaccineMeningitis  Boolean   @default(false)
+  isVaccinePolio       Boolean   @default(false)
+  isVaccineCovid       Boolean   @default(false)
+  administrativeStatus String    @default("BELUM") // BELUM, PROSES, SELESAI, PERLU_TINDAK_LANJUT
+  notesNonMedical      String?
+  dataSource           String    @default("INTERNAL")
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@unique([jamaahId, checkupStage])
+  @@index([administrativeStatus])
+}
+
+// 9. BIMBINGAN MANASIK & PRESENSI QR (PHASE 2)
+model ManasikEvent {
+  id               String     @id @default(uuid())
+  seasonId         String
+  season           HajjSeason @relation(fields: [seasonId], references: [id], onDelete: Restrict)
+  regionId         String
+  region           Region     @relation(fields: [regionId], references: [id], onDelete: Restrict)
+  title            String
+  sessionNumber    Int        @default(1)
+  eventDate        DateTime
+  startTime        String     // e.g. "08:30"
+  endTime          String     // e.g. "12:00"
+  location         String
+  speakerName      String?
+  topicDescription String?
+  qrSecretToken    String     @default(uuid())
+  isActive         Boolean    @default(true)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  attendances ManasikAttendance[]
+
+  @@index([seasonId, regionId])
+}
+
+model ManasikAttendance {
+  id               String       @id @default(uuid())
+  eventId          String
+  event            ManasikEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  jamaahId         String
+  jamaah           Jamaah       @relation(fields: [jamaahId], references: [id], onDelete: Cascade)
+  status           String       @default("HADIR") // HADIR, TIDAK_HADIR, IZIN, SAKIT
+  checkInTime      DateTime     @default(now())
+  attendanceMethod String       @default("QR_SCAN") // QR_SCAN, MANUAL_OPERATOR
+  verifiedById     String?
+  verifiedBy       User?        @relation(fields: [verifiedById], references: [id], onDelete: SetNull)
+
+  @@unique([eventId, jamaahId])
+  @@index([status])
+}
+
+// 10. KELOMPOK, KLOTER & PETUGAS (PHASE 2)
+model Kloter {
+  id                  String     @id @default(uuid())
+  seasonId            String
+  season              HajjSeason @relation(fields: [seasonId], references: [id], onDelete: Restrict)
+  kloterNumber        Int
+  kloterCode          String     @unique // e.g. UPG-01, JPR-01
+  embarkationName     String     @default("Embarkasi Hasanuddin Makassar (UPG)")
+  dormitoryInDate     DateTime?
+  flightDepartureDate DateTime?
+  flightReturnDate    DateTime?
+  airlineName         String?    // Dynamic from DB/Master
+  flightNumber        String?
+  capacityTotal       Int        @default(360)
+  status              String     @default("SIAP") // PERSIAPAN, SIAP, DI_ASRAMA, TERBANG, ARAB_SAUDI, SELESAI
+  createdAt           DateTime   @default(now())
+  updatedAt           DateTime   @updatedAt
+
+  groups   Group[]
+  members  KloterMember[]
+  officers Officer[]
+
+  @@index([seasonId])
+}
+
+model Group {
+  id             String   @id @default(uuid())
+  kloterId       String
+  kloter         Kloter   @relation(fields: [kloterId], references: [id], onDelete: Cascade)
+  groupType      String   // ROMBONGAN, REGU
+  groupNumber    Int
+  name           String
+  leaderJamaahId String?
+
+  members KloterMember[]
+}
+
+model KloterMember {
+  id         String   @id @default(uuid())
+  kloterId   String
+  kloter     Kloter   @relation(fields: [kloterId], references: [id], onDelete: Restrict)
+  groupId    String?
+  group      Group?   @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  jamaahId   String   @unique
+  jamaah     Jamaah   @relation(fields: [jamaahId], references: [id], onDelete: Restrict)
+  seatNumber String?
+  assignedAt DateTime @default(now())
+
+  @@index([kloterId])
+}
+
+model Officer {
+  id             String     @id @default(uuid())
+  seasonId       String
+  season         HajjSeason @relation(fields: [seasonId], references: [id], onDelete: Restrict)
+  kloterId       String?
+  kloter         Kloter?    @relation(fields: [kloterId], references: [id], onDelete: SetNull)
+  userId         String?    @unique
+  user           User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  fullName       String
+  roleType       String     // TPHI (Ketua Kloter), TPIHI (Bimb. Ibadah), TKHI (Dokter/Medis), TPHD
+  phoneEncrypted String
+  status         String     @default("ACTIVE")
+}
+
+// 11. READINESS ENGINE RULES & SCORES
+model ReadinessRule {
+  id               String     @id @default(uuid())
+  seasonId         String
+  season           HajjSeason @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  componentCode    String     // IDENTITAS, ADMINISTRASI, DOKUMEN, KESEHATAN, MANASIK, KLOTER
+  name             String
+  weightPercentage Float      // Default: 10, 20, 20, 20, 15, 15
+  evaluationLogic  String     // Evaluator handler code
+  isActive         Boolean    @default(true)
+  sortOrder        Int        @default(0)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@unique([seasonId, componentCode])
+}
+
+model ReadinessScore {
+  id                 String     @id @default(uuid())
+  jamaahId           String     @unique
+  jamaah             Jamaah     @relation(fields: [jamaahId], references: [id], onDelete: Cascade)
+  seasonId           String
+  season             HajjSeason @relation(fields: [seasonId], references: [id], onDelete: Restrict)
+  totalScore         Float      @default(0.0) // 0.00 to 100.00
+  category           String     @default("PRIORITAS") // SIAP (>=90), HAMPIR_SIAP (75-89), PERLU_TINDAK_LANJUT (50-74), PRIORITAS (<50)
+  componentBreakdown String     // JSON string detail skor komponen & checklist
+  lastCalculatedAt   DateTime   @default(now())
+
+  @@index([totalScore])
+  @@index([category])
+  @@index([seasonId])
+}
+
+// 12. EARLY WARNING ENGINE RULES & EVENTS (PHASE 2)
+model WarningRule {
+  id                  String   @id @default(uuid())
+  ruleCode            String   @unique
+  name                String
+  severity            String   // CRITICAL, WARNING, ATTENTION, NORMAL
+  conditionExpression String   // JSON expression of rule
+  description         String?
+  isActive            Boolean  @default(true)
+
+  events WarningEvent[]
+}
+
+model WarningEvent {
+  id              String      @id @default(uuid())
+  ruleId          String
+  rule            WarningRule @relation(fields: [ruleId], references: [id], onDelete: Restrict)
+  jamaahId        String
+  jamaah          Jamaah      @relation(fields: [jamaahId], references: [id], onDelete: Cascade)
+  regionId        String
+  region          Region      @relation(fields: [regionId], references: [id], onDelete: Restrict)
+  severity        String      // CRITICAL, WARNING, ATTENTION, NORMAL
+  title           String
+  reason          String
+  status          String      @default("OPEN") // OPEN, IN_PROGRESS, RESOLVED, IGNORED
+  detectedAt      DateTime    @default(now())
+  resolvedAt      DateTime?
+  resolvedById    String?
+  resolvedBy      User?       @relation(fields: [resolvedById], references: [id], onDelete: SetNull)
+  resolutionNotes String?
+
+  actionItems ActionItem[]
+
+  @@index([status, severity])
+  @@index([jamaahId])
+  @@index([regionId])
+}
+
+// 13. ACTION CENTER (PUSAT TINDAK LANJUT - PHASE 2)
+model ActionItem {
+  id                String        @id @default(uuid())
+  warningEventId    String?
+  warningEvent      WarningEvent? @relation(fields: [warningEventId], references: [id], onDelete: SetNull)
+  jamaahId          String
+  jamaah            Jamaah        @relation(fields: [jamaahId], references: [id], onDelete: Cascade)
+  category          String        // DOKUMEN, PEMERIKSAAN, ADMINISTRASI, MANASIK, KLOTER, VERIFIKASI
+  title             String
+  description       String?
+  assignedToUserId  String?
+  assignedTo        User?         @relation("ActionAssignedTo", fields: [assignedToUserId], references: [id], onDelete: SetNull)
+  assignedByUserId  String?
+  assignedBy        User?         @relation("ActionAssignedBy", fields: [assignedByUserId], references: [id], onDelete: SetNull)
+  deadline          DateTime?
+  status            String        @default("OPEN") // OPEN, IN_PROGRESS, ESCALATED, RESOLVED
+  priority          String        @default("HIGH") // URGENT, HIGH, MEDIUM, LOW
+  notes             String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  resolvedAt        DateTime?
+
+  @@index([status])
+  @@index([category])
+  @@index([assignedToUserId])
+  @@index([jamaahId])
+}
+
+// 14. AUDIT TRAIL IMMUTABLE (APPEND-ONLY)
+model AuditLog {
+  id            String   @id @default(uuid())
+  actorId       String?
+  actorUsername String?
+  actorRole     String?
+  ipAddress     String?
+  userAgent     String?
+  action        String   // LOGIN, FAILED_LOGIN, CREATE, UPDATE, DELETE, UNMASK, SETTING_CHANGE, RULE_CHANGE, RECALCULATE_READINESS, VERIFY_DOCUMENT, REJECT_DOCUMENT, ASSIGN_TASK, RESOLVE_TASK
+  module        String   // AUTH, JAMAAH, READINESS, SYSTEM, DOCUMENT, HEALTH, ACTION_CENTER
+  recordId      String?
+  beforeState   String?
+  afterState    String?
+  dataSource    String   @default("INTERNAL")
+  createdAt     DateTime @default(now())
+
+  user User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([action])
+  @@index([module])
+  @@index([createdAt])
+}

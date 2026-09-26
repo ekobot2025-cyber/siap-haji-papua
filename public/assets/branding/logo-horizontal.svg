@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 100" fill="none">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#996515" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15803D" />
+      <stop offset="100%" stop-color="#0A3E2F" />
+    </linearGradient>
+  </defs>
+  <!-- Icon Symbol -->
+  <g transform="translate(10, 10)">
+    <rect width="80" height="80" rx="18" fill="url(#emeraldGrad)" stroke="#D4AF37" stroke-width="2"/>
+    <!-- Islamic Arch / Ka'bah Symbol -->
+    <path d="M40 22 C32 22 26 30 26 40 L26 62 L54 62 L54 40 C54 30 48 22 40 22 Z" fill="#0A3E2F" stroke="url(#goldGrad)" stroke-width="2.5"/>
+    <rect x="33" y="38" width="14" height="24" rx="2" fill="url(#goldGrad)"/>
+    <!-- Mountain Accent -->
+    <path d="M22 62 L32 50 L40 60 L48 48 L58 62" stroke="#10B981" stroke-width="1.8" fill="none" opacity="0.6"/>
+  </g>
+  <!-- Text Brand -->
+  <text x="105" y="48" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" letter-spacing="1.5" fill="#FFFFFF">SIAP <tspan fill="url(#goldGrad)">HAJI</tspan></text>
+  <text x="107" y="74" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="16" letter-spacing="6" fill="#D1D5DB">PAPUA</text>
+  <line x1="185" y1="70" x2="320" y2="70" stroke="url(#goldGrad)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+</svg>
