@@ -13,7 +13,10 @@ import {
   ShieldCheck,
   X,
   Syringe,
+  Download,
+  FileText,
 } from 'lucide-react';
+import { exportToPdf, exportToExcel } from '@/lib/export-utils';
 
 export default function KesehatanPage() {
   const [records, setRecords] = useState<any[]>([]);
@@ -61,6 +64,43 @@ export default function KesehatanPage() {
   useEffect(() => {
     fetchRecords();
   }, [fetchRecords]);
+
+  const handleExportExcel = () => {
+    const rows = records.map((rec, index) => [
+      (index + 1).toString(),
+      rec.jamaah?.fullName || '-',
+      rec.checkupStage?.replace(/_/g, ' ') || '-',
+      rec.administrativeStatus || '-',
+      rec.istithaahStatus?.replace(/_/g, ' ') || '-',
+      rec.createdAt ? new Date(rec.createdAt).toLocaleDateString('id-ID') : '-'
+    ]);
+
+    exportToExcel({
+      title: 'Data Kesehatan Haji',
+      headers: ['No', 'Nama Jamaah', 'Jenis Pemeriksaan', 'Status', 'Hasil', 'Tanggal'],
+      rows,
+      filename: 'data-kesehatan',
+      sheetName: 'Kesehatan'
+    });
+  };
+
+  const handleExportPdf = () => {
+    const rows = records.map((rec, index) => [
+      (index + 1).toString(),
+      rec.jamaah?.fullName || '-',
+      rec.checkupStage?.replace(/_/g, ' ') || '-',
+      rec.administrativeStatus || '-',
+      rec.istithaahStatus?.replace(/_/g, ' ') || '-',
+      rec.createdAt ? new Date(rec.createdAt).toLocaleDateString('id-ID') : '-'
+    ]);
+
+    exportToPdf({
+      title: 'Data Kesehatan Haji',
+      headers: ['No', 'Nama Jamaah', 'Jenis Pemeriksaan', 'Status', 'Hasil', 'Tanggal'],
+      rows,
+      filename: 'data-kesehatan',
+    });
+  };
 
   const handleOpenEdit = (rec: any) => {
     setSelectedRecord(rec);
@@ -123,13 +163,31 @@ export default function KesehatanPage() {
           </div>
         </div>
 
-        <button
-          onClick={fetchRecords}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer self-start md:self-auto"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-          Refresh Data
-        </button>
+        <div className="flex items-center gap-2 self-start md:self-auto">
+          <button
+            type="button"
+            onClick={handleExportExcel}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+          >
+            <Download className="w-3.5 h-3.5" />
+            Ekspor Excel
+          </button>
+          <button
+            type="button"
+            onClick={handleExportPdf}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0A3E2F] text-white text-xs font-semibold hover:bg-[#072d22] cursor-pointer"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            Ekspor PDF
+          </button>
+          <button
+            onClick={fetchRecords}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+            Refresh Data
+          </button>
+        </div>
       </div>
 
       {/* Filter and Search Bar */}
@@ -179,7 +237,25 @@ export default function KesehatanPage() {
           <span className="text-xs font-bold text-gray-700">
             Daftar Monitoring Kesehatan ({records.length} data ditampilkan)
           </span>
-          <span className="text-[11px] text-gray-400">Halaman {page} dari {totalPages}</span>
+          <div className="flex items-center justify-between text-xs text-gray-500 mt-2">
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page <= 1}
+              className="px-3 py-1.5 rounded-lg border border-slate-200 text-gray-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-xs font-semibold"
+            >
+              ← Sebelumnya
+            </button>
+            <span className="font-mono mx-4">Halaman {page} dari {totalPages}</span>
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page >= totalPages}
+              className="px-3 py-1.5 rounded-lg border border-slate-200 text-gray-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-xs font-semibold"
+            >
+              Berikutnya →
+            </button>
+          </div>
         </div>
 
         {loading ? (
@@ -282,7 +358,7 @@ export default function KesehatanPage() {
                 </span>
                 <h3 className="text-base font-bold text-gray-900">Perbarui Status Kesehatan Jamaah</h3>
               </div>
-              <button onClick={() => setSelectedRecord(null)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setSelectedRecord(null)} className="text-gray-400 hover:text-gray-600 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -371,7 +447,7 @@ export default function KesehatanPage() {
               <button
                 type="button"
                 onClick={() => setSelectedRecord(null)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-slate-100"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-slate-100 cursor-pointer"
               >
                 Batal
               </button>
@@ -379,7 +455,7 @@ export default function KesehatanPage() {
                 type="button"
                 disabled={submitting}
                 onClick={handleSaveEdit}
-                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#0A3E2F] text-[#D4AF37] hover:bg-[#072d22] disabled:opacity-50"
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-[#0A3E2F] text-[#D4AF37] hover:bg-[#072d22] disabled:opacity-50 cursor-pointer"
               >
                 {submitting ? 'Menyimpan...' : 'Simpan Status'}
               </button>

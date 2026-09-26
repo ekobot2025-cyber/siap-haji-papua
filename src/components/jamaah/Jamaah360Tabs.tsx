@@ -557,7 +557,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                   {new Date(jamaah.readiness.lastCalculatedAt || new Date()).toLocaleString('id-ID')} WIT
                 </div>
                 <p className="text-xs text-gray-600 mt-0.5">
-                  Indeks Kesiapan Administratif tercatat: <strong className="text-[#0A3E2F]">{jamaah.readiness.score.toFixed(1)}% ({jamaah.readiness.category})</strong>
+                  Indeks Kesiapan Administratif tercatat: <strong className="text-[#0A3E2F]">{Number(jamaah?.readiness?.score ?? 0).toFixed(1)}% ({jamaah.readiness.category})</strong>
                 </p>
               </div>
 

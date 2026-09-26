@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { exportToPdf, exportToExcel } from '@/lib/export-utils';
 import {
   Printer,
   Download,
@@ -69,18 +70,18 @@ export function LaporanClientView({
       'Kode Wilayah',
       'Kabupaten / Kota',
       'Target Kuota',
-      'Total Jamaah Terdata',
-      'Dokumen Lengkap (>=5 Berkas)',
-      'Administrasi BPIH Selesai',
-      'Siap Berangkat (Score >= 85)',
-      'Indeks Kesiapan Rata-rata (%)',
-      'Status Kesiapan',
+      'Total Jamaah',
+      'Dokumen Valid',
+      'BPIH Lunas',
+      'Siap Berangkat',
+      'Capaian (%)',
+      'Status'
     ];
 
     const rows = regionalData.map((r, idx) => [
       idx + 1,
       r.code,
-      `"${r.name}"`,
+      r.name,
       r.targetQuota,
       r.totalJamaah,
       r.docCompleteCount,
@@ -90,20 +91,55 @@ export function LaporanClientView({
       r.status,
     ]);
 
-    const csvContent =
-      'data:text/csv;charset=utf-8,\uFEFF' +
-      [headers.join(','), ...rows.map((e) => e.join(','))].join('\n');
+    const filename = `Rekapitulasi_Haji_Papua_1447H_${new Date().toISOString().slice(0, 10)}`;
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute(
-      'download',
-      `Rekapitulasi_Kesiapan_Haji_Papua_1447H_${new Date().toISOString().slice(0, 10)}.csv`
-    );
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    exportToExcel({
+      title: 'Rekapitulasi Kesiapan Haji Provinsi Papua 1447 H / 2026 M',
+      headers,
+      rows,
+      filename,
+      sheetName: 'Rekapitulasi Regional',
+    });
+  };
+
+  const handleExportPdf = () => {
+    const headers = [
+      'No',
+      'Kode Wilayah',
+      'Kabupaten / Kota',
+      'Target Kuota',
+      'Total Jamaah',
+      'Dokumen Valid',
+      'BPIH Lunas',
+      'Siap Berangkat',
+      'Capaian (%)',
+      'Status'
+    ];
+
+    const rows = regionalData.map((r, idx) => [
+      idx + 1,
+      r.code,
+      r.name,
+      r.targetQuota,
+      r.totalJamaah,
+      r.docCompleteCount,
+      r.adminCompleteCount,
+      r.readyCount,
+      r.avgScore,
+      r.status,
+    ]);
+
+    const filename = `Rekapitulasi_Haji_Papua_1447H_${new Date().toISOString().slice(0, 10)}`;
+
+    exportToPdf({
+      title: 'Rekapitulasi Kesiapan Haji Provinsi Papua 1447 H / 2026 M',
+      subtitle: `Musim 1447 H / 2026 M - Dicetak: ${new Date().toLocaleDateString('id-ID', { dateStyle: 'long' })}`,
+      headers,
+      rows,
+      filename,
+      orientation: 'landscape',
+      footerText: 'SIAP HAJI PAPUA - Laporan Rekapitulasi Regional',
+    });
   };
 
   const totalQuota = regionalData.reduce((acc, r) => acc + r.targetQuota, 0);
@@ -179,15 +215,23 @@ export function LaporanClientView({
             className="px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-gray-700 text-xs font-bold shadow-2xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
             <Download className="w-4 h-4 text-emerald-600" />
-            <span>Ekspor CSV / Excel</span>
+            <span>Ekspor Excel</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleExportPdf}
+            className="px-4 py-2 rounded-xl bg-[#0A3E2F] hover:bg-[#072c21] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer border border-[#D4AF37]/40"
+          >
+            <Printer className="w-4 h-4 text-[#D4AF37]" />
+            <span>Ekspor PDF</span>
           </button>
           <button
             type="button"
             onClick={handlePrint}
-            className="px-4 py-2 rounded-xl bg-[#0A3E2F] hover:bg-[#072c21] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer border border-[#D4AF37]/40"
+            className="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
-            <Printer className="w-4 h-4 text-[#D4AF37]" />
-            <span>Cetak Dokumen Resmi (PDF)</span>
+            <Printer className="w-4 h-4 text-white" />
+            <span>Cetak</span>
           </button>
         </div>
       </div>

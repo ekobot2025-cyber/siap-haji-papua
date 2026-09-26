@@ -186,7 +186,7 @@ export default async function DashboardPage() {
           <div className="flex items-center gap-3">
             <div className="text-right">
               <div className="text-3xl font-black text-[#0A3E2F] font-mono">
-                {kpi.provincialReadinessIndex.toFixed(1)}%
+                {Number(kpi?.provincialReadinessIndex ?? 0).toFixed(1)}%
               </div>
               <div className="text-xs font-bold text-[#15803D]">
                 Status Agregat: {kpi.provincialReadinessIndex >= 90 ? 'SIAP BERANGKAT' : 'DALAM PROSES'}
@@ -212,7 +212,7 @@ export default async function DashboardPage() {
                 <span className="font-mono text-[10px] bg-white px-1 py-0.2 rounded border">{comp.weight}%</span>
               </div>
               <div className="text-lg font-black text-[#0A3E2F] font-mono">
-                {comp.averageScore.toFixed(1)}%
+                {Number(comp?.averageScore ?? 0).toFixed(1)}%
               </div>
               <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2 overflow-hidden">
                 <div
@@ -381,7 +381,7 @@ export default async function DashboardPage() {
                           />
                         </div>
                         <span className="font-mono text-xs font-bold text-gray-800 shrink-0">
-                          {reg.averageReadiness.toFixed(1)}%
+                          {Number(reg?.averageReadiness ?? 0).toFixed(1)}%
                         </span>
                       </div>
                     </td>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, use } from 'react';
 import Link from 'next/link';
+import { exportToPdf, exportToExcel } from '@/lib/export-utils';
 import {
   Plane,
   ArrowLeft,
@@ -23,7 +24,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
-  const handleExportCSV = () => {
+  const handleExportExcel = () => {
     if (!kloter || !kloter.members) return;
     const headers = [
       'No',
@@ -42,29 +43,61 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
       idx + 1,
       m.seatNumber || 'Belum Diatur',
       m.jamaah.porsiNumber,
-      `"${m.jamaah.fullName.replace(/"/g, '""')}"`,
+      m.jamaah.fullName,
       m.jamaah.gender === 'MALE' ? 'L' : 'P',
-      `"${m.jamaah.region?.name || 'Provinsi Papua'}"`,
-      `"${m.group ? `${m.group.name}` : 'Regu 1'}"`,
+      m.jamaah.region?.name || 'Provinsi Papua',
+      m.group ? m.group.name : 'Regu 1',
       m.jamaah.readinessScore?.totalScore?.toFixed(0) || '100',
       m.jamaah.status || 'SIAP_BERANGKAT',
       m.jamaah.isPriorityElderly ? `Prioritas Lansia (${m.jamaah.elderlyAge} Th)` : 'Reguler',
     ]);
 
-    const csvContent =
-      'data:text/csv;charset=utf-8,\uFEFF' +
-      [headers.join(','), ...rows.map((e: any[]) => e.join(','))].join('\n');
+    const filename = `Manifest_Resmi_Kloter_${kloter.kloterCode}_1447H`;
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute(
-      'download',
-      `Manifest_Resmi_Kloter_${kloter.kloterCode}_1447H.csv`
-    );
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    exportToExcel({
+      title: `Manifest Kloter ${kloter.kloterCode} - Embarkasi ${kloter.embarkationName}`,
+      headers,
+      rows,
+      filename,
+      sheetName: 'Manifest',
+    });
+  };
+
+  const handleExportManifestPdf = () => {
+    if (!kloter || !kloter.members) return;
+    const headers = [
+      'No',
+      'Seat',
+      'Nomor Porsi',
+      'Nama Lengkap',
+      'L/P',
+      'Asal Wilayah',
+      'Regu',
+      'Kategori',
+    ];
+
+    const rows = kloter.members.map((m: any, idx: number) => [
+      idx + 1,
+      m.seatNumber || 'Belum Diatur',
+      m.jamaah.porsiNumber,
+      m.jamaah.fullName,
+      m.jamaah.gender === 'MALE' ? 'L' : 'P',
+      m.jamaah.region?.name || 'Provinsi Papua',
+      m.group ? m.group.name : 'Regu 1',
+      m.jamaah.isPriorityElderly ? 'Lansia' : 'Reguler',
+    ]);
+
+    const filename = `Manifest_Resmi_Kloter_${kloter.kloterCode}_1447H`;
+
+    exportToPdf({
+      title: `MANIFEST RESMI KLOTER ${kloter.kloterCode}`,
+      subtitle: `Embarkasi: ${kloter.embarkationName} | Maskapai: ${kloter.airlineName} (${kloter.flightNumber}) | Total: ${kloter.members.length} Jamaah`,
+      headers,
+      rows,
+      filename,
+      orientation: 'landscape',
+      footerText: 'SIAP HAJI PAPUA - Manifest Resmi',
+    });
   };
 
   const handlePrint = () => {
@@ -162,19 +195,27 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
         <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={handleExportCSV}
+            onClick={handleExportExcel}
             className="px-3 py-1.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-xs font-bold text-gray-700 shadow-2xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
             <Download className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Ekspor CSV / Excel</span>
+            <span>Ekspor Excel</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleExportManifestPdf}
+            className="px-3.5 py-1.5 rounded-xl bg-[#0A3E2F] hover:bg-[#072c21] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
+          >
+            <Printer className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span>Ekspor PDF</span>
           </button>
           <button
             type="button"
             onClick={handlePrint}
-            className="px-3.5 py-1.5 rounded-xl bg-[#0A3E2F] hover:bg-[#072c21] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
+            className="px-3.5 py-1.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
-            <Printer className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>Cetak Manifest PDF</span>
+            <Printer className="w-3.5 h-3.5 text-white" />
+            <span>Cetak</span>
           </button>
         </div>
       </div>

@@ -14,7 +14,9 @@ import {
   ShieldCheck,
   X,
   FileText,
+  Download,
 } from 'lucide-react';
+import { exportToPdf, exportToExcel } from '@/lib/export-utils';
 
 export default function DokumenPage() {
   const [documents, setDocuments] = useState<any[]>([]);
@@ -56,6 +58,41 @@ export default function DokumenPage() {
   useEffect(() => {
     fetchDocuments();
   }, [fetchDocuments]);
+
+  const handleExportExcel = () => {
+    const rows = documents.map((doc, index) => [
+      (index + 1).toString(),
+      doc.jamaah?.fullName || '-',
+      doc.documentType?.name || '-',
+      doc.status || '-',
+      doc.createdAt ? new Date(doc.createdAt).toLocaleDateString('id-ID') : '-'
+    ]);
+
+    exportToExcel({
+      title: 'Data Dokumen Haji',
+      headers: ['No', 'Nama Jamaah', 'Jenis Dokumen', 'Status', 'Tanggal Upload'],
+      rows,
+      filename: 'data-dokumen',
+      sheetName: 'Dokumen'
+    });
+  };
+
+  const handleExportPdf = () => {
+    const rows = documents.map((doc, index) => [
+      (index + 1).toString(),
+      doc.jamaah?.fullName || '-',
+      doc.documentType?.name || '-',
+      doc.status || '-',
+      doc.createdAt ? new Date(doc.createdAt).toLocaleDateString('id-ID') : '-'
+    ]);
+
+    exportToPdf({
+      title: 'Data Dokumen Haji',
+      headers: ['No', 'Nama Jamaah', 'Jenis Dokumen', 'Status', 'Tanggal Upload'],
+      rows,
+      filename: 'data-dokumen',
+    });
+  };
 
   const handleVerify = async (action: 'VERIFY' | 'REJECT') => {
     if (!selectedDoc) return;
@@ -112,13 +149,31 @@ export default function DokumenPage() {
           </div>
         </div>
 
-        <button
-          onClick={fetchDocuments}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer self-start md:self-auto"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-          Refresh Dokumen
-        </button>
+        <div className="flex items-center gap-2 self-start md:self-auto">
+          <button
+            type="button"
+            onClick={handleExportExcel}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+          >
+            <Download className="w-3.5 h-3.5" />
+            Ekspor Excel
+          </button>
+          <button
+            type="button"
+            onClick={handleExportPdf}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0A3E2F] text-white text-xs font-semibold hover:bg-[#072d22] cursor-pointer"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            Ekspor PDF
+          </button>
+          <button
+            onClick={fetchDocuments}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+            Refresh Dokumen
+          </button>
+        </div>
       </div>
 
       {/* Filter and Search Bar */}
@@ -168,7 +223,25 @@ export default function DokumenPage() {
           <span className="text-xs font-bold text-gray-700">
             Daftar Berkas Dokumen Terdata ({documents.length} dokumen ditampilkan)
           </span>
-          <span className="text-[11px] text-gray-400">Halaman {page} dari {totalPages}</span>
+          <div className="flex items-center justify-between text-xs text-gray-500 mt-2">
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page <= 1}
+              className="px-3 py-1.5 rounded-lg border border-slate-200 text-gray-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-xs font-semibold"
+            >
+              ← Sebelumnya
+            </button>
+            <span className="font-mono mx-4">Halaman {page} dari {totalPages}</span>
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page >= totalPages}
+              className="px-3 py-1.5 rounded-lg border border-slate-200 text-gray-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer text-xs font-semibold"
+            >
+              Berikutnya →
+            </button>
+          </div>
         </div>
 
         {loading ? (
@@ -261,7 +334,7 @@ export default function DokumenPage() {
                 </span>
                 <h3 className="text-base font-bold text-gray-900">Desk Verifikasi Dokumen</h3>
               </div>
-              <button onClick={() => setSelectedDoc(null)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setSelectedDoc(null)} className="text-gray-400 hover:text-gray-600 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>

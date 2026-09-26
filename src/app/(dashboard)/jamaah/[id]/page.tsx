@@ -170,7 +170,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
             </span>
             <div className="flex items-baseline gap-2 mb-2">
               <span className="text-3xl sm:text-4xl font-black text-[#0A3E2F] font-mono">
-                {jamaah.readiness.score.toFixed(1)}%
+                {Number(jamaah?.readiness?.score ?? 0).toFixed(1)}%
               </span>
               <ReadinessBadge category={jamaah.readiness.category} showScore={false} size="sm" />
             </div>

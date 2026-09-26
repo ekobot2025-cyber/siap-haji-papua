@@ -361,7 +361,7 @@ export default function ActionCenterPage() {
               </div>
               <button
                 onClick={() => setSelectedItem(null)}
-                className="text-gray-400 hover:text-gray-600"
+                className="text-gray-400 hover:text-gray-600 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>

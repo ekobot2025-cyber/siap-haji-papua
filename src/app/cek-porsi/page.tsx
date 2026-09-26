@@ -202,7 +202,7 @@ export default function CekPorsiPage() {
             <button
               type="button"
               onClick={handleDemoFill}
-              className="text-xs text-[#0A3E2F] hover:underline font-semibold"
+              className="text-xs text-[#0A3E2F] hover:underline font-semibold cursor-pointer"
             >
               ✨ Isi Otomatis Contoh Nomor Porsi Demo
             </button>
@@ -237,7 +237,7 @@ export default function CekPorsiPage() {
                 <div className="bg-white/10 px-4 py-3 rounded-2xl text-center border border-white/10 shrink-0">
                   <span className="text-[10px] text-slate-300 uppercase font-bold block">Indeks Kesiapan</span>
                   <span className="text-2xl font-black font-mono text-[#D4AF37]">
-                    {result.readiness.score.toFixed(0)}%
+                    {Number(result?.readiness?.score ?? 0).toFixed(0)}%
                   </span>
                   <span className="text-[10px] block font-semibold text-emerald-300 uppercase">
                     {result.readiness.category.replace('_', ' ')}

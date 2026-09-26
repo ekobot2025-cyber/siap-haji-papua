@@ -105,7 +105,7 @@ export default async function PortalJamaahPage() {
     orderBy: { eventDate: 'asc' },
   });
 
-  const readinessScore = jamaah.readinessScore?.totalScore || 90.0;
+  const readinessScore = jamaah.readinessScore?.totalScore ?? 90.0;
   const isReady = readinessScore >= 85.0;
   const kloter = jamaah.kloterMembership?.kloter;
   const group = jamaah.kloterMembership?.group;
