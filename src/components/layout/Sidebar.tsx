@@ -23,6 +23,8 @@ import {
   QrCode,
   FileText,
   Loader2,
+  ArrowUpRight,
+  Globe,
 } from 'lucide-react';
 import type { UserSessionPayload } from '@/infrastructure/security/jwt';
 
@@ -192,6 +194,22 @@ export function Sidebar({ session }: SidebarProps) {
           </div>
         ))}
       </nav>
+
+      {/* Official External Portals */}
+      <div className="px-3 py-2 border-t border-white/10 space-y-1">
+        <a
+          href="https://haji.go.id"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-emerald-300 hover:text-white hover:bg-white/10 transition-colors"
+        >
+          <span className="flex items-center gap-2 truncate">
+            <Globe className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+            <span>Kemenhaj (haji.go.id)</span>
+          </span>
+          <ArrowUpRight className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+        </a>
+      </div>
 
       {/* Footer Branding Notice */}
       <div className="p-3 border-t border-white/10 text-[10px] text-slate-400 text-center font-mono">

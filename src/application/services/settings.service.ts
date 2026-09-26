@@ -11,6 +11,9 @@ export interface AppConfig {
   contactPhone: string;
   logoAppUrl: string;
   logoInstitutionUrl: string;
+  nationalMinistryName?: string;
+  nationalPortalUrl?: string;
+  provincialPortalUrl?: string;
   activeSeasonId?: string;
   activeSeasonName?: string;
 }
@@ -24,6 +27,9 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   CONTACT_PHONE: '(0967) 537427',
   LOGO_APP_URL: '/assets/branding/app-icon.png',
   LOGO_INSTITUTION_URL: '/assets/branding/logo-horizontal.svg',
+  NATIONAL_MINISTRY_NAME: 'Kementerian Haji dan Umrah Republik Indonesia',
+  NATIONAL_PORTAL_URL: 'https://haji.go.id',
+  PROVINCIAL_PORTAL_URL: 'https://papua.kemenag.go.id',
 };
 
 let cachedConfig: AppConfig | null = null;
@@ -61,6 +67,9 @@ export class SettingsService {
         contactPhone: settingsMap.CONTACT_PHONE || DEFAULT_SETTINGS.CONTACT_PHONE,
         logoAppUrl: settingsMap.LOGO_APP_URL || DEFAULT_SETTINGS.LOGO_APP_URL,
         logoInstitutionUrl: settingsMap.LOGO_INSTITUTION_URL || DEFAULT_SETTINGS.LOGO_INSTITUTION_URL,
+        nationalMinistryName: settingsMap.NATIONAL_MINISTRY_NAME || DEFAULT_SETTINGS.NATIONAL_MINISTRY_NAME,
+        nationalPortalUrl: settingsMap.NATIONAL_PORTAL_URL || DEFAULT_SETTINGS.NATIONAL_PORTAL_URL,
+        provincialPortalUrl: settingsMap.PROVINCIAL_PORTAL_URL || DEFAULT_SETTINGS.PROVINCIAL_PORTAL_URL,
         activeSeasonId: activeSeason?.id,
         activeSeasonName: activeSeason?.seasonName || 'Musim Haji 1447 H / 2026 M',
       };
@@ -79,6 +88,9 @@ export class SettingsService {
         contactPhone: DEFAULT_SETTINGS.CONTACT_PHONE,
         logoAppUrl: DEFAULT_SETTINGS.LOGO_APP_URL,
         logoInstitutionUrl: DEFAULT_SETTINGS.LOGO_INSTITUTION_URL,
+        nationalMinistryName: DEFAULT_SETTINGS.NATIONAL_MINISTRY_NAME,
+        nationalPortalUrl: DEFAULT_SETTINGS.NATIONAL_PORTAL_URL,
+        provincialPortalUrl: DEFAULT_SETTINGS.PROVINCIAL_PORTAL_URL,
         activeSeasonName: 'Musim Haji 1447 H / 2026 M',
       };
     }

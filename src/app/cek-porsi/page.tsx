@@ -19,6 +19,7 @@ import {
   Printer,
   Sparkles,
   Info,
+  ArrowUpRight,
 } from 'lucide-react';
 import { SmartHajjPassModal } from '@/components/jamaah/SmartHajjPassModal';
 
@@ -147,6 +148,28 @@ export default function CekPorsiPage() {
           <p className="text-xs sm:text-sm text-gray-600">
             Periksa status kelengkapan berkas, pelunasan BPIH, rekomendasi kesehatan, bimbingan manasik, dan nomor kloter Anda.
           </p>
+        </div>
+
+        {/* Official Ministry Integration Banner */}
+        <div className="bg-gradient-to-r from-emerald-950 via-[#0A3E2F] to-emerald-950 text-white rounded-2xl p-4 border border-[#D4AF37]/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 max-w-xl mx-auto">
+          <div className="flex items-center gap-2.5">
+            <ShieldCheck className="w-5 h-5 text-[#D4AF37] shrink-0" />
+            <div>
+              <span className="font-bold text-xs text-white block">Integrasi Basis Data Resmi SISKOHAT</span>
+              <span className="text-[11px] text-slate-300">
+                Terkoneksi dengan sistem Kementerian Haji dan Umrah RI.
+              </span>
+            </div>
+          </div>
+          <a
+            href="https://haji.go.id"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#D4AF37] text-xs font-bold border border-[#D4AF37]/30 transition-all whitespace-nowrap self-start sm:self-auto"
+          >
+            <span>Portal haji.go.id</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
         </div>
 
         {/* Search Card */}
@@ -380,9 +403,21 @@ export default function CekPorsiPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-gray-500">
-        <p>SIAP HAJI PAPUA — Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji Provinsi Papua</p>
-        <p className="text-[11px] text-gray-400 mt-1">Satu Data • Satu Monitoring • Satu Layanan • Haji Papua Siap</p>
+      <footer className="bg-white border-t border-slate-200 py-6 text-center text-xs text-gray-500 space-y-1">
+        <p className="font-semibold text-gray-700">SIAP HAJI PAPUA — Kantor Wilayah Kementerian Agama Provinsi Papua</p>
+        <p className="text-[11px] text-gray-500">
+          Terintegrasi vertikal dengan SISKOHAT Kementerian Haji dan Umrah Republik Indonesia (
+          <a
+            href="https://haji.go.id"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[#0A3E2F] font-bold underline hover:text-[#15803D]"
+          >
+            haji.go.id
+          </a>
+          )
+        </p>
+        <p className="text-[11px] text-gray-400">Satu Data • Satu Monitoring • Satu Layanan • Haji Papua Siap</p>
       </footer>
     </div>
   );

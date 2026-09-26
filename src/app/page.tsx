@@ -427,7 +427,7 @@ export default function ShowcaseLandingPage() {
               {/* Status Footer */}
               <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
                 <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> SISKOHAT Terhubung
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> SISKOHAT & haji.go.id Terhubung
                 </span>
                 <span className="font-mono text-emerald-400">STATUS: SIAP OPERASIONAL</span>
               </div>
@@ -437,10 +437,16 @@ export default function ShowcaseLandingPage() {
       </section>
 
       {/* =========================================================================
-          4. RUNNING MARQUEE TICKER (9 KABUPATEN/KOTA PAPUA)
+          4. RUNNING MARQUEE TICKER (9 KABUPATEN/KOTA PAPUA & INTEGRASI PUSAT)
           ========================================================================= */}
       <div className="relative overflow-hidden border-y border-[#D4AF37]/30 bg-black/50 py-3.5 z-10 backdrop-blur-md">
         <div className="animate-marquee gap-8 pr-8">
+          <span className="flex items-center gap-2 whitespace-nowrap text-xs sm:text-sm font-bold text-amber-300 bg-amber-500/15 border border-amber-500/40 px-3.5 py-1 rounded-full shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <span>Kementerian Haji dan Umrah RI:</span>
+            <span className="font-mono text-white underline">haji.go.id</span>
+            <span className="text-emerald-400 font-mono">(Sinkronisasi Nasional Aktif)</span>
+          </span>
           {officialRegencies.map((reg) => (
             <span key={reg.code} className="flex items-center gap-2.5 whitespace-nowrap text-xs sm:text-sm font-semibold text-slate-300">
               <span className="w-2 h-2 rounded-full bg-[#D4AF37] shadow-[0_0_8px_#D4AF37]" />
@@ -450,6 +456,12 @@ export default function ShowcaseLandingPage() {
             </span>
           ))}
           {/* Repeat for seamless loop */}
+          <span className="flex items-center gap-2 whitespace-nowrap text-xs sm:text-sm font-bold text-amber-300 bg-amber-500/15 border border-amber-500/40 px-3.5 py-1 rounded-full shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <span>Kementerian Haji dan Umrah RI:</span>
+            <span className="font-mono text-white underline">haji.go.id</span>
+            <span className="text-emerald-400 font-mono">(Sinkronisasi Nasional Aktif)</span>
+          </span>
           {officialRegencies.map((reg) => (
             <span key={`${reg.code}-dup`} className="flex items-center gap-2.5 whitespace-nowrap text-xs sm:text-sm font-semibold text-slate-300">
               <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10b981]" />
@@ -766,9 +778,9 @@ export default function ShowcaseLandingPage() {
             <span className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] font-mono font-bold text-xs flex items-center justify-center">
               05
             </span>
-            <strong className="block text-sm text-white font-bold">Jeddah / Madinah</strong>
+            <strong className="block text-sm text-white font-bold">Kemenhaj RI (haji.go.id)</strong>
             <p className="text-[11px] text-slate-400 leading-relaxed">
-              Penerbangan langsung Garuda/Saudia menuju Tanah Suci dengan pengawalan petugas kloter.
+              Integrasi SISKOHAT Pusat (haji.go.id), smart card Nusuk, serta penerbangan langsung Jeddah/Madinah.
             </p>
           </div>
         </div>
@@ -917,7 +929,7 @@ export default function ShowcaseLandingPage() {
       </section>
 
       {/* =========================================================================
-          9. OFFICIAL KEMENAG PAPUA FOOTER
+          9. OFFICIAL KEMENAG PAPUA & KEMENHAJ RI FOOTER
           ========================================================================= */}
       <footer className="relative z-10 border-t border-white/10 bg-black/60 pt-12 pb-8 mt-12 text-slate-400 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
@@ -945,9 +957,31 @@ export default function ShowcaseLandingPage() {
 
           <div className="space-y-2">
             <strong className="block text-white text-xs uppercase font-mono tracking-wider">
-              Tautan Layanan:
+              Tautan Layanan Resmi:
             </strong>
             <ul className="space-y-1.5">
+              <li>
+                <a
+                  href="https://haji.go.id"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-emerald-400 hover:text-[#D4AF37] transition-colors flex items-center gap-1.5 font-bold"
+                >
+                  • Portal Kementerian Haji & Umrah RI (haji.go.id)
+                  <ArrowUpRight className="w-3 h-3 text-[#D4AF37]" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://papua.kemenag.go.id"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5"
+                >
+                  • Portal Kanwil Kemenag Papua (papua.kemenag.go.id)
+                  <ArrowUpRight className="w-3 h-3 text-[#D4AF37]" />
+                </a>
+              </li>
               <li>
                 <Link href="/cek-porsi" className="hover:text-[#D4AF37] transition-colors">
                   • Portal Cek Estimasi Porsi Mandiri
@@ -963,18 +997,13 @@ export default function ShowcaseLandingPage() {
                   • Login Petugas & Administrator
                 </Link>
               </li>
-              <li>
-                <a href="https://papua.kemenag.go.id" target="_blank" rel="noreferrer" className="hover:text-[#D4AF37] transition-colors">
-                  • Portal Resmi Kanwil Kemenag Papua (papua.kemenag.go.id)
-                </a>
-              </li>
             </ul>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <span>
-            © 2026 Kementerian Agama Republik Indonesia • Kanwil Provinsi Papua. Hak Cipta Dilindungi.
+            © 2026 Kementerian Agama RI & Kanwil Papua • Terintegrasi Vertikal dengan Kementerian Haji & Umrah RI (haji.go.id). Hak Cipta Dilindungi.
           </span>
           <span className="font-mono text-slate-400">
             SIAP HAJI PAPUA • v1.0 ENTERPRISE
