@@ -44,7 +44,7 @@ export function Header({ session, config }: HeaderProps) {
       <div className="w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Left: Branding & Dynamic Organizer */}
         <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/dashboard" className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl bg-white/10 p-1 flex items-center justify-center border border-[#D4AF37] shadow-inner group-hover:scale-105 transition-transform">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

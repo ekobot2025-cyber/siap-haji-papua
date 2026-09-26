@@ -56,7 +56,7 @@ export function Sidebar({ session }: SidebarProps) {
         {
           title: 'MONITORING & EMBARKASI',
           items: [
-            { label: 'Executive Dashboard', href: '/', icon: LayoutDashboard, active: pathname === '/' },
+            { label: 'Executive Dashboard', href: '/dashboard', icon: LayoutDashboard, active: pathname === '/dashboard' },
             { label: 'Manifest & Kloter', href: '/kloter', icon: Plane, active: pathname.startsWith('/kloter'), badge: '4 Kloter', badgeColor: 'bg-emerald-500/20 text-emerald-300' },
             { label: 'Peta Spasial Papua', href: '/monitoring/peta-wilayah', icon: Compass, active: pathname.startsWith('/monitoring/peta-wilayah') },
             { label: 'Laporan Rekapitulasi', href: '/laporan', icon: FileText, active: pathname === '/laporan', badge: 'RESMI', badgeColor: 'bg-emerald-500 text-white' },
@@ -73,7 +73,7 @@ export function Sidebar({ session }: SidebarProps) {
         {
           title: 'COMMAND CENTER',
           items: [
-            { label: 'Executive Dashboard', href: '/', icon: LayoutDashboard, active: pathname === '/' },
+            { label: 'Executive Dashboard', href: '/dashboard', icon: LayoutDashboard, active: pathname === '/dashboard' },
             { label: 'Action Center', href: '/action-center', icon: AlertCircle, active: pathname.startsWith('/action-center'), badge: '65', badgeColor: 'bg-rose-500 text-white' },
             { label: 'Early Warning Engine', href: '/monitoring/early-warning', icon: ShieldAlert, active: pathname.startsWith('/monitoring/early-warning'), badge: 'RISIKO', badgeColor: 'bg-amber-500 text-white' },
             { label: 'Peta Spasial Papua', href: '/monitoring/peta-wilayah', icon: Compass, active: pathname.startsWith('/monitoring/peta-wilayah') },
@@ -97,6 +97,7 @@ export function Sidebar({ session }: SidebarProps) {
         {
           title: 'LAYANAN PUBLIK',
           items: [
+            { label: 'Showcase Beranda', href: '/', icon: Sparkles, active: pathname === '/' },
             { label: 'Portal Cek Porsi Mandiri', href: '/cek-porsi', icon: QrCode, active: pathname === '/cek-porsi', badge: 'WARGA', badgeColor: 'bg-emerald-500 text-white' },
           ],
         },

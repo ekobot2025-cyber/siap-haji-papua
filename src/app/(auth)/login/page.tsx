@@ -47,7 +47,7 @@ export default function LoginPage() {
         return;
       }
 
-      const targetPath = json.data?.user?.roles?.includes('PETUGAS_KESEHATAN') ? '/kesehatan' : '/';
+      const targetPath = json.data?.user?.roles?.includes('PETUGAS_KESEHATAN') ? '/kesehatan' : '/dashboard';
       window.location.href = targetPath;
     } catch {
       setErrorMessage('Terjadi kesalahan jaringan');
