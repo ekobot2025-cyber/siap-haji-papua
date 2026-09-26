@@ -44,18 +44,17 @@ export default function PetaWilayahPage() {
     fetchRegionalData();
   }, [fetchRegionalData]);
 
-  // Spatial metadata for Papua regions
+  // Spatial metadata for 9 official Papua regencies (Wikipedia & UU DOB)
   const regionalMeta: Record<string, { coordinates: string; transitHub: string; distanceEmbarkation: string; islandType: string }> = {
-    'REG-JPR-KOTA': { coordinates: '2.5337° S, 140.7181° E', transitHub: 'Bandara Internasional Sentani (DJJ)', distanceEmbarkation: '3.5 Jam Udara ke Makassar (UPG)', islandType: 'Daratan Utama / Pesisir Utara' },
-    'REG-JPR-KAB': { coordinates: '2.5855° S, 140.5186° E', transitHub: 'Bandara Internasional Sentani (DJJ)', distanceEmbarkation: '3.5 Jam Udara ke Makassar (UPG)', islandType: 'Daratan Utama / Danau Sentani' },
-    'REG-BIAK': { coordinates: '1.1833° S, 136.0833° E', transitHub: 'Bandara Internasional Frans Kaisiepo (BIK)', distanceEmbarkation: '2.5 Jam Udara Langsung ke Makassar (UPG)', islandType: 'Gugusan Kepulauan Teluk Cenderawasih' },
-    'REG-KEEROM': { coordinates: '3.2974° S, 140.7715° E', transitHub: 'Transit Darat ke Kota Jayapura $\\to$ Sentani', distanceEmbarkation: 'Transit Jayapura $\\to$ UPG', islandType: 'Perbatasan RI - Papua Nugini' },
-    'REG-SARMI': { coordinates: '1.8601° S, 138.7423° E', transitHub: 'Darat Trans-Papua / Perintis ke Sentani', distanceEmbarkation: 'Transit Jayapura $\\to$ UPG', islandType: 'Pesisir Utara Samudra Pasifik' },
-    'REG-MERAUKE': { coordinates: '8.4991° S, 140.4019° E', transitHub: 'Bandara Mopah Merauke (MKQ)', distanceEmbarkation: '3.8 Jam Udara ke Makassar (UPG)', islandType: 'Papua Selatan' },
-    'REG-MIMIKA': { coordinates: '4.5468° S, 136.8837° E', transitHub: 'Bandara Mozes Kilangin Timika (TIM)', distanceEmbarkation: '2.2 Jam Udara Langsung ke Makassar (UPG)', islandType: 'Pesisir Selatan' },
-    'REG-NABIRE': { coordinates: '3.3667° S, 135.4833° E', transitHub: 'Bandara Douw Aturure Nabire (NBX)', distanceEmbarkation: 'Transit Sentani / Timika $\\to$ UPG', islandType: 'Teluk Cenderawasih Selatan' },
-    'REG-JAYAWIJAYA': { coordinates: '4.0833° S, 138.9500° E', transitHub: 'Bandara Wamena (WMX) $\\to$ Sentani', distanceEmbarkation: 'Penerbangan Lembah Baliem $\\to$ Sentani $\\to$ UPG', islandType: 'Pegunungan Tengah Papua' },
-    'REG-YAPEN': { coordinates: '1.7833° S, 136.2333° E', transitHub: 'Pelabuhan Serui $\\to$ Biak Numfor', distanceEmbarkation: 'Transit Laut Serui $\\to$ Biak $\\to$ UPG', islandType: 'Kepulauan Yapen Serui' },
+    'REG-JPR-KOTA': { coordinates: '2.5337° S, 140.7181° E', transitHub: 'Bandara Internasional Sentani (DJJ)', distanceEmbarkation: '3.5 Jam Udara ke Makassar (UPG)', islandType: 'Ibukota Provinsi / Pesisir Teluk Youtefa' },
+    'REG-JPR-KAB': { coordinates: '2.5855° S, 140.5186° E', transitHub: 'Bandara Internasional Sentani (DJJ)', distanceEmbarkation: '3.5 Jam Udara ke Makassar (UPG)', islandType: 'Daratan Utama / Kawasan Danau Sentani (Sentani)' },
+    'REG-KEEROM': { coordinates: '3.2974° S, 140.7715° E', transitHub: 'Transit Darat Trans-Papua ke Jayapura -> Sentani', distanceEmbarkation: 'Transit Jayapura -> UPG', islandType: 'Perbatasan RI - Papua Nugini (Waris/Arso)' },
+    'REG-SARMI': { coordinates: '1.8601° S, 138.7423° E', transitHub: 'Darat Trans-Papua / Perintis ke Sentani', distanceEmbarkation: 'Transit Jayapura -> UPG', islandType: 'Pesisir Utara Samudra Pasifik (Kota Ombak)' },
+    'REG-MAMB-RAYA': { coordinates: '2.2333° S, 137.9167° E', transitHub: 'Sungai Mamberamo / Perintis Kasonaweja -> Sentani', distanceEmbarkation: 'Transit Udara Perintis -> DJJ -> UPG', islandType: 'Daerah Aliran Sungai (DAS) Mamberamo (Burmeso)' },
+    'REG-BIAK': { coordinates: '1.1833° S, 136.0833° E', transitHub: 'Bandara Internasional Frans Kaisiepo (BIK)', distanceEmbarkation: '2.5 Jam Udara Langsung ke Makassar (UPG)', islandType: 'Kepulauan Biak Numfor / Teluk Cenderawasih' },
+    'REG-SUPIORI': { coordinates: '0.7500° S, 135.6167° E', transitHub: 'Transit Darat/Jembatan ke Biak -> Bandara BIK', distanceEmbarkation: 'Transit Biak -> UPG', islandType: 'Gugusan Kepulauan Supiori (Sorendiweri)' },
+    'REG-YAPEN': { coordinates: '1.7833° S, 136.2333° E', transitHub: 'Pelabuhan Serui / Bandara Stevanus Rumbewas -> Biak', distanceEmbarkation: 'Transit Laut/Udara -> Biak -> UPG', islandType: 'Gugusan Kepulauan Yapen (Serui)' },
+    'REG-WAROPEN': { coordinates: '2.4000° S, 136.6333° E', transitHub: 'Pelabuhan Botawa / Kapal Cepat -> Serui / Biak', distanceEmbarkation: 'Transit Laut -> Serui -> Biak -> UPG', islandType: 'Pesisir Bakau Teluk Cenderawasih (Botawa)' },
   };
 
   return (
@@ -71,7 +70,7 @@ export default function PetaWilayahPage() {
               PETA GEOSPASIAL & LOGISTIK EMBARKASI PROVINSI PAPUA
             </h1>
             <p className="text-xs text-gray-500 font-medium">
-              Pemetaan spasial kesiapan jamaah, titik transit bandara perintis, dan rute konsentrasi Embarkasi Hasanuddin Makassar
+              Pemetaan spasial kesiapan jamaah di 9 Kabupaten/Kota Provinsi Papua, titik transit bandara perintis, dan rute konsentrasi Embarkasi Hasanuddin Makassar
             </p>
           </div>
         </div>
@@ -93,7 +92,7 @@ export default function PetaWilayahPage() {
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-xs uppercase font-bold text-[#D4AF37] tracking-wider block">
-                  Provinsi Papua • 10 Wilayah Kerja Penyelenggaraan Haji
+                  Provinsi Papua • 9 Kabupaten & Kota Penyelenggara Haji
                 </span>
                 <h2 className="text-lg font-black mt-0.5">Peta Sebaran & Densitas Jamaah</h2>
               </div>

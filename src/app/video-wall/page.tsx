@@ -83,12 +83,14 @@ export default function VideoWallPage() {
 
   const defaultRegionalRanking = [
     { regionId: 'REG-JPR-KOTA', regionName: 'Kota Jayapura', averageReadiness: 97.5, readinessIndex: 97.5 },
-    { regionId: 'REG-MIMIKA', regionName: 'Kab. Mimika', averageReadiness: 96.8, readinessIndex: 96.8 },
-    { regionId: 'REG-MERAUKE', regionName: 'Kab. Merauke', averageReadiness: 95.4, readinessIndex: 95.4 },
-    { regionId: 'REG-JPR-KAB', regionName: 'Kab. Jayapura', averageReadiness: 94.2, readinessIndex: 94.2 },
-    { regionId: 'REG-BIAK', regionName: 'Kab. Biak Numfor', averageReadiness: 93.8, readinessIndex: 93.8 },
-    { regionId: 'REG-NABIRE', regionName: 'Kab. Nabire', averageReadiness: 92.5, readinessIndex: 92.5 },
-    { regionId: 'REG-KEEROM', regionName: 'Kab. Keerom', averageReadiness: 91.0, readinessIndex: 91.0 },
+    { regionId: 'REG-JPR-KAB', regionName: 'Kab. Jayapura', averageReadiness: 96.2, readinessIndex: 96.2 },
+    { regionId: 'REG-BIAK', regionName: 'Kab. Biak Numfor', averageReadiness: 95.8, readinessIndex: 95.8 },
+    { regionId: 'REG-KEEROM', regionName: 'Kab. Keerom', averageReadiness: 94.4, readinessIndex: 94.4 },
+    { regionId: 'REG-SARMI', regionName: 'Kab. Sarmi', averageReadiness: 93.1, readinessIndex: 93.1 },
+    { regionId: 'REG-YAPEN', regionName: 'Kab. Kepulauan Yapen', averageReadiness: 92.5, readinessIndex: 92.5 },
+    { regionId: 'REG-MAMB-RAYA', regionName: 'Kab. Mamberamo Raya', averageReadiness: 91.0, readinessIndex: 91.0 },
+    { regionId: 'REG-SUPIORI', regionName: 'Kab. Supiori', averageReadiness: 90.5, readinessIndex: 90.5 },
+    { regionId: 'REG-WAROPEN', regionName: 'Kab. Waropen', averageReadiness: 89.8, readinessIndex: 89.8 },
   ];
 
   const regionalRanking = (data?.regionalRanking && data.regionalRanking.length > 0)

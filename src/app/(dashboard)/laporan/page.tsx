@@ -59,16 +59,15 @@ export default async function LaporanPage() {
   ]);
 
   const quotaMap: Record<string, number> = {
-    'REG-JPR-KOTA': 380,
-    'REG-JPR-KAB': 180,
-    'REG-BIAK': 120,
-    'REG-KEEROM': 80,
-    'REG-SARMI': 60,
-    'REG-MRK': 90,
-    'REG-MMK': 70,
-    'REG-YAPEN': 40,
-    'REG-NABIRE': 40,
-    'REG-JWY': 20,
+    'REG-JPR-KOTA': 420,
+    'REG-JPR-KAB': 210,
+    'REG-BIAK': 140,
+    'REG-KEEROM': 95,
+    'REG-SARMI': 65,
+    'REG-YAPEN': 50,
+    'REG-MAMB-RAYA': 36,
+    'REG-SUPIORI': 32,
+    'REG-WAROPEN': 28,
   };
 
   // Group jamaah by region in-memory (O(n) instead of 10 separate DB queries)

@@ -18,10 +18,10 @@ export interface AppConfig {
 const DEFAULT_SETTINGS: Record<string, string> = {
   APP_NAME: 'SIAP HAJI PAPUA',
   APP_TAGLINE: 'Satu Data • Satu Monitoring • Satu Layanan • Haji Papua Siap',
-  ORGANIZER_NAME: 'Penyelenggara Haji dan Umrah Tingkat Provinsi Papua',
-  ORGANIZER_ADDRESS: 'Jayapura, Provinsi Papua',
-  CONTACT_EMAIL: 'layanan@siaphaji.papua.go.id',
-  CONTACT_PHONE: '(0967) 533-888',
+  ORGANIZER_NAME: 'Kantor Wilayah Kementerian Agama Provinsi Papua',
+  ORGANIZER_ADDRESS: 'Jl. Raya Abepura, Entrop, Distrik Jayapura Selatan, Kota Jayapura, Papua 99224',
+  CONTACT_EMAIL: 'kanwilpapua@kemenag.go.id',
+  CONTACT_PHONE: '(0967) 537427',
   LOGO_APP_URL: '/assets/branding/app-icon.png',
   LOGO_INSTITUTION_URL: '/assets/branding/logo-horizontal.svg',
 };
