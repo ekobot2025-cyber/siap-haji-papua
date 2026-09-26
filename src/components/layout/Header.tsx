@@ -32,10 +32,10 @@ export function Header({ session, config }: HeaderProps) {
     setIsLoggingOut(true);
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/login');
-      router.refresh();
     } catch {
-      router.push('/login');
+      // ignore network errors
+    } finally {
+      window.location.href = '/login';
     }
   };
 
@@ -81,7 +81,7 @@ export function Header({ session, config }: HeaderProps) {
           <button
             type="button"
             onClick={() => setIsLargeText(!isLargeText)}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
               isLargeText
                 ? 'bg-[#D4AF37] text-gray-900 border-[#D4AF37] shadow-xs'
                 : 'bg-white/10 text-white border-white/20 hover:bg-white/20'
@@ -119,11 +119,15 @@ export function Header({ session, config }: HeaderProps) {
                 type="button"
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="p-1.5 text-slate-300 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
+                className="p-1.5 text-slate-300 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 hover:scale-110 active:scale-95 flex items-center justify-center"
                 title="Keluar dari sistem"
                 aria-label="Logout"
               >
-                <LogOut className="w-4 h-4" />
+                {isLoggingOut ? (
+                  <span className="w-4 h-4 border-2 border-red-300 border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <LogOut className="w-4 h-4" />
+                )}
               </button>
             </div>
           ) : (

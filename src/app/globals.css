@@ -27,6 +27,16 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"]:disabled {
+    cursor: not-allowed;
+  }
+
   /* MODE TEKS BESAR KHUSUS AKSESIBILITAS & LANSIA */
   body.large-text-mode {
     font-size: 1.25rem !important;
