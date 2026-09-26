@@ -26,7 +26,7 @@ export class HealthService {
     const where: any = {};
 
     // Row-Level Authorization
-    if (session && session.regionId && !session.roles.includes('SUPER_ADMIN') && !session.roles.includes('PROV_ADMIN') && !session.roles.includes('EXECUTIVE_LEADER')) {
+    if (session && session.regionId && !session.roles.includes('SUPER_ADMIN') && !session.roles.includes('PROV_ADMIN') && !session.roles.includes('EXECUTIVE_LEADER') && !session.roles.includes('PETUGAS_KESEHATAN')) {
       where.jamaah = { regionId: session.regionId };
     } else if (params.regionId) {
       where.jamaah = { regionId: params.regionId };
@@ -119,7 +119,7 @@ export class HealthService {
     }
 
     // Row-Level Authorization check
-    if (session.regionId && !session.roles.includes('SUPER_ADMIN') && !session.roles.includes('PROV_ADMIN')) {
+    if (session.regionId && !session.roles.includes('SUPER_ADMIN') && !session.roles.includes('PROV_ADMIN') && !session.roles.includes('PETUGAS_KESEHATAN')) {
       if (record.jamaah.regionId !== session.regionId) {
         throw new Error('Akses ditolak: Data bukan milik wilayah kewenangan Anda.');
       }

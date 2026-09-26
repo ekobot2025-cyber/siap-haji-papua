@@ -6,7 +6,7 @@ export const ROLES = {
   REGION_ADMIN: 'REGION_ADMIN',
   OFFICER: 'OFFICER',
   LEADER: 'LEADER',
-  JAMAAH: 'JAMAAH',
+  PETUGAS_KESEHATAN: 'PETUGAS_KESEHATAN',
 } as const;
 
 export type RoleCode = (typeof ROLES)[keyof typeof ROLES];
@@ -30,11 +30,12 @@ export function getRowLevelRegionFilter(
   session: UserSessionPayload,
   requestedRegionId?: string | null
 ): { regionId?: string } | { id: 'FORBIDDEN_NO_ACCESS' } {
-  // 1. Super Admin, Prov Admin, and Executive Leader have provincial-wide scope
+  // 1. Super Admin, Prov Admin, Executive Leader, and Petugas Kesehatan have provincial-wide scope
   if (
     session.roles.includes(ROLES.SUPER_ADMIN) ||
     session.roles.includes(ROLES.PROV_ADMIN) ||
-    session.roles.includes(ROLES.LEADER)
+    session.roles.includes(ROLES.LEADER) ||
+    session.roles.includes(ROLES.PETUGAS_KESEHATAN)
   ) {
     if (requestedRegionId) {
       return { regionId: requestedRegionId };
@@ -70,17 +71,14 @@ export function canAccessJamaahRecord(
   if (
     session.roles.includes(ROLES.SUPER_ADMIN) ||
     session.roles.includes(ROLES.PROV_ADMIN) ||
-    session.roles.includes(ROLES.LEADER)
+    session.roles.includes(ROLES.LEADER) ||
+    session.roles.includes(ROLES.PETUGAS_KESEHATAN)
   ) {
     return true;
   }
 
   if (session.roles.includes(ROLES.REGION_ADMIN)) {
     return session.regionId === record.regionId;
-  }
-
-  if (session.roles.includes(ROLES.JAMAAH)) {
-    return session.userId === record.userId;
   }
 
   if (session.roles.includes(ROLES.OFFICER)) {

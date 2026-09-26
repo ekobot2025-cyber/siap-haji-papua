@@ -79,7 +79,7 @@ async function main() {
     { code: 'REGION_ADMIN', name: 'Admin Kabupaten / Kota', desc: 'Operasional dan verifikasi terbatas pada wilayahnya (RLA Scoped)' },
     { code: 'OFFICER', name: 'Petugas / Kloter', desc: 'Pemantauan checklist jamaah dan bimbingan manasik' },
     { code: 'LEADER', name: 'Pimpinan Eksekutif', desc: 'Executive Monitoring read-only dashboard pimpinan' },
-    { code: 'JAMAAH', name: 'Jamaah Mandiri', desc: 'Akses portal mandiri kesiapan dan informasi personal' },
+    { code: 'PETUGAS_KESEHATAN', name: 'Petugas Kesehatan Haji', desc: 'Pemeriksaan kesehatan, penetapan istitha’ah, dan vaksinasi jamaah' },
   ];
 
   const roleMap = new Map<string, string>();
@@ -118,6 +118,13 @@ async function main() {
       regionCode: 'REG-PAPUA-PROV',
     },
     {
+      username: 'petugaskesehatan',
+      email: 'petugas.kesehatan@siaphaji.papua.go.id',
+      fullName: 'dr. Siti Rahmawati, Sp.PD (Tim Medis Haji)',
+      role: 'PETUGAS_KESEHATAN',
+      regionCode: 'REG-PAPUA-PROV',
+    },
+    {
       username: 'adminkotajpr',
       email: 'admin.kotajpr@siaphaji.papua.go.id',
       fullName: 'Admin Wilayah Kota Jayapura',
@@ -136,13 +143,6 @@ async function main() {
       email: 'petugas01@siaphaji.papua.go.id',
       fullName: 'H. Abdul Karim, S.Ag (Ketua Kloter 01)',
       role: 'OFFICER',
-      regionCode: 'REG-JPR-KOTA',
-    },
-    {
-      username: 'jamaahdemo',
-      email: 'fatimah.jamaah@siaphaji.papua.go.id',
-      fullName: 'Hj. Fatimah Hidayat',
-      role: 'JAMAAH',
       regionCode: 'REG-JPR-KOTA',
     },
   ];

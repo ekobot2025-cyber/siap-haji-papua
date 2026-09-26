@@ -16,10 +16,9 @@ export default function LoginPage() {
     { label: 'Super Admin', username: 'superadmin', role: 'SUPER_ADMIN', desc: 'Akses Penuh Seluruh Sistem' },
     { label: 'Pimpinan', username: 'pimpinan', role: 'LEADER', desc: 'Executive Monitoring (Read-Only)' },
     { label: 'Admin Provinsi', username: 'adminprov', role: 'PROV_ADMIN', desc: 'Komando & Operasional Provinsi' },
+    { label: 'Petugas Kesehatan', username: 'petugaskesehatan', role: 'PETUGAS_KESEHATAN', desc: 'Pemeriksaan & Istitha’ah RSUD / BKKP' },
     { label: 'Admin Kota Jayapura', username: 'adminkotajpr', role: 'REGION_ADMIN', desc: 'Scoped: Kota Jayapura' },
-    { label: 'Admin Biak Numfor', username: 'adminbiak', role: 'REGION_ADMIN', desc: 'Scoped: Kab. Biak Numfor' },
     { label: 'Petugas Kloter', username: 'petugaskloter', role: 'OFFICER', desc: 'Scoped: Kloter 01' },
-    { label: 'Jamaah (Fatimah)', username: 'jamaahdemo', role: 'JAMAAH', desc: 'Portal Mandiri Jamaah' },
   ];
 
   const handleQuickSelect = (username: string) => {
@@ -48,7 +47,7 @@ export default function LoginPage() {
         return;
       }
 
-      const targetPath = json.data?.user?.roles?.includes('JAMAAH') ? '/portal-jamaah' : '/';
+      const targetPath = json.data?.user?.roles?.includes('PETUGAS_KESEHATAN') ? '/kesehatan' : '/';
       window.location.href = targetPath;
     } catch {
       setErrorMessage('Terjadi kesalahan jaringan');

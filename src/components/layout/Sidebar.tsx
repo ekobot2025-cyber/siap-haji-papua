@@ -40,24 +40,32 @@ export function Sidebar({ session }: SidebarProps) {
   }, [pathname]);
 
   const isSuperAdmin = session?.roles.includes('SUPER_ADMIN');
-  const isJamaah = session?.roles.includes('JAMAAH');
+  const isPetugasKesehatan = session?.roles.includes('PETUGAS_KESEHATAN');
 
-  const navSections = isJamaah
+  const navSections = isPetugasKesehatan
     ? [
         {
-          title: 'PORTAL JAMAAH MANDIRI',
+          title: 'LAYANAN KESEHATAN HAJI',
           items: [
-            { label: 'Kesiapan & Status Saya', href: '/portal-jamaah', icon: LayoutDashboard, active: pathname === '/portal-jamaah' },
-            { label: 'Smart Hajj Pass (Digital)', href: '/portal-jamaah#hajj-pass', icon: QrCode, active: false, badge: 'KARTU', badgeColor: 'bg-[#D4AF37] text-gray-950 font-bold' },
-            { label: 'Kelengkapan Dokumen', href: '/portal-jamaah#dokumen', icon: FileCheck, active: false },
-            { label: 'Jadwal Manasik Haji', href: '/portal-jamaah#manasik', icon: BookOpen, active: false },
-            { label: 'Kontak Petugas Kloter', href: '/portal-jamaah#petugas', icon: Plane, active: false },
+            { label: 'Monitoring Kesehatan', href: '/kesehatan', icon: HeartPulse, active: pathname.startsWith('/kesehatan'), badge: '17 Risti', badgeColor: 'bg-rose-500 text-white' },
+            { label: 'Early Warning Risiko', href: '/monitoring/early-warning', icon: ShieldAlert, active: pathname.startsWith('/monitoring/early-warning'), badge: 'MEDIS', badgeColor: 'bg-amber-500 text-white' },
+            { label: 'Data Medis Jamaah', href: '/jamaah', icon: Users, active: pathname.startsWith('/jamaah') },
+            { label: 'Kalender Pemeriksaan', href: '/kalender', icon: Calendar, active: pathname.startsWith('/kalender') },
+          ],
+        },
+        {
+          title: 'MONITORING & EMBARKASI',
+          items: [
+            { label: 'Executive Dashboard', href: '/', icon: LayoutDashboard, active: pathname === '/' },
+            { label: 'Manifest & Kloter', href: '/kloter', icon: Plane, active: pathname.startsWith('/kloter'), badge: '4 Kloter', badgeColor: 'bg-emerald-500/20 text-emerald-300' },
+            { label: 'Peta Spasial Papua', href: '/monitoring/peta-wilayah', icon: Compass, active: pathname.startsWith('/monitoring/peta-wilayah') },
+            { label: 'Laporan Rekapitulasi', href: '/laporan', icon: FileText, active: pathname === '/laporan', badge: 'RESMI', badgeColor: 'bg-emerald-500 text-white' },
           ],
         },
         {
           title: 'LAYANAN TERBUKA',
           items: [
-            { label: 'Cek Porsi Mandiri', href: '/cek-porsi', icon: QrCode, active: pathname === '/cek-porsi', badge: 'PUBLIK', badgeColor: 'bg-emerald-500 text-white' },
+            { label: 'Portal Cek Porsi Mandiri', href: '/cek-porsi', icon: QrCode, active: pathname === '/cek-porsi', badge: 'PUBLIK', badgeColor: 'bg-emerald-500 text-white' },
           ],
         },
       ]
@@ -109,16 +117,16 @@ export function Sidebar({ session }: SidebarProps) {
       {/* Scope Info Card */}
       <div className="p-4 mx-3 my-3 rounded-xl bg-black/25 border border-white/10 text-xs">
         <span className="text-[10px] uppercase font-bold text-[#D4AF37] block mb-1">
-          {isJamaah ? 'Akun Calon Jamaah Haji' : 'Lingkup Otorisasi Data'}
+          {isPetugasKesehatan ? 'Tim Medis & Petugas Kesehatan' : 'Lingkup Otorisasi Data'}
         </span>
         <div className="font-semibold text-white truncate">
-          {isJamaah
-            ? (session?.fullName || 'Jamaah Papua')
+          {isPetugasKesehatan
+            ? (session?.fullName || 'dr. Siti Rahmawati, Sp.PD')
             : (session?.regionName ? session.regionName : 'Seluruh Provinsi Papua')}
         </div>
         <div className="text-[11px] text-slate-300 mt-0.5">
-          {isJamaah ? (
-            <span className="text-emerald-300 font-medium">Musim Haji 1447H / 2026M</span>
+          {isPetugasKesehatan ? (
+            <span className="text-emerald-300 font-medium">Balai Karantina / RSUD Papua</span>
           ) : (
             <>Peran: <strong className="text-white">{session?.roles[0] || 'GUEST'}</strong></>
           )}
