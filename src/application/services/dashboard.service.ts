@@ -52,6 +52,10 @@ export interface ExecutiveDashboardData {
   }[];
 }
 
+// 15-second in-memory cache to prevent redundant DB queries during rapid navigation
+const _cache = new Map<string, { data: ExecutiveDashboardData; expires: number }>();
+const CACHE_TTL = 15_000; // 15 seconds
+
 export class DashboardService {
   /**
    * Aggregates real-time Command Center metrics from PostgreSQL/SQLite database
@@ -60,6 +64,12 @@ export class DashboardService {
     session: UserSessionPayload,
     filterRegionId?: string
   ): Promise<ExecutiveDashboardData> {
+    // Check cache first
+    const cacheKey = `${session.userId}:${filterRegionId || 'ALL'}`;
+    const cached = _cache.get(cacheKey);
+    if (cached && Date.now() < cached.expires) {
+      return cached.data;
+    }
     // 1. Fetch active season
     const season = await prisma.hajjSeason.findFirst({
       where: { isActive: true },
@@ -197,7 +207,7 @@ export class DashboardService {
       description: `${log.action} pada modul ${log.module}${log.recordId ? ` (ID: ${log.recordId.slice(0, 8)}...)` : ''}`,
     }));
 
-    return {
+    const result: ExecutiveDashboardData = {
       season: season
         ? {
             id: season.id,
@@ -221,5 +231,9 @@ export class DashboardService {
       regionalRanking,
       recentActivities,
     };
+
+    _cache.set(cacheKey, { data: result, expires: Date.now() + CACHE_TTL });
+
+    return result;
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -22,6 +22,7 @@ import {
   Tv,
   QrCode,
   FileText,
+  Loader2,
 } from 'lucide-react';
 import type { UserSessionPayload } from '@/infrastructure/security/jwt';
 
@@ -31,6 +32,12 @@ interface SidebarProps {
 
 export function Sidebar({ session }: SidebarProps) {
   const pathname = usePathname();
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+
+  // Clear pending state when navigation completes
+  useEffect(() => {
+    setPendingHref(null);
+  }, [pathname]);
 
   const isSuperAdmin = session?.roles.includes('SUPER_ADMIN');
   const isJamaah = session?.roles.includes('JAMAAH');
@@ -129,24 +136,44 @@ export function Sidebar({ session }: SidebarProps) {
               {section.items.map((item) => {
                 const Icon = item.icon;
 
+                const isPending = pendingHref === item.href;
+
                 return (
                   <li key={item.label}>
                     <Link
                       href={item.href}
-                      className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+                      prefetch={true}
+                      onClick={() => {
+                        if (!item.active && item.href !== pathname) {
+                          setPendingHref(item.href);
+                        }
+                      }}
+                      className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer ${
                         item.active
                           ? 'bg-[#15803D] text-white shadow-xs border-l-4 border-[#D4AF37]'
+                          : isPending
+                          ? 'bg-[#15803D]/60 text-white shadow-xs border-l-4 border-[#D4AF37] animate-pulse ring-1 ring-[#D4AF37]/50'
                           : 'text-slate-300 hover:bg-white/10 hover:text-white'
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
-                        <Icon className={`w-4 h-4 ${item.active ? 'text-[#D4AF37]' : 'text-slate-400'}`} />
+                        {isPending ? (
+                          <Loader2 className="w-4 h-4 text-[#D4AF37] animate-spin" />
+                        ) : (
+                          <Icon className={`w-4 h-4 ${item.active ? 'text-[#D4AF37]' : 'text-slate-400'}`} />
+                        )}
                         <span>{item.label}</span>
                       </div>
-                      {item.badge && (
-                        <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${item.badgeColor || 'bg-white/10 text-white'}`}>
-                          {item.badge}
+                      {isPending ? (
+                        <span className="text-[10px] font-mono text-[#D4AF37] font-bold">
+                          Memuat...
                         </span>
+                      ) : (
+                        item.badge && (
+                          <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${item.badgeColor || 'bg-white/10 text-white'}`}>
+                            {item.badge}
+                          </span>
+                        )
                       )}
                     </Link>
                   </li>

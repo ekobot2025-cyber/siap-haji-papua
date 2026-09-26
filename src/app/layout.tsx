@@ -1,6 +1,8 @@
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import './globals.css';
 import { ScrollToTop } from '@/components/common/ScrollToTop';
+import { NavigationProgressBar } from '@/components/common/NavigationProgressBar';
 
 export const metadata: Metadata = {
   title: 'SIAP HAJI PAPUA — Command Center Penyelenggaraan Haji',
@@ -21,6 +23,9 @@ export default function RootLayout({
         <link rel="icon" href="/assets/branding/app-icon.png" />
       </head>
       <body>
+        <Suspense fallback={null}>
+          <NavigationProgressBar />
+        </Suspense>
         {children}
         <ScrollToTop />
       </body>
