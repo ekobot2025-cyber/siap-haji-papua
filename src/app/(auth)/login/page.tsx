@@ -48,12 +48,8 @@ export default function LoginPage() {
         return;
       }
 
-      if (json.data?.user?.roles?.includes('JAMAAH')) {
-        router.push('/portal-jamaah');
-      } else {
-        router.push('/');
-      }
-      router.refresh();
+      const targetPath = json.data?.user?.roles?.includes('JAMAAH') ? '/portal-jamaah' : '/';
+      window.location.href = targetPath;
     } catch {
       setErrorMessage('Terjadi kesalahan jaringan');
       setIsLoading(false);

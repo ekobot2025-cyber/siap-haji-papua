@@ -109,7 +109,8 @@ export class AuthService {
 
     const token = await signSessionToken(sessionPayload);
 
-    await AuditService.log({
+    // Catat audit log di background tanpa menghambat respons login ke user
+    void AuditService.log({
       actorId: user.id,
       actorUsername: user.username,
       actorRole: roleCodes[0] || 'USER',
@@ -118,7 +119,7 @@ export class AuthService {
       ipAddress,
       userAgent,
       afterState: { loginSuccess: true },
-    });
+    }).catch((err) => console.error('Failed to log login audit:', err));
 
     return { token, session: sessionPayload };
   }

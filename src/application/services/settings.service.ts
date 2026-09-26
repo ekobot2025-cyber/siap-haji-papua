@@ -26,11 +26,19 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   LOGO_INSTITUTION_URL: '/assets/branding/logo-horizontal.svg',
 };
 
+let cachedConfig: AppConfig | null = null;
+let cachedConfigExpiry = 0;
+
 export class SettingsService {
   /**
-   * Retrieves all key-value settings as a strongly-typed object
+   * Retrieves all key-value settings as a strongly-typed object (Cached for 60 seconds)
    */
   public static async getAppConfig(): Promise<AppConfig> {
+    const now = Date.now();
+    if (cachedConfig && now < cachedConfigExpiry) {
+      return cachedConfig;
+    }
+
     try {
       const records = await prisma.systemSetting.findMany();
       const settingsMap: Record<string, string> = { ...DEFAULT_SETTINGS };
@@ -44,7 +52,7 @@ export class SettingsService {
         where: { isActive: true },
       });
 
-      return {
+      const config: AppConfig = {
         appName: settingsMap.APP_NAME || DEFAULT_SETTINGS.APP_NAME,
         tagline: settingsMap.APP_TAGLINE || DEFAULT_SETTINGS.APP_TAGLINE,
         organizerName: settingsMap.ORGANIZER_NAME || DEFAULT_SETTINGS.ORGANIZER_NAME,
@@ -56,6 +64,11 @@ export class SettingsService {
         activeSeasonId: activeSeason?.id,
         activeSeasonName: activeSeason?.seasonName || 'Musim Haji 1447 H / 2026 M',
       };
+
+      cachedConfig = config;
+      cachedConfigExpiry = now + 60 * 1000; // Cache 60 detik
+
+      return config;
     } catch {
       return {
         appName: DEFAULT_SETTINGS.APP_NAME,
