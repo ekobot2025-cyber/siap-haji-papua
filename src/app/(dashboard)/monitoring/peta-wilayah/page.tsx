@@ -105,13 +105,14 @@ export default function PetaWilayahPage() {
             {/* Interactive Regions Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
               {ranking.map((reg) => {
-                const isSelected = selectedRegion?.regionId === reg.regionId;
-                const isHighReady = reg.readinessIndex >= 90;
-                const isMidReady = reg.readinessIndex >= 75;
+                const score = Number(reg?.averageReadiness ?? reg?.readinessIndex ?? 0);
+                const isSelected = selectedRegion?.regionId === reg?.regionId;
+                const isHighReady = score >= 90;
+                const isMidReady = score >= 75;
 
                 return (
                   <div
-                    key={reg.regionId}
+                    key={reg?.regionId || reg?.regionCode}
                     onClick={() => setSelectedRegion(reg)}
                     className={`p-4 rounded-2xl border text-left cursor-pointer transition-all ${
                       isSelected
@@ -122,20 +123,20 @@ export default function PetaWilayahPage() {
                     <div className="flex items-start justify-between">
                       <div className="space-y-0.5">
                         <span className="text-[10px] font-mono font-bold text-[#D4AF37] uppercase">
-                          {reg.regionCode}
+                          {reg?.regionCode}
                         </span>
-                        <h3 className="text-sm font-bold text-white">{reg.regionName}</h3>
+                        <h3 className="text-sm font-bold text-white">{reg?.regionName}</h3>
                       </div>
                       <span className={`px-2 py-0.5 rounded text-[10px] font-black font-mono ${
                         isHighReady ? 'bg-emerald-500 text-white' : isMidReady ? 'bg-amber-500 text-white' : 'bg-rose-500 text-white'
                       }`}>
-                        {reg.readinessIndex.toFixed(0)}%
+                        {score.toFixed(0)}%
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between text-xs pt-3 mt-2 border-t border-white/10 text-slate-300">
-                      <span>Total: <strong>{reg.totalJamaah} Jamaah</strong></span>
-                      <span className="text-emerald-300 font-semibold">{reg.siapBerangkat} Siap</span>
+                      <span>Total: <strong>{reg?.totalJamaah ?? 0} Jamaah</strong></span>
+                      <span className="text-emerald-300 font-semibold">{reg?.siapCount ?? reg?.siapBerangkat ?? 0} Siap</span>
                     </div>
                   </div>
                 );
@@ -182,12 +183,14 @@ export default function PetaWilayahPage() {
               <div className="space-y-2 pt-2">
                 <div className="flex items-center justify-between text-xs font-bold">
                   <span className="text-gray-700">Capaian Indeks Kesiapan:</span>
-                  <span className="font-mono text-[#0A3E2F] text-base">{selectedRegion.readinessIndex.toFixed(1)}%</span>
+                  <span className="font-mono text-[#0A3E2F] text-base">
+                    {Number(selectedRegion?.averageReadiness ?? selectedRegion?.readinessIndex ?? 0).toFixed(1)}%
+                  </span>
                 </div>
                 <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
                   <div
-                    className="bg-[#0A3E2F] h-full rounded-full"
-                    style={{ width: `${selectedRegion.readinessIndex}%` }}
+                    className="bg-[#0A3E2F] h-full rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min(100, Math.max(0, Number(selectedRegion?.averageReadiness ?? selectedRegion?.readinessIndex ?? 0)))}%` }}
                   />
                 </div>
               </div>
@@ -195,11 +198,11 @@ export default function PetaWilayahPage() {
               <div className="grid grid-cols-2 gap-2 text-xs pt-2">
                 <div className="p-3 rounded-xl bg-emerald-50 text-emerald-800 text-center">
                   <span className="text-[10px] uppercase font-bold block">Siap Berangkat</span>
-                  <strong className="text-lg font-mono font-black">{selectedRegion.siapBerangkat}</strong>
+                  <strong className="text-lg font-mono font-black">{selectedRegion?.siapCount ?? selectedRegion?.siapBerangkat ?? 0}</strong>
                 </div>
                 <div className="p-3 rounded-xl bg-amber-50 text-amber-800 text-center">
                   <span className="text-[10px] uppercase font-bold block">Dalam Proses</span>
-                  <strong className="text-lg font-mono font-black">{selectedRegion.dalamProses}</strong>
+                  <strong className="text-lg font-mono font-black">{selectedRegion?.hampirSiapCount ?? selectedRegion?.dalamProses ?? 0}</strong>
                 </div>
               </div>
 

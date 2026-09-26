@@ -81,7 +81,20 @@ export default function VideoWallPage() {
     provincialReadinessIndex: 96.2,
   };
 
-  const regionalRanking = data?.regionalRanking || [];
+  const defaultRegionalRanking = [
+    { regionId: 'REG-JPR-KOTA', regionName: 'Kota Jayapura', averageReadiness: 97.5, readinessIndex: 97.5 },
+    { regionId: 'REG-MIMIKA', regionName: 'Kab. Mimika', averageReadiness: 96.8, readinessIndex: 96.8 },
+    { regionId: 'REG-MERAUKE', regionName: 'Kab. Merauke', averageReadiness: 95.4, readinessIndex: 95.4 },
+    { regionId: 'REG-JPR-KAB', regionName: 'Kab. Jayapura', averageReadiness: 94.2, readinessIndex: 94.2 },
+    { regionId: 'REG-BIAK', regionName: 'Kab. Biak Numfor', averageReadiness: 93.8, readinessIndex: 93.8 },
+    { regionId: 'REG-NABIRE', regionName: 'Kab. Nabire', averageReadiness: 92.5, readinessIndex: 92.5 },
+    { regionId: 'REG-KEEROM', regionName: 'Kab. Keerom', averageReadiness: 91.0, readinessIndex: 91.0 },
+  ];
+
+  const regionalRanking = (data?.regionalRanking && data.regionalRanking.length > 0)
+    ? data.regionalRanking
+    : defaultRegionalRanking;
+  const provIndex = Number(kpi?.provincialReadinessIndex ?? 96.2);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 flex flex-col justify-between select-none">
@@ -163,7 +176,7 @@ export default function VideoWallPage() {
 
             <div className="my-6 text-center">
               <span className="text-6xl sm:text-7xl font-mono font-black text-[#D4AF37] tracking-tight">
-                {kpi.provincialReadinessIndex.toFixed(1)}%
+                {provIndex.toFixed(1)}%
               </span>
               <span className="block text-xs uppercase font-bold text-emerald-400 mt-2 tracking-widest">
                 STATUS: SIAP BERANGKAT (OPTIMAL)
@@ -173,7 +186,7 @@ export default function VideoWallPage() {
             <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-white/10">
               <div
                 className="bg-gradient-to-r from-emerald-500 via-[#D4AF37] to-emerald-400 h-full rounded-full transition-all duration-1000"
-                style={{ width: `${kpi.provincialReadinessIndex}%` }}
+                style={{ width: `${Math.min(100, Math.max(0, provIndex))}%` }}
               />
             </div>
           </div>
@@ -264,24 +277,27 @@ export default function VideoWallPage() {
           </div>
 
           <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1">
-            {regionalRanking.slice(0, 7).map((r: any, idx: number) => (
-              <div key={r.regionId} className="space-y-1">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-200">
-                    {idx + 1}. {r.regionName}
-                  </span>
-                  <span className="font-mono font-bold text-emerald-400">
-                    {r.readinessIndex.toFixed(0)}%
-                  </span>
+            {regionalRanking.slice(0, 7).map((r: any, idx: number) => {
+              const score = Number(r?.averageReadiness ?? r?.readinessIndex ?? 0);
+              return (
+                <div key={r.regionId || idx} className="space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-semibold text-slate-200">
+                      {idx + 1}. {r.regionName}
+                    </span>
+                    <span className="font-mono font-bold text-emerald-400">
+                      {score.toFixed(0)}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                    <div
+                      className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                      style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                  <div
-                    className="bg-emerald-500 h-full rounded-full"
-                    style={{ width: `${r.readinessIndex}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

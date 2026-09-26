@@ -209,7 +209,7 @@ export default function SimulasiKuotaPage() {
                     </td>
                     <td className="p-3.5 text-center">
                       <span className="px-2.5 py-1 rounded-full text-xs font-black font-mono bg-emerald-100 text-emerald-800">
-                        {c.readinessScore.toFixed(0)}%
+                        {Number(c?.readinessScore ?? 0).toFixed(0)}%
                       </span>
                     </td>
                     <td className="p-3.5 text-right">

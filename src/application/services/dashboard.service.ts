@@ -12,6 +12,9 @@ export interface RegionalSummary {
   perluTindakLanjutCount: number;
   prioritasCount: number;
   averageReadiness: number;
+  readinessIndex?: number;
+  siapBerangkat?: number;
+  dalamProses?: number;
 }
 
 export interface ExecutiveDashboardData {
@@ -156,17 +159,23 @@ export class DashboardService {
     // Build regional ranking sorted by average readiness descending
     const regionalRanking: RegionalSummary[] = Array.from(regionMap.values())
       .filter((r) => r.total > 0 || session.roles.includes('SUPER_ADMIN'))
-      .map((r) => ({
-        regionId: r.id,
-        regionCode: r.code,
-        regionName: r.name,
-        totalJamaah: r.total,
-        siapCount: r.siap,
-        hampirSiapCount: r.hampirSiap,
-        perluTindakLanjutCount: r.perluTindakLanjut,
-        prioritasCount: r.prioritas,
-        averageReadiness: r.total > 0 ? Math.round((r.scoreSum / r.total) * 10) / 10 : 0,
-      }))
+      .map((r) => {
+        const avg = r.total > 0 ? Math.round((r.scoreSum / r.total) * 10) / 10 : 0;
+        return {
+          regionId: r.id,
+          regionCode: r.code,
+          regionName: r.name,
+          totalJamaah: r.total,
+          siapCount: r.siap,
+          hampirSiapCount: r.hampirSiap,
+          perluTindakLanjutCount: r.perluTindakLanjut,
+          prioritasCount: r.prioritas,
+          averageReadiness: avg,
+          readinessIndex: avg,
+          siapBerangkat: r.siap,
+          dalamProses: r.hampirSiap,
+        };
+      })
       .sort((a, b) => b.averageReadiness - a.averageReadiness || b.totalJamaah - a.totalJamaah);
 
     // Foundation component indicators (Identitas, Administrasi, Dokumen, Kesehatan, Manasik, Kloter)
