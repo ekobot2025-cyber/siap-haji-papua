@@ -32,8 +32,8 @@ export default async function MasterDataPage() {
       {/* Header */}
       <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0A3E2F] text-white flex items-center justify-center border border-[#D4AF37]">
-            <Database className="w-5 h-5 text-[#D4AF37]" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white flex items-center justify-center border border-blue-400/30 shadow-xs">
+            <Database className="w-5 h-5 text-white" />
           </div>
           <div>
             <h1 className="text-xl font-black text-gray-900">Master Data Sistem</h1>
@@ -50,7 +50,7 @@ export default async function MasterDataPage() {
         <div className="lg:col-span-6 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
             <div className="flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-[#15803D]" />
+              <MapPin className="w-5 h-5 text-[#1e40af]" />
               <h2 className="text-base font-bold text-gray-900">Master Wilayah Papua ({regions.length})</h2>
             </div>
             <span className="text-[10px] bg-slate-100 px-2 py-0.5 rounded font-mono">
@@ -92,7 +92,7 @@ export default async function MasterDataPage() {
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-[#D4AF37]" />
+                <Calendar className="w-5 h-5 text-[#1e40af]" />
                 <h2 className="text-base font-bold text-gray-900">Musim Haji ({seasons.length})</h2>
               </div>
               <span className="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200">
@@ -106,7 +106,7 @@ export default async function MasterDataPage() {
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-gray-900">{s.seasonName}</span>
                     {s.isActive && (
-                      <span className="bg-[#15803D] text-white text-[10px] font-bold px-2 py-0.2 rounded-full">
+                      <span className="bg-[#059669] text-white text-[10px] font-bold px-2 py-0.2 rounded-full">
                         Musim Aktif
                       </span>
                     )}
@@ -124,7 +124,7 @@ export default async function MasterDataPage() {
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2">
-                <Sliders className="w-5 h-5 text-[#0A3E2F]" />
+                <Sliders className="w-5 h-5 text-[#059669]" />
                 <h2 className="text-base font-bold text-gray-900">Bobot Komponen Readiness</h2>
               </div>
               <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${

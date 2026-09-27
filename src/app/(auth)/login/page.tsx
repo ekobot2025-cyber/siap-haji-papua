@@ -56,18 +56,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAF8] flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col justify-between">
       <DemoBanner />
 
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
           {/* Left Column: Visual Brand Identity */}
-          <div className="md:col-span-5 bg-[#0A3E2F] p-8 text-white flex flex-col justify-between relative overflow-hidden">
+          <div className="md:col-span-5 bg-gradient-to-br from-[#1e3a8a] via-[#1e40af] to-[#047857] p-8 text-white flex flex-col justify-between relative overflow-hidden">
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]" />
+            <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
 
             <div className="relative z-10">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 p-2 border border-[#D4AF37] mb-6 shadow-md">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 p-2 border border-emerald-300/40 mb-6 shadow-md">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/branding/app-icon.png"
@@ -77,21 +77,21 @@ export default function LoginPage() {
               </div>
 
               <h1 className="text-2xl font-black tracking-tight text-white mb-1">
-                SIAP <span className="text-[#D4AF37]">HAJI</span> PAPUA
+                SIAP <span className="text-emerald-300">HAJI</span> PAPUA
               </h1>
-              <p className="text-xs text-emerald-100 font-semibold tracking-wide uppercase mb-4">
+              <p className="text-xs text-blue-100 font-semibold tracking-wide uppercase mb-4">
                 Command Center Penyelenggaraan Haji
               </p>
 
-              <div className="border-t border-white/20 pt-4 text-xs text-slate-300 space-y-2 leading-relaxed">
+              <div className="border-t border-white/20 pt-4 text-xs text-blue-50/90 space-y-2 leading-relaxed">
                 <p>Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji Provinsi Papua.</p>
-                <p className="text-[#D4AF37] font-semibold italic">
+                <p className="text-emerald-300 font-semibold italic">
                   &ldquo;Satu Data • Satu Monitoring • Satu Layanan • Haji Papua Siap&rdquo;
                 </p>
               </div>
             </div>
 
-            <div className="relative z-10 mt-8 pt-4 border-t border-white/10 text-[11px] text-slate-400">
+            <div className="relative z-10 mt-8 pt-4 border-t border-white/10 text-[11px] text-blue-100/70">
               <div className="flex items-center gap-1 text-emerald-300 font-semibold mb-1">
                 <ShieldCheck className="w-4 h-4" />
                 <span>Keamanan Sistem Pemerintahan</span>
@@ -108,7 +108,7 @@ export default function LoginPage() {
                   <h2 className="text-xl font-bold text-gray-900">Masuk ke Portal</h2>
                   <p className="text-xs text-gray-500">Silakan masukkan username dan password administratif Anda</p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200">
+                <div className="w-8 h-8 rounded-full bg-blue-50 text-[#1e40af] flex items-center justify-center border border-blue-200">
                   <Lock className="w-4 h-4" />
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function LoginPage() {
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
                       placeholder="e.g. superadmin / adminprov"
-                      className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+                      className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
                     />
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export default function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+                      className="w-full pl-9 pr-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
                     />
                   </div>
                 </div>
@@ -160,7 +160,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-[#15803D] hover:bg-[#0A3E2F] text-white font-bold py-2.5 px-4 rounded-lg text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white font-bold py-2.5 px-4 rounded-lg text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isLoading ? 'Memverifikasi...' : 'Masuk ke Command Center'}
                   <ArrowRight className="w-4 h-4" />
@@ -171,7 +171,7 @@ export default function LoginPage() {
             {/* Quick Demo Role Selector */}
             <div className="mt-6 pt-5 border-t border-slate-200">
               <div className="flex items-center gap-1.5 text-xs font-bold text-gray-700 mb-2">
-                <Info className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <Info className="w-3.5 h-3.5 text-[#1e40af]" />
                 <span>Pilih Akun Demo Uji Coba (1-Click) :</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -182,7 +182,7 @@ export default function LoginPage() {
                     onClick={() => handleQuickSelect(acc.username)}
                     className={`p-2 rounded-lg border text-left transition-all text-xs cursor-pointer ${
                       identifier === acc.username
-                        ? 'border-[#15803D] bg-emerald-50 text-[#0A3E2F] font-bold shadow-2xs'
+                        ? 'border-[#1e40af] bg-blue-50/80 text-[#1e3a8a] font-bold shadow-2xs'
                         : 'border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100'
                     }`}
                   >

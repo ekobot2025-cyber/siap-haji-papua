@@ -80,7 +80,7 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
               required
               value={appName}
               onChange={(e) => setAppName(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
             />
           </div>
 
@@ -93,7 +93,7 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
               required
               value={tagline}
               onChange={(e) => setTagline(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
             />
           </div>
         </div>
@@ -114,7 +114,7 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
             required
             value={organizerName}
             onChange={(e) => setOrganizerName(e.target.value)}
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
           />
           <p className="text-[11px] text-gray-400 mt-1">
             Dapat disesuaikan jika terjadi perubahan nomenklatur kementerian atau pembentukan badan penyelenggara baru tanpa mengubah kode program.
@@ -130,7 +130,7 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
             required
             value={organizerAddress}
             onChange={(e) => setOrganizerAddress(e.target.value)}
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
           />
         </div>
 
@@ -144,7 +144,7 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
               required
               value={contactEmail}
               onChange={(e) => setContactEmail(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
             />
           </div>
 
@@ -157,7 +157,7 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
               required
               value={contactPhone}
               onChange={(e) => setContactPhone(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
             />
           </div>
         </div>
@@ -167,9 +167,9 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
         <button
           type="submit"
           disabled={saving}
-          className="flex items-center gap-2 bg-[#15803D] hover:bg-[#0A3E2F] text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
+          className="flex items-center gap-2 bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
         >
-          <Save className="w-4 h-4 text-[#D4AF37]" />
+          <Save className="w-4 h-4 text-emerald-200" />
           <span>{saving ? 'Menyimpan...' : 'Simpan Perubahan'}</span>
         </button>
       </div>

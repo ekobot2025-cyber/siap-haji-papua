@@ -50,7 +50,7 @@ export default async function DashboardPage() {
             <h1 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
               Executive Command Center
             </h1>
-            <span className="bg-[#15803D]/10 text-[#0A3E2F] text-xs font-bold px-2 py-0.5 rounded-full border border-[#15803D]/20">
+            <span className="bg-emerald-50 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
               Musim Aktif: {season?.yearHijri || 1447} H
             </span>
           </div>
@@ -63,9 +63,9 @@ export default async function DashboardPage() {
           <RecalculateButton seasonId={season?.id} />
           <Link
             href="/jamaah"
-            className="flex items-center gap-1.5 bg-[#0A3E2F] hover:bg-[#15803D] text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors shadow-xs"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-xs"
           >
-            <Users className="w-4 h-4 text-[#D4AF37]" />
+            <Users className="w-4 h-4 text-emerald-200" />
             <span>Lihat Data Jamaah</span>
           </Link>
         </div>
@@ -171,7 +171,7 @@ export default async function DashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#D4AF37]">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#1e40af]">
                 Indikator Kesiapan Internal
               </span>
               <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono">
@@ -185,10 +185,10 @@ export default async function DashboardPage() {
 
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <div className="text-3xl font-black text-[#0A3E2F] font-mono">
+              <div className="text-3xl font-black text-[#1e40af] font-mono">
                 {Number(kpi?.provincialReadinessIndex ?? 0).toFixed(1)}%
               </div>
-              <div className="text-xs font-bold text-[#15803D]">
+              <div className="text-xs font-bold text-[#059669]">
                 Status Agregat: {kpi.provincialReadinessIndex >= 90 ? 'SIAP BERANGKAT' : 'DALAM PROSES'}
               </div>
             </div>
@@ -198,7 +198,7 @@ export default async function DashboardPage() {
         {/* Progress Bar Container */}
         <div className="w-full bg-slate-100 rounded-full h-4 p-0.5 border border-slate-200 overflow-hidden mb-6">
           <div
-            className="bg-linear-to-r from-[#15803D] via-[#10B981] to-[#D4AF37] h-full rounded-full transition-all duration-700"
+            className="bg-gradient-to-r from-[#1e40af] via-blue-500 to-[#059669] h-full rounded-full transition-all duration-700"
             style={{ width: `${Math.min(100, Math.max(5, kpi.provincialReadinessIndex))}%` }}
           />
         </div>
@@ -211,12 +211,12 @@ export default async function DashboardPage() {
                 <span className="font-semibold truncate">{comp.name}</span>
                 <span className="font-mono text-[10px] bg-white px-1 py-0.2 rounded border">{comp.weight}%</span>
               </div>
-              <div className="text-lg font-black text-[#0A3E2F] font-mono">
+              <div className="text-lg font-black text-blue-900 font-mono">
                 {Number(comp?.averageScore ?? 0).toFixed(1)}%
               </div>
               <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2 overflow-hidden">
                 <div
-                  className="bg-[#15803D] h-full rounded-full"
+                  className="bg-[#059669] h-full rounded-full"
                   style={{ width: `${comp.averageScore}%` }}
                 />
               </div>
@@ -229,7 +229,7 @@ export default async function DashboardPage() {
       <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-[#0A3E2F] text-[#D4AF37]">
+            <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] text-white">
               <AlertCircle className="w-4 h-4" />
             </span>
             <div>
@@ -243,7 +243,7 @@ export default async function DashboardPage() {
           </div>
           <Link
             href="/action-center"
-            className="text-xs font-bold text-[#0A3E2F] hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-[#1e40af] hover:underline flex items-center gap-1"
           >
             Buka Command Board <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
@@ -331,7 +331,7 @@ export default async function DashboardPage() {
             </div>
             <Link
               href="/jamaah"
-              className="text-xs font-bold text-[#15803D] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#1e40af] hover:underline flex items-center gap-1"
             >
               <span>Semua Wilayah</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -354,7 +354,7 @@ export default async function DashboardPage() {
                 {regionalRanking.map((reg) => (
                   <tr key={reg.regionId} className="hover:bg-slate-50/80 transition-colors">
                     <td className="py-3 px-3 font-semibold text-gray-900 flex items-center gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-[#15803D] shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-[#1e40af] shrink-0" />
                       <span>{reg.regionName}</span>
                     </td>
                     <td className="py-3 px-3 text-center font-mono font-bold text-gray-800">
@@ -410,7 +410,7 @@ export default async function DashboardPage() {
                 <h3 className="text-base font-bold text-gray-900">Aktivitas Sistem</h3>
                 <p className="text-xs text-gray-500">Jejak audit append-only operasional</p>
               </div>
-              <ShieldCheck className="w-5 h-5 text-[#15803D]" />
+              <ShieldCheck className="w-5 h-5 text-[#059669]" />
             </div>
 
             <div className="space-y-3">
@@ -425,7 +425,7 @@ export default async function DashboardPage() {
                     className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-[#0A3E2F] font-mono text-[11px]">
+                      <span className="font-bold text-[#1e40af] font-mono text-[11px]">
                         {act.action}
                       </span>
                       <span className="text-[10px] text-gray-400 font-mono">
@@ -445,7 +445,7 @@ export default async function DashboardPage() {
           <div className="mt-4 pt-3 border-t border-slate-100">
             <Link
               href="/system/audit-logs"
-              className="w-full block text-center text-xs font-bold text-[#0A3E2F] hover:underline"
+              className="w-full block text-center text-xs font-bold text-[#1e40af] hover:underline"
             >
               Lihat Seluruh Log Audit →
             </Link>

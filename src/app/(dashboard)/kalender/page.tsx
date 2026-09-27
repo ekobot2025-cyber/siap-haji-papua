@@ -106,8 +106,8 @@ export default function KalenderPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-[#0A3E2F] text-[#D4AF37]">
-            <CalendarIcon className="w-6 h-6" />
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+            <CalendarIcon className="w-6 h-6 text-white" />
           </span>
           <div>
             <h1 className="text-xl font-black text-gray-900 tracking-tight">
@@ -127,7 +127,7 @@ export default function KalenderPage() {
               onClick={() => setFilterCategory(cat)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                 filterCategory === cat
-                  ? 'bg-[#0A3E2F] text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
                   : 'bg-white border border-slate-200 text-gray-600 hover:bg-slate-50'
               }`}
             >
@@ -151,7 +151,7 @@ export default function KalenderPage() {
                   isDone
                     ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs'
                     : isCurrent
-                    ? 'bg-[#0A3E2F] text-[#D4AF37] border-[#D4AF37] ring-4 ring-emerald-100 shadow-md'
+                    ? 'bg-[#1e40af] text-white border-blue-400 ring-4 ring-blue-100 shadow-md'
                     : 'bg-white text-slate-400 border-slate-200'
                 }`}>
                   <Icon className="w-5 h-5" />

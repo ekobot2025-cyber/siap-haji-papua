@@ -189,18 +189,18 @@ export default async function PortalJamaahPage() {
   return (
     <div className="space-y-6">
       {/* 1. Header Sambutan Syar'i & Identitas Ringkas */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0A3E2F] via-[#0e4e3c] to-[#0A3E2F] text-white p-6 sm:p-8 shadow-xl border-2 border-[#D4AF37]/40">
-        <div className="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-[#D4AF37]/10 blur-3xl pointer-events-none" />
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#047857] text-white p-6 sm:p-8 shadow-xl border-2 border-emerald-400/40">
+        <div className="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#D4AF37] text-xs font-bold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-400/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold tracking-wide">
               <Sparkles className="w-3.5 h-3.5" />
               <span>PORTAL MANDIRI JAMAAH HAJI PAPUA • 1447 H / 2026 M</span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
               Assalamu&apos;alaikum,{' '}
-              <span className="text-[#D4AF37]">{jamaah.fullName}</span>
+              <span className="text-emerald-300">{jamaah.fullName}</span>
             </h1>
 
             <p className="text-xs sm:text-sm text-emerald-100 max-w-2xl leading-relaxed">
@@ -216,7 +216,7 @@ export default async function PortalJamaahPage() {
                 Wilayah: <strong className="text-white">{jamaah.region.name}</strong>
               </span>
               <span className="bg-white/10 px-3 py-1.5 rounded-xl text-emerald-200 border border-white/10">
-                Kloter: <strong className="text-[#D4AF37]">{kloter ? kloter.kloterCode : 'UPG-02'}</strong>
+                Kloter: <strong className="text-emerald-300">{kloter ? kloter.kloterCode : 'UPG-02'}</strong>
               </span>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default async function PortalJamaahPage() {
               <span className="text-[10px] text-slate-300 uppercase font-bold block mb-1">
                 Indeks Kesiapan Diri
               </span>
-              <div className="text-3xl font-black font-mono text-[#D4AF37]">
+              <div className="text-3xl font-black font-mono text-emerald-300">
                 {readinessScore.toFixed(0)}%
               </div>
               <span
@@ -285,12 +285,12 @@ export default async function PortalJamaahPage() {
             return (
               <div
                 key={p.id}
-                className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#0A3E2F]/30 transition-all flex flex-col justify-between space-y-3"
+                className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#1e40af]/30 transition-all flex flex-col justify-between space-y-3"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-white text-[#0A3E2F] flex items-center justify-center border border-slate-200 shadow-2xs">
-                      <Icon className="w-5 h-5 text-[#0A3E2F]" />
+                    <div className="w-9 h-9 rounded-xl bg-white text-[#1e40af] flex items-center justify-center border border-slate-200 shadow-2xs">
+                      <Icon className="w-5 h-5 text-[#1e40af]" />
                     </div>
                     <div>
                       <h3 className="font-bold text-xs text-gray-900">{p.name}</h3>
@@ -305,7 +305,7 @@ export default async function PortalJamaahPage() {
                 <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full ${
-                      isFull ? 'bg-emerald-600' : 'bg-[#D4AF37]'
+                      isFull ? 'bg-emerald-600' : 'bg-blue-600'
                     }`}
                     style={{ width: `${Math.min(100, p.score)}%` }}
                   />

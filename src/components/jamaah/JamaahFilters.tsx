@@ -52,7 +52,7 @@ export function JamaahFilters({ regions, isRegionAdmin, userRegionId }: JamaahFi
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
             placeholder="Cari Nama, No Porsi, atau NIK..."
-            className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none"
+            className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
           />
         </div>
 
@@ -62,7 +62,7 @@ export function JamaahFilters({ regions, isRegionAdmin, userRegionId }: JamaahFi
             value={regionId}
             disabled={isRegionAdmin}
             onChange={(e) => setRegionId(e.target.value)}
-            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none bg-white disabled:bg-gray-100 disabled:text-gray-500"
+            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none bg-white disabled:bg-gray-100 disabled:text-gray-500"
           >
             <option value="">Semua Wilayah</option>
             {regions.map((r) => (
@@ -78,7 +78,7 @@ export function JamaahFilters({ regions, isRegionAdmin, userRegionId }: JamaahFi
           <select
             value={readinessCategory}
             onChange={(e) => setReadinessCategory(e.target.value)}
-            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none bg-white"
+            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none bg-white"
           >
             <option value="">Semua Status Kesiapan</option>
             <option value="SIAP">Siap Berangkat (≥90%)</option>
@@ -93,7 +93,7 @@ export function JamaahFilters({ regions, isRegionAdmin, userRegionId }: JamaahFi
           <select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none bg-white"
+            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none bg-white"
           >
             <option value="">Semua Gender</option>
             <option value="MALE">Laki-Laki</option>
@@ -106,7 +106,7 @@ export function JamaahFilters({ regions, isRegionAdmin, userRegionId }: JamaahFi
           <select
             value={elderly}
             onChange={(e) => setElderly(e.target.value)}
-            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#15803D] focus:border-[#15803D] outline-none bg-white"
+            className="w-full py-2 px-3 text-xs sm:text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none bg-white"
           >
             <option value="">Semua Usia</option>
             <option value="true">Prioritas Lansia (≥65 th)</option>
@@ -126,9 +126,9 @@ export function JamaahFilters({ regions, isRegionAdmin, userRegionId }: JamaahFi
         <button
           type="button"
           onClick={applyFilters}
-          className="flex items-center gap-1.5 bg-[#0A3E2F] hover:bg-[#15803D] text-white px-4 py-1.5 rounded-lg text-xs font-semibold transition-colors shadow-2xs cursor-pointer"
+          className="flex items-center gap-1.5 bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white px-4 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-2xs cursor-pointer"
         >
-          <Filter className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <Filter className="w-3.5 h-3.5 text-emerald-200" />
           <span>Terapkan Filter</span>
         </button>
       </div>

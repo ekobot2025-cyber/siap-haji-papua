@@ -42,14 +42,14 @@ export default async function NewJamaahPage() {
           href="/jamaah"
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-600 hover:text-gray-900 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs transition-colors"
         >
-          <ChevronLeft className="w-4 h-4 text-[#D4AF37]" />
+          <ChevronLeft className="w-4 h-4 text-[#1e40af]" />
           <span>Kembali ke Daftar Jamaah</span>
         </Link>
       </div>
 
       <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-[#0A3E2F] text-white flex items-center justify-center border border-[#D4AF37]">
-          <UserPlus className="w-5 h-5 text-[#D4AF37]" />
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white flex items-center justify-center border border-blue-400/30 shadow-xs">
+          <UserPlus className="w-5 h-5 text-white" />
         </div>
         <div>
           <h1 className="text-xl font-black text-gray-900">Registrasi Jamaah Haji Baru</h1>

@@ -125,8 +125,8 @@ export default function ManasikPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-[#0A3E2F] text-[#D4AF37]">
-            <BookOpen className="w-6 h-6" />
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+            <BookOpen className="w-6 h-6 text-white" />
           </span>
           <div>
             <h1 className="text-xl font-black text-gray-900 tracking-tight">
@@ -148,10 +148,10 @@ export default function ManasikPage() {
       </div>
 
       {/* Simulator Presensi QR & Scanner Box */}
-      <div className="bg-gradient-to-r from-[#0A3E2F] to-[#0d4d3a] p-6 rounded-3xl text-white shadow-md">
+      <div className="bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#047857] p-6 rounded-3xl text-white shadow-md">
         <div className="max-w-3xl space-y-4">
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-xl bg-white/10 text-[#D4AF37]">
+            <span className="p-2 rounded-xl bg-white/10 text-emerald-300">
               <ScanLine className="w-5 h-5" />
             </span>
             <div>
@@ -171,7 +171,7 @@ export default function ManasikPage() {
                 placeholder="Masukkan 10-digit Nomor Porsi Jamaah..."
                 value={porsiInput}
                 onChange={(e) => setPorsiInput(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-white text-gray-900 text-xs font-mono font-bold placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+                className="w-full px-4 py-2.5 rounded-xl bg-white text-gray-900 text-xs font-mono font-bold placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400"
               />
             </div>
 
@@ -191,7 +191,7 @@ export default function ManasikPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full h-full py-2.5 rounded-xl bg-[#D4AF37] text-gray-950 font-bold text-xs hover:bg-[#c49f2e] transition-colors cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-sm"
+                className="w-full h-full py-2.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#047857] hover:from-[#047857] hover:to-[#065f46] text-white font-bold text-xs transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
               >
                 <QrCode className="w-4 h-4" />
                 {submitting ? 'Merekam...' : 'Catat Presensi'}
@@ -219,12 +219,12 @@ export default function ManasikPage() {
               onClick={() => setSelectedEventId(ev.id)}
               className={`p-4 rounded-2xl border text-left cursor-pointer transition-all ${
                 isSelected
-                  ? 'border-[#0A3E2F] ring-2 ring-[#0A3E2F] bg-emerald-50/40 shadow-xs'
+                  ? 'border-[#1e40af] ring-2 ring-[#1e40af] bg-blue-50/30 shadow-xs'
                   : 'bg-white border-slate-200 hover:border-slate-300'
               }`}
             >
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <span className="text-[10px] font-bold text-[#0A3E2F] uppercase bg-emerald-100 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold text-[#1e40af] uppercase bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
                   Sesi {ev.sessionNumber}
                 </span>
                 <span className="text-xs font-mono font-bold text-gray-700">
@@ -253,7 +253,7 @@ export default function ManasikPage() {
         <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
             <div>
-              <span className="text-xs font-bold text-[#0A3E2F] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#1e40af] uppercase tracking-wider">
                 {selectedEvent.region.name} • Sesi {selectedEvent.sessionNumber}
               </span>
               <h2 className="text-lg font-black text-gray-900 mt-0.5">{selectedEvent.title}</h2>

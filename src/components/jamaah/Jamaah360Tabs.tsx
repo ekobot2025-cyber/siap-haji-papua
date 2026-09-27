@@ -64,11 +64,11 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                 onClick={() => setActiveTab(tab.key)}
                 className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-[#0A3E2F] text-white shadow-xs'
+                    ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-slate-200/60'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#D4AF37]' : 'text-slate-400'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-200' : 'text-slate-400'}`} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -148,7 +148,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
               <div className="space-y-1">
                 <span className="text-xs font-semibold text-gray-500">Nomor Porsi</span>
-                <p className="font-mono font-bold text-[#0A3E2F] text-base">{jamaah.porsiNumber}</p>
+                <p className="font-mono font-bold text-[#1e40af] text-base">{jamaah.porsiNumber}</p>
               </div>
 
               <div className="space-y-1">
@@ -320,7 +320,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                       </div>
 
                       <div className="text-right">
-                        <div className="text-sm font-mono font-bold text-[#0A3E2F]">
+                        <div className="text-sm font-mono font-bold text-[#1e40af]">
                           {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(adm.amountPaid)}
                         </div>
                         {adm.paymentReference && (
@@ -449,7 +449,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                 <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                   <div>
                     <span className="text-xs font-semibold text-gray-500">Nomor Kloter</span>
-                    <h3 className="text-xl font-bold text-[#0A3E2F]">
+                    <h3 className="text-xl font-bold text-[#1e40af]">
                       Kloter {jamaah.kloterMembership.kloter.kloterNumber} ({jamaah.kloterMembership.kloter.kloterCode})
                     </h3>
                   </div>
@@ -471,7 +471,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                   </div>
                   <div>
                     <span className="text-xs font-semibold text-gray-500 block">Nomor Seat / Kursi:</span>
-                    <span className="font-mono font-bold text-[#0A3E2F] text-base">
+                    <span className="font-mono font-bold text-[#1e40af] text-base">
                       {jamaah.kloterMembership.seatNumber || 'Belum Ditentukan'}
                     </span>
                   </div>
@@ -551,13 +551,13 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
 
             <div className="space-y-4 pl-4 border-l-2 border-emerald-500">
               <div className="relative">
-                <div className="absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full bg-[#15803D] border-2 border-white shadow-xs" />
+                <div className="absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full bg-[#1e40af] border-2 border-white shadow-xs" />
                 <div className="text-xs font-bold text-gray-900">Kalkulasi Kesiapan Terkini</div>
                 <div className="text-[11px] text-gray-500 font-mono">
                   {new Date(jamaah.readiness.lastCalculatedAt || new Date()).toLocaleString('id-ID')} WIT
                 </div>
                 <p className="text-xs text-gray-600 mt-0.5">
-                  Indeks Kesiapan Administratif tercatat: <strong className="text-[#0A3E2F]">{Number(jamaah?.readiness?.score ?? 0).toFixed(1)}% ({jamaah.readiness.category})</strong>
+                  Indeks Kesiapan Administratif tercatat: <strong className="text-[#1e40af]">{Number(jamaah?.readiness?.score ?? 0).toFixed(1)}% ({jamaah.readiness.category})</strong>
                 </p>
               </div>
 

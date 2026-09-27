@@ -131,7 +131,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
     return (
       <div className="text-center py-16 text-gray-400">
         Kloter tidak ditemukan.{' '}
-        <Link href="/kloter" className="text-[#0A3E2F] underline">
+        <Link href="/kloter" className="text-[#1e40af] underline">
           Kembali ke daftar kloter
         </Link>
       </div>
@@ -204,9 +204,9 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
           <button
             type="button"
             onClick={handleExportManifestPdf}
-            className="px-3.5 py-1.5 rounded-xl bg-[#0A3E2F] hover:bg-[#072c21] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
+            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
-            <Printer className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <Printer className="w-3.5 h-3.5 text-emerald-200" />
             <span>Ekspor PDF</span>
           </button>
           <button
@@ -221,10 +221,10 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Kloter Header Hero (Screen Only) */}
-      <div className="no-print bg-gradient-to-r from-[#0A3E2F] to-[#124d3c] p-6 rounded-3xl text-white shadow-md space-y-4">
+      <div className="no-print bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#047857] p-6 rounded-3xl text-white shadow-md space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <span className="text-xs uppercase font-bold text-[#D4AF37] tracking-wider block">
+            <span className="text-xs uppercase font-bold text-emerald-300 tracking-wider block">
               Manifest Resmi Internal — Embarkasi Haji
             </span>
             <h1 className="text-2xl font-black mt-1">
@@ -238,7 +238,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
           <div className="flex items-center gap-3">
             <div className="bg-white/10 px-4 py-2.5 rounded-2xl text-center border border-white/10">
               <span className="text-[10px] text-slate-300 uppercase font-bold block">Total Jamaah</span>
-              <span className="text-xl font-black font-mono text-[#D4AF37]">{members.length} / {kloter.capacityTotal}</span>
+              <span className="text-xl font-black font-mono text-emerald-300">{members.length} / {kloter.capacityTotal}</span>
             </div>
             <div className="bg-white/10 px-4 py-2.5 rounded-2xl text-center border border-white/10">
               <span className="text-[10px] text-slate-300 uppercase font-bold block">Status Kloter</span>
@@ -250,7 +250,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
         {/* Officers Row */}
         {kloter.officers && kloter.officers.length > 0 && (
           <div className="pt-3 border-t border-white/10">
-            <span className="text-[11px] font-bold text-[#D4AF37] block mb-2">Petugas Kloter Terpadu:</span>
+            <span className="text-[11px] font-bold text-emerald-300 block mb-2">Petugas Kloter Terpadu:</span>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
               {kloter.officers.map((off: any) => (
                 <div key={off.id} className="bg-black/20 p-2.5 rounded-xl border border-white/5 text-xs">
@@ -273,7 +273,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
               placeholder="Cari jamaah, porsi, atau nomor seat..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#0A3E2F]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#1e40af]"
             />
           </div>
 
@@ -298,11 +298,11 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
             <tbody className="divide-y divide-slate-100 print:divide-black">
               {filteredMembers.map((m: any) => (
                 <tr key={m.id} className="hover:bg-slate-50/60 transition-colors print:border-b print:border-black">
-                  <td className="p-3.5 print:p-2 print:border print:border-black font-mono font-bold text-[#0A3E2F] print:text-black">
+                  <td className="p-3.5 print:p-2 print:border print:border-black font-mono font-bold text-[#1e40af] print:text-black">
                     {m.seatNumber || '-'}
                   </td>
                   <td className="p-3.5 print:p-2 print:border print:border-black">
-                    <span className="font-bold text-[#0A3E2F] print:text-black block">
+                    <span className="font-bold text-[#1e40af] print:text-black block">
                       {m.jamaah.fullName}
                     </span>
                     <div className="flex items-center gap-1.5 font-mono text-gray-500 print:text-black text-[11px]">

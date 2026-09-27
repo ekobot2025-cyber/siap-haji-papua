@@ -46,8 +46,8 @@ export default function SimulasiKuotaPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-[#0A3E2F] text-[#D4AF37]">
-            <Sparkles className="w-6 h-6" />
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+            <Sparkles className="w-6 h-6 text-white" />
           </span>
           <div>
             <h1 className="text-xl font-black text-gray-900 tracking-tight">
@@ -71,7 +71,7 @@ export default function SimulasiKuotaPage() {
       {/* Scenario Control Panel */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-4">
         <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-          <Sliders className="w-4 h-4 text-[#0A3E2F]" />
+          <Sliders className="w-4 h-4 text-[#1e40af]" />
           <h2 className="text-sm font-bold text-gray-900">Parameter Skenario Pengisian Kuota</h2>
         </div>
 
@@ -80,7 +80,7 @@ export default function SimulasiKuotaPage() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="font-bold text-gray-700">Jumlah Kuota Dibutuhkan / Pengganti:</label>
-              <span className="font-mono text-base font-black text-[#0A3E2F] bg-emerald-50 px-2.5 py-0.5 rounded-lg border border-emerald-200">
+              <span className="font-mono text-base font-black text-[#1e40af] bg-blue-50 px-2.5 py-0.5 rounded-lg border border-blue-200">
                 {neededCount} Jamaah
               </span>
             </div>
@@ -90,7 +90,7 @@ export default function SimulasiKuotaPage() {
               max={50}
               value={neededCount}
               onChange={(e) => setNeededCount(parseInt(e.target.value, 10))}
-              className="w-full accent-[#0A3E2F] cursor-pointer"
+              className="w-full accent-[#1e40af] cursor-pointer"
             />
             <div className="flex justify-between text-[10px] text-gray-400 font-mono">
               <span>1 Jamaah</span>
@@ -103,7 +103,7 @@ export default function SimulasiKuotaPage() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="font-bold text-gray-700">Ambang Batas Kesiapan Minimal:</label>
-              <span className="font-mono text-base font-black text-[#0A3E2F] bg-emerald-50 px-2.5 py-0.5 rounded-lg border border-emerald-200">
+              <span className="font-mono text-base font-black text-[#1e40af] bg-blue-50 px-2.5 py-0.5 rounded-lg border border-blue-200">
                 $\ge$ {minScore}%
               </span>
             </div>
@@ -114,7 +114,7 @@ export default function SimulasiKuotaPage() {
               step={5}
               value={minScore}
               onChange={(e) => setMinScore(parseFloat(e.target.value))}
-              className="w-full accent-[#0A3E2F] cursor-pointer"
+              className="w-full accent-[#1e40af] cursor-pointer"
             />
             <div className="flex justify-between text-[10px] text-gray-400 font-mono">
               <span>50% (Perlu Tindak Lanjut)</span>
@@ -172,7 +172,7 @@ export default function SimulasiKuotaPage() {
                     <td className="p-3.5">
                       <Link
                         href={`/jamaah/${c.id}`}
-                        className="font-bold text-[#0A3E2F] hover:underline block"
+                        className="font-bold text-[#1e40af] hover:underline block"
                       >
                         {c.fullName}
                       </Link>
@@ -215,7 +215,7 @@ export default function SimulasiKuotaPage() {
                     <td className="p-3.5 text-right">
                       <Link
                         href={`/jamaah/${c.id}`}
-                        className="px-3 py-1.5 rounded-lg bg-[#0A3E2F] text-[#D4AF37] hover:bg-[#072d22] text-xs font-bold transition-colors inline-block cursor-pointer shadow-xs"
+                        className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold transition-all inline-block cursor-pointer shadow-xs"
                       >
                         Pilih Nominasi
                       </Link>

@@ -103,9 +103,9 @@ export default function VideoWallPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 flex flex-col justify-between select-none">
       {/* 1. TOP COMMAND BAR */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-emerald-900/60">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-emerald-950 p-2 border border-[#D4AF37]/50 flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-2xl bg-[#1e3a8a] p-2 border border-emerald-400/50 flex items-center justify-center shadow-lg">
             <Image
               src="/assets/branding/app-icon.png"
               alt="Logo"
@@ -116,7 +116,7 @@ export default function VideoWallPage() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#D4AF37] bg-emerald-950 px-2 py-0.5 rounded border border-[#D4AF37]/30">
+              <span className="text-[10px] font-black uppercase tracking-widest text-emerald-300 bg-blue-950/80 px-2.5 py-0.5 rounded border border-emerald-400/30">
                 PROVINCIAL COMMAND CENTER • BIG SCREEN MODE
               </span>
               <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
@@ -133,7 +133,7 @@ export default function VideoWallPage() {
             <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
               WAKTU PROVINSI PAPUA
             </span>
-            <span className="text-xl sm:text-2xl font-mono font-black text-[#D4AF37]">
+            <span className="text-xl sm:text-2xl font-mono font-black text-emerald-400">
               {currentTime || '00:00:00 WIT'}
             </span>
           </div>
@@ -148,7 +148,7 @@ export default function VideoWallPage() {
 
           <Link
             href="/"
-            className="p-3 rounded-2xl bg-emerald-900/50 hover:bg-emerald-800 text-[#D4AF37] border border-[#D4AF37]/30 transition-colors flex items-center gap-1.5 text-xs font-bold"
+            className="p-3 rounded-2xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white border border-blue-400/30 transition-all flex items-center gap-1.5 text-xs font-bold"
           >
             <ArrowLeft className="w-4 h-4" /> Keluar
           </Link>
@@ -170,16 +170,16 @@ export default function VideoWallPage() {
       {/* 3. MAIN DASHBOARD WALL GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
         {/* Left Column (4 cols): Provincial Index & Season */}
-        <div className="lg:col-span-4 bg-gradient-to-b from-[#0A3E2F]/80 to-slate-900/90 p-6 rounded-3xl border border-emerald-800/40 space-y-6 shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-gradient-to-b from-[#1e3a8a]/60 to-slate-900/90 p-6 rounded-3xl border border-blue-800/40 space-y-6 shadow-xl flex flex-col justify-between">
           <div>
-            <span className="text-xs uppercase font-extrabold text-[#D4AF37] tracking-wider block">
+            <span className="text-xs uppercase font-extrabold text-emerald-400 tracking-wider block">
               Indikator Kesiapan Agregat
             </span>
             <h2 className="text-lg font-bold text-white mt-1">Indeks Kesiapan Papua</h2>
             <p className="text-xs text-slate-400">Musim Haji 1447 H / 2026 M</p>
 
             <div className="my-6 text-center">
-              <span className="text-6xl sm:text-7xl font-mono font-black text-[#D4AF37] tracking-tight">
+              <span className="text-6xl sm:text-7xl font-mono font-black text-white tracking-tight">
                 {provIndex.toFixed(1)}%
               </span>
               <span className="block text-xs uppercase font-bold text-emerald-400 mt-2 tracking-widest">
@@ -189,7 +189,7 @@ export default function VideoWallPage() {
 
             <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-white/10">
               <div
-                className="bg-gradient-to-r from-emerald-500 via-[#D4AF37] to-emerald-400 h-full rounded-full transition-all duration-1000"
+                className="bg-gradient-to-r from-[#1e40af] via-blue-400 to-[#059669] h-full rounded-full transition-all duration-1000"
                 style={{ width: `${Math.min(100, Math.max(0, provIndex))}%` }}
               />
             </div>

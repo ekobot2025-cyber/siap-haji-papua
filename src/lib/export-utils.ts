@@ -32,11 +32,11 @@ export function exportToPdf(options: PdfExportOptions): void {
   const doc = new jsPDF({ orientation, unit: 'mm', format: 'a4' });
 
   // Header bar
-  doc.setFillColor(10, 62, 47); // #0A3E2F
+  doc.setFillColor(30, 64, 175); // #1e40af
   doc.rect(0, 0, doc.internal.pageSize.getWidth(), 22, 'F');
 
   // Title
-  doc.setTextColor(212, 175, 55); // #D4AF37
+  doc.setTextColor(255, 255, 255);
   doc.setFontSize(14);
   doc.setFont('helvetica', 'bold');
   doc.text(title, 14, 10);
@@ -44,7 +44,7 @@ export function exportToPdf(options: PdfExportOptions): void {
   // Subtitle
   if (subtitle) {
     doc.setFontSize(9);
-    doc.setTextColor(255, 255, 255);
+    doc.setTextColor(239, 246, 255); // #eff6ff
     doc.text(subtitle, 14, 17);
   }
 
@@ -69,8 +69,8 @@ export function exportToPdf(options: PdfExportOptions): void {
     body: rows,
     theme: 'grid',
     headStyles: {
-      fillColor: [10, 62, 47],
-      textColor: [212, 175, 55],
+      fillColor: [30, 64, 175], // #1e40af
+      textColor: [255, 255, 255],
       fontSize: 8,
       fontStyle: 'bold',
       halign: 'center',

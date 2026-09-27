@@ -34,8 +34,8 @@ export default async function SystemSettingsPage() {
       {/* Header */}
       <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0A3E2F] text-white flex items-center justify-center border border-[#D4AF37]">
-            <Settings className="w-5 h-5 text-[#D4AF37]" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white flex items-center justify-center border border-blue-400/30 shadow-xs">
+            <Settings className="w-5 h-5 text-white" />
           </div>
           <div>
             <h1 className="text-xl font-black text-gray-900">Pengaturan Sistem Kelembagaan</h1>

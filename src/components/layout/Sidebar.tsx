@@ -79,7 +79,7 @@ export function Sidebar({ session }: SidebarProps) {
             { label: 'Action Center', href: '/action-center', icon: AlertCircle, active: pathname.startsWith('/action-center'), badge: '65', badgeColor: 'bg-rose-500 text-white' },
             { label: 'Early Warning Engine', href: '/monitoring/early-warning', icon: ShieldAlert, active: pathname.startsWith('/monitoring/early-warning'), badge: 'RISIKO', badgeColor: 'bg-amber-500 text-white' },
             { label: 'Peta Spasial Papua', href: '/monitoring/peta-wilayah', icon: Compass, active: pathname.startsWith('/monitoring/peta-wilayah') },
-            { label: 'Mode Video Wall', href: '/video-wall', icon: Tv, active: pathname === '/video-wall', badge: 'BIG SCREEN', badgeColor: 'bg-[#D4AF37] text-gray-950 font-bold' },
+            { label: 'Mode Video Wall', href: '/video-wall', icon: Tv, active: pathname === '/video-wall', badge: 'BIG SCREEN', badgeColor: 'bg-emerald-500 text-white font-bold' },
             { label: 'Laporan & Rekap Resmi', href: '/laporan', icon: FileText, active: pathname === '/laporan', badge: 'RESMI', badgeColor: 'bg-emerald-500 text-white' },
             { label: 'Kalender Operasional', href: '/kalender', icon: Calendar, active: pathname.startsWith('/kalender') },
           ],
@@ -116,10 +116,10 @@ export function Sidebar({ session }: SidebarProps) {
       ];
 
   return (
-    <aside className="w-64 bg-[#0A3E2F] text-slate-200 border-r border-[#D4AF37]/20 flex flex-col shrink-0 min-h-[calc(100vh-5.75rem)] select-none">
+    <aside className="w-64 bg-[#0f172a] text-slate-200 border-r border-slate-800 flex flex-col shrink-0 min-h-[calc(100vh-5.75rem)] select-none">
       {/* Scope Info Card */}
-      <div className="p-4 mx-3 my-3 rounded-xl bg-black/25 border border-white/10 text-xs">
-        <span className="text-[10px] uppercase font-bold text-[#D4AF37] block mb-1">
+      <div className="p-4 mx-3 my-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
+        <span className="text-[10px] uppercase font-bold text-emerald-400 block mb-1">
           {isPetugasKesehatan ? 'Tim Medis & Petugas Kesehatan' : 'Lingkup Otorisasi Data'}
         </span>
         <div className="font-semibold text-white truncate">
@@ -127,7 +127,7 @@ export function Sidebar({ session }: SidebarProps) {
             ? (session?.fullName || 'dr. Siti Rahmawati, Sp.PD')
             : (session?.regionName ? session.regionName : 'Seluruh Provinsi Papua')}
         </div>
-        <div className="text-[11px] text-slate-300 mt-0.5">
+        <div className="text-[11px] text-slate-400 mt-0.5">
           {isPetugasKesehatan ? (
             <span className="text-emerald-300 font-medium">Balai Karantina / RSUD Papua</span>
           ) : (
@@ -140,7 +140,7 @@ export function Sidebar({ session }: SidebarProps) {
       <nav className="flex-1 px-3 space-y-6 overflow-y-auto pb-6">
         {navSections.map((section) => (
           <div key={section.title}>
-            <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-[#D4AF37]">
+            <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">
               {section.title}
             </div>
             <ul className="space-y-1">
@@ -161,22 +161,22 @@ export function Sidebar({ session }: SidebarProps) {
                       }}
                       className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer ${
                         item.active
-                          ? 'bg-[#15803D] text-white shadow-xs border-l-4 border-[#D4AF37]'
+                          ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-sm border-l-4 border-emerald-400'
                           : isPending
-                          ? 'bg-[#15803D]/60 text-white shadow-xs border-l-4 border-[#D4AF37] animate-pulse ring-1 ring-[#D4AF37]/50'
-                          : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                          ? 'bg-[#1e40af]/60 text-white shadow-xs border-l-4 border-emerald-400 animate-pulse ring-1 ring-emerald-400/50'
+                          : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
                         {isPending ? (
-                          <Loader2 className="w-4 h-4 text-[#D4AF37] animate-spin" />
+                          <Loader2 className="w-4 h-4 text-emerald-300 animate-spin" />
                         ) : (
-                          <Icon className={`w-4 h-4 ${item.active ? 'text-[#D4AF37]' : 'text-slate-400'}`} />
+                          <Icon className={`w-4 h-4 ${item.active ? 'text-white' : 'text-slate-400'}`} />
                         )}
                         <span>{item.label}</span>
                       </div>
                       {isPending ? (
-                        <span className="text-[10px] font-mono text-[#D4AF37] font-bold">
+                        <span className="text-[10px] font-mono text-emerald-300 font-bold">
                           Memuat...
                         </span>
                       ) : (
@@ -196,18 +196,18 @@ export function Sidebar({ session }: SidebarProps) {
       </nav>
 
       {/* Official External Portals */}
-      <div className="px-3 py-2 border-t border-white/10 space-y-1">
+      <div className="px-3 py-2 border-t border-slate-800 space-y-1">
         <a
           href="https://haji.go.id"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-emerald-300 hover:text-white hover:bg-white/10 transition-colors"
+          className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-emerald-300 hover:text-white hover:bg-slate-800 transition-colors"
         >
           <span className="flex items-center gap-2 truncate">
-            <Globe className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+            <Globe className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
             <span>Kemenhaj (haji.go.id)</span>
           </span>
-          <ArrowUpRight className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+          <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
         </a>
       </div>
 

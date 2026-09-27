@@ -103,10 +103,10 @@ export default function CekPorsiPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
       {/* Top Header */}
-      <header className="bg-[#0A3E2F] text-white border-b border-[#D4AF37]/30 sticky top-0 z-30 shadow-md">
+      <header className="bg-[#1e3a8a] text-white border-b border-blue-900/40 sticky top-0 z-30 shadow-md">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/10 p-1.5 border border-[#D4AF37]/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-white/10 p-1.5 border border-emerald-400/40 flex items-center justify-center">
               <Image
                 src="/assets/branding/app-icon.png"
                 alt="Logo SIAP HAJI PAPUA"
@@ -116,10 +116,10 @@ export default function CekPorsiPage() {
               />
             </div>
             <div>
-              <span className="font-black text-sm tracking-wider text-[#D4AF37] block">
-                SIAP HAJI PAPUA
+              <span className="font-black text-sm tracking-wider text-white block">
+                SIAP <span className="text-emerald-400">HAJI</span> PAPUA
               </span>
-              <span className="text-[10px] text-slate-300 block">
+              <span className="text-[10px] text-blue-100/80 block">
                 Portal Mandiri Layanan Jamaah & Keluarga
               </span>
             </div>
@@ -127,7 +127,7 @@ export default function CekPorsiPage() {
 
           <Link
             href="/login"
-            className="text-xs font-bold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-[#D4AF37] border border-[#D4AF37]/30 transition-colors"
+            className="text-xs font-bold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-300 border border-emerald-400/30 transition-colors"
           >
             Login Petugas
           </Link>
@@ -138,8 +138,8 @@ export default function CekPorsiPage() {
       <main className="max-w-4xl mx-auto px-4 py-8 w-full space-y-6">
         {/* Hero Banner */}
         <div className="text-center space-y-2 max-w-xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-[#0A3E2F] text-xs font-bold">
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#1e40af] text-xs font-bold border border-blue-200">
+            <Sparkles className="w-3.5 h-3.5 text-[#059669]" />
             Transparansi & Layanan Publik Haji Papua
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
@@ -151,13 +151,13 @@ export default function CekPorsiPage() {
         </div>
 
         {/* Official Ministry Integration Banner */}
-        <div className="bg-gradient-to-r from-emerald-950 via-[#0A3E2F] to-emerald-950 text-white rounded-2xl p-4 border border-[#D4AF37]/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 max-w-xl mx-auto">
+        <div className="bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#059669] text-white rounded-2xl p-4 border border-blue-400/30 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 max-w-xl mx-auto">
           <div className="flex items-center gap-2.5">
-            <ShieldCheck className="w-5 h-5 text-[#D4AF37] shrink-0" />
+            <ShieldCheck className="w-5 h-5 text-emerald-300 shrink-0" />
             <div>
               <span className="font-bold text-xs text-white block">Integrasi Basis Data Resmi SISKOHAT</span>
-              <span className="text-[11px] text-slate-300">
-                Terkoneksi dengan sistem Kementerian Haji dan Umrah RI.
+              <span className="text-[11px] text-blue-100">
+                Terkoneksi langsung dengan portal Kementerian Haji dan Umrah RI.
               </span>
             </div>
           </div>
@@ -165,10 +165,10 @@ export default function CekPorsiPage() {
             href="https://haji.go.id"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#D4AF37] text-xs font-bold border border-[#D4AF37]/30 transition-all whitespace-nowrap self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold border border-white/20 transition-all whitespace-nowrap self-start sm:self-auto shadow-xs"
           >
             <span>Portal haji.go.id</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-emerald-300" />
           </a>
         </div>
 
@@ -180,7 +180,7 @@ export default function CekPorsiPage() {
                 10-Digit Nomor Porsi Haji
               </label>
               <div className="relative">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-3.5" />
                 <input
                   type="text"
                   required
@@ -188,7 +188,7 @@ export default function CekPorsiPage() {
                   placeholder="Contoh: 2700192001"
                   value={porsi}
                   onChange={(e) => setPorsi(e.target.value.replace(/\D/g, ''))}
-                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#0A3E2F]"
+                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af]"
                 />
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function CekPorsiPage() {
                 placeholder="Contoh: 1951"
                 value={birthYear}
                 onChange={(e) => setBirthYear(e.target.value)}
-                className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#0A3E2F]"
+                className="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af]"
               />
               <span className="text-[11px] text-gray-400 mt-1 block">
                 Sesuai Undang-Undang Perlindungan Data Pribadi (UU PDP), verifikasi tahun lahir melindungi data pribadi Anda.
@@ -215,7 +215,7 @@ export default function CekPorsiPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-xl bg-[#0A3E2F] text-[#D4AF37] hover:bg-[#072d22] font-bold text-sm transition-colors cursor-pointer shadow-sm disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white font-bold text-sm transition-all cursor-pointer shadow-md disabled:opacity-50"
             >
               {loading ? 'Memeriksa Data...' : 'Cek Status Kesiapan'}
             </button>
@@ -225,7 +225,7 @@ export default function CekPorsiPage() {
             <button
               type="button"
               onClick={handleDemoFill}
-              className="text-xs text-[#0A3E2F] hover:underline font-semibold cursor-pointer"
+              className="text-xs text-[#1e40af] hover:text-[#059669] hover:underline font-semibold cursor-pointer"
             >
               ✨ Isi Otomatis Contoh Nomor Porsi Demo
             </button>
@@ -243,23 +243,23 @@ export default function CekPorsiPage() {
         {result && (
           <div className="space-y-6 pt-4 animate-in fade-in duration-300">
             {/* Identity & Overall Score Box */}
-            <div className="bg-gradient-to-r from-[#0A3E2F] to-[#124d3c] text-white rounded-3xl p-6 sm:p-8 shadow-md">
+            <div className="bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#047857] text-white rounded-3xl p-6 sm:p-8 shadow-md">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
                 <div>
-                  <span className="text-xs uppercase font-bold text-[#D4AF37] tracking-wider block">
+                  <span className="text-xs uppercase font-bold text-emerald-300 tracking-wider block">
                     {result.seasonName} • Wilayah {result.regionName}
                   </span>
                   <h2 className="text-2xl font-black mt-1">{result.fullName}</h2>
-                  <div className="flex items-center gap-3 text-xs text-slate-300 mt-1 font-mono">
+                  <div className="flex items-center gap-3 text-xs text-blue-100 mt-1 font-mono">
                     <span>Nomor Porsi: <strong>{result.porsiNumber}</strong></span>
                     <span>•</span>
                     <span>NIK: <strong>{result.nikMasked}</strong></span>
                   </div>
                 </div>
 
-                <div className="bg-white/10 px-4 py-3 rounded-2xl text-center border border-white/10 shrink-0">
-                  <span className="text-[10px] text-slate-300 uppercase font-bold block">Indeks Kesiapan</span>
-                  <span className="text-2xl font-black font-mono text-[#D4AF37]">
+                <div className="bg-white/10 px-4 py-3 rounded-2xl text-center border border-white/15 shrink-0">
+                  <span className="text-[10px] text-blue-100 uppercase font-bold block">Indeks Kesiapan</span>
+                  <span className="text-2xl font-black font-mono text-white">
                     {Number(result?.readiness?.score ?? 0).toFixed(0)}%
                   </span>
                   <span className="text-[10px] block font-semibold text-emerald-300 uppercase">
@@ -270,7 +270,7 @@ export default function CekPorsiPage() {
 
               {/* Kloter & Pass Trigger */}
               <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div className="text-xs text-slate-200 space-y-0.5">
+                <div className="text-xs text-blue-100 space-y-0.5">
                   <div>
                     Alokasi Kloter:{' '}
                     <strong>
@@ -284,9 +284,9 @@ export default function CekPorsiPage() {
 
                 <button
                   onClick={() => setShowSmartPass(true)}
-                  className="px-4 py-2 rounded-xl bg-[#D4AF37] text-gray-950 font-bold text-xs hover:bg-[#c49f2e] transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-white text-[#1e40af] hover:bg-blue-50 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
                 >
-                  <QrCode className="w-4 h-4" /> Buka Smart Hajj Pass Digital
+                  <QrCode className="w-4 h-4 text-[#059669]" /> Buka Smart Hajj Pass Digital
                 </button>
               </div>
             </div>
@@ -411,7 +411,7 @@ export default function CekPorsiPage() {
             href="https://haji.go.id"
             target="_blank"
             rel="noreferrer"
-            className="text-[#0A3E2F] font-bold underline hover:text-[#15803D]"
+            className="text-[#1e40af] font-bold underline hover:text-[#059669]"
           >
             haji.go.id
           </a>
