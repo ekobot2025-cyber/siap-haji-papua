@@ -56,7 +56,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
           </p>
           <Link
             href="/jamaah"
-            className="inline-flex items-center gap-1.5 mt-5 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold px-4 py-2 rounded-xl text-xs font-semibold shadow-xs"
+            className="inline-flex items-center gap-1.5 mt-5 btn-kemenhaj-primary px-4 py-2 rounded-xl text-xs font-semibold shadow-xs"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Kembali ke Daftar Jamaah Wilayah Anda</span>
@@ -80,7 +80,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
       <div className="flex items-center justify-between">
         <Link
           href="/jamaah"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-600 hover:text-gray-900 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-stone-700 hover:text-[#1A1410] bg-white px-3 py-1.5 rounded-xl border border-[#e8dfc8] shadow-2xs hover:bg-[#fbf8ee] transition-colors"
         >
           <ChevronLeft className="w-4 h-4 text-[#b8941e]" />
           <span>Kembali ke Daftar Jamaah</span>
@@ -89,8 +89,8 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
         <div className="flex items-center gap-2">
           <DataSourceBadge source={jamaah.dataSource} />
           {jamaah.isPriorityElderly && (
-            <span className="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-0.5 rounded-full border border-purple-200 flex items-center gap-1">
-              <HeartHandshake className="w-3.5 h-3.5" />
+            <span className="bg-purple-50 text-purple-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-purple-200 flex items-center gap-1">
+              <HeartHandshake className="w-3.5 h-3.5 text-purple-600" />
               <span>Prioritas Lansia ({jamaah.elderlyAge} th)</span>
             </span>
           )}
@@ -98,64 +98,64 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
       </div>
 
       {/* 2. JAMAAH 360° MASTER HEADER CARD */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs relative overflow-hidden">
-        {/* Subtle Papuan Decorative Top Border Accent */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#c9a961] via-amber-300 to-[#b8941e]" />
+      <div className="bg-white rounded-2xl border border-[#e8dfc8] p-6 shadow-xs relative overflow-hidden">
+        {/* Kemenhaj Royal Gold Accent Top Line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c9a961] via-[#d4af37] to-[#b8941e]" />
 
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           {/* Left: Avatar & Personal Identity */}
           <div className="flex items-start gap-4">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#261F1A] to-[#1A1410] text-[#c9a961] flex items-center justify-center font-extrabold text-2xl border-2 border-[#c9a961] shadow-md shrink-0">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-white flex items-center justify-center font-black text-3xl shadow-sm border-2 border-white ring-4 ring-[#c9a961]/20 shrink-0">
               {jamaah.fullName.charAt(0)}
             </div>
 
             <div>
               <div className="flex items-center gap-2 flex-wrap mb-1">
-                <h1 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+                <h1 className="text-xl sm:text-2xl font-black text-[#1A1410] tracking-tight">
                   {jamaah.fullName}
                 </h1>
-                <span className="bg-slate-100 text-slate-700 text-xs font-semibold px-2 py-0.5 rounded border">
+                <span className="bg-[#fbf8ee] text-stone-700 text-xs font-semibold px-2 py-0.5 rounded border border-[#e8dfc8]">
                   {jamaah.gender === 'MALE' ? 'Laki-Laki' : 'Perempuan'} • {age} Tahun
                 </span>
               </div>
 
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-stone-600">
                 <div className="flex items-center gap-1">
-                  <span className="font-semibold text-gray-500">No. Porsi:</span>
-                  <span className="font-mono font-bold text-[#b8941e] bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">
+                  <span className="font-semibold text-stone-500">No. Porsi:</span>
+                  <span className="font-mono font-bold text-[#8a6d2b] bg-[#fbf8ee] px-2 py-0.5 rounded-lg border border-[#e8dfc8]">
                     {jamaah.porsiNumber}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span className="font-medium">{jamaah.region.name}</span>
+                  <MapPin className="w-3.5 h-3.5 text-[#b8941e] shrink-0" />
+                  <span className="font-medium text-stone-800">{jamaah.region.name}</span>
                 </div>
 
                 <div className="flex items-center gap-1">
-                  <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                  <Calendar className="w-3.5 h-3.5 text-stone-400 shrink-0" />
                   <span>Daftar: {jamaah.registrationYear}</span>
                 </div>
               </div>
 
               {/* NIK & Unmask Privilege */}
-              <div className="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100 text-xs font-mono">
-                <span className="text-gray-500">NIK:</span>
-                <span className="font-bold text-gray-800 bg-slate-100 px-2 py-0.5 rounded border">
+              <div className="flex items-center gap-2 mt-3 pt-2 border-t border-stone-100 text-xs font-mono">
+                <span className="text-stone-500 font-sans">NIK:</span>
+                <span className="font-bold text-stone-800 bg-stone-100 px-2 py-0.5 rounded border border-stone-200">
                   {jamaah.nik}
                 </span>
 
                 {jamaah.canUnmask && (
                   <Link
                     href={`/jamaah/${jamaah.id}${jamaah.isUnmasked ? '' : '?unmask=true'}`}
-                    className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-sans font-semibold border transition-colors ${
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-[11px] font-sans font-semibold border transition-colors ${
                       jamaah.isUnmasked
-                        ? 'bg-amber-100 text-amber-900 border-amber-300'
-                        : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-300'
+                        ? 'bg-amber-50 text-amber-800 border-amber-300'
+                        : 'bg-stone-50 hover:bg-[#fbf8ee] text-stone-700 border-[#e8dfc8]'
                     }`}
                     title={jamaah.isUnmasked ? 'Sembunyikan NIK lengkap' : 'Buka penyamaran NIK (Tercatat di Audit Log)'}
                   >
-                    {jamaah.isUnmasked ? <EyeOff className="w-3 h-3" /> : <Eye className="w-3 h-3" />}
+                    {jamaah.isUnmasked ? <EyeOff className="w-3 h-3 text-amber-600" /> : <Eye className="w-3 h-3 text-stone-500" />}
                     <span>{jamaah.isUnmasked ? 'Mask Data' : 'Buka Masking'}</span>
                   </Link>
                 )}
@@ -164,22 +164,22 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
           </div>
 
           {/* Right: Readiness Score Card */}
-          <div className="lg:border-l lg:border-slate-200 lg:pl-6 flex flex-col justify-center min-w-[240px]">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-[#b8941e] mb-1">
+          <div className="lg:border-l lg:border-[#e8dfc8] lg:pl-6 flex flex-col justify-center min-w-[240px]">
+            <span className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">
               Indeks Kesiapan Administratif
             </span>
             <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-3xl sm:text-4xl font-black text-[#b8941e] font-mono">
+              <span className="text-3xl sm:text-4xl font-black text-[#967412] font-mono">
                 {Number(jamaah?.readiness?.score ?? 0).toFixed(1)}%
               </span>
               <ReadinessBadge category={jamaah.readiness.category} showScore={false} size="sm" />
             </div>
 
-            <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden border border-slate-200">
+            <div className="w-full bg-stone-100 rounded-full h-2.5 overflow-hidden border border-[#e8dfc8]">
               <div
                 className={`h-full rounded-full ${
                   jamaah.readiness.score >= 90
-                    ? 'bg-emerald-600'
+                    ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e]'
                     : jamaah.readiness.score >= 75
                     ? 'bg-blue-600'
                     : 'bg-amber-500'
@@ -187,7 +187,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
                 style={{ width: `${Math.min(100, Math.max(5, jamaah.readiness.score))}%` }}
               />
             </div>
-            <span className="text-[10px] text-gray-400 mt-1 italic">
+            <span className="text-[10px] text-stone-400 mt-1 italic">
               Decision-support indicator internal
             </span>
           </div>

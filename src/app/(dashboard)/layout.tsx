@@ -22,12 +22,12 @@ export default async function DashboardLayout({
   const config = await SettingsService.getAppConfig();
 
   return (
-    <div className="min-h-screen bg-[#F8FAF8] flex flex-col">
+    <div className="min-h-screen bg-[#FAF9F5] flex flex-col font-sans">
       <DemoBanner />
       <Header session={session} config={config} />
-      <div className="flex-1 flex w-full bg-white">
+      <div className="flex-1 flex w-full">
         <Sidebar session={session} />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden min-w-0 bg-[#F8FAF8]/50">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden min-w-0 bg-[#FAF9F5]">
           {children}
         </main>
       </div>

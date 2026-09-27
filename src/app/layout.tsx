@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'SIAP HAJI PAPUA — Command Center Penyelenggaraan Haji',
   description: 'Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji Provinsi Papua. Satu Data • Satu Monitoring • Satu Layanan • Haji Papua Siap.',
   icons: {
-    icon: '/assets/branding/app-icon.png',
+    icon: '/assets/branding/logo-kemenhaj.png',
   },
 };
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <head>
-        <link rel="icon" href="/assets/branding/app-icon.png" />
+        <link rel="icon" href="/assets/branding/logo-kemenhaj.png" />
       </head>
       <body>
         <Suspense fallback={null}>

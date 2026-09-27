@@ -32,15 +32,15 @@ export default async function SystemSettingsPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+      <div className="bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold flex items-center justify-center border border-blue-400/30 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-white font-bold flex items-center justify-center shadow-xs">
             <Settings className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-black text-gray-900">Pengaturan Sistem Kelembagaan</h1>
+            <h1 className="text-xl font-black text-[#1A1410]">Pengaturan Sistem Kelembagaan</h1>
             <p className="text-xs text-gray-500">
-              Konfigurasi dinamis identitas instansi, branding, dan informasi kontak (Institution-Agnostic)
+              Konfigurasi dinamis identitas instansi Kementerian Haji dan Umrah, branding, dan informasi kontak resmi
             </p>
           </div>
         </div>

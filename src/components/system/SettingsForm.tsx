@@ -50,16 +50,16 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-6">
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border border-[#e8dfc8] shadow-xs space-y-6">
       {message && (
         <div
           className={`p-3 rounded-xl border text-xs sm:text-sm flex items-center gap-2 ${
             message.type === 'success'
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+              ? 'bg-[#fbf8ee] text-[#8a6d2b] border-[#e8dfc8]'
               : 'bg-red-50 text-red-800 border-red-200'
           }`}
         >
-          {message.type === 'success' ? <Check className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
+          {message.type === 'success' ? <Check className="w-4 h-4 text-[#b8941e]" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
           <span>{message.text}</span>
         </div>
       )}
@@ -167,9 +167,9 @@ export function SettingsForm({ initialConfig }: { initialConfig: AppConfig }) {
         <button
           type="submit"
           disabled={saving}
-          className="flex items-center gap-2 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
+          className="flex items-center gap-2 btn-kemenhaj-primary text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
         >
-          <Save className="w-4 h-4 text-emerald-200" />
+          <Save className="w-4 h-4 text-white/90" />
           <span>{saving ? 'Menyimpan...' : 'Simpan Perubahan'}</span>
         </button>
       </div>

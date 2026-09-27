@@ -2,23 +2,23 @@
 
 @layer base {
   :root {
-    /* haji.go.id Official Design Tokens (Keputusan Menteri No. 41/2025) */
+    /* haji.go.id Official Design Tokens (Royal Gold & Charcoal Obsidian) */
     --primary-color: #c9a961;       /* Hajj Royal Gold */
     --primary-dark: #b8941e;        /* Deep Gold Ochre */
-    --primary-light: #faf5e9;       /* Light Warm Gold Tint */
-    --secondary-color: #b8941e;     /* Secondary Ochre Gold */
-    --secondary-dark: #967412;      /* Deep Golden Bronze */
-    --secondary-light: #fef8ee;     /* Very Light Gold */
-    --accent-color: #b8941e;
-    --accent-gold: #c9a961;
-    --accent-green: #0f6938;        /* Syariah Emerald Green */
-    --accent-green-light: #eaf5ee;
-    --dark-color: #1A1410;          /* Deep Espresso / Ka'bah Charcoal */
-    --bg-base: #FAF8F1;             /* Warm Ivory / Krem haji.go.id */
-    --surface: #ffffff;
-    --text-main: #1A1410;           /* Aristocratic Dark Charcoal */
-    --text-muted: #645a50;          /* Warm Muted Slate */
-    --border-light: #e8dfc8;        /* Soft Sand / Golden Border */
+    --primary-light: #fbf8ee;       /* Soft Champagne Tint */
+    --secondary-color: #b8941e;     /* Deep Gold */
+    --secondary-dark: #967412;      /* Golden Bronze */
+    --secondary-light: #fefcf7;     /* Very Light Ivory */
+    --accent-color: #c9a961;
+    --accent-gold: #c9a961;         /* Royal Gold */
+    --accent-green: #059669;        /* Syariah Indicator Accent */
+    --accent-green-light: #ecfdf5;
+    --dark-color: #1A1410;          /* Ka'bah Charcoal Obsidian */
+    --bg-base: #FAF9F5;             /* Warm Ivory haji.go.id */
+    --surface: #ffffff;             /* Crisp Pure White */
+    --text-main: #1A1410;           /* Deep Charcoal */
+    --text-muted: #786c5e;          /* Warm Muted Slate */
+    --border-light: #e8dfc8;        /* Soft Elegant Gold Border */
 
     /* Legacy fallback */
     --primary: #c9a961;
@@ -69,6 +69,45 @@
     min-height: 56px !important;
     font-size: 1.15rem !important;
   }
+}
+
+/* Official Kemenhaj / haji.go.id Reusable Utility Classes */
+.btn-kemenhaj-primary {
+  background: linear-gradient(135deg, #c9a961 0%, #b8941e 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(201, 169, 97, 0.25);
+  transition: all 0.2s ease-in-out;
+}
+.btn-kemenhaj-primary:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 4px 14px rgba(201, 169, 97, 0.35);
+}
+.btn-kemenhaj-primary:active {
+  transform: scale(0.99);
+}
+
+.btn-kemenhaj-outline {
+  background-color: #ffffff;
+  color: #1A1410;
+  border: 1px solid #e8dfc8;
+  font-weight: 600;
+  transition: all 0.15s ease-in-out;
+}
+.btn-kemenhaj-outline:hover {
+  background-color: #fbf8ee;
+  border-color: #c9a961;
+  color: #8a6d2b;
+}
+
+.badge-kemenhaj-gold {
+  background-color: #fbf8ee;
+  color: #8a6d2b;
+  border: 1px solid #e8dfc8;
+}
+
+.border-kemenhaj {
+  border-color: #e8dfc8;
 }
 
 /* Custom Scrollbar for Command Center */

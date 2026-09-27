@@ -43,31 +43,31 @@ export default async function AuditLogsPage({ searchParams }: AuditLogsPageProps
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+      <div className="bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold flex items-center justify-center border border-blue-400/30 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-white font-bold flex items-center justify-center shadow-xs">
             <History className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-black text-gray-900">Jejak Audit Sistem (Append-Only)</h1>
+            <h1 className="text-xl font-black text-[#1A1410]">Jejak Audit Sistem (Append-Only)</h1>
             <p className="text-xs text-gray-500">
-              Rekaman mutasi data, login, dan akses data sensitif yang tidak dapat diubah atau dihapus
+              Rekaman mutasi data, login, dan akses data sensitif sesuai UU PDP & regulasi Kementerian Haji dan Umrah
             </p>
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
+        <div className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-[#8a6d2b] bg-[#fbf8ee] px-3 py-1.5 rounded-full border border-[#e8dfc8]">
+          <ShieldCheck className="w-4 h-4 text-[#b8941e]" />
           <span>Immutable Audit Ledger</span>
         </div>
       </div>
 
       {/* Audit Log Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div className="bg-white rounded-2xl border border-[#e8dfc8] shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs sm:text-sm">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-gray-600 text-xs uppercase tracking-wider font-semibold">
+              <tr className="bg-[#FAF9F5] border-b border-[#e8dfc8] text-gray-600 text-xs uppercase tracking-wider font-semibold">
                 <th className="py-3 px-4">Waktu (WIT)</th>
                 <th className="py-3 px-4">Aktor / Pengguna</th>
                 <th className="py-3 px-4">Aksi & Modul</th>
@@ -125,7 +125,7 @@ export default async function AuditLogsPage({ searchParams }: AuditLogsPageProps
                               : log.action === 'UNMASK'
                               ? 'bg-amber-100 text-amber-900 border-amber-300'
                               : log.action === 'CREATE'
-                              ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
+                              ? 'bg-[#fbf8ee] text-[#8a6d2b] border-[#e8dfc8]'
                               : 'bg-slate-100 text-slate-800 border-slate-300'
                           }`}
                         >

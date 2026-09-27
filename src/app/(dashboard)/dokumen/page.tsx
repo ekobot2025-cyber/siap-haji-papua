@@ -134,16 +134,16 @@ export default function DokumenPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#e8dfc8]">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
+          <span className="p-2.5 rounded-xl btn-kemenhaj-primary text-white font-bold shadow-xs">
             <FileCheck className="w-6 h-6 text-white" />
           </span>
           <div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-xl font-black text-[#1A1410] tracking-tight">
               DESK VERIFIKASI DOKUMEN & PASPOR
             </h1>
-            <p className="text-xs text-gray-500 font-medium">
+            <p className="text-xs text-stone-500 font-medium">
               Pemeriksaan keabsahan dokumen, masa berlaku paspor (min. 6 bulan), dan penerbitan visa
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function DokumenPage() {
           <button
             type="button"
             onClick={handleExportExcel}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-stone-700 bg-white hover:bg-[#fbf8ee] cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
             Ekspor Excel
@@ -161,14 +161,14 @@ export default function DokumenPage() {
           <button
             type="button"
             onClick={handleExportPdf}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-semibold shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg btn-kemenhaj-primary text-white font-bold text-xs shadow-xs cursor-pointer"
           >
-            <FileText className="w-3.5 h-3.5" />
+            <FileText className="w-3.5 h-3.5 text-white" />
             Ekspor PDF
           </button>
           <button
             onClick={fetchDocuments}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-stone-700 bg-white hover:bg-[#fbf8ee] cursor-pointer"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh Dokumen
@@ -177,25 +177,25 @@ export default function DokumenPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#e8dfc8] space-y-3">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="relative w-full md:w-80">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+            <Search className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Cari nama jamaah atau nomor porsi..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#c9a961]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-[#e8dfc8] focus:outline-none focus:border-[#c9a961]"
             />
           </div>
 
-          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto">
+          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
             {/* Type Filter */}
             <select
               value={typeFilter}
               onChange={(e) => { setTypeFilter(e.target.value); setPage(1); }}
-              className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-medium"
+              className="text-xs px-3 py-1.5 rounded-lg border border-[#e8dfc8] bg-white font-medium"
             >
               {docTypes.map((dt) => (
                 <option key={dt.code} value={dt.code}>{dt.label}</option>
@@ -206,7 +206,7 @@ export default function DokumenPage() {
             <select
               value={statusFilter}
               onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-              className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-medium"
+              className="text-xs px-3 py-1.5 rounded-lg border border-[#e8dfc8] bg-white font-medium"
             >
               <option value="">Semua Status</option>
               <option value="PENDING">Menunggu Verifikasi</option>
@@ -279,7 +279,7 @@ export default function DokumenPage() {
                       <td className="p-3.5">
                         <Link
                           href={`/jamaah/${doc.jamaah.id}`}
-                          className="font-bold text-[#b8941e] hover:underline block"
+                          className="font-bold text-[#1A1410] hover:text-[#8a6d2b] hover:underline block"
                         >
                           {doc.jamaah.fullName}
                         </Link>
@@ -293,14 +293,14 @@ export default function DokumenPage() {
                       <td className="p-3.5">
                         <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold ${
                           isVerified
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]'
                             : isPending
                             ? 'bg-amber-100 text-amber-800'
                             : isRejected
                             ? 'bg-rose-100 text-rose-800'
                             : 'bg-slate-100 text-slate-600'
                         }`}>
-                          {isVerified && <CheckCircle2 className="w-3 h-3" />}
+                          {isVerified && <CheckCircle2 className="w-3 h-3 text-[#b8941e]" />}
                           {isPending && <Clock className="w-3 h-3" />}
                           {isRejected && <XCircle className="w-3 h-3" />}
                           {doc.status}
@@ -309,7 +309,7 @@ export default function DokumenPage() {
                       <td className="p-3.5 text-right">
                         <button
                           onClick={() => { setSelectedDoc(doc); setActionNotes(doc.notes || ''); }}
-                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all shadow-xs cursor-pointer"
+                          className="px-3.5 py-1.5 rounded-xl btn-kemenhaj-primary text-xs font-bold transition-all shadow-xs cursor-pointer"
                         >
                           Verifikasi
                         </button>
@@ -329,10 +329,10 @@ export default function DokumenPage() {
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
+                <span className="p-1.5 rounded-lg bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-white font-bold shadow-xs">
                   <ShieldCheck className="w-4 h-4 text-white" />
                 </span>
-                <h3 className="text-base font-bold text-gray-900">Desk Verifikasi Dokumen</h3>
+                <h3 className="text-base font-bold text-[#1A1410]">Desk Verifikasi Dokumen</h3>
               </div>
               <button onClick={() => setSelectedDoc(null)} className="text-gray-400 hover:text-gray-600 cursor-pointer">
                 <X className="w-5 h-5" />
@@ -346,7 +346,7 @@ export default function DokumenPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Nama Jamaah:</span>
-                <span className="font-bold text-[#b8941e]">{selectedDoc.jamaah.fullName}</span>
+                <span className="font-bold text-[#1A1410]">{selectedDoc.jamaah.fullName}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Nomor Porsi:</span>
@@ -397,7 +397,7 @@ export default function DokumenPage() {
                   type="button"
                   disabled={submitting}
                   onClick={() => handleVerify('VERIFY')}
-                  className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-700 text-white hover:bg-emerald-800 cursor-pointer disabled:opacity-50"
+                  className="px-4 py-2 rounded-xl text-xs font-bold btn-kemenhaj-primary cursor-pointer disabled:opacity-50"
                 >
                   {submitting ? 'Memproses...' : 'Setujui & Verifikasi'}
                 </button>

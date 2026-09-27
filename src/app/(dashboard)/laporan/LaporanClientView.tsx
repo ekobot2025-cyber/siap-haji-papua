@@ -160,16 +160,16 @@ export function LaporanClientView({
       <div className="hidden print:block text-center border-b-2 border-black pb-4 mb-4">
         <div className="flex items-center justify-between">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/branding/app-icon.png" alt="Emblem" className="w-16 h-16 object-contain" />
+          <img src="/assets/branding/logo-kemenhaj.png" alt="Emblem Kementerian Haji" className="w-16 h-16 object-contain" />
           <div className="text-center flex-1 px-4">
             <h2 className="text-xs font-bold uppercase tracking-widest text-black">
-              KEMENTERIAN AGAMA REPUBLIK INDONESIA
+              KEMENTERIAN HAJI DAN UMRAH REPUBLIK INDONESIA
             </h2>
             <h3 className="text-xs font-bold uppercase text-gray-800">
-              KANTOR WILAYAH KEMENTERIAN AGAMA PROVINSI PAPUA
+              KANTOR WILAYAH KEMENTERIAN HAJI DAN UMRAH PROVINSI PAPUA
             </h3>
             <h1 className="text-sm font-black uppercase text-black mt-0.5">
-              BIDANG PENYELENGGARAAN HAJI DAN UMRAH
+              BIDANG PENYELENGGARAAN HAJI DAN UMRAH (PHU)
             </h1>
             <p className="text-[10px] text-gray-700 italic">
               LAPORAN AUDIT & REKAPITULASI KESIAPAN OPERASIONAL HAJI PROVINSI PAPUA 1447 H / 2026 M
@@ -192,10 +192,10 @@ export function LaporanClientView({
       {/* =========================================================================
           2. SCREEN HEADER & CONTROLS (SCREEN ONLY)
           ========================================================================= */}
-      <div className="no-print bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="no-print bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-200">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
               PUSAT LAPORAN & AUDIT
             </span>
             <span className="text-xs text-gray-500 font-mono">1447 H / 2026 M</span>
@@ -204,7 +204,7 @@ export function LaporanClientView({
             Laporan Resmi Penyelenggaraan Haji Papua
           </h1>
           <p className="text-xs text-gray-500">
-            Dokumen rekapitulasi operasional untuk kebutuhan rapat pimpinan (Forkopimda) dan pelaporan Kemenag Pusat
+            Dokumen rekapitulasi operasional untuk kebutuhan rapat pimpinan (Forkopimda) dan pelaporan Kementerian Haji dan Umrah RI
           </p>
         </div>
 
@@ -212,17 +212,17 @@ export function LaporanClientView({
           <button
             type="button"
             onClick={handleExportRegionalCSV}
-            className="px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-gray-700 text-xs font-bold shadow-2xs flex items-center gap-1.5 transition-all cursor-pointer"
+            className="px-3.5 py-2 rounded-xl bg-white border border-[#e8dfc8] hover:bg-[#fbf8ee] text-gray-700 text-xs font-bold shadow-2xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
-            <Download className="w-4 h-4 text-emerald-600" />
+            <Download className="w-4 h-4 text-[#b8941e]" />
             <span>Ekspor Excel</span>
           </button>
           <button
             type="button"
             onClick={handleExportPdf}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer border border-blue-400/30"
+            className="btn-kemenhaj-primary px-4 py-2 rounded-xl text-xs font-bold shadow-xs flex items-center gap-1.5 cursor-pointer"
           >
-            <Printer className="w-4 h-4 text-emerald-200" />
+            <Printer className="w-4 h-4 text-white" />
             <span>Ekspor PDF</span>
           </button>
           <button
@@ -239,26 +239,26 @@ export function LaporanClientView({
       {/* =========================================================================
           3. TABS (SCREEN ONLY)
           ========================================================================= */}
-      <div className="no-print flex items-center gap-2 border-b border-slate-200 pb-2 text-xs font-bold">
+      <div className="no-print flex items-center gap-2 border-b border-[#e8dfc8] pb-2 text-xs font-bold">
         <button
           type="button"
           onClick={() => setActiveTab('regional')}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'regional'
-              ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
-              : 'bg-white border border-slate-200 text-gray-600 hover:bg-slate-50'
+              ? 'btn-kemenhaj-primary text-white font-bold shadow-xs'
+              : 'bg-white border border-[#e8dfc8] text-gray-600 hover:bg-[#fbf8ee]'
           }`}
         >
           <Building2 className="w-4 h-4" />
-          <span>1. Rekapitulasi 10 Kab / Kota</span>
+          <span>1. Rekapitulasi 11 Kab / Kota</span>
         </button>
         <button
           type="button"
           onClick={() => setActiveTab('kloter')}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'kloter'
-              ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
-              : 'bg-white border border-slate-200 text-gray-600 hover:bg-slate-50'
+              ? 'btn-kemenhaj-primary text-white font-bold shadow-xs'
+              : 'bg-white border border-[#e8dfc8] text-gray-600 hover:bg-[#fbf8ee]'
           }`}
         >
           <Plane className="w-4 h-4" />
@@ -267,22 +267,22 @@ export function LaporanClientView({
       </div>
 
       {/* =========================================================================
-          4. TAB 1: REKAPITULASI 10 KAB / KOTA
+          4. TAB 1: REKAPITULASI 11 KAB / KOTA
           ========================================================================= */}
       {(activeTab === 'regional' || typeof window === 'undefined') && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs space-y-4 print:border-none print:shadow-none">
-          <div className="no-print p-4 border-b border-slate-100 flex items-center justify-between">
+        <div className="bg-white rounded-2xl border border-[#e8dfc8] overflow-hidden shadow-xs space-y-4 print:border-none print:shadow-none">
+          <div className="no-print p-4 border-b border-[#e8dfc8] bg-[#FAF9F5] flex items-center justify-between">
             <h2 className="text-sm font-bold text-gray-900">
-              Tabel Rekapitulasi Kesiapan 10 Kabupaten / Kota Se-Provinsi Papua
+              Tabel Rekapitulasi Kesiapan 11 Kabupaten / Kota Se-Provinsi Papua
             </h2>
             <span className="text-xs text-gray-500 font-mono">
-              Indeks Kesiapan Provinsi: <strong className="text-emerald-700">{provincialAverage}%</strong>
+              Indeks Kesiapan Provinsi: <strong className="text-[#8a6d2b] font-bold">{provincialAverage}%</strong>
             </span>
           </div>
 
           <div className="overflow-x-auto p-4 pt-0 print:p-0">
             <table className="w-full text-left text-xs print:border print:border-black">
-              <thead className="bg-slate-50 border-b border-slate-200 text-gray-600 font-bold print:bg-gray-100 print:text-black">
+              <thead className="bg-[#FAF9F5] border-b border-[#e8dfc8] text-gray-700 font-bold print:bg-gray-100 print:text-black">
                 <tr>
                   <th className="p-3 print:p-2 print:border print:border-black text-center">No</th>
                   <th className="p-3 print:p-2 print:border print:border-black">Kabupaten / Kota</th>
@@ -319,11 +319,11 @@ export function LaporanClientView({
                     <td className="p-3 print:p-2 print:border print:border-black text-center font-mono text-gray-700 print:text-black">
                       {r.adminCompleteCount}
                     </td>
-                    <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-bold text-emerald-700 print:text-black">
+                    <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-bold text-[#8a6d2b] print:text-black">
                       {r.readyCount}
                     </td>
                     <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-bold">
-                      <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 print:bg-transparent print:border-none print:text-black">
+                      <span className="px-2 py-0.5 rounded bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8] print:bg-transparent print:border-none print:text-black">
                         {r.avgScore}%
                       </span>
                     </td>
@@ -331,10 +331,10 @@ export function LaporanClientView({
                       <span
                         className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold ${
                           r.status === 'SIAP'
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]'
                             : r.status === 'DALAM PROSES'
-                            ? 'bg-blue-100 text-blue-800'
-                            : 'bg-amber-100 text-amber-800'
+                            ? 'bg-blue-50 text-blue-800 border border-blue-200'
+                            : 'bg-amber-50 text-amber-800 border border-amber-200'
                         } print:bg-transparent print:text-black`}
                       >
                         {r.status}
@@ -344,7 +344,7 @@ export function LaporanClientView({
                 ))}
 
                 {/* Total Row */}
-                <tr className="bg-slate-100 font-bold border-t-2 border-slate-300 print:bg-gray-200 print:border-t-2 print:border-black print:text-black">
+                <tr className="bg-[#FAF9F5] font-bold border-t-2 border-[#e8dfc8] print:bg-gray-200 print:border-t-2 print:border-black print:text-black">
                   <td colSpan={2} className="p-3 print:p-2 print:border print:border-black text-center uppercase tracking-wider">
                     Total Provinsi Papua
                   </td>
@@ -360,13 +360,13 @@ export function LaporanClientView({
                   <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-black">
                     {totalAdminComplete}
                   </td>
-                  <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-black text-emerald-800 print:text-black">
+                  <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-black text-[#8a6d2b] print:text-black">
                     {totalReady}
                   </td>
-                  <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-black text-emerald-800 print:text-black">
+                  <td className="p-3 print:p-2 print:border print:border-black text-center font-mono font-black text-[#8a6d2b] print:text-black">
                     {provincialAverage}%
                   </td>
-                  <td className="p-3 print:p-2 print:border print:border-black text-center text-emerald-800 print:text-black">
+                  <td className="p-3 print:p-2 print:border print:border-black text-center text-[#8a6d2b] font-bold print:text-black">
                     TERKENDALI
                   </td>
                 </tr>
@@ -380,8 +380,8 @@ export function LaporanClientView({
           5. TAB 2: REKAPITULASI 4 KLOTER PAPUA
           ========================================================================= */}
       {activeTab === 'kloter' && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs space-y-4">
-          <div className="p-4 border-b border-slate-100 flex items-center justify-between">
+        <div className="bg-white rounded-2xl border border-[#e8dfc8] overflow-hidden shadow-xs space-y-4">
+          <div className="p-4 border-b border-[#e8dfc8] bg-[#FAF9F5] flex items-center justify-between">
             <h2 className="text-sm font-bold text-gray-900">
               Rekapitulasi 4 Kloter Papua (Embarkasi Hasanuddin Makassar UPG)
             </h2>
@@ -392,11 +392,11 @@ export function LaporanClientView({
             {kloters.map((k) => (
               <div
                 key={k.id}
-                className="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-3 flex flex-col justify-between"
+                className="p-4 rounded-2xl border border-[#e8dfc8] bg-[#FAF9F5] space-y-3 flex flex-col justify-between"
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-[10px] font-bold text-[#b8941e] uppercase tracking-wider block">
+                    <span className="text-[10px] font-bold text-[#8a6d2b] uppercase tracking-wider block">
                       Kloter {k.number}
                     </span>
                     <h3 className="text-base font-black text-gray-900">{k.code}</h3>
@@ -404,12 +404,12 @@ export function LaporanClientView({
                       {k.airline} ({k.flight})
                     </p>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
                     {k.status}
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs font-mono p-2.5 rounded-xl bg-white border border-slate-200">
+                <div className="grid grid-cols-2 gap-2 text-xs font-mono p-2.5 rounded-xl bg-white border border-[#e8dfc8]">
                   <div>
                     <span className="text-[10px] text-gray-400 block font-sans">Kapasitas Seat:</span>
                     <strong>{k.filled} / {k.capacity}</strong>
@@ -424,15 +424,15 @@ export function LaporanClientView({
                   </div>
                   <div>
                     <span className="text-[10px] text-gray-400 block font-sans">Jadwal Terbang:</span>
-                    <span className="text-emerald-700 font-bold">{k.departureDate}</span>
+                    <span className="text-[#8a6d2b] font-bold">{k.departureDate}</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-slate-200">
+                <div className="flex items-center justify-between pt-2 border-t border-[#e8dfc8]">
                   <span className="text-[11px] text-gray-500">{k.embarkation}</span>
                   <Link
                     href={`/kloter/${k.id}`}
-                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all flex items-center gap-1 shadow-xs cursor-pointer"
+                    className="btn-kemenhaj-primary px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 shadow-xs cursor-pointer"
                   >
                     <span>Buka & Cetak Manifest</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -450,8 +450,8 @@ export function LaporanClientView({
       <div className="hidden print:grid grid-cols-2 gap-8 pt-8 text-center text-xs border-t border-black mt-8 text-black">
         <div>
           <span className="block text-[10px] text-gray-700">Diverifikasi & Diperiksa Oleh,</span>
-          <strong className="block font-bold">Plt. Kepala Bidang Penyelenggaraan Haji dan Umrah</strong>
-          <span className="block text-[10px] text-gray-600">Kanwil Kementerian Agama Provinsi Papua</span>
+          <strong className="block font-bold">Plt. Kepala Bidang Penyelenggaraan Haji dan Umrah (PHU)</strong>
+          <span className="block text-[10px] text-gray-600">Kanwil Kementerian Haji dan Umrah Provinsi Papua</span>
           <div className="h-16" />
           <span className="block font-bold underline">(...................................................)</span>
           <span className="block text-[10px] text-gray-600">NIP. 19780815 200501 1 003</span>
@@ -460,7 +460,7 @@ export function LaporanClientView({
         <div>
           <span className="block text-[10px] text-gray-700">Jayapura, {new Date().toLocaleDateString('id-ID', { dateStyle: 'long' })}</span>
           <span className="block text-[10px] text-gray-700">Mengetahui & Menyetujui,</span>
-          <strong className="block font-bold">Kepala Kantor Wilayah Kementerian Agama</strong>
+          <strong className="block font-bold">Kepala Kantor Wilayah Kementerian Haji dan Umrah</strong>
           <span className="block text-[10px] text-gray-600">Provinsi Papua</span>
           <div className="h-16" />
           <span className="block font-bold underline">(...................................................)</span>

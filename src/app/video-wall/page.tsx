@@ -101,14 +101,14 @@ export default function VideoWallPage() {
   const provIndex = Number(kpi?.provincialReadinessIndex ?? 96.2);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 flex flex-col justify-between select-none">
+    <div className="min-h-screen bg-[#0D0B09] text-stone-100 p-4 sm:p-6 flex flex-col justify-between select-none">
       {/* 1. TOP COMMAND BAR */}
-      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#2A2018]">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#1A1410] p-2 border border-emerald-400/50 flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-2xl bg-[#1A1410] p-2 border border-[#c9a961]/50 flex items-center justify-center shadow-lg">
             <Image
-              src="/assets/branding/app-icon.png"
-              alt="Logo"
+              src="/assets/branding/logo-kemenhaj.png"
+              alt="Logo Kementerian Haji"
               width={36}
               height={36}
               className="object-contain"
@@ -116,10 +116,10 @@ export default function VideoWallPage() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-black uppercase tracking-widest text-emerald-300 bg-blue-950/80 px-2.5 py-0.5 rounded border border-emerald-400/30">
-                PROVINCIAL COMMAND CENTER • BIG SCREEN MODE
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#c9a961] bg-[#1A1410] px-2.5 py-0.5 rounded border border-[#c9a961]/40">
+                PROVINCIAL COMMAND CENTER • BIG SCREEN NOC MODE
               </span>
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              <span className="inline-block w-2 h-2 rounded-full bg-[#c9a961] animate-ping" />
             </div>
             <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">
               SIAP HAJI PAPUA — MONITORING OPERASIONAL TERPADU
@@ -130,17 +130,17 @@ export default function VideoWallPage() {
         {/* Live Clock & Fullscreen Controls */}
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+            <span className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block">
               WAKTU PROVINSI PAPUA
             </span>
-            <span className="text-xl sm:text-2xl font-mono font-black text-emerald-400">
+            <span className="text-xl sm:text-2xl font-mono font-black text-[#c9a961]">
               {currentTime || '00:00:00 WIT'}
             </span>
           </div>
 
           <button
             onClick={toggleFullscreen}
-            className="p-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-white/10 transition-colors cursor-pointer"
+            className="p-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white border border-[#c9a961]/20 transition-colors cursor-pointer"
             title="Toggle Fullscreen"
           >
             {isFullscreen ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
@@ -148,7 +148,7 @@ export default function VideoWallPage() {
 
           <Link
             href="/"
-            className="p-3 rounded-2xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold border border-blue-400/30 transition-all flex items-center gap-1.5 text-xs font-bold"
+            className="px-4 py-2.5 rounded-2xl btn-kemenhaj-primary text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm"
           >
             <ArrowLeft className="w-4 h-4" /> Keluar
           </Link>
@@ -170,26 +170,26 @@ export default function VideoWallPage() {
       {/* 3. MAIN DASHBOARD WALL GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
         {/* Left Column (4 cols): Provincial Index & Season */}
-        <div className="lg:col-span-4 bg-gradient-to-b from-[#261F1A]/80 to-[#1A1410] p-6 rounded-3xl border border-[#c9a961]/30 space-y-6 shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-[#1A1410] p-6 rounded-3xl border border-[#c9a961]/35 space-y-6 shadow-xl flex flex-col justify-between">
           <div>
-            <span className="text-xs uppercase font-extrabold text-emerald-400 tracking-wider block">
+            <span className="text-xs uppercase font-extrabold text-[#c9a961] tracking-wider block">
               Indikator Kesiapan Agregat
             </span>
             <h2 className="text-lg font-bold text-white mt-1">Indeks Kesiapan Papua</h2>
-            <p className="text-xs text-slate-400">Musim Haji 1447 H / 2026 M</p>
+            <p className="text-xs text-gray-400">Musim Haji 1447 H / 2026 M • Embarkasi Makassar (UPG)</p>
 
             <div className="my-6 text-center">
               <span className="text-6xl sm:text-7xl font-mono font-black text-white tracking-tight">
                 {provIndex.toFixed(1)}%
               </span>
-              <span className="block text-xs uppercase font-bold text-emerald-400 mt-2 tracking-widest">
+              <span className="block text-xs uppercase font-bold text-[#c9a961] mt-2 tracking-widest">
                 STATUS: SIAP BERANGKAT (OPTIMAL)
               </span>
             </div>
 
-            <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-white/10">
+            <div className="w-full bg-black/60 rounded-full h-3 overflow-hidden border border-white/10">
               <div
-                className="bg-gradient-to-r from-[#c9a961] via-amber-300 to-[#b8941e] h-full rounded-full transition-all duration-1000"
+                className="bg-gradient-to-r from-[#c9a961] via-[#d4af37] to-[#b8941e] h-full rounded-full transition-all duration-1000"
                 style={{ width: `${Math.min(100, Math.max(0, provIndex))}%` }}
               />
             </div>
@@ -272,30 +272,30 @@ export default function VideoWallPage() {
         </div>
 
         {/* Right Column (4 cols): Regional Ranking Leaderboard */}
-        <div className="lg:col-span-4 bg-slate-900/90 p-5 rounded-3xl border border-slate-800 space-y-4 shadow-xl">
+        <div className="lg:col-span-4 bg-[#1A1410] p-5 rounded-3xl border border-[#c9a961]/35 space-y-4 shadow-xl">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-gray-300">
               Peringkat Kesiapan per Wilayah
             </h3>
-            <span className="text-[10px] text-slate-500 font-mono">10 Kab/Kota</span>
+            <span className="text-[10px] text-[#c9a961] font-mono font-bold">11 Kab/Kota Papua</span>
           </div>
 
           <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1">
-            {regionalRanking.slice(0, 7).map((r: any, idx: number) => {
+            {regionalRanking.slice(0, 11).map((r: any, idx: number) => {
               const score = Number(r?.averageReadiness ?? r?.readinessIndex ?? 0);
               return (
                 <div key={r.regionId || idx} className="space-y-1">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-200">
+                    <span className="font-semibold text-gray-200">
                       {idx + 1}. {r.regionName}
                     </span>
-                    <span className="font-mono font-bold text-emerald-400">
+                    <span className="font-mono font-bold text-[#c9a961]">
                       {score.toFixed(0)}%
                     </span>
                   </div>
-                  <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                  <div className="w-full bg-black/60 rounded-full h-1.5 overflow-hidden">
                     <div
-                      className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                      className="bg-gradient-to-r from-[#c9a961] to-[#b8941e] h-full rounded-full transition-all duration-500"
                       style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
                     />
                   </div>
@@ -307,12 +307,12 @@ export default function VideoWallPage() {
       </div>
 
       {/* 4. FOOTER STATUS BAR */}
-      <footer className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-500">
+      <footer className="pt-4 border-t border-[#2A2018] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-400">
         <div>
-          <span>Pusat Data Komando Haji Provinsi Papua • Status Sistem: </span>
-          <strong className="text-emerald-400">OPERASIONAL AMAN</strong>
+          <span>Pusat Data Komando Haji Kantor Wilayah Kementerian Haji dan Umrah Papua • Status Sistem: </span>
+          <strong className="text-[#c9a961]">OPERASIONAL SIAP & AMAN</strong>
         </div>
-        <div className="font-mono text-[11px]">
+        <div className="font-mono text-[11px] text-[#c9a961]">
           Satu Data • Satu Monitoring • Satu Layanan • Haji Papua Siap
         </div>
       </footer>

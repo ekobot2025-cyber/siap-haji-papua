@@ -62,13 +62,13 @@ export default function PetaWilayahPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#e8dfc8]">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-white font-bold shadow-xs">
             <Compass className="w-6 h-6 text-white" />
           </span>
           <div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-xl font-black text-[#1A1410] tracking-tight">
               PETA GEOSPASIAL & LOGISTIK EMBARKASI PROVINSI PAPUA
             </h1>
             <p className="text-xs text-gray-500 font-medium">
@@ -79,7 +79,7 @@ export default function PetaWilayahPage() {
 
         <button
           onClick={fetchRegionalData}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer self-start md:self-auto"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-[#8a6d2b] bg-white hover:bg-[#fbf8ee] cursor-pointer self-start md:self-auto transition-colors"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
           Refresh Peta
@@ -90,15 +90,15 @@ export default function PetaWilayahPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Map Grid of Regencies */}
         <div className="lg:col-span-8 space-y-4">
-          <div className="bg-gradient-to-br from-[#1A1410] via-[#261F1A] to-[#1A1410] border border-[#c9a961]/30 p-6 rounded-3xl text-white shadow-md relative overflow-hidden">
+          <div className="bg-gradient-to-b from-[#1A1410] via-[#2A2018] to-[#1A1410] border border-[#c9a961]/30 p-6 rounded-3xl text-white shadow-md relative overflow-hidden">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
-                <span className="text-xs uppercase font-bold text-emerald-300 tracking-wider block">
-                  Provinsi Papua • 9 Kabupaten & Kota Penyelenggara Haji
+                <span className="text-xs uppercase font-bold text-[#c9a961] tracking-wider block">
+                  Provinsi Papua • 11 Kabupaten & Kota Penyelenggara Haji
                 </span>
-                <h2 className="text-lg font-black mt-0.5">Peta Sebaran & Densitas Jamaah</h2>
+                <h2 className="text-lg font-black mt-0.5 text-white">Peta Sebaran & Densitas Jamaah</h2>
               </div>
-              <span className="text-[10px] bg-white/10 text-slate-300 px-2 py-1 rounded font-mono">
+              <span className="text-[10px] bg-white/10 text-gray-300 px-2 py-1 rounded font-mono border border-white/15">
                 Pusat Koordinasi: Kota Jayapura
               </span>
             </div>
@@ -117,27 +117,27 @@ export default function PetaWilayahPage() {
                     onClick={() => setSelectedRegion(reg)}
                     className={`p-4 rounded-2xl border text-left cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-white/20 border-emerald-400 ring-2 ring-emerald-400 shadow-lg'
-                        : 'bg-black/30 border-white/10 hover:bg-white/10'
+                        ? 'bg-white/20 border-[#c9a961] ring-2 ring-[#c9a961]/60 shadow-lg'
+                        : 'bg-black/40 border-[#c9a961]/20 hover:bg-white/10'
                     }`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="space-y-0.5">
-                        <span className="text-[10px] font-mono font-bold text-emerald-300 uppercase">
+                        <span className="text-[10px] font-mono font-bold text-[#c9a961] uppercase">
                           {reg?.regionCode}
                         </span>
                         <h3 className="text-sm font-bold text-white">{reg?.regionName}</h3>
                       </div>
                       <span className={`px-2 py-0.5 rounded text-[10px] font-black font-mono ${
-                        isHighReady ? 'bg-emerald-500 text-white' : isMidReady ? 'bg-amber-500 text-white' : 'bg-rose-500 text-white'
+                        isHighReady ? 'bg-[#c9a961] text-[#1A1410]' : isMidReady ? 'bg-amber-500 text-white' : 'bg-rose-500 text-white'
                       }`}>
                         {score.toFixed(0)}%
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs pt-3 mt-2 border-t border-white/10 text-slate-300">
+                    <div className="flex items-center justify-between text-xs pt-3 mt-2 border-t border-white/10 text-gray-300">
                       <span>Total: <strong>{reg?.totalJamaah ?? 0} Jamaah</strong></span>
-                      <span className="text-emerald-300 font-semibold">{reg?.siapCount ?? reg?.siapBerangkat ?? 0} Siap</span>
+                      <span className="text-[#c9a961] font-semibold">{reg?.siapCount ?? reg?.siapBerangkat ?? 0} Siap</span>
                     </div>
                   </div>
                 );
@@ -149,22 +149,22 @@ export default function PetaWilayahPage() {
         {/* Right: Regional Detail Inspector */}
         <div className="lg:col-span-4 space-y-4">
           {selectedRegion ? (
-            <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="bg-white rounded-3xl border border-[#e8dfc8] p-6 shadow-xs space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#e8dfc8]/60">
                 <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+                  <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
                     Wilayah Terpilih ({selectedRegion.regionCode})
                   </span>
-                  <h3 className="text-lg font-black text-[#b8941e]">{selectedRegion.regionName}</h3>
+                  <h3 className="text-lg font-black text-[#1A1410]">{selectedRegion.regionName}</h3>
                 </div>
-                <span className="p-2 rounded-xl bg-emerald-50 text-emerald-700">
+                <span className="p-2 rounded-xl bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
                   <MapPin className="w-5 h-5" />
                 </span>
               </div>
 
               {/* Spatial Specs */}
               {regionalMeta[selectedRegion.regionCode] && (
-                <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+                <div className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#e8dfc8] text-xs space-y-2">
                   <div>
                     <span className="text-gray-400 block text-[10px] uppercase font-bold">Karakter Wilayah:</span>
                     <strong className="text-gray-800">{regionalMeta[selectedRegion.regionCode].islandType}</strong>
@@ -184,7 +184,7 @@ export default function PetaWilayahPage() {
               <div className="space-y-2 pt-2">
                 <div className="flex items-center justify-between text-xs font-bold">
                   <span className="text-gray-700">Capaian Indeks Kesiapan:</span>
-                  <span className="font-mono text-[#b8941e] text-base">
+                  <span className="font-mono text-[#8a6d2b] text-base">
                     {Number(selectedRegion?.averageReadiness ?? selectedRegion?.readinessIndex ?? 0).toFixed(1)}%
                   </span>
                 </div>
@@ -197,28 +197,28 @@ export default function PetaWilayahPage() {
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs pt-2">
-                <div className="p-3 rounded-xl bg-emerald-50 text-emerald-800 text-center">
+                <div className="p-3 rounded-xl bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8] text-center">
                   <span className="text-[10px] uppercase font-bold block">Siap Berangkat</span>
                   <strong className="text-lg font-mono font-black">{selectedRegion?.siapCount ?? selectedRegion?.siapBerangkat ?? 0}</strong>
                 </div>
-                <div className="p-3 rounded-xl bg-amber-50 text-amber-800 text-center">
+                <div className="p-3 rounded-xl bg-amber-50 text-amber-800 border border-amber-200 text-center">
                   <span className="text-[10px] uppercase font-bold block">Dalam Proses</span>
                   <strong className="text-lg font-mono font-black">{selectedRegion?.hampirSiapCount ?? selectedRegion?.dalamProses ?? 0}</strong>
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-3 border-t border-slate-100 space-y-2">
+              <div className="pt-3 border-t border-[#e8dfc8]/60 space-y-2">
                 <Link
                   href={`/action-center?regionId=${selectedRegion.regionId}`}
-                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full py-2.5 rounded-xl btn-kemenhaj-primary text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   Buka Antrean Action Center Wilayah <ArrowUpRight className="w-4 h-4" />
                 </Link>
 
                 <Link
                   href={`/jamaah?regionId=${selectedRegion.regionId}`}
-                  className="w-full py-2.5 rounded-xl border border-slate-200 text-gray-700 hover:bg-slate-50 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-xl border border-[#e8dfc8] text-gray-700 hover:bg-[#fbf8ee] font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
                 >
                   Lihat Seluruh Jamaah Wilayah Ini
                 </Link>

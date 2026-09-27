@@ -124,7 +124,7 @@ export function CreateJamaahForm({
 
           <div>
             <label className="block text-xs font-semibold text-gray-700 mb-1">
-              Nomor Porsi (10 Digit)
+              Nomor Porsi (10 Digit SISKOHAT)
             </label>
             <input
               type="text"
@@ -145,8 +145,8 @@ export function CreateJamaahForm({
           <h3 className="text-sm font-bold text-gray-900">
             2. Identitas Pribadi (Terenkripsi AES-256)
           </h3>
-          <span className="flex items-center gap-1 text-[11px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="flex items-center gap-1 text-[11px] text-[#8a6d2b] bg-[#fbf8ee] px-2 py-0.5 rounded border border-[#e8dfc8] font-semibold">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#b8941e]" />
             <span>UU PDP Compliant</span>
           </span>
         </div>
@@ -191,9 +191,12 @@ export function CreateJamaahForm({
             required
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            placeholder="e.g. H. Achmad Subarjo"
+            placeholder="e.g. H. Achmad Subarjo Mansyur"
             className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
           />
+          <span className="text-[11px] text-gray-500 mt-1 block">
+            Sesuai regulasi dokumen haji Kementerian Haji dan Umrah & Arab Saudi, nama di paspor minimal terdiri dari 3 kata nama.
+          </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -331,9 +334,9 @@ export function CreateJamaahForm({
         <button
           type="submit"
           disabled={saving}
-          className="flex items-center gap-2 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
+          className="flex items-center gap-2 btn-kemenhaj-primary text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
         >
-          <Save className="w-4 h-4 text-emerald-200" />
+          <Save className="w-4 h-4 text-white/90" />
           <span>{saving ? 'Menyimpan & Menghitung Kesiapan...' : 'Simpan Jamaah'}</span>
         </button>
       </div>

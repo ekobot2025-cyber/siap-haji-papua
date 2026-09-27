@@ -148,9 +148,9 @@ export default function KesehatanPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#e8dfc8]">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-white font-bold shadow-xs">
             <HeartPulse className="w-6 h-6 text-white" />
           </span>
           <div>
@@ -167,7 +167,7 @@ export default function KesehatanPage() {
           <button
             type="button"
             onClick={handleExportExcel}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-gray-700 bg-white hover:bg-[#fbf8ee] cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
             Ekspor Excel
@@ -175,14 +175,14 @@ export default function KesehatanPage() {
           <button
             type="button"
             onClick={handleExportPdf}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-semibold shadow-xs cursor-pointer"
+            className="btn-kemenhaj-primary flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold cursor-pointer"
           >
             <FileText className="w-3.5 h-3.5" />
             Ekspor PDF
           </button>
           <button
             onClick={fetchRecords}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-gray-700 bg-white hover:bg-[#fbf8ee] cursor-pointer"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh Data
@@ -191,7 +191,7 @@ export default function KesehatanPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 space-y-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#e8dfc8] shadow-xs space-y-3">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
@@ -200,11 +200,11 @@ export default function KesehatanPage() {
               placeholder="Cari nama jamaah atau nomor porsi..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#c9a961]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#c9a961] focus:ring-1 focus:ring-[#c9a961]"
             />
           </div>
 
-          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto">
+          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
             <select
               value={stageFilter}
               onChange={(e) => { setStageFilter(e.target.value); setPage(1); }}
@@ -283,12 +283,12 @@ export default function KesehatanPage() {
                   const isOk = rec.istithaahStatus === 'MEMENUHI_SYARAT';
                   const isCompanion = rec.istithaahStatus === 'MEMENUHI_DENGAN_PENDAMPING';
 
-                  return (
+                    return (
                     <tr key={rec.id} className="hover:bg-slate-50/60 transition-colors">
                       <td className="p-3.5">
                         <Link
                           href={`/jamaah/${rec.jamaah.id}`}
-                          className="font-bold text-[#b8941e] hover:underline block"
+                          className="font-bold text-[#8a6d2b] hover:text-[#b8941e] hover:underline block"
                         >
                           {rec.jamaah.fullName}
                         </Link>
@@ -306,24 +306,24 @@ export default function KesehatanPage() {
                       <td className="p-3.5">
                         <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold ${
                           isOk
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]'
                             : isCompanion
                             ? 'bg-blue-100 text-blue-800'
                             : 'bg-rose-100 text-rose-800'
                         }`}>
-                          {isOk ? <CheckCircle2 className="w-3 h-3" /> : <AlertTriangle className="w-3 h-3" />}
+                          {isOk ? <CheckCircle2 className="w-3 h-3 text-[#b8941e]" /> : <AlertTriangle className="w-3 h-3" />}
                           {rec.istithaahStatus.replace(/_/g, ' ')}
                         </span>
                       </td>
                       <td className="p-3.5">
                         <div className="flex items-center gap-1.5">
                           <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                            rec.isVaccineMeningitis ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                            rec.isVaccineMeningitis ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-rose-50 text-rose-800 border border-rose-200'
                           }`}>
                             M:{rec.isVaccineMeningitis ? '✓' : '✗'}
                           </span>
                           <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                            rec.isVaccinePolio ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                            rec.isVaccinePolio ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-rose-50 text-rose-800 border border-rose-200'
                           }`}>
                             P:{rec.isVaccinePolio ? '✓' : '✗'}
                           </span>
@@ -333,7 +333,7 @@ export default function KesehatanPage() {
                       <td className="p-3.5 text-right">
                         <button
                           onClick={() => handleOpenEdit(rec)}
-                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all shadow-xs cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-[#fbf8ee] hover:bg-[#c9a961] text-[#8a6d2b] hover:text-white border border-[#e8dfc8] text-xs font-bold transition-all shadow-xs cursor-pointer"
                         >
                           Update Status
                         </button>
@@ -351,9 +351,9 @@ export default function KesehatanPage() {
       {selectedRecord && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-3 border-b border-[#e8dfc8]">
               <div className="flex items-center gap-2">
-                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
+                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-white font-bold shadow-xs">
                   <HeartPulse className="w-4 h-4 text-white" />
                 </span>
                 <h3 className="text-base font-bold text-gray-900">Perbarui Status Kesehatan Jamaah</h3>
@@ -455,7 +455,7 @@ export default function KesehatanPage() {
                 type="button"
                 disabled={submitting}
                 onClick={handleSaveEdit}
-                className="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold disabled:opacity-50 cursor-pointer shadow-xs"
+                className="btn-kemenhaj-primary px-4 py-2 rounded-xl text-xs font-bold disabled:opacity-50 cursor-pointer shadow-xs"
               >
                 {submitting ? 'Menyimpan...' : 'Simpan Status'}
               </button>

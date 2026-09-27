@@ -44,24 +44,24 @@ export default function SimulasiKuotaPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#e8dfc8]">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-white font-bold shadow-xs">
             <Sparkles className="w-6 h-6 text-white" />
           </span>
           <div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-xl font-black text-[#1A1410] tracking-tight">
               SIMULASI KUOTA CADANGAN & REKOMENDASI PENGGANTI
             </h1>
             <p className="text-xs text-gray-500 font-medium">
-              Decision Support System: Proyeksi pengisian kuota tambahan & pengganti jamaah tunda berdasarkan urut porsi dan skor kesiapan
+              Decision Support System: Proyeksi pengisian kuota tambahan & pengganti jamaah tunda berdasarkan urut porsi dan skor kesiapan sesuai regulasi Kementerian Haji dan Umrah
             </p>
           </div>
         </div>
 
         <button
           onClick={() => window.print()}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-gray-700 bg-white hover:bg-slate-50 cursor-pointer self-start md:self-auto"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-[#8a6d2b] bg-white hover:bg-[#fbf8ee] cursor-pointer self-start md:self-auto transition-colors"
         >
           <Printer className="w-3.5 h-3.5" />
           Cetak Nominasi Cadangan
@@ -69,10 +69,10 @@ export default function SimulasiKuotaPage() {
       </div>
 
       {/* Scenario Control Panel */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-slate-100">
-          <Sliders className="w-4 h-4 text-[#b8941e]" />
-          <h2 className="text-sm font-bold text-gray-900">Parameter Skenario Pengisian Kuota</h2>
+      <div className="bg-white rounded-3xl border border-[#e8dfc8] p-6 shadow-xs space-y-4">
+        <div className="flex items-center gap-2 pb-2 border-b border-[#e8dfc8]/60">
+          <Sliders className="w-4 h-4 text-[#8a6d2b]" />
+          <h2 className="text-sm font-bold text-[#1A1410]">Parameter Skenario Pengisian Kuota</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
@@ -80,7 +80,7 @@ export default function SimulasiKuotaPage() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="font-bold text-gray-700">Jumlah Kuota Dibutuhkan / Pengganti:</label>
-              <span className="font-mono text-base font-black text-[#b8941e] bg-blue-50 px-2.5 py-0.5 rounded-lg border border-blue-200">
+              <span className="font-mono text-base font-black text-[#8a6d2b] bg-[#fbf8ee] px-2.5 py-0.5 rounded-lg border border-[#e8dfc8]">
                 {neededCount} Jamaah
               </span>
             </div>
@@ -103,7 +103,7 @@ export default function SimulasiKuotaPage() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="font-bold text-gray-700">Ambang Batas Kesiapan Minimal:</label>
-              <span className="font-mono text-base font-black text-[#b8941e] bg-blue-50 px-2.5 py-0.5 rounded-lg border border-blue-200">
+              <span className="font-mono text-base font-black text-[#8a6d2b] bg-[#fbf8ee] px-2.5 py-0.5 rounded-lg border border-[#e8dfc8]">
                 $\ge$ {minScore}%
               </span>
             </div>
@@ -137,7 +137,7 @@ export default function SimulasiKuotaPage() {
             </p>
           </div>
 
-          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
             Algoritma: Porsi x Readiness Engine
           </span>
         </div>
@@ -151,7 +151,7 @@ export default function SimulasiKuotaPage() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 border-b border-slate-200 text-gray-600 font-bold">
+              <thead className="bg-[#FAF9F5] border-b border-[#e8dfc8] text-[#1A1410] font-bold">
                 <tr>
                   <th className="p-3.5 text-center">Rank</th>
                   <th className="p-3.5">Nama Jamaah & Porsi</th>
@@ -163,16 +163,16 @@ export default function SimulasiKuotaPage() {
                   <th className="p-3.5 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-[#e8dfc8]/60">
                 {candidates.map((c) => (
-                  <tr key={c.id} className="hover:bg-slate-50/60 transition-colors">
-                    <td className="p-3.5 text-center font-bold font-mono text-gray-700">
+                  <tr key={c.id} className="hover:bg-[#fbf8ee]/30 transition-colors">
+                    <td className="p-3.5 text-center font-bold font-mono text-[#8a6d2b]">
                       #{c.rank}
                     </td>
                     <td className="p-3.5">
                       <Link
                         href={`/jamaah/${c.id}`}
-                        className="font-bold text-[#b8941e] hover:underline block"
+                        className="font-bold text-[#1A1410] hover:text-[#8a6d2b] block"
                       >
                         {c.fullName}
                       </Link>
@@ -188,34 +188,34 @@ export default function SimulasiKuotaPage() {
                     <td className="p-3.5 font-medium text-gray-700">{c.regionName}</td>
                     <td className="p-3.5 text-center">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        c.passportOk ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                        c.passportOk ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-rose-50 text-rose-800 border border-rose-200'
                       }`}>
                         {c.passportOk ? '✓ Valid' : '✗ Belum'}
                       </span>
                     </td>
                     <td className="p-3.5 text-center">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        c.bpihOk ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+                        c.bpihOk ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-rose-50 text-rose-800 border border-rose-200'
                       }`}>
                         {c.bpihOk ? '✓ Lunas' : '✗ Belum'}
                       </span>
                     </td>
                     <td className="p-3.5 text-center">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        c.healthOk ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                        c.healthOk ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-amber-50 text-amber-800 border border-amber-200'
                       }`}>
-                        {c.healthOk ? '✓ Laik' : 'Proses'}
+                        {c.healthOk ? '✓ Memenuhi Syarat' : 'Proses'}
                       </span>
                     </td>
                     <td className="p-3.5 text-center">
-                      <span className="px-2.5 py-1 rounded-full text-xs font-black font-mono bg-emerald-100 text-emerald-800">
+                      <span className="px-2.5 py-1 rounded-full text-xs font-black font-mono bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
                         {Number(c?.readinessScore ?? 0).toFixed(0)}%
                       </span>
                     </td>
                     <td className="p-3.5 text-right">
                       <Link
                         href={`/jamaah/${c.id}`}
-                        className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all inline-block cursor-pointer shadow-xs"
+                        className="px-3.5 py-1.5 rounded-xl btn-kemenhaj-primary text-xs font-bold transition-all inline-block cursor-pointer shadow-xs"
                       >
                         Pilih Nominasi
                       </Link>

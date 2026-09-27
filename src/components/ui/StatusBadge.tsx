@@ -15,7 +15,7 @@ export function ReadinessBadge({ category = 'PRIORITAS', score, showScore = true
 
   switch (category) {
     case 'SIAP':
-      bgClass = 'bg-emerald-50 text-emerald-800 border-emerald-300';
+      bgClass = 'bg-[#fbf8ee] text-[#8a6d2b] border-[#e8dfc8]';
       Icon = CheckCircle2;
       label = 'Kesiapan Lengkap';
       break;
@@ -69,7 +69,7 @@ export function DataSourceBadge({ source = 'INTERNAL' }: { source?: string }) {
   const styles: Record<string, { bg: string; text: string; label: string }> = {
     DEMO: { bg: 'bg-amber-100 text-amber-900 border-amber-300', text: 'DEMO', label: 'Data Demo Sintetis' },
     INTERNAL: { bg: 'bg-slate-100 text-slate-800 border-slate-300', text: 'INTERNAL', label: 'Data Operasional Internal' },
-    VERIFIED: { bg: 'bg-emerald-100 text-emerald-900 border-emerald-300', text: 'VERIFIED', label: 'Terverifikasi Faktual' },
+    VERIFIED: { bg: 'bg-[#fbf8ee] text-[#8a6d2b] border-[#e8dfc8]', text: 'VERIFIED', label: 'Terverifikasi Faktual' },
     OFFICIAL_EXTERNAL: { bg: 'bg-purple-100 text-purple-900 border-purple-300', text: 'OFFICIAL', label: 'Resmi Nasional (External)' },
   };
 

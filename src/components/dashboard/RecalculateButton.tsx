@@ -43,8 +43,8 @@ export function RecalculateButton({ seasonId }: RecalculateButtonProps) {
       disabled={loading}
       className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition-all cursor-pointer ${
         success
-          ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-          : 'bg-white hover:bg-slate-50 text-gray-700 border-slate-300 shadow-2xs'
+          ? 'bg-[#fbf8ee] text-[#8a6d2b] border-[#c9a961]'
+          : 'bg-white hover:bg-[#fbf8ee] text-stone-700 border-[#e8dfc8] shadow-2xs'
       }`}
       title="Kalkulasi ulang skor kesiapan seluruh jamaah berdasarkan aturan aktif"
     >
@@ -55,12 +55,12 @@ export function RecalculateButton({ seasonId }: RecalculateButtonProps) {
         </>
       ) : success ? (
         <>
-          <Check className="w-3.5 h-3.5 text-emerald-600" />
+          <Check className="w-3.5 h-3.5 text-[#b8941e]" />
           <span>Terkalkulasi</span>
         </>
       ) : (
         <>
-          <RefreshCw className="w-3.5 h-3.5 text-slate-500" />
+          <RefreshCw className="w-3.5 h-3.5 text-stone-500" />
           <span>Kalkulasi Kesiapan</span>
         </>
       )}

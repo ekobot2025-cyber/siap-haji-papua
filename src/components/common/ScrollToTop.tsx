@@ -64,12 +64,12 @@ export function ScrollToTop() {
         onClick={scrollToTop}
         aria-label="Kembali ke halaman paling atas"
         title="Kembali ke Atas"
-        className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] shadow-xl hover:shadow-2xl border-2 border-white/60 transition-all duration-200 active:scale-90 focus:outline-none focus:ring-4 focus:ring-[#c9a961]/40 cursor-pointer"
+        className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-white shadow-xl hover:shadow-2xl border-2 border-white/60 transition-all duration-200 active:scale-90 focus:outline-none focus:ring-4 focus:ring-[#c9a961]/40 cursor-pointer"
       >
         <ArrowUp className="w-5 h-5 stroke-[2.5] transition-transform duration-200 group-hover:-translate-y-1" />
 
         {/* Floating Tooltip Label */}
-        <span className="absolute right-full mr-3 px-2.5 py-1 text-xs font-semibold text-white bg-slate-900/90 backdrop-blur-xs rounded-md shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-slate-700">
+        <span className="absolute right-full mr-3 px-2.5 py-1 text-xs font-semibold text-white bg-[#1A1410] rounded-md shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none border border-[#e8dfc8]/30">
           Kembali ke Atas
         </span>
       </button>

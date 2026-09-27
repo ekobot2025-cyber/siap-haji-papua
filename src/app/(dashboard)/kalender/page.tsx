@@ -104,31 +104,31 @@ export default function KalenderPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#e8dfc8]">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-white font-bold shadow-xs">
             <CalendarIcon className="w-6 h-6 text-white" />
           </span>
           <div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-xl font-black text-[#1A1410] tracking-tight">
               KALENDER OPERASIONAL & TIMELINE HAJI 1447 H / 2026 M
             </h1>
             <p className="text-xs text-gray-500 font-medium">
-              Jadwal tahapan terpadu, batas waktu krusial, bimbingan manasik, dan operasional embarkasi
+              Jadwal tahapan terpadu, batas waktu krusial, bimbingan manasik, dan operasional Embarkasi Makassar (UPG)
             </p>
           </div>
         </div>
 
-        {/* Filter categories */}
-        <div className="flex items-center gap-1.5 overflow-x-auto">
+        {/* Filter categories - Tampil penuh responsive */}
+        <div className="flex flex-wrap items-center gap-1.5">
           {['ALL', 'ADMINISTRASI', 'DOKUMEN', 'KESEHATAN', 'MANASIK', 'PENERBANGAN'].map((cat) => (
             <button
               key={cat}
               onClick={() => setFilterCategory(cat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 filterCategory === cat
-                  ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
-                  : 'bg-white border border-slate-200 text-gray-600 hover:bg-slate-50'
+                  ? 'btn-kemenhaj-primary text-white font-bold shadow-xs'
+                  : 'bg-white border border-[#e8dfc8] text-gray-700 hover:bg-[#fbf8ee]'
               }`}
             >
               {cat === 'ALL' ? 'Semua Kategori' : cat}
@@ -138,8 +138,8 @@ export default function KalenderPage() {
       </div>
 
       {/* Timeline Flow */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs">
-        <div className="space-y-8 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-slate-200">
+      <div className="bg-white rounded-3xl border border-[#e8dfc8] p-6 shadow-xs">
+        <div className="space-y-8 relative before:absolute before:inset-0 before:left-5 before:w-0.5 before:bg-[#e8dfc8]">
           {filtered.map((m) => {
             const Icon = m.icon;
             const isDone = m.status === 'SELESAI';
@@ -149,16 +149,16 @@ export default function KalenderPage() {
               <div key={m.id} className="relative flex items-start gap-4">
                 <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 z-10 border-2 ${
                   isDone
-                    ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs'
+                    ? 'bg-[#c9a961] text-white border-[#b8941e] shadow-xs'
                     : isCurrent
-                    ? 'bg-[#c9a961] text-white border-blue-400 ring-4 ring-blue-100 shadow-md'
+                    ? 'bg-[#b8941e] text-white border-[#c9a961] ring-4 ring-[#c9a961]/25 shadow-md'
                     : 'bg-white text-slate-400 border-slate-200'
                 }`}>
                   <Icon className="w-5 h-5" />
                 </div>
 
                 <div className={`flex-1 p-5 rounded-2xl border transition-all ${
-                  isCurrent ? 'bg-emerald-50/40 border-emerald-300 shadow-xs' : 'bg-slate-50/50 border-slate-200'
+                  isCurrent ? 'bg-[#fbf8ee] border-[#c9a961] shadow-xs' : 'bg-slate-50/50 border-slate-200'
                 }`}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
                     <div className="flex items-center gap-2">
@@ -167,7 +167,7 @@ export default function KalenderPage() {
                       </span>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
                         isDone
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]'
                           : isCurrent
                           ? 'bg-amber-100 text-amber-800 animate-pulse'
                           : 'bg-slate-200 text-slate-600'

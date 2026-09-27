@@ -49,10 +49,20 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
   const breakdown: Record<string, ComponentScoreDetail> = jamaah.readiness.breakdown || {};
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-      {/* Tab Navigation Header */}
-      <div className="border-b border-slate-200 bg-slate-50/60 overflow-x-auto">
-        <div className="flex items-center gap-1 p-2 min-w-max">
+    <div className="bg-white rounded-2xl border border-[#e8dfc8] shadow-xs overflow-hidden">
+      {/* Tab Navigation Header - Tampil Keseluruhan (Tanpa Scroll Bar Geser) */}
+      <div className="border-b border-[#e8dfc8] bg-[#FAF9F5] p-3 sm:p-4 space-y-2.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-1">
+          <span className="text-[11px] font-bold font-mono uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#b8941e]" />
+            Navigasi 9 Modul Layanan Jamaah
+          </span>
+          <span className="text-[11px] text-stone-500 font-medium">
+            Modul Aktif: <strong className="text-[#8a6d2b]">{tabs.find((t) => t.key === activeTab)?.label}</strong>
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.key;
@@ -62,13 +72,13 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                 key={tab.key}
                 type="button"
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-slate-200/60'
+                    ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-white border-[#b8941e] shadow-xs ring-2 ring-[#c9a961]/25 font-bold'
+                    : 'bg-white hover:bg-[#fbf8ee] text-stone-700 hover:text-[#1A1410] border-[#e8dfc8] shadow-2xs'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-200' : 'text-slate-400'}`} />
+                <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-white' : 'text-stone-400 group-hover:text-[#b8941e]'}`} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -81,7 +91,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
         {/* TAB 1: OVERVIEW */}
         {activeTab === 'OVERVIEW' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-3 border-b border-stone-100">
               <div>
                 <h3 className="text-base font-bold text-gray-900">
                   Rincian Komponen Kesiapan Administratif
@@ -102,17 +112,17 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                 </div>
               ) : (
                 Object.values(breakdown).map((comp) => (
-                  <div key={comp.code} className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3">
+                  <div key={comp.code} className="p-4 rounded-xl border border-[#e8dfc8] bg-white shadow-2xs hover:border-[#c9a961] transition-colors space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-gray-900 text-sm">{comp.name}</span>
-                      <span className="font-mono text-xs font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+                      <span className="font-bold text-stone-900 text-sm">{comp.name}</span>
+                      <span className="font-mono text-xs font-bold text-[#8a6d2b] bg-[#fbf8ee] border border-[#e8dfc8] px-2 py-0.5 rounded-lg">
                         {comp.score}% (Bobot: {comp.weight}%)
                       </span>
                     </div>
 
-                    <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                    <div className="w-full bg-stone-100 rounded-full h-2 overflow-hidden border border-stone-100">
                       <div
-                        className={`h-full rounded-full ${comp.score === 100 ? 'bg-emerald-600' : comp.score >= 50 ? 'bg-blue-600' : 'bg-amber-500'}`}
+                        className={`h-full rounded-full ${comp.score === 100 ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e]' : comp.score >= 50 ? 'bg-[#c9a961]' : 'bg-amber-500'}`}
                         style={{ width: `${comp.score}%` }}
                       />
                     </div>
@@ -121,11 +131,11 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                       {comp.itemsChecklist.map((item, idx) => (
                         <div key={idx} className="flex items-start gap-2 text-xs">
                           {item.isCompleted ? (
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#b8941e] shrink-0 mt-0.5" />
                           ) : (
                             <AlertTriangle className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                           )}
-                          <span className={item.isCompleted ? 'text-gray-700' : 'text-amber-800 font-semibold'}>
+                          <span className={item.isCompleted ? 'text-stone-700' : 'text-amber-800 font-semibold'}>
                             {item.label}
                           </span>
                         </div>
@@ -148,7 +158,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
               <div className="space-y-1">
                 <span className="text-xs font-semibold text-gray-500">Nomor Porsi</span>
-                <p className="font-mono font-bold text-[#b8941e] text-base">{jamaah.porsiNumber}</p>
+                <p className="font-mono font-bold text-[#8a6d2b] bg-[#fbf8ee] px-2.5 py-0.5 rounded-lg border border-[#e8dfc8] inline-block text-base">{jamaah.porsiNumber}</p>
               </div>
 
               <div className="space-y-1">
@@ -232,14 +242,14 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                         </div>
                         <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${
                           isVerified
-                            ? 'bg-emerald-100 text-emerald-800'
+                            ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]'
                             : isPending
                             ? 'bg-amber-100 text-amber-800'
                             : isRejected
                             ? 'bg-rose-100 text-rose-800'
                             : 'bg-slate-100 text-slate-600'
                         }`}>
-                          {isVerified && <CheckCircle2 className="w-3.5 h-3.5" />}
+                          {isVerified && <CheckCircle2 className="w-3.5 h-3.5 text-[#b8941e]" />}
                           {isPending && <Clock3 className="w-3.5 h-3.5" />}
                           {isRejected && <XCircle className="w-3.5 h-3.5" />}
                           {doc.status}
@@ -306,7 +316,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                           <span className="font-bold text-gray-900 text-sm">{adm.stageName.replace(/_/g, ' ')}</span>
                           <span className={`px-2 py-0.5 rounded text-[11px] font-bold ${
                             isDone
-                              ? 'bg-emerald-100 text-emerald-800'
+                              ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]'
                               : isNeedAction
                               ? 'bg-rose-100 text-rose-800'
                               : 'bg-amber-100 text-amber-800'
@@ -320,14 +330,14 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                       </div>
 
                       <div className="text-right">
-                        <div className="text-sm font-mono font-bold text-[#b8941e]">
+                        <div className="text-sm font-mono font-bold text-[#8a6d2b]">
                           {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(adm.amountPaid)}
                         </div>
                         {adm.paymentReference && (
                           <div className="text-[11px] text-gray-400 font-mono">Ref: {adm.paymentReference}</div>
                         )}
                         {adm.completionDate && (
-                          <div className="text-[10px] text-emerald-700">
+                          <div className="text-[10px] text-[#8a6d2b]">
                             Selesai: {new Date(adm.completionDate).toLocaleDateString('id-ID')}
                           </div>
                         )}
@@ -360,7 +370,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                       <span className="font-bold text-gray-900 text-sm">{rec.checkupStage.replace(/_/g, ' ')}</span>
                       <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
                         rec.istithaahStatus === 'MEMENUHI_SYARAT'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]'
                           : rec.istithaahStatus === 'MEMENUHI_DENGAN_PENDAMPING'
                           ? 'bg-blue-100 text-blue-800'
                           : 'bg-rose-100 text-rose-800'
@@ -377,10 +387,10 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                       <div>
                         <span className="text-gray-500 block">Status Vaksin Wajib:</span>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${rec.isVaccineMeningitis ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`}>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${rec.isVaccineMeningitis ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-rose-50 text-rose-800 border border-rose-200'}`}>
                             Meningitis: {rec.isVaccineMeningitis ? '✓' : '✗'}
                           </span>
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${rec.isVaccinePolio ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`}>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${rec.isVaccinePolio ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-rose-50 text-rose-800 border border-rose-200'}`}>
                             Polio: {rec.isVaccinePolio ? '✓' : '✗'}
                           </span>
                         </div>
@@ -422,7 +432,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                         Metode: <span className="font-semibold text-gray-700">{att.attendanceMethod}</span>
                       </div>
                     </div>
-                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                    <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
                       {att.status}
                     </span>
                   </div>
@@ -449,11 +459,11 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                 <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                   <div>
                     <span className="text-xs font-semibold text-gray-500">Nomor Kloter</span>
-                    <h3 className="text-xl font-bold text-[#b8941e]">
+                    <h3 className="text-xl font-bold text-[#1A1410]">
                       Kloter {jamaah.kloterMembership.kloter.kloterNumber} ({jamaah.kloterMembership.kloter.kloterCode})
                     </h3>
                   </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
                     STATUS: {jamaah.kloterMembership.kloter.status}
                   </span>
                 </div>
@@ -471,7 +481,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                   </div>
                   <div>
                     <span className="text-xs font-semibold text-gray-500 block">Nomor Seat / Kursi:</span>
-                    <span className="font-mono font-bold text-[#b8941e] text-base">
+                    <span className="font-mono font-bold text-[#8a6d2b] text-base">
                       {jamaah.kloterMembership.seatNumber || 'Belum Ditentukan'}
                     </span>
                   </div>
@@ -523,7 +533,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                           <h4 className="text-sm font-bold text-gray-900 mt-1">{item.title}</h4>
                         </div>
                         <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${
-                          isResolved ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                          isResolved ? 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' : 'bg-amber-100 text-amber-800'
                         }`}>
                           {item.status}
                         </span>
@@ -549,15 +559,15 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
               Riwayat Perjalanan & Event Audit Jamaah
             </h3>
 
-            <div className="space-y-4 pl-4 border-l-2 border-emerald-500">
+            <div className="space-y-4 pl-4 border-l-2 border-[#c9a961]">
               <div className="relative">
-                <div className="absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full bg-[#c9a961] border-2 border-white shadow-xs" />
-                <div className="text-xs font-bold text-gray-900">Kalkulasi Kesiapan Terkini</div>
-                <div className="text-[11px] text-gray-500 font-mono">
+                <div className="absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full bg-[#b8941e] border-2 border-white shadow-xs" />
+                <div className="text-xs font-bold text-[#1A1410]">Kalkulasi Kesiapan Terkini</div>
+                <div className="text-[11px] text-stone-500 font-mono">
                   {new Date(jamaah.readiness.lastCalculatedAt || new Date()).toLocaleString('id-ID')} WIT
                 </div>
-                <p className="text-xs text-gray-600 mt-0.5">
-                  Indeks Kesiapan Administratif tercatat: <strong className="text-[#b8941e]">{Number(jamaah?.readiness?.score ?? 0).toFixed(1)}% ({jamaah.readiness.category})</strong>
+                <p className="text-xs text-stone-600 mt-0.5">
+                  Indeks Kesiapan Administratif tercatat: <strong className="text-[#8a6d2b]">{Number(jamaah?.readiness?.score ?? 0).toFixed(1)}% ({jamaah.readiness.category})</strong>
                 </p>
               </div>
 

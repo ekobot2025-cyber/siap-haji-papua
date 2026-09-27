@@ -44,17 +44,17 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* 1. Header & Season Notice */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-black text-[#1A1410] tracking-tight">
               Executive Command Center
             </h1>
-            <span className="bg-emerald-50 text-emerald-800 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+            <span className="bg-[#fbf8ee] text-[#8a6d2b] text-xs font-bold px-2.5 py-0.5 rounded-full border border-[#e8dfc8]">
               Musim Aktif: {season?.yearHijri || 1447} H
             </span>
           </div>
-          <p className="text-xs sm:text-sm text-gray-600">
+          <p className="text-xs sm:text-sm text-stone-600">
             Pemantauan Kesiapan Administratif & Penyelenggaraan Haji Tingkat Provinsi Papua
           </p>
         </div>
@@ -63,9 +63,9 @@ export default async function DashboardPage() {
           <RecalculateButton seasonId={season?.id} />
           <Link
             href="/jamaah"
-            className="flex items-center gap-1.5 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-xs"
+            className="flex items-center gap-1.5 btn-kemenhaj-primary px-3.5 py-2 rounded-xl text-xs sm:text-sm shadow-xs"
           >
-            <Users className="w-4 h-4 text-emerald-200" />
+            <Users className="w-4 h-4 text-white" />
             <span>Lihat Data Jamaah</span>
           </Link>
         </div>
@@ -87,24 +87,24 @@ export default async function DashboardPage() {
             </div>
             <div className="text-[11px] text-gray-500 mt-1 flex items-center justify-between">
               <span>Kuota Musim: {season?.quotaTotal || 1080}</span>
-              <span className="font-semibold text-emerald-700">{Math.round((kpi.totalJamaah / (season?.quotaTotal || 1080)) * 100)}%</span>
+              <span className="font-semibold text-[#8a6d2b]">{Math.round((kpi.totalJamaah / (season?.quotaTotal || 1080)) * 100)}%</span>
             </div>
           </div>
         </div>
 
         {/* Siap Berangkat (>=90) */}
-        <div className="bg-white p-4 rounded-xl border border-emerald-200 bg-emerald-50/20 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-emerald-800 mb-2">
+        <div className="bg-white p-4 rounded-xl border border-[#e8dfc8] bg-[#fbf8ee]/60 shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-[#8a6d2b] mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Siap Berangkat</span>
-            <div className="p-1.5 bg-emerald-100 rounded-lg text-emerald-700">
+            <div className="p-1.5 bg-[#FAF9F5] rounded-lg text-[#b8941e] border border-[#e8dfc8]">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-black text-emerald-800 font-mono">
+            <div className="text-2xl sm:text-3xl font-black text-[#1A1410] font-mono">
               {kpi.siapBerangkat}
             </div>
-            <div className="text-[11px] text-emerald-700 font-semibold mt-1">
+            <div className="text-[11px] text-[#8a6d2b] font-semibold mt-1">
               {kpi.totalJamaah > 0 ? `${((kpi.siapBerangkat / kpi.totalJamaah) * 100).toFixed(1)}% dari total` : '-'}
             </div>
           </div>
@@ -167,28 +167,28 @@ export default async function DashboardPage() {
       </div>
 
       {/* 3. PROVINCIAL READINESS INDEX (INDEKS KESIAPAN ADMINISTRATIF PROVINSI PAPUA) */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+      <div className="bg-white p-6 rounded-2xl border border-[#e8dfc8] shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#b8941e]">
+              <span className="text-xs font-bold uppercase tracking-wider text-stone-500">
                 Indikator Kesiapan Internal
               </span>
-              <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono">
+              <span className="text-[10px] bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8] px-2 py-0.5 rounded font-mono font-bold">
                 Formula Bobot Dinamis
               </span>
             </div>
-            <h2 className="text-lg font-bold text-gray-900">
+            <h2 className="text-lg font-bold text-[#1A1410]">
               Indeks Kesiapan Administratif Provinsi Papua
             </h2>
           </div>
 
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <div className="text-3xl font-black text-[#b8941e] font-mono">
+              <div className="text-3xl font-black text-[#967412] font-mono">
                 {Number(kpi?.provincialReadinessIndex ?? 0).toFixed(1)}%
               </div>
-              <div className="text-xs font-bold text-[#0f6938]">
+              <div className="text-xs font-bold text-[#8a6d2b]">
                 Status Agregat: {kpi.provincialReadinessIndex >= 90 ? 'SIAP BERANGKAT' : 'DALAM PROSES'}
               </div>
             </div>
@@ -196,27 +196,27 @@ export default async function DashboardPage() {
         </div>
 
         {/* Progress Bar Container */}
-        <div className="w-full bg-slate-100 rounded-full h-4 p-0.5 border border-slate-200 overflow-hidden mb-6">
+        <div className="w-full bg-stone-100 rounded-full h-4 p-0.5 border border-[#e8dfc8] overflow-hidden mb-6">
           <div
-            className="bg-gradient-to-r from-[#c9a961] via-amber-300 to-[#b8941e] h-full rounded-full transition-all duration-700"
+            className="bg-gradient-to-r from-[#c9a961] via-[#d4af37] to-[#b8941e] h-full rounded-full transition-all duration-700"
             style={{ width: `${Math.min(100, Math.max(5, kpi.provincialReadinessIndex))}%` }}
           />
         </div>
 
         {/* Component Breakdown Checklist */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-2 border-t border-slate-100">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-2 border-t border-stone-100">
           {componentsReadiness.map((comp) => (
-            <div key={comp.code} className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-              <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
+            <div key={comp.code} className="p-3 rounded-xl bg-[#FAF9F5] border border-[#e8dfc8]">
+              <div className="flex items-center justify-between text-xs text-stone-500 mb-1">
                 <span className="font-semibold truncate">{comp.name}</span>
-                <span className="font-mono text-[10px] bg-white px-1 py-0.2 rounded border">{comp.weight}%</span>
+                <span className="font-mono text-[10px] bg-white px-1 py-0.2 rounded border border-[#e8dfc8]">{comp.weight}%</span>
               </div>
-              <div className="text-lg font-black text-blue-900 font-mono">
+              <div className="text-lg font-black text-[#1A1410] font-mono">
                 {Number(comp?.averageScore ?? 0).toFixed(1)}%
               </div>
-              <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2 overflow-hidden">
+              <div className="w-full bg-stone-200 rounded-full h-1.5 mt-2 overflow-hidden">
                 <div
-                  className="bg-[#0f6938] h-full rounded-full"
+                  className="bg-gradient-to-r from-[#c9a961] to-[#b8941e] h-full rounded-full"
                   style={{ width: `${comp.averageScore}%` }}
                 />
               </div>
@@ -226,26 +226,26 @@ export default async function DashboardPage() {
       </div>
 
       {/* 3.5. OPERATIONAL INTERVENTION BAND (4 PILAR OPERASIONAL) */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+      <div className="bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-stone-100">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold">
+            <span className="p-1.5 rounded-lg bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8] font-bold">
               <AlertCircle className="w-4 h-4" />
             </span>
             <div>
-              <h3 className="text-sm font-bold text-gray-900">
+              <h3 className="text-sm font-bold text-[#1A1410]">
                 Pusat Intervensi & Tindak Lanjut Terpadu (Action Center)
               </h3>
-              <p className="text-[11px] text-gray-500">
+              <p className="text-[11px] text-stone-500">
                 Prinsip Komando: MONITOR → IDENTIFY → PRIORITIZE → ACTION → RESOLVE
               </p>
             </div>
           </div>
           <Link
             href="/action-center"
-            className="text-xs font-bold text-[#b8941e] hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-[#8a6d2b] hover:text-[#1A1410] hover:underline flex items-center gap-1"
           >
-            Buka Command Board <ArrowUpRight className="w-3.5 h-3.5" />
+            Buka Command Board <ArrowUpRight className="w-3.5 h-3.5 text-[#b8941e]" />
           </Link>
         </div>
 
@@ -319,29 +319,29 @@ export default async function DashboardPage() {
       {/* 4. DUAL COLUMN: REGIONAL RANKING & RECENT AUDIT ACTIVITIES */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Regional Readiness Ranking */}
-        <div className="lg:col-span-8 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+        <div className="lg:col-span-8 bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-base font-bold text-gray-900">
+              <h3 className="text-base font-bold text-[#1A1410]">
                 Kesiapan Administratif per Wilayah (Kabupaten / Kota)
               </h3>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-stone-500">
                 Peringkat wilayah berdasarkan capaian indeks kesiapan jamaah
               </p>
             </div>
             <Link
               href="/jamaah"
-              className="text-xs font-bold text-[#b8941e] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#8a6d2b] hover:text-[#1A1410] hover:underline flex items-center gap-1"
             >
               <span>Semua Wilayah</span>
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-3.5 h-3.5 text-[#b8941e]" />
             </Link>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-slate-200 text-gray-500 text-xs uppercase tracking-wider font-semibold bg-slate-50">
+                <tr className="border-b border-[#e8dfc8] text-stone-600 text-xs uppercase tracking-wider font-semibold bg-[#FAF9F5]">
                   <th className="py-2.5 px-3">Kabupaten / Kota</th>
                   <th className="py-2.5 px-3 text-center">Jumlah Jamaah</th>
                   <th className="py-2.5 px-3 text-center">Siap</th>
@@ -350,17 +350,17 @@ export default async function DashboardPage() {
                   <th className="py-2.5 px-3 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-stone-100">
                 {regionalRanking.map((reg) => (
-                  <tr key={reg.regionId} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-3 px-3 font-semibold text-gray-900 flex items-center gap-2">
+                  <tr key={reg.regionId} className="hover:bg-[#FAF9F5]/80 transition-colors">
+                    <td className="py-3 px-3 font-semibold text-[#1A1410] flex items-center gap-2">
                       <MapPin className="w-3.5 h-3.5 text-[#b8941e] shrink-0" />
                       <span>{reg.regionName}</span>
                     </td>
-                    <td className="py-3 px-3 text-center font-mono font-bold text-gray-800">
+                    <td className="py-3 px-3 text-center font-mono font-bold text-stone-800">
                       {reg.totalJamaah}
                     </td>
-                    <td className="py-3 px-3 text-center font-mono font-semibold text-emerald-700">
+                    <td className="py-3 px-3 text-center font-mono font-semibold text-[#8a6d2b]">
                       {reg.siapCount}
                     </td>
                     <td className="py-3 px-3 text-center font-mono font-semibold text-amber-700">
@@ -368,11 +368,11 @@ export default async function DashboardPage() {
                     </td>
                     <td className="py-3 px-3 min-w-[140px]">
                       <div className="flex items-center gap-2">
-                        <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-stone-200 rounded-full h-2 overflow-hidden">
                           <div
                             className={`h-full rounded-full ${
                               reg.averageReadiness >= 90
-                                ? 'bg-emerald-600'
+                                ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e]'
                                 : reg.averageReadiness >= 75
                                 ? 'bg-blue-600'
                                 : 'bg-amber-500'
@@ -380,7 +380,7 @@ export default async function DashboardPage() {
                             style={{ width: `${Math.min(100, reg.averageReadiness)}%` }}
                           />
                         </div>
-                        <span className="font-mono text-xs font-bold text-gray-800 shrink-0">
+                        <span className="font-mono text-xs font-bold text-stone-800 shrink-0">
                           {Number(reg?.averageReadiness ?? 0).toFixed(1)}%
                         </span>
                       </div>
@@ -388,11 +388,11 @@ export default async function DashboardPage() {
                     <td className="py-3 px-3 text-right">
                       <Link
                         href={`/jamaah?regionId=${reg.regionId}`}
-                        className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded border border-emerald-200 transition-colors"
+                        className="inline-flex items-center gap-1 text-[11px] font-bold text-[#8a6d2b] bg-[#fbf8ee] hover:bg-[#f4ebd0] px-2.5 py-1 rounded-lg border border-[#e8dfc8] transition-colors"
                         title="Buka daftar jamaah wilayah ini"
                       >
                         <span>Filter</span>
-                        <ChevronRight className="w-3 h-3" />
+                        <ChevronRight className="w-3 h-3 text-[#b8941e]" />
                       </Link>
                     </td>
                   </tr>
@@ -403,38 +403,38 @@ export default async function DashboardPage() {
         </div>
 
         {/* Right: Recent Audit Trail Feed */}
-        <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-base font-bold text-gray-900">Aktivitas Sistem</h3>
-                <p className="text-xs text-gray-500">Jejak audit append-only operasional</p>
+                <h3 className="text-base font-bold text-[#1A1410]">Aktivitas Sistem</h3>
+                <p className="text-xs text-stone-500">Jejak audit append-only operasional</p>
               </div>
-              <ShieldCheck className="w-5 h-5 text-[#0f6938]" />
+              <ShieldCheck className="w-5 h-5 text-[#b8941e]" />
             </div>
 
             <div className="space-y-3">
               {recentActivities.length === 0 ? (
-                <div className="text-xs text-gray-400 py-6 text-center italic">
+                <div className="text-xs text-stone-400 py-6 text-center italic">
                   Belum ada catatan aktivitas baru
                 </div>
               ) : (
                 recentActivities.map((act) => (
                   <div
                     key={act.id}
-                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1"
+                    className="p-3 rounded-xl bg-[#FAF9F5] border border-[#e8dfc8] text-xs space-y-1"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-[#b8941e] font-mono text-[11px]">
+                      <span className="font-bold text-[#8a6d2b] font-mono text-[11px]">
                         {act.action}
                       </span>
-                      <span className="text-[10px] text-gray-400 font-mono">
+                      <span className="text-[10px] text-stone-400 font-mono">
                         {new Date(act.timestamp).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })} WIT
                       </span>
                     </div>
-                    <p className="text-gray-700 text-[11px] truncate">{act.description}</p>
-                    <div className="text-[10px] text-gray-500">
-                      Oleh: <strong className="text-gray-700">{act.actor}</strong>
+                    <p className="text-stone-700 text-[11px] truncate">{act.description}</p>
+                    <div className="text-[10px] text-stone-500">
+                      Oleh: <strong className="text-stone-700">{act.actor}</strong>
                     </div>
                   </div>
                 ))
@@ -442,10 +442,10 @@ export default async function DashboardPage() {
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-100">
+          <div className="mt-4 pt-3 border-t border-stone-100">
             <Link
               href="/system/audit-logs"
-              className="w-full block text-center text-xs font-bold text-[#b8941e] hover:underline"
+              className="w-full block text-center text-xs font-bold text-[#8a6d2b] hover:text-[#1A1410] hover:underline"
             >
               Lihat Seluruh Log Audit →
             </Link>

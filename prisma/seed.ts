@@ -15,7 +15,7 @@ async function main() {
     { key: 'ORGANIZER_ADDRESS', value: 'Jl. Raya Abepura - Kotaraja, Kota Jayapura, Papua 99225', group: 'GENERAL', desc: 'Alamat sekretariat' },
     { key: 'CONTACT_EMAIL', value: 'layanan@siaphaji.papua.go.id', group: 'GENERAL', desc: 'Email resmi pengaduan' },
     { key: 'CONTACT_PHONE', value: '(0967) 581-229', group: 'GENERAL', desc: 'Call center komando' },
-    { key: 'LOGO_APP_URL', value: '/assets/branding/app-icon.png', group: 'BRANDING', desc: 'Ikon aplikasi' },
+    { key: 'LOGO_APP_URL', value: '/assets/branding/logo-kemenhaj.png', group: 'BRANDING', desc: 'Ikon aplikasi' },
     { key: 'LOGO_INSTITUTION_URL', value: '/assets/branding/logo-horizontal.svg', group: 'BRANDING', desc: 'Logo horizontal instansi' },
   ];
 
@@ -32,14 +32,16 @@ async function main() {
   const regionsData = [
     { code: 'REG-PAPUA-PROV', name: 'Provinsi Papua', type: 'PROVINSI', lat: -2.5337, lng: 140.7181 },
     { code: 'REG-JPR-KOTA', name: 'Kota Jayapura', type: 'KOTA', lat: -2.5337, lng: 140.7181 },
-    { code: 'REG-JPR-KAB', name: 'Kabupaten Jayapura', type: 'KABUPATEN', lat: -2.6288, lng: 140.4883 },
-    { code: 'REG-BIAK', name: 'Kabupaten Biak Numfor', type: 'KABUPATEN', lat: -1.0500, lng: 136.0000 },
     { code: 'REG-KEEROM', name: 'Kabupaten Keerom', type: 'KABUPATEN', lat: -3.3100, lng: 140.6100 },
-    { code: 'REG-SARMI', name: 'Kabupaten Sarmi', type: 'KABUPATEN', lat: -1.8600, lng: 139.3100 },
+    { code: 'REG-JPR-KAB', name: 'Kabupaten Jayapura', type: 'KABUPATEN', lat: -2.6288, lng: 140.4883 },
     { code: 'REG-MRK', name: 'Kabupaten Merauke', type: 'KABUPATEN', lat: -8.4991, lng: 140.4011 },
+    { code: 'REG-BVD', name: 'Kabupaten Boven Digoel', type: 'KABUPATEN', lat: -6.0967, lng: 140.3025 },
+    { code: 'REG-ASMAT', name: 'Kabupaten Asmat', type: 'KABUPATEN', lat: -5.4667, lng: 138.3000 },
     { code: 'REG-MMK', name: 'Kabupaten Mimika', type: 'KABUPATEN', lat: -4.5469, lng: 136.8837 },
-    { code: 'REG-NBR', name: 'Kabupaten Nabire', type: 'KABUPATEN', lat: -3.3667, lng: 135.4833 },
+    { code: 'REG-BIAK', name: 'Kabupaten Biak Numfor', type: 'KABUPATEN', lat: -1.0500, lng: 136.0000 },
     { code: 'REG-YAPEN', name: 'Kabupaten Kepulauan Yapen', type: 'KABUPATEN', lat: -1.7800, lng: 136.2300 },
+    { code: 'REG-NBR', name: 'Kabupaten Nabire', type: 'KABUPATEN', lat: -3.3667, lng: 135.4833 },
+    { code: 'REG-JWY', name: 'Kabupaten Jayawijaya', type: 'KABUPATEN', lat: -4.0833, lng: 138.9500 },
   ];
 
   const regionMap = new Map<string, string>();
@@ -51,7 +53,7 @@ async function main() {
     });
     regionMap.set(r.code, created.id);
   }
-  console.log('✓ Master Wilayah Papua berhasil dimuat (10 Wilayah)');
+  console.log('✓ Master Wilayah Papua berhasil dimuat (11 Kabupaten/Kota + 1 Provinsi)');
 
   // 3. MUSIM HAJI (HAJJ SEASONS)
   const season = await prisma.hajjSeason.upsert({
@@ -220,9 +222,13 @@ async function main() {
     regionMap.get('REG-JPR-KAB')!,
     regionMap.get('REG-BIAK')!,
     regionMap.get('REG-KEEROM')!,
-    regionMap.get('REG-SARMI')!,
     regionMap.get('REG-MRK')!,
     regionMap.get('REG-MMK')!,
+    regionMap.get('REG-BVD')!,
+    regionMap.get('REG-ASMAT')!,
+    regionMap.get('REG-YAPEN')!,
+    regionMap.get('REG-NBR')!,
+    regionMap.get('REG-JWY')!,
   ];
 
   // Distribution weights: Kota Jayapura ~40%, Kab Jayapura ~20%, Biak ~15%, Keerom ~10%, etc.
@@ -449,14 +455,18 @@ async function main() {
     const kkNumberEncrypted = encryptData(fakeKk);
     const phoneEncrypted = encryptData(fakePhone);
 
-    // Pick region based on weighted index
+    // Pick region based on weighted index across 11 official Papua regencies
     let regionId = availableRegions[0]; // Kota Jayapura default
-    if (i > 80 && i <= 120) regionId = availableRegions[1]; // Kab Jayapura
-    else if (i > 120 && i <= 150) regionId = availableRegions[2]; // Biak
-    else if (i > 150 && i <= 170) regionId = availableRegions[3]; // Keerom
-    else if (i > 170 && i <= 185) regionId = availableRegions[4]; // Sarmi
-    else if (i > 185 && i <= 195) regionId = availableRegions[5]; // Merauke
-    else if (i > 195) regionId = availableRegions[6]; // Mimika
+    if (i > 80 && i <= 110) regionId = availableRegions[1]; // Kab Jayapura
+    else if (i > 110 && i <= 130) regionId = availableRegions[2]; // Biak
+    else if (i > 130 && i <= 145) regionId = availableRegions[3]; // Keerom
+    else if (i > 145 && i <= 160) regionId = availableRegions[4]; // Merauke
+    else if (i > 160 && i <= 175) regionId = availableRegions[5]; // Mimika
+    else if (i > 175 && i <= 185) regionId = availableRegions[6]; // Boven Digoel
+    else if (i > 185 && i <= 190) regionId = availableRegions[7]; // Asmat
+    else if (i > 190 && i <= 195) regionId = availableRegions[8]; // Yapen
+    else if (i > 195 && i <= 200) regionId = availableRegions[9]; // Nabire
+    else if (i > 200) regionId = availableRegions[10]; // Jayawijaya
 
     // Simulate readiness factors
     // Exact non-overlapping allocations:

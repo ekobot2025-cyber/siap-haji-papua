@@ -47,7 +47,7 @@ export default function DashboardLoading() {
               <div className="h-4 w-16 bg-slate-100 rounded" />
               <div className="h-4 w-16 bg-slate-100 rounded" />
               <div className="h-4 w-20 bg-slate-200 rounded" />
-              <div className="h-6 w-16 bg-emerald-100 rounded" />
+              <div className="h-6 w-16 bg-[#fbf8ee] border border-[#e8dfc8] rounded" />
             </div>
           ))}
         </div>

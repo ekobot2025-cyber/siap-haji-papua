@@ -32,7 +32,7 @@ export function SmartPassModalClient({ jamaah }: SmartPassProps) {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer border border-blue-400/30"
+        className="w-full sm:w-auto px-5 py-2.5 rounded-2xl btn-kemenhaj-primary text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
       >
         <QrCode className="w-4 h-4 text-white" />
         <span>Buka Smart Hajj Pass (Digital)</span>
