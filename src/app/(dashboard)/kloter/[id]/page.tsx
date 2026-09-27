@@ -131,7 +131,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
     return (
       <div className="text-center py-16 text-gray-400">
         Kloter tidak ditemukan.{' '}
-        <Link href="/kloter" className="text-[#1e40af] underline">
+        <Link href="/kloter" className="text-[#b8941e] underline">
           Kembali ke daftar kloter
         </Link>
       </div>
@@ -204,7 +204,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
           <button
             type="button"
             onClick={handleExportManifestPdf}
-            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
+            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
           >
             <Printer className="w-3.5 h-3.5 text-emerald-200" />
             <span>Ekspor PDF</span>
@@ -221,7 +221,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Kloter Header Hero (Screen Only) */}
-      <div className="no-print bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#047857] p-6 rounded-3xl text-white shadow-md space-y-4">
+      <div className="no-print bg-gradient-to-r from-[#261F1A] via-[#1A1410] to-[#140F0C] p-6 rounded-3xl text-white shadow-md space-y-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <span className="text-xs uppercase font-bold text-emerald-300 tracking-wider block">
@@ -273,7 +273,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
               placeholder="Cari jamaah, porsi, atau nomor seat..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#1e40af]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#c9a961]"
             />
           </div>
 
@@ -298,11 +298,11 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
             <tbody className="divide-y divide-slate-100 print:divide-black">
               {filteredMembers.map((m: any) => (
                 <tr key={m.id} className="hover:bg-slate-50/60 transition-colors print:border-b print:border-black">
-                  <td className="p-3.5 print:p-2 print:border print:border-black font-mono font-bold text-[#1e40af] print:text-black">
+                  <td className="p-3.5 print:p-2 print:border print:border-black font-mono font-bold text-[#b8941e] print:text-black">
                     {m.seatNumber || '-'}
                   </td>
                   <td className="p-3.5 print:p-2 print:border print:border-black">
-                    <span className="font-bold text-[#1e40af] print:text-black block">
+                    <span className="font-bold text-[#b8941e] print:text-black block">
                       {m.jamaah.fullName}
                     </span>
                     <div className="flex items-center gap-1.5 font-mono text-gray-500 print:text-black text-[11px]">

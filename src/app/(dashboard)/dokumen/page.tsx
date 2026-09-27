@@ -136,7 +136,7 @@ export default function DokumenPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
             <FileCheck className="w-6 h-6 text-white" />
           </span>
           <div>
@@ -161,7 +161,7 @@ export default function DokumenPage() {
           <button
             type="button"
             onClick={handleExportPdf}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-semibold shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-semibold shadow-xs cursor-pointer"
           >
             <FileText className="w-3.5 h-3.5" />
             Ekspor PDF
@@ -186,7 +186,7 @@ export default function DokumenPage() {
               placeholder="Cari nama jamaah atau nomor porsi..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#1e40af]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#c9a961]"
             />
           </div>
 
@@ -279,7 +279,7 @@ export default function DokumenPage() {
                       <td className="p-3.5">
                         <Link
                           href={`/jamaah/${doc.jamaah.id}`}
-                          className="font-bold text-[#1e40af] hover:underline block"
+                          className="font-bold text-[#b8941e] hover:underline block"
                         >
                           {doc.jamaah.fullName}
                         </Link>
@@ -309,7 +309,7 @@ export default function DokumenPage() {
                       <td className="p-3.5 text-right">
                         <button
                           onClick={() => { setSelectedDoc(doc); setActionNotes(doc.notes || ''); }}
-                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all shadow-xs cursor-pointer"
                         >
                           Verifikasi
                         </button>
@@ -329,7 +329,7 @@ export default function DokumenPage() {
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
                   <ShieldCheck className="w-4 h-4 text-white" />
                 </span>
                 <h3 className="text-base font-bold text-gray-900">Desk Verifikasi Dokumen</h3>
@@ -346,7 +346,7 @@ export default function DokumenPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Nama Jamaah:</span>
-                <span className="font-bold text-[#1e40af]">{selectedDoc.jamaah.fullName}</span>
+                <span className="font-bold text-[#b8941e]">{selectedDoc.jamaah.fullName}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">Nomor Porsi:</span>

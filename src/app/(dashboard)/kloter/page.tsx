@@ -41,7 +41,7 @@ export default function KloterPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
             <Plane className="w-6 h-6 text-white" />
           </span>
           <div>
@@ -82,7 +82,7 @@ export default function KloterPage() {
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
                       Provinsi Papua
                     </span>
-                    <h2 className="text-xl font-black text-[#1e40af]">
+                    <h2 className="text-xl font-black text-[#b8941e]">
                       Kloter {k.kloterNumber} ({k.kloterCode})
                     </h2>
                   </div>
@@ -120,11 +120,11 @@ export default function KloterPage() {
                     <span className="font-semibold text-gray-700">
                       Okupansi Kursi: {memberCount} / {k.capacityTotal} Jamaah
                     </span>
-                    <span className="font-mono font-bold text-[#1e40af]">{pct}%</span>
+                    <span className="font-mono font-bold text-[#b8941e]">{pct}%</span>
                   </div>
                   <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-[#1e40af] to-[#059669] h-full rounded-full transition-all duration-500"
+                      className="bg-gradient-to-r from-[#c9a961] to-[#b8941e] h-full rounded-full transition-all duration-500"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
@@ -138,7 +138,7 @@ export default function KloterPage() {
 
                   <Link
                     href={`/kloter/${k.id}`}
-                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs"
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all flex items-center gap-1.5 shadow-xs"
                   >
                     Buka Manifest Internal <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>

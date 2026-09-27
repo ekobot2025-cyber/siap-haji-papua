@@ -148,7 +148,7 @@ export default function EarlyWarningPage() {
           <button
             type="button"
             onClick={handleExportPdf}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-semibold shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-semibold shadow-xs cursor-pointer"
           >
             <FileText className="w-3.5 h-3.5" />
             Ekspor PDF
@@ -248,14 +248,14 @@ export default function EarlyWarningPage() {
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-gray-700">Daftar Peringatan Dini Aktif</span>
             {severityFilter !== 'ALL' && (
-              <span className="text-[10px] font-bold bg-[#1e40af] text-white px-2 py-0.5 rounded">
+              <span className="text-[10px] font-bold bg-[#c9a961] text-white px-2 py-0.5 rounded">
                 Filter: {severityFilter}
               </span>
             )}
           </div>
           <Link
             href="/action-center"
-            className="text-xs font-bold text-[#1e40af] hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-[#b8941e] hover:underline flex items-center gap-1"
           >
             Buka di Action Center <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
@@ -294,7 +294,7 @@ export default function EarlyWarningPage() {
                     <div className="flex items-center gap-4 text-xs text-gray-500 pt-1">
                       <div>
                         Jamaah:{' '}
-                        <Link href={`/jamaah/${w.jamaah.id}`} className="font-bold text-[#1e40af] hover:underline">
+                        <Link href={`/jamaah/${w.jamaah.id}`} className="font-bold text-[#b8941e] hover:underline">
                           {w.jamaah.fullName}
                         </Link>{' '}
                         <span className="font-mono text-[11px] text-gray-400">({w.jamaah.porsiNumber})</span>

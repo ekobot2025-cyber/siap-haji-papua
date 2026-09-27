@@ -116,10 +116,10 @@ export function Sidebar({ session }: SidebarProps) {
       ];
 
   return (
-    <aside className="w-64 bg-[#0f172a] text-slate-200 border-r border-slate-800 flex flex-col shrink-0 min-h-[calc(100vh-5.75rem)] select-none">
+    <aside className="w-64 bg-[#1A1410] text-[#fdfbf7] border-r border-[#c9a961]/20 flex flex-col shrink-0 min-h-[calc(100vh-5.75rem)] select-none">
       {/* Scope Info Card */}
-      <div className="p-4 mx-3 my-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs">
-        <span className="text-[10px] uppercase font-bold text-emerald-400 block mb-1">
+      <div className="p-4 mx-3 my-3 rounded-xl bg-[#261F1A] border border-[#c9a961]/30 text-xs">
+        <span className="text-[10px] uppercase font-bold text-[#c9a961] block mb-1">
           {isPetugasKesehatan ? 'Tim Medis & Petugas Kesehatan' : 'Lingkup Otorisasi Data'}
         </span>
         <div className="font-semibold text-white truncate">
@@ -127,9 +127,9 @@ export function Sidebar({ session }: SidebarProps) {
             ? (session?.fullName || 'dr. Siti Rahmawati, Sp.PD')
             : (session?.regionName ? session.regionName : 'Seluruh Provinsi Papua')}
         </div>
-        <div className="text-[11px] text-slate-400 mt-0.5">
+        <div className="text-[11px] text-stone-400 mt-0.5">
           {isPetugasKesehatan ? (
-            <span className="text-emerald-300 font-medium">Balai Karantina / RSUD Papua</span>
+            <span className="text-[#c9a961] font-medium">Balai Karantina / RSUD Papua</span>
           ) : (
             <>Peran: <strong className="text-white">{session?.roles[0] || 'GUEST'}</strong></>
           )}
@@ -140,7 +140,7 @@ export function Sidebar({ session }: SidebarProps) {
       <nav className="flex-1 px-3 space-y-6 overflow-y-auto pb-6">
         {navSections.map((section) => (
           <div key={section.title}>
-            <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-emerald-400">
+            <div className="px-3 mb-2 text-[10px] font-extrabold uppercase tracking-wider text-[#c9a961]">
               {section.title}
             </div>
             <ul className="space-y-1">
@@ -161,22 +161,22 @@ export function Sidebar({ session }: SidebarProps) {
                       }}
                       className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all cursor-pointer ${
                         item.active
-                          ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-sm border-l-4 border-emerald-400'
+                          ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-md shadow-[#c9a961]/25 border-l-4 border-amber-300'
                           : isPending
-                          ? 'bg-[#1e40af]/60 text-white shadow-xs border-l-4 border-emerald-400 animate-pulse ring-1 ring-emerald-400/50'
-                          : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
+                          ? 'bg-[#c9a961]/30 text-white shadow-xs border-l-4 border-[#c9a961] animate-pulse ring-1 ring-[#c9a961]/50'
+                          : 'text-stone-300 hover:bg-[#2A221C] hover:text-[#c9a961]'
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
                         {isPending ? (
-                          <Loader2 className="w-4 h-4 text-emerald-300 animate-spin" />
+                          <Loader2 className="w-4 h-4 text-[#c9a961] animate-spin" />
                         ) : (
-                          <Icon className={`w-4 h-4 ${item.active ? 'text-white' : 'text-slate-400'}`} />
+                          <Icon className={`w-4 h-4 ${item.active ? 'text-[#1A1410]' : 'text-stone-400'}`} />
                         )}
                         <span>{item.label}</span>
                       </div>
                       {isPending ? (
-                        <span className="text-[10px] font-mono text-emerald-300 font-bold">
+                        <span className="text-[10px] font-mono text-[#c9a961] font-bold">
                           Memuat...
                         </span>
                       ) : (
@@ -196,23 +196,23 @@ export function Sidebar({ session }: SidebarProps) {
       </nav>
 
       {/* Official External Portals */}
-      <div className="px-3 py-2 border-t border-slate-800 space-y-1">
+      <div className="px-3 py-2 border-t border-[#c9a961]/20 space-y-1">
         <a
           href="https://haji.go.id"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-emerald-300 hover:text-white hover:bg-slate-800 transition-colors"
+          className="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[11px] font-semibold text-[#c9a961] hover:text-white hover:bg-[#2A221C] transition-colors"
         >
           <span className="flex items-center gap-2 truncate">
-            <Globe className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <Globe className="w-3.5 h-3.5 text-[#c9a961] shrink-0" />
             <span>Kemenhaj (haji.go.id)</span>
           </span>
-          <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+          <ArrowUpRight className="w-3.5 h-3.5 text-[#c9a961] shrink-0" />
         </a>
       </div>
 
       {/* Footer Branding Notice */}
-      <div className="p-3 border-t border-white/10 text-[10px] text-slate-400 text-center font-mono">
+      <div className="p-3 border-t border-[#c9a961]/15 text-[10px] text-stone-400 text-center font-mono">
         SIAP HAJI PAPUA • v1.0 ENTERPRISE
       </div>
     </aside>

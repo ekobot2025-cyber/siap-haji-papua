@@ -64,7 +64,7 @@ export function ScrollToTop() {
         onClick={scrollToTop}
         aria-label="Kembali ke halaman paling atas"
         title="Kembali ke Atas"
-        className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white shadow-xl hover:shadow-2xl border-2 border-white/40 transition-all duration-200 active:scale-90 focus:outline-none focus:ring-4 focus:ring-blue-500/30 cursor-pointer"
+        className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] shadow-xl hover:shadow-2xl border-2 border-white/60 transition-all duration-200 active:scale-90 focus:outline-none focus:ring-4 focus:ring-[#c9a961]/40 cursor-pointer"
       >
         <ArrowUp className="w-5 h-5 stroke-[2.5] transition-transform duration-200 group-hover:-translate-y-1" />
 

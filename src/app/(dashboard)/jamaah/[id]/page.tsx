@@ -56,7 +56,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
           </p>
           <Link
             href="/jamaah"
-            className="inline-flex items-center gap-1.5 mt-5 bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white px-4 py-2 rounded-xl text-xs font-semibold shadow-xs"
+            className="inline-flex items-center gap-1.5 mt-5 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold px-4 py-2 rounded-xl text-xs font-semibold shadow-xs"
           >
             <ChevronLeft className="w-4 h-4" />
             <span>Kembali ke Daftar Jamaah Wilayah Anda</span>
@@ -82,7 +82,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
           href="/jamaah"
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-600 hover:text-gray-900 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs transition-colors"
         >
-          <ChevronLeft className="w-4 h-4 text-[#1e40af]" />
+          <ChevronLeft className="w-4 h-4 text-[#b8941e]" />
           <span>Kembali ke Daftar Jamaah</span>
         </Link>
 
@@ -100,12 +100,12 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
       {/* 2. JAMAAH 360° MASTER HEADER CARD */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs relative overflow-hidden">
         {/* Subtle Papuan Decorative Top Border Accent */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1e40af] via-blue-500 to-[#059669]" />
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#c9a961] via-amber-300 to-[#b8941e]" />
 
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           {/* Left: Avatar & Personal Identity */}
           <div className="flex items-start gap-4">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#1e3a8a] to-[#1e40af] text-white flex items-center justify-center font-extrabold text-2xl border-2 border-emerald-400 shadow-md shrink-0">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#261F1A] to-[#1A1410] text-[#c9a961] flex items-center justify-center font-extrabold text-2xl border-2 border-[#c9a961] shadow-md shrink-0">
               {jamaah.fullName.charAt(0)}
             </div>
 
@@ -122,7 +122,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-600">
                 <div className="flex items-center gap-1">
                   <span className="font-semibold text-gray-500">No. Porsi:</span>
-                  <span className="font-mono font-bold text-[#1e40af] bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">
+                  <span className="font-mono font-bold text-[#b8941e] bg-blue-50 px-1.5 py-0.2 rounded border border-blue-200">
                     {jamaah.porsiNumber}
                   </span>
                 </div>
@@ -165,11 +165,11 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
 
           {/* Right: Readiness Score Card */}
           <div className="lg:border-l lg:border-slate-200 lg:pl-6 flex flex-col justify-center min-w-[240px]">
-            <span className="text-xs font-extrabold uppercase tracking-wider text-[#1e40af] mb-1">
+            <span className="text-xs font-extrabold uppercase tracking-wider text-[#b8941e] mb-1">
               Indeks Kesiapan Administratif
             </span>
             <div className="flex items-baseline gap-2 mb-2">
-              <span className="text-3xl sm:text-4xl font-black text-[#1e40af] font-mono">
+              <span className="text-3xl sm:text-4xl font-black text-[#b8941e] font-mono">
                 {Number(jamaah?.readiness?.score ?? 0).toFixed(1)}%
               </span>
               <ReadinessBadge category={jamaah.readiness.category} showScore={false} size="sm" />

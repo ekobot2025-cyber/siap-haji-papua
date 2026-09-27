@@ -150,7 +150,7 @@ export default function KesehatanPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
             <HeartPulse className="w-6 h-6 text-white" />
           </span>
           <div>
@@ -175,7 +175,7 @@ export default function KesehatanPage() {
           <button
             type="button"
             onClick={handleExportPdf}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-semibold shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-semibold shadow-xs cursor-pointer"
           >
             <FileText className="w-3.5 h-3.5" />
             Ekspor PDF
@@ -200,7 +200,7 @@ export default function KesehatanPage() {
               placeholder="Cari nama jamaah atau nomor porsi..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#1e40af]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#c9a961]"
             />
           </div>
 
@@ -288,7 +288,7 @@ export default function KesehatanPage() {
                       <td className="p-3.5">
                         <Link
                           href={`/jamaah/${rec.jamaah.id}`}
-                          className="font-bold text-[#1e40af] hover:underline block"
+                          className="font-bold text-[#b8941e] hover:underline block"
                         >
                           {rec.jamaah.fullName}
                         </Link>
@@ -333,7 +333,7 @@ export default function KesehatanPage() {
                       <td className="p-3.5 text-right">
                         <button
                           onClick={() => handleOpenEdit(rec)}
-                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all shadow-xs cursor-pointer"
                         >
                           Update Status
                         </button>
@@ -353,7 +353,7 @@ export default function KesehatanPage() {
           <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
                   <HeartPulse className="w-4 h-4 text-white" />
                 </span>
                 <h3 className="text-base font-bold text-gray-900">Perbarui Status Kesehatan Jamaah</h3>
@@ -455,7 +455,7 @@ export default function KesehatanPage() {
                 type="button"
                 disabled={submitting}
                 onClick={handleSaveEdit}
-                className="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white disabled:opacity-50 cursor-pointer shadow-xs"
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold disabled:opacity-50 cursor-pointer shadow-xs"
               >
                 {submitting ? 'Menyimpan...' : 'Simpan Status'}
               </button>

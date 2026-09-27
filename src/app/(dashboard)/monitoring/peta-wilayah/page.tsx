@@ -64,7 +64,7 @@ export default function PetaWilayahPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
             <Compass className="w-6 h-6 text-white" />
           </span>
           <div>
@@ -90,7 +90,7 @@ export default function PetaWilayahPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Map Grid of Regencies */}
         <div className="lg:col-span-8 space-y-4">
-          <div className="bg-gradient-to-br from-slate-900 via-[#1e3a8a]/70 to-[#047857]/80 p-6 rounded-3xl text-white shadow-md relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#1A1410] via-[#261F1A] to-[#1A1410] border border-[#c9a961]/30 p-6 rounded-3xl text-white shadow-md relative overflow-hidden">
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-xs uppercase font-bold text-emerald-300 tracking-wider block">
@@ -155,7 +155,7 @@ export default function PetaWilayahPage() {
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
                     Wilayah Terpilih ({selectedRegion.regionCode})
                   </span>
-                  <h3 className="text-lg font-black text-[#1e40af]">{selectedRegion.regionName}</h3>
+                  <h3 className="text-lg font-black text-[#b8941e]">{selectedRegion.regionName}</h3>
                 </div>
                 <span className="p-2 rounded-xl bg-emerald-50 text-emerald-700">
                   <MapPin className="w-5 h-5" />
@@ -184,13 +184,13 @@ export default function PetaWilayahPage() {
               <div className="space-y-2 pt-2">
                 <div className="flex items-center justify-between text-xs font-bold">
                   <span className="text-gray-700">Capaian Indeks Kesiapan:</span>
-                  <span className="font-mono text-[#1e40af] text-base">
+                  <span className="font-mono text-[#b8941e] text-base">
                     {Number(selectedRegion?.averageReadiness ?? selectedRegion?.readinessIndex ?? 0).toFixed(1)}%
                   </span>
                 </div>
                 <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
                   <div
-                    className="bg-gradient-to-r from-[#1e40af] to-[#059669] h-full rounded-full transition-all duration-500"
+                    className="bg-gradient-to-r from-[#c9a961] to-[#b8941e] h-full rounded-full transition-all duration-500"
                     style={{ width: `${Math.min(100, Math.max(0, Number(selectedRegion?.averageReadiness ?? selectedRegion?.readinessIndex ?? 0)))}%` }}
                   />
                 </div>
@@ -211,7 +211,7 @@ export default function PetaWilayahPage() {
               <div className="pt-3 border-t border-slate-100 space-y-2">
                 <Link
                   href={`/action-center?regionId=${selectedRegion.regionId}`}
-                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   Buka Antrean Action Center Wilayah <ArrowUpRight className="w-4 h-4" />
                 </Link>

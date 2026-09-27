@@ -32,7 +32,7 @@ export function exportToPdf(options: PdfExportOptions): void {
   const doc = new jsPDF({ orientation, unit: 'mm', format: 'a4' });
 
   // Header bar
-  doc.setFillColor(30, 64, 175); // #1e40af
+  doc.setFillColor(30, 64, 175); // #1A1410
   doc.rect(0, 0, doc.internal.pageSize.getWidth(), 22, 'F');
 
   // Title
@@ -69,7 +69,7 @@ export function exportToPdf(options: PdfExportOptions): void {
     body: rows,
     theme: 'grid',
     headStyles: {
-      fillColor: [30, 64, 175], // #1e40af
+      fillColor: [30, 64, 175], // #1A1410
       textColor: [255, 255, 255],
       fontSize: 8,
       fontStyle: 'bold',

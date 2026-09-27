@@ -50,7 +50,7 @@ export function RecalculateButton({ seasonId }: RecalculateButtonProps) {
     >
       {loading ? (
         <>
-          <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#1e40af]" />
+          <RefreshCw className="w-3.5 h-3.5 animate-spin text-[#b8941e]" />
           <span>Menghitung...</span>
         </>
       ) : success ? (

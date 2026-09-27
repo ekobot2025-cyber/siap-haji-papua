@@ -107,7 +107,7 @@ export function CreateJamaahForm({
               value={regionId}
               disabled={isRegionAdmin}
               onChange={(e) => setRegionId(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none bg-white disabled:bg-gray-100"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none bg-white disabled:bg-gray-100"
             >
               {regions.map((r) => (
                 <option key={r.id} value={r.id}>
@@ -133,7 +133,7 @@ export function CreateJamaahForm({
               value={porsiNumber}
               onChange={(e) => setPorsiNumber(e.target.value.replace(/\D/g, ''))}
               placeholder="e.g. 2700192999"
-              className="w-full px-3 py-2 text-sm font-mono border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm font-mono border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
         </div>
@@ -163,7 +163,7 @@ export function CreateJamaahForm({
               value={nik}
               onChange={(e) => setNik(e.target.value.replace(/\D/g, ''))}
               placeholder="917101..."
-              className="w-full px-3 py-2 text-sm font-mono border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm font-mono border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
 
@@ -177,7 +177,7 @@ export function CreateJamaahForm({
               value={kkNumber}
               onChange={(e) => setKkNumber(e.target.value.replace(/\D/g, ''))}
               placeholder="917101..."
-              className="w-full px-3 py-2 text-sm font-mono border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm font-mono border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
         </div>
@@ -192,7 +192,7 @@ export function CreateJamaahForm({
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="e.g. H. Achmad Subarjo"
-            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
           />
         </div>
 
@@ -206,7 +206,7 @@ export function CreateJamaahForm({
               required
               value={birthPlace}
               onChange={(e) => setBirthPlace(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
 
@@ -219,7 +219,7 @@ export function CreateJamaahForm({
               required
               value={birthDate}
               onChange={(e) => setBirthDate(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
 
@@ -230,7 +230,7 @@ export function CreateJamaahForm({
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value as 'MALE' | 'FEMALE')}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none bg-white"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none bg-white"
             >
               <option value="MALE">Laki-Laki</option>
               <option value="FEMALE">Perempuan</option>
@@ -256,7 +256,7 @@ export function CreateJamaahForm({
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="e.g. Jl. Raya Sentani No. 42"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
 
@@ -269,7 +269,7 @@ export function CreateJamaahForm({
               value={district}
               onChange={(e) => setDistrict(e.target.value)}
               placeholder="e.g. Sentani"
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
         </div>
@@ -284,7 +284,7 @@ export function CreateJamaahForm({
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="0812..."
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
 
@@ -295,7 +295,7 @@ export function CreateJamaahForm({
             <select
               value={bloodType}
               onChange={(e) => setBloodType(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none bg-white"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none bg-white"
             >
               <option value="A">A</option>
               <option value="B">B</option>
@@ -314,7 +314,7 @@ export function CreateJamaahForm({
               max={2035}
               value={registrationYear}
               onChange={(e) => setRegistrationYear(Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#1e40af] focus:border-[#1e40af] outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
             />
           </div>
         </div>
@@ -331,7 +331,7 @@ export function CreateJamaahForm({
         <button
           type="submit"
           disabled={saving}
-          className="flex items-center gap-2 bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
+          className="flex items-center gap-2 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold font-bold py-2.5 px-6 rounded-xl text-sm shadow-md transition-all cursor-pointer disabled:opacity-50"
         >
           <Save className="w-4 h-4 text-emerald-200" />
           <span>{saving ? 'Menyimpan & Menghitung Kesiapan...' : 'Simpan Jamaah'}</span>

@@ -189,7 +189,7 @@ export default async function PortalJamaahPage() {
   return (
     <div className="space-y-6">
       {/* 1. Header Sambutan Syar'i & Identitas Ringkas */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#047857] text-white p-6 sm:p-8 shadow-xl border-2 border-emerald-400/40">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#261F1A] via-[#1A1410] to-[#140F0C] text-white p-6 sm:p-8 shadow-xl border-2 border-emerald-400/40">
         <div className="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-emerald-400/10 blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
@@ -285,12 +285,12 @@ export default async function PortalJamaahPage() {
             return (
               <div
                 key={p.id}
-                className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#1e40af]/30 transition-all flex flex-col justify-between space-y-3"
+                className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-[#c9a961]/30 transition-all flex flex-col justify-between space-y-3"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-white text-[#1e40af] flex items-center justify-center border border-slate-200 shadow-2xs">
-                      <Icon className="w-5 h-5 text-[#1e40af]" />
+                    <div className="w-9 h-9 rounded-xl bg-white text-[#b8941e] flex items-center justify-center border border-slate-200 shadow-2xs">
+                      <Icon className="w-5 h-5 text-[#b8941e]" />
                     </div>
                     <div>
                       <h3 className="font-bold text-xs text-gray-900">{p.name}</h3>

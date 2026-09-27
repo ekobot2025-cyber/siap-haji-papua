@@ -2,26 +2,26 @@
 
 @layer base {
   :root {
-    /* haji.go.id Official Design Tokens */
-    --primary-color: #1e40af;       /* Ministry Royal Blue */
-    --primary-dark: #1e3a8a;        /* Deep Navy */
-    --primary-light: #eff6ff;       /* Soft Blue Tint */
-    --secondary-color: #059669;     /* Hajj Emerald Green */
-    --secondary-dark: #047857;      /* Deep Emerald */
-    --secondary-light: #ecfdf5;     /* Soft Emerald Tint */
-    --accent-color: #1e40af;
-    --accent-gold: #059669;
-    --gold: #d97706;                /* Subtle Gold / Amber Badge */
-    --gold-light: #fef3c7;
-    --gold-dark: #b45309;
-    --bg-base: #f8fafc;
+    /* haji.go.id Official Design Tokens (Keputusan Menteri No. 41/2025) */
+    --primary-color: #c9a961;       /* Hajj Royal Gold */
+    --primary-dark: #b8941e;        /* Deep Gold Ochre */
+    --primary-light: #faf5e9;       /* Light Warm Gold Tint */
+    --secondary-color: #b8941e;     /* Secondary Ochre Gold */
+    --secondary-dark: #967412;      /* Deep Golden Bronze */
+    --secondary-light: #fef8ee;     /* Very Light Gold */
+    --accent-color: #b8941e;
+    --accent-gold: #c9a961;
+    --accent-green: #0f6938;        /* Syariah Emerald Green */
+    --accent-green-light: #eaf5ee;
+    --dark-color: #1A1410;          /* Deep Espresso / Ka'bah Charcoal */
+    --bg-base: #FAF8F1;             /* Warm Ivory / Krem haji.go.id */
     --surface: #ffffff;
-    --text-main: #1f2937;
-    --text-muted: #64748b;
-    --border-light: #e2e8f0;
+    --text-main: #1A1410;           /* Aristocratic Dark Charcoal */
+    --text-muted: #645a50;          /* Warm Muted Slate */
+    --border-light: #e8dfc8;        /* Soft Sand / Golden Border */
 
     /* Legacy fallback */
-    --primary: #1e40af;
+    --primary: #c9a961;
   }
 
   html {

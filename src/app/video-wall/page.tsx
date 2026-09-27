@@ -105,7 +105,7 @@ export default function VideoWallPage() {
       {/* 1. TOP COMMAND BAR */}
       <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#1e3a8a] p-2 border border-emerald-400/50 flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-2xl bg-[#1A1410] p-2 border border-emerald-400/50 flex items-center justify-center shadow-lg">
             <Image
               src="/assets/branding/app-icon.png"
               alt="Logo"
@@ -148,7 +148,7 @@ export default function VideoWallPage() {
 
           <Link
             href="/"
-            className="p-3 rounded-2xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white border border-blue-400/30 transition-all flex items-center gap-1.5 text-xs font-bold"
+            className="p-3 rounded-2xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold border border-blue-400/30 transition-all flex items-center gap-1.5 text-xs font-bold"
           >
             <ArrowLeft className="w-4 h-4" /> Keluar
           </Link>
@@ -170,7 +170,7 @@ export default function VideoWallPage() {
       {/* 3. MAIN DASHBOARD WALL GRID */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
         {/* Left Column (4 cols): Provincial Index & Season */}
-        <div className="lg:col-span-4 bg-gradient-to-b from-[#1e3a8a]/60 to-slate-900/90 p-6 rounded-3xl border border-blue-800/40 space-y-6 shadow-xl flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-gradient-to-b from-[#261F1A]/80 to-[#1A1410] p-6 rounded-3xl border border-[#c9a961]/30 space-y-6 shadow-xl flex flex-col justify-between">
           <div>
             <span className="text-xs uppercase font-extrabold text-emerald-400 tracking-wider block">
               Indikator Kesiapan Agregat
@@ -189,7 +189,7 @@ export default function VideoWallPage() {
 
             <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-white/10">
               <div
-                className="bg-gradient-to-r from-[#1e40af] via-blue-400 to-[#059669] h-full rounded-full transition-all duration-1000"
+                className="bg-gradient-to-r from-[#c9a961] via-amber-300 to-[#b8941e] h-full rounded-full transition-all duration-1000"
                 style={{ width: `${Math.min(100, Math.max(0, provIndex))}%` }}
               />
             </div>

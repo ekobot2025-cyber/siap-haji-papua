@@ -220,7 +220,7 @@ export function LaporanClientView({
           <button
             type="button"
             onClick={handleExportPdf}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer border border-blue-400/30"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold shadow-xs flex items-center gap-1.5 transition-all cursor-pointer border border-blue-400/30"
           >
             <Printer className="w-4 h-4 text-emerald-200" />
             <span>Ekspor PDF</span>
@@ -245,7 +245,7 @@ export function LaporanClientView({
           onClick={() => setActiveTab('regional')}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'regional'
-              ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
+              ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
               : 'bg-white border border-slate-200 text-gray-600 hover:bg-slate-50'
           }`}
         >
@@ -257,7 +257,7 @@ export function LaporanClientView({
           onClick={() => setActiveTab('kloter')}
           className={`px-4 py-2 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
             activeTab === 'kloter'
-              ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
+              ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
               : 'bg-white border border-slate-200 text-gray-600 hover:bg-slate-50'
           }`}
         >
@@ -396,7 +396,7 @@ export function LaporanClientView({
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-[10px] font-bold text-[#1e40af] uppercase tracking-wider block">
+                    <span className="text-[10px] font-bold text-[#b8941e] uppercase tracking-wider block">
                       Kloter {k.number}
                     </span>
                     <h3 className="text-base font-black text-gray-900">{k.code}</h3>
@@ -432,7 +432,7 @@ export function LaporanClientView({
                   <span className="text-[11px] text-gray-500">{k.embarkation}</span>
                   <Link
                     href={`/kloter/${k.id}`}
-                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold transition-all flex items-center gap-1 shadow-xs cursor-pointer"
+                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all flex items-center gap-1 shadow-xs cursor-pointer"
                   >
                     <span>Buka & Cetak Manifest</span>
                     <ArrowRight className="w-3.5 h-3.5" />

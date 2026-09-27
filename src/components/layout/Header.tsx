@@ -40,12 +40,12 @@ export function Header({ session, config }: HeaderProps) {
   };
 
   return (
-    <header className="bg-[#1e3a8a] text-white border-b border-blue-900/40 shadow-md sticky top-7 z-40">
+    <header className="bg-[#1A1410] text-white border-b border-[#c9a961]/30 shadow-md sticky top-7 z-40">
       <div className="w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Left: Branding & Dynamic Organizer */}
         <div className="flex items-center gap-3">
           <Link href="/dashboard" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-white/10 p-1 flex items-center justify-center border border-emerald-400/50 shadow-inner group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-white/10 p-1 flex items-center justify-center border border-[#c9a961]/50 shadow-inner group-hover:scale-105 transition-transform">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/assets/branding/app-icon.png"
@@ -56,13 +56,13 @@ export function Header({ session, config }: HeaderProps) {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-base sm:text-lg tracking-wide text-white">
-                  SIAP <span className="text-emerald-400">HAJI</span> PAPUA
+                  SIAP <span className="text-[#c9a961]">HAJI</span> PAPUA
                 </span>
-                <span className="hidden sm:inline-block bg-[#059669] text-[10px] uppercase font-bold px-1.5 py-0.5 rounded text-white border border-emerald-300/40">
+                <span className="hidden sm:inline-block bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded shadow-xs">
                   Command Center
                 </span>
               </div>
-              <p className="text-[11px] text-blue-100/80 truncate max-w-[240px] sm:max-w-md">
+              <p className="text-[11px] text-amber-100/80 truncate max-w-[240px] sm:max-w-md">
                 {config.organizerName}
               </p>
             </div>
@@ -70,8 +70,8 @@ export function Header({ session, config }: HeaderProps) {
         </div>
 
         {/* Center: Active Season */}
-        <div className="hidden lg:flex items-center gap-2 bg-black/20 border border-white/10 px-3 py-1 rounded-full text-xs text-blue-100">
-          <Calendar className="w-3.5 h-3.5 text-emerald-400" />
+        <div className="hidden lg:flex items-center gap-2 bg-[#2A211B] border border-[#c9a961]/30 px-3 py-1 rounded-full text-xs text-amber-100">
+          <Calendar className="w-3.5 h-3.5 text-[#c9a961]" />
           <span className="font-semibold">{config.activeSeasonName || 'Musim Haji 1447 H / 2026 M'}</span>
         </div>
 
@@ -83,8 +83,8 @@ export function Header({ session, config }: HeaderProps) {
             onClick={() => setIsLargeText(!isLargeText)}
             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
               isLargeText
-                ? 'bg-[#059669] text-white border-emerald-400 shadow-xs'
-                : 'bg-white/10 text-white border-white/20 hover:bg-white/20'
+                ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] border-amber-300 shadow-xs'
+                : 'bg-white/10 text-white border-[#c9a961]/30 hover:bg-white/20'
             }`}
             title="Klik untuk beralih mode teks besar (Lansia-friendly)"
             aria-pressed={isLargeText}
@@ -95,14 +95,14 @@ export function Header({ session, config }: HeaderProps) {
 
           {/* User Session Pill */}
           {session ? (
-            <div className="flex items-center gap-2 pl-2 border-l border-white/20">
+            <div className="flex items-center gap-2 pl-2 border-l border-[#c9a961]/30">
               <div className="hidden sm:flex flex-col text-right">
                 <span className="text-xs font-bold text-white truncate max-w-[140px]">
                   {session.fullName}
                 </span>
-                <span className="text-[10px] text-emerald-300 flex items-center justify-end gap-1">
+                <span className="text-[10px] text-[#c9a961] flex items-center justify-end gap-1">
                   {session.regionName && (
-                    <span className="flex items-center gap-0.5 text-blue-200">
+                    <span className="flex items-center gap-0.5 text-amber-200/80">
                       <MapPin className="w-2.5 h-2.5" />
                       {session.regionName} •
                     </span>
@@ -111,7 +111,7 @@ export function Header({ session, config }: HeaderProps) {
                 </span>
               </div>
 
-              <div className="w-8 h-8 rounded-full bg-[#059669] border border-emerald-300/60 flex items-center justify-center text-white font-bold text-xs shadow-xs">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#c9a961] to-[#b8941e] text-[#1A1410] border border-amber-200 flex items-center justify-center font-bold text-xs shadow-xs">
                 {session.fullName.charAt(0)}
               </div>
 
@@ -119,7 +119,7 @@ export function Header({ session, config }: HeaderProps) {
                 type="button"
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="p-1.5 text-slate-300 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 hover:scale-110 active:scale-95 flex items-center justify-center"
+                className="p-1.5 text-stone-300 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-all duration-200 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 hover:scale-110 active:scale-95 flex items-center justify-center"
                 title="Keluar dari sistem"
                 aria-label="Logout"
               >
@@ -133,7 +133,7 @@ export function Header({ session, config }: HeaderProps) {
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-1 bg-[#059669] hover:bg-[#047857] text-white px-3 py-1.5 rounded-lg text-xs font-semibold border border-emerald-400 shadow-sm"
+              className="flex items-center gap-1 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] px-3 py-1.5 rounded-lg text-xs font-bold border border-[#c9a961] shadow-xs"
             >
               <User className="w-3.5 h-3.5" />
               <span>Masuk</span>

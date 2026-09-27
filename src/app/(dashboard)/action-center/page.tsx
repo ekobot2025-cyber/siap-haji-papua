@@ -129,7 +129,7 @@ export default function ActionCenterPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+            <span className="p-2 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
               <AlertCircle className="w-5 h-5 text-white" />
             </span>
             <div>
@@ -137,7 +137,7 @@ export default function ActionCenterPage() {
                 ACTION CENTER — PUSAT INTERVENSI & KOMANDO
               </h1>
               <p className="text-xs text-gray-500 font-medium">
-                Prinsip Operasional: <span className="font-bold text-[#1e40af]">MONITOR → IDENTIFY → PRIORITIZE → ACTION → RESOLVE</span>
+                Prinsip Operasional: <span className="font-bold text-[#b8941e]">MONITOR → IDENTIFY → PRIORITIZE → ACTION → RESOLVE</span>
               </p>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default function ActionCenterPage() {
               }}
               className={`p-4 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden ${
                 isSelected
-                  ? 'ring-2 ring-[#1e40af] shadow-md border-transparent bg-white'
+                  ? 'ring-2 ring-[#c9a961] shadow-md border-transparent bg-white'
                   : 'bg-white hover:border-slate-300 hover:shadow-xs border-slate-200'
               }`}
             >
@@ -189,7 +189,7 @@ export default function ActionCenterPage() {
                 <span className="text-[10px] text-gray-400 mt-0.5 block">Klik untuk menyaring list</span>
               </div>
               {isSelected && (
-                <div className="absolute top-0 right-0 w-3 h-3 bg-[#1e40af] rounded-bl-lg" />
+                <div className="absolute top-0 right-0 w-3 h-3 bg-[#c9a961] rounded-bl-lg" />
               )}
             </button>
           );
@@ -206,7 +206,7 @@ export default function ActionCenterPage() {
               placeholder="Cari nama, porsi, atau judul kendala..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#1e40af]"
+              className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#c9a961]"
             />
           </div>
 
@@ -218,7 +218,7 @@ export default function ActionCenterPage() {
                 onClick={() => { setActiveStatus(st); setPage(1); }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                   activeStatus === st
-                    ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
+                    ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
                     : 'bg-slate-100 text-gray-600 hover:bg-slate-200'
                 }`}
               >
@@ -291,7 +291,7 @@ export default function ActionCenterPage() {
                         Jamaah:{' '}
                         <Link
                           href={`/jamaah/${item.jamaah.id}`}
-                          className="font-bold text-[#1e40af] hover:underline"
+                          className="font-bold text-[#b8941e] hover:underline"
                         >
                           {item.jamaah.fullName}
                         </Link>{' '}
@@ -313,7 +313,7 @@ export default function ActionCenterPage() {
                     </Link>
                     <button
                       onClick={() => handleOpenEdit(item)}
-                      className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs font-bold transition-all shadow-xs cursor-pointer"
                     >
                       Tindak Lanjuti
                     </button>
@@ -354,7 +354,7 @@ export default function ActionCenterPage() {
           <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+                <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
                   <UserCheck className="w-4 h-4 text-white" />
                 </span>
                 <h3 className="text-base font-bold text-gray-900">Intervensi Tugas Tindak Lanjut</h3>
@@ -429,7 +429,7 @@ export default function ActionCenterPage() {
                 type="button"
                 disabled={submitting}
                 onClick={handleSaveEdit}
-                className="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white cursor-pointer shadow-xs disabled:opacity-50"
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold cursor-pointer shadow-xs disabled:opacity-50"
               >
                 {submitting ? 'Menyimpan...' : 'Simpan Pembaruan'}
               </button>

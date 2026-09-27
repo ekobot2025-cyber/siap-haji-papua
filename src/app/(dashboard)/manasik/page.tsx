@@ -125,7 +125,7 @@ export default function ManasikPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs">
+          <span className="p-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs">
             <BookOpen className="w-6 h-6 text-white" />
           </span>
           <div>
@@ -148,7 +148,7 @@ export default function ManasikPage() {
       </div>
 
       {/* Simulator Presensi QR & Scanner Box */}
-      <div className="bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#047857] p-6 rounded-3xl text-white shadow-md">
+      <div className="bg-gradient-to-r from-[#261F1A] via-[#1A1410] to-[#140F0C] p-6 rounded-3xl text-white shadow-md">
         <div className="max-w-3xl space-y-4">
           <div className="flex items-center gap-2">
             <span className="p-2 rounded-xl bg-white/10 text-emerald-300">
@@ -191,7 +191,7 @@ export default function ManasikPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full h-full py-2.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#047857] hover:from-[#047857] hover:to-[#065f46] text-white font-bold text-xs transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md"
+                className="w-full h-full py-2.5 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5 shadow-md shadow-[#c9a961]/25"
               >
                 <QrCode className="w-4 h-4" />
                 {submitting ? 'Merekam...' : 'Catat Presensi'}
@@ -219,12 +219,12 @@ export default function ManasikPage() {
               onClick={() => setSelectedEventId(ev.id)}
               className={`p-4 rounded-2xl border text-left cursor-pointer transition-all ${
                 isSelected
-                  ? 'border-[#1e40af] ring-2 ring-[#1e40af] bg-blue-50/30 shadow-xs'
+                  ? 'border-[#c9a961] ring-2 ring-[#c9a961] bg-blue-50/30 shadow-xs'
                   : 'bg-white border-slate-200 hover:border-slate-300'
               }`}
             >
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <span className="text-[10px] font-bold text-[#1e40af] uppercase bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold text-[#b8941e] uppercase bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
                   Sesi {ev.sessionNumber}
                 </span>
                 <span className="text-xs font-mono font-bold text-gray-700">
@@ -253,7 +253,7 @@ export default function ManasikPage() {
         <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
             <div>
-              <span className="text-xs font-bold text-[#1e40af] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#b8941e] uppercase tracking-wider">
                 {selectedEvent.region.name} • Sesi {selectedEvent.sessionNumber}
               </span>
               <h2 className="text-lg font-black text-gray-900 mt-0.5">{selectedEvent.title}</h2>

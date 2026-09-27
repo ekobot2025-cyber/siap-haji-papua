@@ -67,7 +67,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
           width: 320,
           margin: 1,
           color: {
-            dark: '#1e3a8a',
+            dark: '#1A1410',
             light: '#FFFFFF',
           },
           errorCorrectionLevel: 'M',
@@ -111,7 +111,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
             ========================================================================= */}
         <div className="no-print p-4 sm:p-5 border-b border-slate-200 bg-slate-50 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#1e40af] text-emerald-300 flex items-center justify-center shadow-xs">
+            <div className="w-8 h-8 rounded-xl bg-[#261F1A] text-[#c9a961] border border-[#c9a961]/40 flex items-center justify-center shadow-xs">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -143,7 +143,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
               onClick={() => setActiveTab('front')}
               className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 activeTab === 'front'
-                  ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -154,7 +154,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
               onClick={() => setActiveTab('back')}
               className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 activeTab === 'back'
-                  ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -165,7 +165,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
               onClick={() => setActiveTab('all')}
               className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
                 activeTab === 'all'
-                  ? 'bg-gradient-to-r from-[#1e40af] to-[#059669] text-white shadow-xs'
+                  ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold shadow-xs'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -178,7 +178,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
             onClick={handlePrint}
             className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold shadow-md transition-all flex items-center gap-2 cursor-pointer"
           >
-            <Printer className="w-4 h-4 text-emerald-400" />
+            <Printer className="w-4 h-4 text-[#c9a961]" />
             <span>Cetak / Simpan PDF (A4)</span>
           </button>
         </div>
@@ -223,7 +223,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                 SIDE A: SISI DEPAN (FRONT CARD)
                 ------------------------------------------------------------- */}
             {(activeTab === 'front' || activeTab === 'all') && (
-              <div className="w-full max-w-[340px] mx-auto bg-gradient-to-b from-[#1e3a8a] via-[#1e40af] to-[#0f172a] rounded-3xl border-3 border-emerald-500 text-white shadow-xl overflow-hidden flex flex-col justify-between relative print:shadow-none print:border-2 print:border-[#1e3a8a]">
+              <div className="w-full max-w-[340px] mx-auto bg-gradient-to-b from-[#261F1A] via-[#1A1410] to-[#140F0C] rounded-3xl border-3 border-[#c9a961] text-white shadow-xl overflow-hidden flex flex-col justify-between relative print:shadow-none print:border-2 print:border-[#c9a961]">
                 {/* Top Indonesian Ribbon Bar */}
                 <div className="h-2 w-full bg-gradient-to-r from-red-600 via-white to-red-600 border-b border-black/30" />
 
@@ -240,17 +240,17 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                       <span className="text-[9px] uppercase font-bold text-slate-200 tracking-wider block">
                         Kemenag RI • PPIH Papua
                       </span>
-                      <span className="text-xs font-black uppercase text-emerald-300 tracking-tight block">
+                      <span className="text-xs font-black uppercase text-[#c9a961] tracking-tight block">
                         SIAP HAJI PAPUA 1447 H
                       </span>
                     </div>
-                    <span className="text-[8px] font-bold px-1.5 py-0.5 rounded bg-emerald-500 text-white">
+                    <span className="text-[8px] font-bold px-1.5 py-0.5 rounded bg-[#c9a961] text-white">
                       REGULER
                     </span>
                   </div>
 
                   {/* Ribbon Title */}
-                  <div className="inline-block px-3 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 text-[9px] font-extrabold uppercase tracking-wide">
+                  <div className="inline-block px-3 py-0.5 rounded-full bg-[#c9a961]/20 border border-emerald-400/50 text-[#c9a961] text-[9px] font-extrabold uppercase tracking-wide">
                     KARTU IDENTITAS RESMI JAMAAH HAJI
                   </div>
                 </div>
@@ -262,7 +262,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                     {/* Official Photo Box */}
                     <div className="relative w-20 h-24 rounded-xl bg-white p-1 border-2 border-emerald-400 shadow-md shrink-0 flex flex-col items-center justify-between overflow-hidden">
                       <div className="w-full h-full bg-slate-900 rounded-lg flex flex-col items-center justify-center text-white relative">
-                        <span className="text-2xl font-black text-emerald-300">
+                        <span className="text-2xl font-black text-[#c9a961]">
                           {jamaah.fullName.slice(0, 1)}
                         </span>
                         <span className="text-[8px] uppercase font-mono text-emerald-200">
@@ -288,7 +288,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
 
                       <div className="pt-0.5">
                         <span className="text-[9px] text-slate-300 uppercase block">Nomor Porsi Resmi:</span>
-                        <span className="font-mono text-xs font-black text-emerald-300 bg-black/40 px-2 py-0.5 rounded border border-emerald-400/40 inline-block">
+                        <span className="font-mono text-xs font-black text-[#c9a961] bg-black/40 px-2 py-0.5 rounded border border-[#c9a961]/40 inline-block">
                           {jamaah.porsiNumber}
                         </span>
                       </div>
@@ -306,7 +306,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                   <div className="grid grid-cols-2 gap-1.5 p-2 rounded-xl bg-black/35 border border-white/10 text-[10px] font-mono">
                     <div>
                       <span className="text-slate-400 block text-[8px] uppercase">Kloter:</span>
-                      <strong className="text-emerald-300 text-xs font-bold block">
+                      <strong className="text-[#c9a961] text-xs font-bold block">
                         {jamaah.kloterCode}
                       </strong>
                     </div>
@@ -370,13 +370,13 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                 SIDE B: SISI BELAKANG (BACK CARD)
                 ------------------------------------------------------------- */}
             {(activeTab === 'back' || activeTab === 'all') && (
-              <div className="w-full max-w-[340px] mx-auto bg-gradient-to-b from-[#1e3a8a] via-[#1e40af] to-[#0f172a] rounded-3xl border-3 border-emerald-500 text-white shadow-xl overflow-hidden flex flex-col justify-between relative print:shadow-none print:border-2 print:border-[#1e3a8a]">
+              <div className="w-full max-w-[340px] mx-auto bg-gradient-to-b from-[#261F1A] via-[#1A1410] to-[#140F0C] rounded-3xl border-3 border-[#c9a961] text-white shadow-xl overflow-hidden flex flex-col justify-between relative print:shadow-none print:border-2 print:border-[#c9a961]">
                 {/* Top Ribbon */}
-                <div className="h-2 w-full bg-emerald-500 border-b border-black/30" />
+                <div className="h-2 w-full bg-[#c9a961] border-b border-black/30" />
 
                 {/* Header */}
                 <div className="p-3 pb-2 text-center border-b border-white/15 bg-black/20">
-                  <span className="text-[9px] uppercase font-bold text-emerald-300 tracking-wider block">
+                  <span className="text-[9px] uppercase font-bold text-[#c9a961] tracking-wider block">
                     AKOMODASI & LAYANAN DARURAT
                   </span>
                   <span className="text-xs font-black uppercase text-white block">
@@ -388,7 +388,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                   {/* Lodging & Maktab */}
                   <div className="p-2.5 rounded-xl bg-black/30 border border-white/10 space-y-1.5">
                     <div className="flex items-start gap-2">
-                      <Building2 className="w-4 h-4 text-emerald-300 shrink-0 mt-0.5" />
+                      <Building2 className="w-4 h-4 text-[#c9a961] shrink-0 mt-0.5" />
                       <div>
                         <span className="text-[9px] text-slate-300 uppercase font-bold block">
                           Maktab & Hotel di Makkah:
@@ -398,7 +398,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                     </div>
 
                     <div className="flex items-start gap-2 pt-1 border-t border-white/10">
-                      <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <MapPin className="w-4 h-4 text-[#c9a961] shrink-0 mt-0.5" />
                       <div>
                         <span className="text-[9px] text-slate-300 uppercase font-bold block">
                           Hotel di Madinah:
@@ -412,7 +412,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                   <div className="p-2.5 rounded-xl bg-black/30 border border-white/10 space-y-1">
                     <div className="flex items-center justify-between text-[10px]">
                       <span className="text-slate-300">Status Istitha&apos;ah:</span>
-                      <strong className="text-emerald-300 font-bold">MEMENUHI SYARAT</strong>
+                      <strong className="text-[#c9a961] font-bold">MEMENUHI SYARAT</strong>
                     </div>
                     <div className="flex items-center justify-between text-[10px]">
                       <span className="text-slate-300">Vaksin Meningitis:</span>
@@ -420,7 +420,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                     </div>
                     <div className="flex items-center justify-between text-[10px]">
                       <span className="text-slate-300">Kategori Kesehatan:</span>
-                      <strong className="text-emerald-300 font-bold">
+                      <strong className="text-[#c9a961] font-bold">
                         {jamaah.age >= 65 ? 'PRIORITAS LANSIA' : 'MANDIRI'}
                       </strong>
                     </div>
@@ -428,7 +428,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
 
                   {/* Emergency Officers Contacts */}
                   <div className="p-2.5 rounded-xl bg-black/30 border border-white/10 space-y-1.5">
-                    <span className="text-[9px] uppercase font-bold text-emerald-300 block">
+                    <span className="text-[9px] uppercase font-bold text-[#c9a961] block">
                       Kontak Darurat Petugas Kloter {jamaah.kloterCode} (24 Jam):
                     </span>
                     <div className="text-[10px] space-y-1">
@@ -442,14 +442,14 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-slate-300">Call Center Haji Papua:</span>
-                        <span className="font-mono text-emerald-300 font-bold">(0967) 532100</span>
+                        <span className="font-mono text-[#c9a961] font-bold">(0967) 532100</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Prayer / Wish */}
-                  <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-400/30 text-center">
-                    <p className="text-[9px] text-emerald-300 italic font-serif">
+                  <div className="p-2 rounded-xl bg-[#c9a961]/10 border border-emerald-400/30 text-center">
+                    <p className="text-[9px] text-[#c9a961] italic font-serif">
                       &ldquo;Semoga Menjadi Haji yang Mabrur dan Mabrurah. Amin Ya Rabbal &apos;Alamin.&rdquo;
                     </p>
                   </div>
@@ -498,7 +498,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
             <button
               type="button"
               onClick={handlePrint}
-              className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer border border-emerald-400/40"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer border border-[#c9a961]/40"
             >
               <Printer className="w-4 h-4" />
               <span>Cetak Kartu PDF</span>

@@ -63,7 +63,7 @@ export default async function DashboardPage() {
           <RecalculateButton seasonId={season?.id} />
           <Link
             href="/jamaah"
-            className="flex items-center gap-1.5 bg-gradient-to-r from-[#1e40af] to-[#059669] hover:from-[#1e3a8a] hover:to-[#047857] text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-xs"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-[#c9a961] to-[#b8941e] hover:brightness-105 text-[#1A1410] font-bold px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-xs"
           >
             <Users className="w-4 h-4 text-emerald-200" />
             <span>Lihat Data Jamaah</span>
@@ -171,7 +171,7 @@ export default async function DashboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#1e40af]">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#b8941e]">
                 Indikator Kesiapan Internal
               </span>
               <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono">
@@ -185,10 +185,10 @@ export default async function DashboardPage() {
 
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <div className="text-3xl font-black text-[#1e40af] font-mono">
+              <div className="text-3xl font-black text-[#b8941e] font-mono">
                 {Number(kpi?.provincialReadinessIndex ?? 0).toFixed(1)}%
               </div>
-              <div className="text-xs font-bold text-[#059669]">
+              <div className="text-xs font-bold text-[#0f6938]">
                 Status Agregat: {kpi.provincialReadinessIndex >= 90 ? 'SIAP BERANGKAT' : 'DALAM PROSES'}
               </div>
             </div>
@@ -198,7 +198,7 @@ export default async function DashboardPage() {
         {/* Progress Bar Container */}
         <div className="w-full bg-slate-100 rounded-full h-4 p-0.5 border border-slate-200 overflow-hidden mb-6">
           <div
-            className="bg-gradient-to-r from-[#1e40af] via-blue-500 to-[#059669] h-full rounded-full transition-all duration-700"
+            className="bg-gradient-to-r from-[#c9a961] via-amber-300 to-[#b8941e] h-full rounded-full transition-all duration-700"
             style={{ width: `${Math.min(100, Math.max(5, kpi.provincialReadinessIndex))}%` }}
           />
         </div>
@@ -216,7 +216,7 @@ export default async function DashboardPage() {
               </div>
               <div className="w-full bg-slate-200 rounded-full h-1.5 mt-2 overflow-hidden">
                 <div
-                  className="bg-[#059669] h-full rounded-full"
+                  className="bg-[#0f6938] h-full rounded-full"
                   style={{ width: `${comp.averageScore}%` }}
                 />
               </div>
@@ -229,7 +229,7 @@ export default async function DashboardPage() {
       <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#1e40af] to-[#059669] text-white">
+            <span className="p-1.5 rounded-lg bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-bold">
               <AlertCircle className="w-4 h-4" />
             </span>
             <div>
@@ -243,7 +243,7 @@ export default async function DashboardPage() {
           </div>
           <Link
             href="/action-center"
-            className="text-xs font-bold text-[#1e40af] hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-[#b8941e] hover:underline flex items-center gap-1"
           >
             Buka Command Board <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
@@ -331,7 +331,7 @@ export default async function DashboardPage() {
             </div>
             <Link
               href="/jamaah"
-              className="text-xs font-bold text-[#1e40af] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#b8941e] hover:underline flex items-center gap-1"
             >
               <span>Semua Wilayah</span>
               <ChevronRight className="w-3.5 h-3.5" />
@@ -354,7 +354,7 @@ export default async function DashboardPage() {
                 {regionalRanking.map((reg) => (
                   <tr key={reg.regionId} className="hover:bg-slate-50/80 transition-colors">
                     <td className="py-3 px-3 font-semibold text-gray-900 flex items-center gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-[#1e40af] shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-[#b8941e] shrink-0" />
                       <span>{reg.regionName}</span>
                     </td>
                     <td className="py-3 px-3 text-center font-mono font-bold text-gray-800">
@@ -410,7 +410,7 @@ export default async function DashboardPage() {
                 <h3 className="text-base font-bold text-gray-900">Aktivitas Sistem</h3>
                 <p className="text-xs text-gray-500">Jejak audit append-only operasional</p>
               </div>
-              <ShieldCheck className="w-5 h-5 text-[#059669]" />
+              <ShieldCheck className="w-5 h-5 text-[#0f6938]" />
             </div>
 
             <div className="space-y-3">
@@ -425,7 +425,7 @@ export default async function DashboardPage() {
                     className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-[#1e40af] font-mono text-[11px]">
+                      <span className="font-bold text-[#b8941e] font-mono text-[11px]">
                         {act.action}
                       </span>
                       <span className="text-[10px] text-gray-400 font-mono">
@@ -445,7 +445,7 @@ export default async function DashboardPage() {
           <div className="mt-4 pt-3 border-t border-slate-100">
             <Link
               href="/system/audit-logs"
-              className="w-full block text-center text-xs font-bold text-[#1e40af] hover:underline"
+              className="w-full block text-center text-xs font-bold text-[#b8941e] hover:underline"
             >
               Lihat Seluruh Log Audit →
             </Link>
