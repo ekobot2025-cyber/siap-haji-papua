@@ -690,7 +690,7 @@ export default function ShowcaseLandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-xs">
                       <span className="text-slate-400">Status Keberangkatan:</span>
-                      <span className="text-[#c9a961] font-bold bg-[#eaf5ee]0/10 px-2 py-0.5 rounded">SIAP BERANGKAT 1447H</span>
+                      <span className="text-[#0f6938] font-bold bg-[#0f6938]/10 px-2 py-0.5 rounded">SIAP BERANGKAT 1447H</span>
                     </div>
                   </div>
                 </div>
