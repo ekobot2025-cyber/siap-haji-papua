@@ -46,6 +46,6 @@ Thumbs.db
 
 # Dokumen & berkas catatan lokal/pribadi
 *.pdf
-167da98d-291a-4670-bc8b-5e28f9950ce4.png
-41ac4267-f843-47da-920f-8aae5c590a44.png
+*.png
+.pnpm-store
 # SIAP HAJI PAPUA.txt

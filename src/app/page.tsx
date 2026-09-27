@@ -58,15 +58,17 @@ export default function ShowcaseLandingPage() {
   };
 
   const officialRegencies = [
-    { code: 'REG-JPR-KOTA', name: 'Kota Jayapura', quota: 420, ready: 97.5, type: 'Ibukota Provinsi / Pesisir Youtefa', hub: 'Bandara Sentani (DJJ)' },
-    { code: 'REG-JPR-KAB', name: 'Kab. Jayapura', quota: 210, ready: 96.2, type: 'Daratan Utama / Danau Sentani', hub: 'Bandara Sentani (DJJ)' },
-    { code: 'REG-BIAK', name: 'Kab. Biak Numfor', quota: 140, ready: 95.8, type: 'Kepulauan Teluk Cenderawasih', hub: 'Bandara Frans Kaisiepo (BIK)' },
-    { code: 'REG-KEEROM', name: 'Kab. Keerom', quota: 95, ready: 94.4, type: 'Perbatasan RI - PNG (Waris/Arso)', hub: 'Transit Jayapura -> Sentani' },
-    { code: 'REG-SARMI', name: 'Kab. Sarmi', quota: 65, ready: 93.1, type: 'Pesisir Samudra Pasifik', hub: 'Trans-Papua -> Sentani' },
-    { code: 'REG-YAPEN', name: 'Kab. Kepulauan Yapen', quota: 50, ready: 92.5, type: 'Gugusan Kepulauan Serui', hub: 'Pelabuhan Serui -> Biak' },
-    { code: 'REG-MAMB-RAYA', name: 'Kab. Mamberamo Raya', quota: 36, ready: 91.0, type: 'DAS Sungai Mamberamo (Burmeso)', hub: 'Perintis Kasonaweja -> DJJ' },
-    { code: 'REG-SUPIORI', name: 'Kab. Supiori', quota: 32, ready: 90.5, type: 'Gugusan Kepulauan Sorendiweri', hub: 'Transit Biak -> BIK' },
-    { code: 'REG-WAROPEN', name: 'Kab. Waropen', quota: 28, ready: 89.8, type: 'Pesisir Bakau Botawa', hub: 'Speedboat -> Serui/Biak' },
+    { code: 'REG-JPR-KOTA', name: 'Kota Jayapura', quota: 350, ready: 97.8, type: 'Pusat Pemerintahan / Pesisir Youtefa', hub: 'Bandara Sentani (DJJ)' },
+    { code: 'REG-KEEROM', name: 'Kab. Keerom', quota: 75, ready: 94.5, type: 'Wilayah Perbatasan RI-PNG (Arso/Waris)', hub: 'Transit Jayapura -> Sentani' },
+    { code: 'REG-JPR-KAB', name: 'Kab. Jayapura', quota: 140, ready: 96.4, type: 'Danau Sentani / Hub Utama Embarkasi', hub: 'Bandara Sentani (DJJ)' },
+    { code: 'REG-MRK', name: 'Kab. Merauke', quota: 120, ready: 95.2, type: 'Dataran Rendah Selatan / Ujung Timur NKRI', hub: 'Bandara Mopah (MKQ) -> UPG' },
+    { code: 'REG-BVD', name: 'Kab. Boven Digoel', quota: 30, ready: 92.0, type: 'Pedalaman DAS Sungai Digoel / Perbatasan', hub: 'Bandara Tanah Merah (TMH) -> MKQ' },
+    { code: 'REG-ASMAT', name: 'Kab. Asmat', quota: 20, ready: 91.5, type: 'Kawasan Pesisir Rawa / Kota Papan Agats', hub: 'Bandara Ewer (EWE) -> TIM -> UPG' },
+    { code: 'REG-MMK', name: 'Kab. Mimika', quota: 135, ready: 96.0, type: 'Kota Industri Timika / Pesisir Laut Arafura', hub: 'Bandara Mozes Kilangin (TIM) -> UPG' },
+    { code: 'REG-BIAK', name: 'Kab. Biak Numfor', quota: 95, ready: 95.8, type: 'Kepulauan Teluk Cenderawasih / Hub Utara', hub: 'Bandara Frans Kaisiepo (BIK)' },
+    { code: 'REG-YAPEN', name: 'Kab. Kepulauan Yapen', quota: 40, ready: 93.2, type: 'Gugusan Kepulauan Serui / Selat Yapen', hub: 'Pelabuhan Serui -> Biak' },
+    { code: 'REG-NBR', name: 'Kab. Nabire', quota: 50, ready: 94.0, type: 'Pesisir Teluk Cenderawasih Leher Burung', hub: 'Bandara Douw Aturure (NBX) -> UPG' },
+    { code: 'REG-JWY', name: 'Kab. Jayawijaya', quota: 21, ready: 91.8, type: 'Lembah Baliem Pegunungan Tengah Papua', hub: 'Bandara Wamena (WMX) -> Sentani' },
   ];
 
   return (
@@ -187,7 +189,7 @@ export default function ShowcaseLandingPage() {
               href="#wilayah"
               className="px-3.5 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap"
             >
-              9 Wilayah
+              11 Wilayah
             </a>
             <Link
               href="/video-wall"
@@ -255,7 +257,7 @@ export default function ShowcaseLandingPage() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="block px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
             >
-              9 Wilayah Kerja Papua
+              11 Wilayah Kerja Papua
             </a>
             <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
               <Link
@@ -309,7 +311,7 @@ export default function ShowcaseLandingPage() {
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl font-normal">
-              Platform komando digital terintegrasi <strong>Kantor Wilayah Kementerian Agama Provinsi Papua</strong> untuk pemantauan real-time kesiapan administrasi, bio visa, penetapan istitha&apos;ah medis RSUD, dan alokasi 4 Kloter jamaah di 9 Kabupaten/Kota.
+              Platform komando digital terintegrasi <strong>Kantor Wilayah Kementerian Agama Provinsi Papua</strong> untuk pemantauan real-time kesiapan administrasi, bio visa, penetapan istitha&apos;ah medis RSUD, dan alokasi 4 Kloter jamaah di 11 Kabupaten/Kota.
             </p>
 
             {/* CTAs */}
@@ -339,7 +341,7 @@ export default function ShowcaseLandingPage() {
             {/* 3 Metric Stat Counters */}
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-xl">
               <div>
-                <div className="text-2xl sm:text-4xl font-black font-mono text-white">9</div>
+                <div className="text-2xl sm:text-4xl font-black font-mono text-white">11</div>
                 <div className="text-[11px] sm:text-xs text-slate-400 font-medium mt-0.5">Kabupaten & Kota</div>
               </div>
               <div className="border-x border-white/10 px-4">
@@ -537,7 +539,7 @@ export default function ShowcaseLandingPage() {
                   Pusat Kendali Pengambilan Keputusan Kakanwil & Forkopimda
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                  Menyajikan ringkasan strategis 9 kabupaten/kota secara real-time. Dilengkapi <strong>Early Warning Engine</strong> untuk mendeteksi potensi keterlambatan paspor atau pelunasan BPIH, serta <strong>Mode Video Wall NOC</strong> untuk display layar besar aula komando.
+                  Menyajikan ringkasan strategis 11 kabupaten/kota secara real-time. Dilengkapi <strong>Early Warning Engine</strong> untuk mendeteksi potensi keterlambatan paspor atau pelunasan BPIH, serta <strong>Mode Video Wall NOC</strong> untuk display layar besar aula komando.
                 </p>
                 <ul className="space-y-2 text-xs text-slate-300 pt-2 font-medium">
                   <li className="flex items-center gap-2">
@@ -575,7 +577,7 @@ export default function ShowcaseLandingPage() {
                   </div>
                   <div className="p-3 rounded-xl bg-white/5 border border-white/10">
                     <strong className="block text-white">Peta Spasial Papua</strong>
-                    <span className="text-[10px] text-slate-400">9 Wilayah Definitif</span>
+                    <span className="text-[10px] text-slate-400">11 Wilayah Definitif</span>
                   </div>
                   <div className="p-3 rounded-xl bg-white/5 border border-white/10">
                     <strong className="block text-white">Laporan & Rekap Resmi</strong>
@@ -734,7 +736,7 @@ export default function ShowcaseLandingPage() {
             <span className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] font-mono font-bold text-xs flex items-center justify-center">
               01
             </span>
-            <strong className="block text-sm text-white font-bold">Kemenag 9 Kab/Kota</strong>
+            <strong className="block text-sm text-white font-bold">Kemenag 11 Kab/Kota</strong>
             <p className="text-[11px] text-slate-400 leading-relaxed">
               Pendaftaran porsi, validasi berkas fisik KTP/KK, dan penyerahan SPPH.
             </p>
@@ -787,7 +789,7 @@ export default function ShowcaseLandingPage() {
       </section>
 
       {/* =========================================================================
-          7. 9 WILAYAH KABUPATEN/KOTA DEFINITIF PAPUA
+          7. 11 WILAYAH KABUPATEN/KOTA PENYELENGGARA HAJI PAPUA
           ========================================================================= */}
       <section id="wilayah" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
@@ -796,7 +798,7 @@ export default function ShowcaseLandingPage() {
               DISTRIBUSI LOGISTIK EMBARKASI
             </p>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white mt-1">
-              9 Wilayah Kerja Penyelenggara Haji Papua
+              11 Wilayah Kerja Penyelenggara Haji Papua
             </h2>
           </div>
           <Link

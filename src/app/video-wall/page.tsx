@@ -82,15 +82,17 @@ export default function VideoWallPage() {
   };
 
   const defaultRegionalRanking = [
-    { regionId: 'REG-JPR-KOTA', regionName: 'Kota Jayapura', averageReadiness: 97.5, readinessIndex: 97.5 },
-    { regionId: 'REG-JPR-KAB', regionName: 'Kab. Jayapura', averageReadiness: 96.2, readinessIndex: 96.2 },
+    { regionId: 'REG-JPR-KOTA', regionName: 'Kota Jayapura', averageReadiness: 97.8, readinessIndex: 97.8 },
+    { regionId: 'REG-KEEROM', regionName: 'Kab. Keerom', averageReadiness: 94.5, readinessIndex: 94.5 },
+    { regionId: 'REG-JPR-KAB', regionName: 'Kab. Jayapura', averageReadiness: 96.4, readinessIndex: 96.4 },
+    { regionId: 'REG-MRK', regionName: 'Kab. Merauke', averageReadiness: 95.2, readinessIndex: 95.2 },
+    { regionId: 'REG-BVD', regionName: 'Kab. Boven Digoel', averageReadiness: 92.0, readinessIndex: 92.0 },
+    { regionId: 'REG-ASMAT', regionName: 'Kab. Asmat', averageReadiness: 91.5, readinessIndex: 91.5 },
+    { regionId: 'REG-MMK', regionName: 'Kab. Mimika', averageReadiness: 96.0, readinessIndex: 96.0 },
     { regionId: 'REG-BIAK', regionName: 'Kab. Biak Numfor', averageReadiness: 95.8, readinessIndex: 95.8 },
-    { regionId: 'REG-KEEROM', regionName: 'Kab. Keerom', averageReadiness: 94.4, readinessIndex: 94.4 },
-    { regionId: 'REG-SARMI', regionName: 'Kab. Sarmi', averageReadiness: 93.1, readinessIndex: 93.1 },
-    { regionId: 'REG-YAPEN', regionName: 'Kab. Kepulauan Yapen', averageReadiness: 92.5, readinessIndex: 92.5 },
-    { regionId: 'REG-MAMB-RAYA', regionName: 'Kab. Mamberamo Raya', averageReadiness: 91.0, readinessIndex: 91.0 },
-    { regionId: 'REG-SUPIORI', regionName: 'Kab. Supiori', averageReadiness: 90.5, readinessIndex: 90.5 },
-    { regionId: 'REG-WAROPEN', regionName: 'Kab. Waropen', averageReadiness: 89.8, readinessIndex: 89.8 },
+    { regionId: 'REG-YAPEN', regionName: 'Kab. Kepulauan Yapen', averageReadiness: 93.2, readinessIndex: 93.2 },
+    { regionId: 'REG-NBR', regionName: 'Kab. Nabire', averageReadiness: 94.0, readinessIndex: 94.0 },
+    { regionId: 'REG-JWY', regionName: 'Kab. Jayawijaya', averageReadiness: 91.8, readinessIndex: 91.8 },
   ];
 
   const regionalRanking = (data?.regionalRanking && data.regionalRanking.length > 0)
