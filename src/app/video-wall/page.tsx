@@ -73,11 +73,11 @@ export default function VideoWallPage() {
   };
 
   const kpi = data?.kpi || {
-    totalJamaah: 200,
-    siapBerangkat: 135,
+    totalJamaah: 924,
+    siapBerangkat: 859,
     dalamProses: 65,
-    perluTindakLanjut: 21,
-    lansiaPrioritas: 38,
+    perluTindakLanjut: 0,
+    lansiaPrioritas: 47,
     provincialReadinessIndex: 96.2,
   };
 

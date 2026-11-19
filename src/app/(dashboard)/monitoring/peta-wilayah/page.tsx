@@ -72,7 +72,7 @@ export default function PetaWilayahPage() {
               PETA GEOSPASIAL & LOGISTIK EMBARKASI PROVINSI PAPUA
             </h1>
             <p className="text-xs text-gray-500 font-medium">
-              Pemetaan spasial kesiapan jamaah di 11 Kabupaten/Kota Penyelenggara Haji Papua, titik transit bandara perintis, dan rute konsentrasi Embarkasi Hasanuddin Makassar
+              Pemetaan spasial kesiapan 924 calon jamaah riil di 11 Wilayah Kerja &amp; 18 Kabupaten/Kota Penyelenggara Haji Papua, titik transit bandara perintis, dan rute konsentrasi Embarkasi Hasanuddin Makassar
             </p>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function PetaWilayahPage() {
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-xs uppercase font-bold text-[#c9a961] tracking-wider block">
-                  Provinsi Papua • 11 Kabupaten & Kota Penyelenggara Haji
+                  Provinsi Papua • 11 Wilayah Kerja Kantor Kemenag (924 Jamaah Riil)
                 </span>
                 <h2 className="text-lg font-black mt-0.5 text-white">Peta Sebaran & Densitas Jamaah</h2>
               </div>

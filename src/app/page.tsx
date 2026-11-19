@@ -33,43 +33,27 @@ import {
 
 export default function ShowcaseLandingPage() {
   const [activeTab, setActiveTab] = useState<'eksekutif' | 'medis' | 'jamaah'>('eksekutif');
-  const [isLoggingIn, setIsLoggingIn] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Quick 1-click login handler for demo users
-  const handleQuickLogin = async (username: string, defaultPath: string) => {
-    setIsLoggingIn(username);
-    try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: username, password: 'AdminPapua2026!' }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        window.location.href = defaultPath;
-      } else {
-        window.location.href = '/login';
-      }
-    } catch {
-      window.location.href = '/login';
-    } finally {
-      setIsLoggingIn(null);
-    }
-  };
-
   const officialRegencies = [
-    { code: 'REG-JPR-KOTA', name: 'Kota Jayapura', quota: 350, ready: 97.8, type: 'Pusat Pemerintahan / Pesisir Youtefa', hub: 'Bandara Sentani (DJJ)' },
-    { code: 'REG-KEEROM', name: 'Kab. Keerom', quota: 75, ready: 94.5, type: 'Wilayah Perbatasan RI-PNG (Arso/Waris)', hub: 'Transit Jayapura -> Sentani' },
-    { code: 'REG-JPR-KAB', name: 'Kab. Jayapura', quota: 140, ready: 96.4, type: 'Danau Sentani / Hub Utama Embarkasi', hub: 'Bandara Sentani (DJJ)' },
-    { code: 'REG-MRK', name: 'Kab. Merauke', quota: 120, ready: 95.2, type: 'Dataran Rendah Selatan / Ujung Timur NKRI', hub: 'Bandara Mopah (MKQ) -> UPG' },
-    { code: 'REG-BVD', name: 'Kab. Boven Digoel', quota: 30, ready: 92.0, type: 'Pedalaman DAS Sungai Digoel / Perbatasan', hub: 'Bandara Tanah Merah (TMH) -> MKQ' },
-    { code: 'REG-ASMAT', name: 'Kab. Asmat', quota: 20, ready: 91.5, type: 'Kawasan Pesisir Rawa / Kota Papan Agats', hub: 'Bandara Ewer (EWE) -> TIM -> UPG' },
-    { code: 'REG-MMK', name: 'Kab. Mimika', quota: 135, ready: 96.0, type: 'Kota Industri Timika / Pesisir Laut Arafura', hub: 'Bandara Mozes Kilangin (TIM) -> UPG' },
-    { code: 'REG-BIAK', name: 'Kab. Biak Numfor', quota: 95, ready: 95.8, type: 'Kepulauan Teluk Cenderawasih / Hub Utara', hub: 'Bandara Frans Kaisiepo (BIK)' },
-    { code: 'REG-YAPEN', name: 'Kab. Kepulauan Yapen', quota: 40, ready: 93.2, type: 'Gugusan Kepulauan Serui / Selat Yapen', hub: 'Pelabuhan Serui -> Biak' },
-    { code: 'REG-NBR', name: 'Kab. Nabire', quota: 50, ready: 94.0, type: 'Pesisir Teluk Cenderawasih Leher Burung', hub: 'Bandara Douw Aturure (NBX) -> UPG' },
-    { code: 'REG-JWY', name: 'Kab. Jayawijaya', quota: 21, ready: 91.8, type: 'Lembah Baliem Pegunungan Tengah Papua', hub: 'Bandara Wamena (WMX) -> Sentani' },
+    { code: 'KOTA-JPR', name: 'Kota Jayapura', quota: 295, ready: 97.8, type: 'Pusat Komando & Hub Transit Sentani (DJJ)', hub: 'Bandara Sentani (DJJ)' },
+    { code: 'KAB-MMK', name: 'Kab. Mimika', quota: 172, ready: 96.0, type: 'Hub Timika / Pesisir Laut Arafura', hub: 'Bandara Mozes Kilangin (TIM) -> UPG' },
+    { code: 'KAB-MRK', name: 'Kab. Merauke', quota: 124, ready: 95.2, type: 'Hub Mopah / Dataran Rendah Selatan NKRI', hub: 'Bandara Mopah (MKQ) -> UPG' },
+    { code: 'KAB-JPR', name: 'Kab. Jayapura', quota: 81, ready: 96.4, type: 'Kawasan Danau Sentani / Grime Nawa', hub: 'Bandara Sentani (DJJ)' },
+    { code: 'KAB-NBR', name: 'Kab. Nabire', quota: 58, ready: 94.0, type: 'Hub Papua Tengah / Teluk Cenderawasih', hub: 'Bandara Douw Aturure (NBX) -> UPG' },
+    { code: 'KAB-BIAK', name: 'Kab. Biak Numfor', quota: 52, ready: 95.8, type: 'Hub Utara Pasifik / Frans Kaisiepo', hub: 'Bandara Frans Kaisiepo (BIK)' },
+    { code: 'KAB-JWY', name: 'Kab. Jayawijaya', quota: 26, ready: 91.8, type: 'Lembah Baliem Pegunungan Tengah', hub: 'Bandara Wamena (WMX) -> Sentani' },
+    { code: 'KAB-BVD', name: 'Kab. Boven Digoel', quota: 21, ready: 92.0, type: 'Pedalaman DAS Sungai Digoel Tanah Merah', hub: 'Bandara Tanah Merah (TMH) -> MKQ' },
+    { code: 'KAB-YAPEN', name: 'Kab. Kepulauan Yapen', quota: 21, ready: 93.2, type: 'Gugusan Kepulauan Serui / Selat Yapen', hub: 'Pelabuhan Serui -> Biak' },
+    { code: 'KAB-MAPPI', name: 'Kab. Mappi', quota: 19, ready: 92.5, type: 'Kawasan Rawa Sepefi Kepi', hub: 'Bandara Kepi (KEI) -> MKQ' },
+    { code: 'KAB-ASMAT', name: 'Kab. Asmat', quota: 18, ready: 91.5, type: 'Kawasan Pesisir Rawa Kota Papan Agats', hub: 'Bandara Ewer (EWE) -> TIM -> UPG' },
+    { code: 'KAB-WRP', name: 'Kab. Waropen', quota: 12, ready: 92.0, type: 'Pesisir Teluk Cenderawasih Botawa', hub: 'Transit Serui -> Biak' },
+    { code: 'KAB-SRM', name: 'Kab. Sarmi', quota: 11, ready: 93.0, type: 'Pesisir Pasifik Utara Ombak Sarmi', hub: 'Transit Darat Trans-Papua -> Sentani' },
+    { code: 'KAB-KRM', name: 'Kab. Keerom', quota: 10, ready: 94.5, type: 'Wilayah Perbatasan RI-PNG Arso', hub: 'Transit Jayapura -> Sentani' },
+    { code: 'KAB-YHK', name: 'Kab. Yahukimo', quota: 1, ready: 90.0, type: 'Dekai Lembah Pegunungan', hub: 'Bandara Nop Goliat Dekai -> DJJ' },
+    { code: 'KAB-MBR', name: 'Kab. Mamberamo Raya', quota: 1, ready: 90.0, type: 'Kawasan DAS Sungai Mamberamo Kasonaweja', hub: 'Transit Perintis -> Sentani' },
+    { code: 'KAB-PAN', name: 'Kab. Paniai', quota: 1, ready: 90.0, type: 'Enarotali Pegunungan Tengah', hub: 'Bandara Enarotali -> NBX' },
+    { code: 'KAB-SUP', name: 'Kab. Supiori', quota: 1, ready: 90.0, type: 'Kepulauan Supiori Utara', hub: 'Transit Darat -> Biak' },
   ];
 
   return (
@@ -346,7 +330,7 @@ export default function ShowcaseLandingPage() {
             {/* 3 Metric Stat Counters */}
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#e8dfc8] max-w-xl">
               <div>
-                <div className="text-2xl sm:text-4xl font-black font-mono text-[#967412]">11</div>
+                <div className="text-2xl sm:text-4xl font-black font-mono text-[#967412]">18</div>
                 <div className="text-[11px] sm:text-xs text-stone-500 font-medium mt-0.5">Kabupaten & Kota</div>
               </div>
               <div className="border-x border-[#e8dfc8] px-4">
@@ -582,7 +566,7 @@ export default function ShowcaseLandingPage() {
                     </div>
                     <div className="p-3 rounded-xl bg-white/5 border border-white/10">
                       <strong className="block text-white">Peta Spasial Papua</strong>
-                      <span className="text-[10px] text-stone-400">11 Wilayah Definitif</span>
+                      <span className="text-[10px] text-stone-400">18 Wilayah Se-Papua Raya</span>
                     </div>
                     <div className="p-3 rounded-xl bg-white/5 border border-white/10">
                       <strong className="block text-white">Laporan & Rekap Resmi</strong>
@@ -617,12 +601,12 @@ export default function ShowcaseLandingPage() {
                     </li>
                   </ul>
                   <div className="pt-3">
-                    <button
-                      onClick={() => handleQuickLogin('petugaskesehatan', '/kesehatan')}
+                    <Link
+                      href="/login"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 transition-all cursor-pointer shadow-md shadow-rose-600/20"
                     >
-                      Login Sebagai Petugas Medis <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                      Login Petugas Medis <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
                 </div>
                 <div className="lg:col-span-6 bg-[#1A1410] text-white rounded-2xl p-5 border border-white/10 space-y-3">
@@ -794,17 +778,20 @@ export default function ShowcaseLandingPage() {
       </section>
 
       {/* =========================================================================
-          7. 11 WILAYAH KABUPATEN/KOTA PENYELENGGARA HAJI PAPUA
+          7. 18 WILAYAH KABUPATEN/KOTA PENYELENGGARA HAJI PAPUA
           ========================================================================= */}
       <section id="wilayah" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <p className="text-xs font-mono font-bold uppercase tracking-[0.24em] text-[#8a6d2b]">
-              DISTRIBUSI LOGISTIK EMBARKASI
+              DATA RIIL SATU DATA HAJI.GO.ID • 1448 H / 2026-2027 M
             </p>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A1410] mt-1">
-              11 Wilayah Kerja Penyelenggara Haji Papua
+              18 Wilayah Penyelenggara Haji Papua
             </h2>
+            <p className="text-xs text-stone-600 mt-1">
+              Sebaran alokasi 924 calon jamaah riil berhak lunas dari 18 kabupaten/kota se-Papua Raya.
+            </p>
           </div>
           <Link
             href="/monitoring/peta-wilayah"
@@ -832,7 +819,7 @@ export default function ShowcaseLandingPage() {
               <div className="text-xs text-stone-600 space-y-1 pt-2 border-t border-stone-100">
                 <div className="flex justify-between">
                   <span className="text-stone-500">Alokasi Kuota:</span>
-                  <strong className="text-stone-900 font-mono">{reg.quota} Jamaah</strong>
+                  <strong className="text-stone-900 font-mono">{reg.quota} Jamaah (Riil)</strong>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-stone-500">Titik Transit:</span>
@@ -849,88 +836,34 @@ export default function ShowcaseLandingPage() {
       </section>
 
       {/* =========================================================================
-          8. DIRECT 1-CLICK DEMO LOGIN (INSTANT ACCESS)
+          8. OFFICIAL SECURE PORTAL ACCESS (CLEAN - NO DEMO ACCOUNTS)
           ========================================================================= */}
       <section className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12">
-        <div className="p-8 rounded-3xl border border-[#e8dfc8] bg-white shadow-md text-center space-y-6">
-          <div>
-            <span className="text-xs font-mono font-bold text-[#8a6d2b] uppercase tracking-wider block mb-1">
-              AKSES CEPAT DEMO SISTEM • 1-CLICK INSTANT LOGIN
-            </span>
-            <h3 className="text-2xl font-black text-[#1A1410]">
-              Pilih Peran Pengguna untuk Menguji Sistem Langsung
-            </h3>
-            <p className="text-xs text-stone-600 mt-1 max-w-lg mx-auto">
-              Klik salah satu akun di bawah ini untuk langsung masuk ke modul operasional tanpa mengetik password manual.
-            </p>
+        <div className="p-8 sm:p-10 rounded-3xl border border-[#c9a961]/40 bg-gradient-to-b from-[#1A1410] via-[#241A12] to-[#1A1410] text-white text-center space-y-5 shadow-xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-[#c9a961]/30 text-xs font-mono text-[#c9a961]">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>PORTAL TEROTENTIKASI KEMENTERIAN HAJI &amp; UMRAH PROVINSI PAPUA</span>
           </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
-            <button
-              onClick={() => handleQuickLogin('superadmin', '/dashboard')}
-              disabled={isLoggingIn !== null}
-              className="p-3.5 rounded-xl bg-white hover:bg-[#fbf8ee] border border-[#e8dfc8] hover:border-[#c9a961] text-left transition-all cursor-pointer group disabled:opacity-50 shadow-2xs"
+          <h3 className="text-2xl sm:text-3xl font-black text-white max-w-xl mx-auto">
+            Pusat Komando &amp; Sistem Administrasi Haji Terpadu
+          </h3>
+          <p className="text-xs sm:text-sm text-stone-300 max-w-lg mx-auto leading-relaxed">
+            Akses sistem terproteksi untuk Pimpinan Komando, Administrator Wilayah Kanwil/Kankemenag, dan Tim Medis Pemeriksa Istitha&apos;ah Kesehatan.
+          </p>
+          <div className="pt-2 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/login"
+              className="btn-kemenhaj-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white text-xs sm:text-sm font-bold shadow-md transition-all hover:scale-[1.02]"
             >
-              <strong className="block text-xs font-bold text-[#1A1410] group-hover:text-[#8a6d2b]">
-                Super Admin
-              </strong>
-              <span className="text-[10px] text-stone-500">Akses Penuh Seluruh Sistem</span>
-            </button>
-
-            <button
-              onClick={() => handleQuickLogin('pimpinan', '/dashboard')}
-              disabled={isLoggingIn !== null}
-              className="p-3.5 rounded-xl bg-white hover:bg-[#fbf8ee] border border-[#e8dfc8] hover:border-[#c9a961] text-left transition-all cursor-pointer group disabled:opacity-50 shadow-2xs"
+              <span>Masuk ke Dashboard Operasional</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/cek-porsi"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs sm:text-sm font-bold transition-all"
             >
-              <strong className="block text-xs font-bold text-[#1A1410] group-hover:text-[#8a6d2b]">
-                Pimpinan Wilayah
-              </strong>
-              <span className="text-[10px] text-stone-500">Executive Read-Only Monitor</span>
-            </button>
-
-            <button
-              onClick={() => handleQuickLogin('petugaskesehatan', '/kesehatan')}
-              disabled={isLoggingIn !== null}
-              className="p-3.5 rounded-xl bg-rose-50 hover:bg-rose-100/70 border border-rose-200 hover:border-rose-300 text-left transition-all cursor-pointer group disabled:opacity-50 shadow-2xs"
-            >
-              <strong className="block text-xs font-bold text-rose-700 group-hover:text-rose-900">
-                Petugas Kesehatan
-              </strong>
-              <span className="text-[10px] text-rose-600">Tim Medis & Istitha&apos;ah RSUD</span>
-            </button>
-
-            <button
-              onClick={() => handleQuickLogin('adminprov', '/dashboard')}
-              disabled={isLoggingIn !== null}
-              className="p-3.5 rounded-xl bg-white hover:bg-[#fbf8ee] border border-[#e8dfc8] hover:border-[#c9a961] text-left transition-all cursor-pointer group disabled:opacity-50 shadow-2xs"
-            >
-              <strong className="block text-xs font-bold text-[#1A1410] group-hover:text-[#8a6d2b]">
-                Admin Provinsi
-              </strong>
-              <span className="text-[10px] text-stone-500">Operasional Tahapan Wilayah</span>
-            </button>
-
-            <button
-              onClick={() => handleQuickLogin('adminkotajpr', '/dashboard')}
-              disabled={isLoggingIn !== null}
-              className="p-3.5 rounded-xl bg-white hover:bg-[#fbf8ee] border border-[#e8dfc8] hover:border-[#c9a961] text-left transition-all cursor-pointer group disabled:opacity-50 shadow-2xs"
-            >
-              <strong className="block text-xs font-bold text-[#1A1410] group-hover:text-[#8a6d2b]">
-                Admin Kota Jayapura
-              </strong>
-              <span className="text-[10px] text-stone-500">Scoped: Kota Jayapura</span>
-            </button>
-
-            <button
-              onClick={() => handleQuickLogin('petugaskloter', '/dashboard')}
-              disabled={isLoggingIn !== null}
-              className="p-3.5 rounded-xl bg-white hover:bg-[#fbf8ee] border border-[#e8dfc8] hover:border-[#c9a961] text-left transition-all cursor-pointer group disabled:opacity-50 shadow-2xs"
-            >
-              <strong className="block text-xs font-bold text-[#1A1410] group-hover:text-[#8a6d2b]">
-                Petugas Kloter
-              </strong>
-              <span className="text-[10px] text-stone-500">Scoped: Kloter 01 Papua</span>
-            </button>
+              <span>Portal Cek Porsi Publik</span>
+            </Link>
           </div>
         </div>
       </section>
