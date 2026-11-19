@@ -25,6 +25,8 @@ import { getServerSession } from '@/infrastructure/security/jwt';
 import { DashboardService } from '@/application/services/dashboard.service';
 import { ReadinessBadge } from '@/components/ui/StatusBadge';
 import { RecalculateButton } from '@/components/dashboard/RecalculateButton';
+import { BerhakLunasService } from '@/application/services/berhak-lunas.service';
+import { BerhakLunasCard } from '@/components/dashboard/BerhakLunasCard';
 import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
@@ -38,6 +40,7 @@ export default async function DashboardPage() {
     redirect('/portal-jamaah');
   }
   const data = await DashboardService.getExecutiveData(session);
+  const berhakLunasSummary = BerhakLunasService.getSummary();
 
   const { kpi, season, componentsReadiness, regionalRanking, recentActivities } = data;
 
@@ -165,6 +168,9 @@ export default async function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* 2.5. ALOKASI KUOTA BERHAK LUNAS PAPUA 1448 H (SATU DATA KEMENHAJ haji.go.id) */}
+      <BerhakLunasCard summary={berhakLunasSummary} />
 
       {/* 3. PROVINCIAL READINESS INDEX (INDEKS KESIAPAN ADMINISTRATIF PROVINSI PAPUA) */}
       <div className="bg-white p-6 rounded-2xl border border-[#e8dfc8] shadow-xs">

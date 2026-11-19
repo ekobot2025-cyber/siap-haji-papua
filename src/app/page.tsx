@@ -289,9 +289,21 @@ export default function ShowcaseLandingPage() {
           {/* Left Column: Headlines & CTAs */}
           <div className="lg:col-span-7 space-y-6 text-left">
             {/* Eyebrow Pill */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#e8dfc8] bg-[#fbf8ee] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#8a6d2b] shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#b8941e] animate-pulse" />
-              SISTEM INFORMASI & MONITORING HAJI PROVINSI PAPUA
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#e8dfc8] bg-[#fbf8ee] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[#8a6d2b] shadow-2xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#b8941e] animate-pulse" />
+                SISTEM INFORMASI & MONITORING HAJI PROVINSI PAPUA
+              </div>
+              <a
+                href="https://haji.go.id/estimasi-keberangkatan?tab=berhak-lunas"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition-colors shadow-2xs"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>924 Kuota Berhak Lunas 1448 H Resmi Teradopsi</span>
+                <ArrowUpRight className="w-3 h-3 text-emerald-700" />
+              </a>
             </div>
 
             {/* Main Headline */}
