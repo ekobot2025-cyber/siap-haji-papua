@@ -1,10 +1,6 @@
 import React from 'react';
-import { redirect } from 'next/navigation';
 import { ExternalLink, Newspaper } from 'lucide-react';
-import { getServerSession } from '@/infrastructure/security/jwt';
 import { InformasiCarousel, type InfoSlide } from '@/components/informasi/InformasiCarousel';
-
-export const dynamic = 'force-dynamic';
 
 /**
  * Halaman Informasi Resmi: hanya memuat tautan ke kanal PUBLIK resmi.
@@ -51,12 +47,14 @@ const SLIDES: InfoSlide[] = [
   },
 ];
 
-export default async function InformasiResmiPage() {
-  const session = await getServerSession();
-  if (!session) redirect('/login');
+export const metadata = {
+  title: 'Informasi Resmi Kemenhaj | SIAP HAJI PAPUA',
+  description: 'Kanal informasi publik resmi Kemenhaj: Instagram, portal haji, dan berita Kemenag.',
+};
 
+export default function InformasiResmiPage() {
   return (
-    <div className="space-y-6">
+    <div className="max-w-5xl mx-auto p-4 sm:p-8 space-y-6 min-h-screen bg-[#FAF9F5]">
       <div className="bg-white p-5 rounded-2xl border border-[#e8dfc8] shadow-xs">
         <div className="flex items-center gap-2 mb-1">
           <Newspaper className="w-5 h-5 text-[#b8941e]" />
