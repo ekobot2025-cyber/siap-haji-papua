@@ -59,7 +59,31 @@ export async function GET() {
     const lain = items.filter((i) => !i.haji);
     const hasil = [...haji, ...lain].slice(0, Math.max(6, Math.min(haji.length, 8)));
 
-    return NextResponse.json({ success: true, sumber: 'kemenag.go.id/rss', items: hasil });
+    // Ambil gambar publik (og:image) tiap artikel; gagal = tanpa gambar.
+    const dgGambar = await Promise.all(
+      hasil.map(async (it) => {
+        try {
+          const ctl = new AbortController();
+          const t = setTimeout(() => ctl.abort(), 6000);
+          const page = await fetch(it.url, {
+            headers: { 'User-Agent': 'SiapHajiPapua/1.0 (+informasi publik)' },
+            signal: ctl.signal,
+            next: { revalidate: 1800 },
+          });
+          clearTimeout(t);
+          const html = await page.text();
+          const m =
+            html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
+            html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+          const img = m?.[1] ?? '';
+          return { ...it, gambar: img.startsWith('https://') ? img : '' };
+        } catch {
+          return { ...it, gambar: '' };
+        }
+      })
+    );
+
+    return NextResponse.json({ success: true, sumber: 'kemenag.go.id/rss', items: dgGambar });
   } catch {
     return NextResponse.json({ success: false, items: [] });
   }

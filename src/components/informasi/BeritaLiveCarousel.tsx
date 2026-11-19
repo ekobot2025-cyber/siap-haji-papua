@@ -11,6 +11,7 @@ interface ApiItem {
   url: string;
   tanggal: string;
   haji: boolean;
+  gambar?: string;
 }
 
 const WARNA = [
@@ -45,6 +46,7 @@ export function BeritaLiveCarousel() {
           sumber: 'berita selengkapnya di kemenag.go.id',
           url: it.url,
           warna: WARNA[i % WARNA.length],
+          gambar: it.gambar || undefined,
         }));
         setSlides([...berita, ...INFO_SLIDES]);
       })
