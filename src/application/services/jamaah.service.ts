@@ -150,8 +150,9 @@ export class JamaahService {
     unmask = false,
     ipAddress?: string
   ) {
-    const jamaah = await prisma.jamaah.findUnique({
-      where: { id: jamaahId },
+    const isPorsi = /^\d{10}$/.test(jamaahId);
+    const jamaah = await prisma.jamaah.findFirst({
+      where: isPorsi ? { porsiNumber: jamaahId, deletedAt: null } : { id: jamaahId, deletedAt: null },
       include: {
         region: true,
         season: true,

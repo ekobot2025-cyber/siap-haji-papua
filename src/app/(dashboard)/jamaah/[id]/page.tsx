@@ -64,7 +64,27 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
         </div>
       );
     }
-    notFound();
+    return (
+      <div className="bg-white border border-[#e8dfc8] p-8 rounded-2xl text-center max-w-lg mx-auto my-12 shadow-xs space-y-4">
+        <div className="w-14 h-14 rounded-full bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8] flex items-center justify-center mx-auto">
+          <User className="w-7 h-7" />
+        </div>
+        <h2 className="text-lg font-bold text-[#1A1410]">Data Jamaah Tidak Ditemukan</h2>
+        <p className="text-xs text-stone-600 leading-relaxed">
+          ID jamaah <code className="bg-stone-100 font-mono text-[11px] px-1.5 py-0.5 rounded border border-stone-200">{id}</code> tidak ditemukan dalam basis data aktif.
+          Kemungkinan data ini berasal dari data simulasi lama yang telah dibersihkan secara tuntas, atau sesi peramban Anda masih menyimpan tautan riwayat lama.
+        </p>
+        <div className="pt-2">
+          <Link
+            href="/jamaah"
+            className="inline-flex items-center gap-1.5 btn-kemenhaj-primary px-4 py-2.5 rounded-xl text-xs font-bold shadow-xs"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span>Buka Daftar 924 Calon Jamaah Riil Papua</span>
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const birthDateFormatted = new Date(jamaah.birthDate).toLocaleDateString('id-ID', {
