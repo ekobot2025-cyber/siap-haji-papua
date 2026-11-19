@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { InformasiCarousel } from '@/components/informasi/InformasiCarousel';
+import { INFO_SLIDES } from '@/components/informasi/slides';
 import {
   Sparkles,
   ShieldCheck,
@@ -176,6 +178,12 @@ export default function ShowcaseLandingPage() {
               className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-stone-600 hover:text-[#8a6d2b] hover:bg-white transition-all whitespace-nowrap"
             >
               11 Wilayah
+            </a>
+            <a
+              href="#informasi"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-stone-600 hover:text-[#8a6d2b] hover:bg-white transition-all whitespace-nowrap"
+            >
+              Informasi Resmi
             </a>
             <Link
               href="/video-wall"
@@ -919,6 +927,22 @@ export default function ShowcaseLandingPage() {
       {/* =========================================================================
           9. OFFICIAL KEMENHAJ PAPUA FOOTER
           ========================================================================= */}
+      {/* Informasi Resmi (slide berita, sumber publik) */}
+      <section id="informasi" className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12">
+        <div className="flex items-end justify-between mb-5 gap-3">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-black text-[#1A1410]">Informasi Resmi</h2>
+            <p className="text-xs sm:text-sm text-stone-600 mt-1">
+              Kanal publik resmi Kemenhaj: Instagram, portal haji, dan berita Kemenag.
+            </p>
+          </div>
+          <Link href="/informasi-resmi" className="text-xs font-bold text-[#8a6d2b] hover:underline whitespace-nowrap">
+            Lihat semua
+          </Link>
+        </div>
+        <InformasiCarousel slides={INFO_SLIDES} />
+      </section>
+
       <footer className="relative z-10 border-t border-white/10 bg-[#1A1410] pt-12 pb-8 mt-12 text-stone-400 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
           <div className="space-y-3">
@@ -962,6 +986,11 @@ export default function ShowcaseLandingPage() {
               <li>
                 <Link href="/cek-porsi" className="hover:text-[#c9a961] transition-colors">
                   • Portal Cek Estimasi Porsi Mandiri
+                </Link>
+              </li>
+              <li>
+                <Link href="/informasi-resmi" className="hover:text-[#c9a961] transition-colors">
+                  • Informasi Resmi Kemenhaj (Instagram &amp; Berita)
                 </Link>
               </li>
               <li>
