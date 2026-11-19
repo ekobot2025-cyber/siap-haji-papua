@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -147,7 +147,7 @@ export default function ShowcaseLandingPage() {
                 </span>
               </div>
               <p className="text-[11px] text-stone-500 font-medium tracking-tight whitespace-nowrap hidden sm:block">
-                Kementerian Haji dan Umrah â€¢ Wilayah Kerja Papua
+                Kementerian Haji dan Umrah • Wilayah Kerja Papua
               </p>
             </div>
           </Link>
@@ -296,7 +296,7 @@ export default function ShowcaseLandingPage() {
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-[#1A1410]">
-              Satu Data â€¢ Satu Monitoring â€¢ Satu Layanan.{' '}
+              Satu Data • Satu Monitoring • Satu Layanan.{' '}
               <span className="bg-gradient-to-r from-[#c9a961] via-[#d4af37] to-[#b8941e] bg-clip-text text-transparent block mt-1">
                 Haji Papua Siap 2026 M.
               </span>
@@ -526,7 +526,7 @@ export default function ShowcaseLandingPage() {
               <div className="grid lg:grid-cols-12 gap-8 items-center bg-white p-8 rounded-3xl border border-[#e8dfc8] shadow-sm text-stone-800">
                 <div className="lg:col-span-6 space-y-4 text-left">
                   <span className="text-xs font-mono font-bold text-[#8a6d2b] uppercase tracking-wider block">
-                    PILAR 1 â€¢ EXECUTIVE COMMAND CENTER
+                    PILAR 1 • EXECUTIVE COMMAND CENTER
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-black text-[#1A1410]">
                     Pusat Kendali Pengambilan Keputusan Kakanwil & Forkopimda
@@ -585,7 +585,7 @@ export default function ShowcaseLandingPage() {
               <div className="grid lg:grid-cols-12 gap-8 items-center bg-white p-8 rounded-3xl border border-rose-200 shadow-sm text-stone-800">
                 <div className="lg:col-span-6 space-y-4 text-left">
                   <span className="text-xs font-mono font-bold text-rose-600 uppercase tracking-wider block">
-                    PILAR 2 â€¢ TIM MEDIS & OPERASIONAL TAHAPAN
+                    PILAR 2 • TIM MEDIS & OPERASIONAL TAHAPAN
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-black text-stone-900">
                     Verifikasi Kesehatan, Paspor, & BPIH Tanpa Hambatan
@@ -649,7 +649,7 @@ export default function ShowcaseLandingPage() {
               <div className="grid lg:grid-cols-12 gap-8 items-center bg-white p-8 rounded-3xl border border-[#e8dfc8] shadow-sm text-stone-800">
                 <div className="lg:col-span-6 space-y-4 text-left">
                   <span className="text-xs font-mono font-bold text-[#8a6d2b] uppercase tracking-wider block">
-                    PILAR 3 â€¢ PORTAL WARGA & CALON JAMAAH
+                    PILAR 3 • PORTAL WARGA & CALON JAMAAH
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-black text-[#1A1410]">
                     Transparansi Antrean & Estimasi Keberangkatan Terbuka
@@ -843,7 +843,7 @@ export default function ShowcaseLandingPage() {
         <div className="p-8 rounded-3xl border border-[#e8dfc8] bg-white shadow-md text-center space-y-6">
           <div>
             <span className="text-xs font-mono font-bold text-[#8a6d2b] uppercase tracking-wider block mb-1">
-              AKSES CEPAT DEMO SISTEM â€¢ 1-CLICK INSTANT LOGIN
+              AKSES CEPAT DEMO SISTEM • 1-CLICK INSTANT LOGIN
             </span>
             <h3 className="text-2xl font-black text-[#1A1410]">
               Pilih Peran Pengguna untuk Menguji Sistem Langsung
@@ -952,7 +952,7 @@ export default function ShowcaseLandingPage() {
               Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji Provinsi Papua. Mewujudkan tata kelola haji yang profesional, transparan, dan terpercaya.
             </p>
             <p className="text-[#c9a961] font-mono text-[11px]">
-              Motto: Ikhlas Beramal â€¢ Haji Papua Siap 2026
+              Motto: Ikhlas Beramal • Haji Papua Siap 2026
             </p>
           </div>
 
@@ -963,7 +963,7 @@ export default function ShowcaseLandingPage() {
             <p><strong className="text-white">Kementerian Haji dan Umrah Wilayah Provinsi Papua</strong></p>
             <p>Bidang Penyelenggaraan Haji dan Umrah (PHU)</p>
             <p>Jl. Raya Abepura, Entrop, Distrik Jayapura Selatan, Kota Jayapura, Papua 99224</p>
-            <p>Telepon: (0967) 537427 â€¢ Portal: haji.go.id</p>
+            <p>Telepon: (0967) 537427 • Portal: haji.go.id</p>
           </div>
 
           <div className="space-y-2">
@@ -978,28 +978,28 @@ export default function ShowcaseLandingPage() {
                   rel="noreferrer"
                   className="text-[#c9a961] hover:text-white transition-colors flex items-center gap-1.5 font-bold"
                 >
-                  â€¢ Portal Kementerian Haji & Umrah RI (haji.go.id)
+                  • Portal Kementerian Haji & Umrah RI (haji.go.id)
                   <ArrowUpRight className="w-3 h-3 text-[#c9a961]" />
                 </a>
               </li>
               <li>
                 <Link href="/cek-porsi" className="hover:text-[#c9a961] transition-colors">
-                  â€¢ Portal Cek Estimasi Porsi Mandiri
+                  • Portal Cek Estimasi Porsi Mandiri
                 </Link>
               </li>
               <li>
                 <Link href="/informasi-resmi" className="hover:text-[#c9a961] transition-colors">
-                  â€¢ Informasi Resmi Kemenhaj (Instagram &amp; Berita)
+                  • Informasi Resmi Kemenhaj (Instagram &amp; Berita)
                 </Link>
               </li>
               <li>
                 <Link href="/video-wall" className="hover:text-[#c9a961] transition-colors">
-                  â€¢ Mode Video Wall NOC Aula Komando
+                  • Mode Video Wall NOC Aula Komando
                 </Link>
               </li>
               <li>
                 <Link href="/login" className="hover:text-[#c9a961] transition-colors">
-                  â€¢ Login Petugas & Administrator
+                  • Login Petugas & Administrator
                 </Link>
               </li>
             </ul>
@@ -1008,10 +1008,10 @@ export default function ShowcaseLandingPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500">
           <span>
-            Â© 2026 Kementerian Haji dan Umrah RI Wilayah Papua â€¢ Terintegrasi Vertikal dengan haji.go.id. Hak Cipta Dilindungi.
+            © 2026 Kementerian Haji dan Umrah RI Wilayah Papua • Terintegrasi Vertikal dengan haji.go.id. Hak Cipta Dilindungi.
           </span>
           <span className="font-mono text-[#c9a961]">
-            SIAP HAJI PAPUA â€¢ v1.0 ENTERPRISE
+            SIAP HAJI PAPUA • v1.0 ENTERPRISE
           </span>
         </div>
       </footer>
