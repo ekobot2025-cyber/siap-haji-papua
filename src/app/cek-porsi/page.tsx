@@ -96,8 +96,8 @@ export default function CekPorsiPage() {
   };
 
   const handleDemoFill = () => {
-    setPorsi('2700192001');
-    setBirthYear('1951');
+    setPorsi('2600021828');
+    setBirthYear('1981');
   };
 
   return (
@@ -227,7 +227,7 @@ export default function CekPorsiPage() {
               onClick={handleDemoFill}
               className="text-xs text-[#8a6d2b] hover:text-[#1A1410] hover:underline font-semibold cursor-pointer"
             >
-              ✨ Isi Otomatis Contoh Nomor Porsi Demo
+              ✨ Isi Contoh Nomor Porsi Resmi Papua (2600021828)
             </button>
           </div>
 
@@ -253,7 +253,7 @@ export default function CekPorsiPage() {
                   <div className="flex items-center gap-3 text-xs text-[#e8dfc8] mt-1 font-mono">
                     <span>Nomor Porsi: <strong className="text-white">{result.porsiNumber}</strong></span>
                     <span>•</span>
-                    <span>NIK: <strong className="text-white">{result.nikMasked}</strong></span>
+                    <span>Asal: <strong className="text-white">{result.regionName}</strong></span>
                   </div>
                 </div>
 
