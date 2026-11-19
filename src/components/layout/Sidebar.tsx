@@ -25,6 +25,7 @@ import {
   Loader2,
   ArrowUpRight,
   Globe,
+  Newspaper,
 } from 'lucide-react';
 import type { UserSessionPayload } from '@/infrastructure/security/jwt';
 
@@ -82,6 +83,7 @@ export function Sidebar({ session }: SidebarProps) {
             { label: 'Mode Video Wall', href: '/video-wall', icon: Tv, active: pathname === '/video-wall', badge: 'BIG SCREEN', badgeColor: 'bg-[#1A1410] text-[#c9a961] border border-[#c9a961]/40 font-bold' },
             { label: 'Laporan & Rekap Resmi', href: '/laporan', icon: FileText, active: pathname === '/laporan', badge: 'RESMI', badgeColor: 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-white font-bold' },
             { label: 'Kalender Operasional', href: '/kalender', icon: Calendar, active: pathname.startsWith('/kalender') },
+            { label: 'Informasi Resmi', href: '/informasi-resmi', icon: Newspaper, active: pathname.startsWith('/informasi-resmi'), badge: 'BERITA', badgeColor: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
           ],
         },
         {
