@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { ExternalLink, Newspaper } from 'lucide-react';
-import { InformasiCarousel } from '@/components/informasi/InformasiCarousel';
+import { BeritaLiveCarousel } from '@/components/informasi/BeritaLiveCarousel';
 import { INFO_SLIDES as SLIDES } from '@/components/informasi/slides';
 
 
@@ -24,7 +24,7 @@ export default function InformasiResmiPage() {
         </p>
       </div>
 
-      <InformasiCarousel slides={SLIDES} />
+      <BeritaLiveCarousel />
 
       <div className="grid sm:grid-cols-2 gap-4">
         {SLIDES.map((s) => (
@@ -46,4 +46,5 @@ export default function InformasiResmiPage() {
     </div>
   );
 }
+
 
