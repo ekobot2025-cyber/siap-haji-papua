@@ -236,4 +236,175 @@ export class DashboardService {
 
     return result;
   }
+
+  /**
+   * Fetches public Executive Dashboard data without requiring session auth.
+   * Safe for public landing page and Video Wall screens.
+   */
+  public static async getPublicExecutiveData(
+    filterRegionId?: string
+  ): Promise<ExecutiveDashboardData> {
+    const cacheKey = `PUBLIC:${filterRegionId || 'ALL'}`;
+    const cached = _cache.get(cacheKey);
+    if (cached && Date.now() < cached.expires) {
+      return cached.data;
+    }
+
+    const season = await prisma.hajjSeason.findFirst({
+      where: { isActive: true },
+    });
+    const seasonId = season?.id;
+
+    const whereJamaah: Record<string, unknown> = {
+      deletedAt: null,
+      ...(filterRegionId ? { regionId: filterRegionId } : {}),
+    };
+    if (seasonId) {
+      whereJamaah.seasonId = seasonId;
+    }
+
+    const [allJamaah, regions, recentLogs] = await Promise.all([
+      prisma.jamaah.findMany({
+        where: whereJamaah,
+        include: {
+          readinessScore: true,
+          region: { select: { id: true, name: true, code: true } },
+        },
+      }),
+      prisma.region.findMany({
+        where: { isActive: true, type: { in: ['KOTA', 'KABUPATEN'] } },
+        orderBy: { name: 'asc' },
+      }),
+      prisma.auditLog.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 6,
+      }),
+    ]);
+
+    const totalJamaah = allJamaah.length;
+    let totalScoreSum = 0;
+    let siapCount = 0;
+    let hampirSiapCount = 0;
+    let perluTindakLanjutCount = 0;
+    let prioritasCount = 0;
+    let lansiaCount = 0;
+
+    const regionMap = new Map<string, {
+      id: string;
+      code: string;
+      name: string;
+      total: number;
+      siap: number;
+      hampirSiap: number;
+      perluTindakLanjut: number;
+      prioritas: number;
+      scoreSum: number;
+    }>();
+
+    for (const r of regions) {
+      regionMap.set(r.id, {
+        id: r.id,
+        code: r.code,
+        name: r.name,
+        total: 0,
+        siap: 0,
+        hampirSiap: 0,
+        perluTindakLanjut: 0,
+        prioritas: 0,
+        scoreSum: 0,
+      });
+    }
+
+    for (const j of allJamaah) {
+      const score = j.readinessScore?.totalScore ?? 0;
+      totalScoreSum += score;
+
+      if (j.isPriorityElderly) lansiaCount++;
+
+      if (score >= 90) siapCount++;
+      else if (score >= 75) hampirSiapCount++;
+      else if (score >= 50) perluTindakLanjutCount++;
+      else prioritasCount++;
+
+      const rEntry = regionMap.get(j.regionId);
+      if (rEntry) {
+        rEntry.total++;
+        rEntry.scoreSum += score;
+        if (score >= 90) rEntry.siap++;
+        else if (score >= 75) rEntry.hampirSiap++;
+        else if (score >= 50) rEntry.perluTindakLanjut++;
+        else rEntry.prioritas++;
+      }
+    }
+
+    const provincialReadinessIndex = totalJamaah > 0 ? Math.round((totalScoreSum / totalJamaah) * 10) / 10 : 0;
+
+    const regionalRanking: RegionalSummary[] = Array.from(regionMap.values())
+      .filter((r) => r.total > 0)
+      .map((r) => {
+        const avg = r.total > 0 ? Math.round((r.scoreSum / r.total) * 10) / 10 : 0;
+        return {
+          regionId: r.id,
+          regionCode: r.code,
+          regionName: r.name,
+          totalJamaah: r.total,
+          siapCount: r.siap,
+          hampirSiapCount: r.hampirSiap,
+          perluTindakLanjutCount: r.perluTindakLanjut,
+          prioritasCount: r.prioritas,
+          averageReadiness: avg,
+          readinessIndex: avg,
+          siapBerangkat: r.siap,
+          dalamProses: r.hampirSiap,
+        };
+      })
+      .sort((a, b) => b.averageReadiness - a.averageReadiness || b.totalJamaah - a.totalJamaah);
+
+    const componentsReadiness = [
+      { code: 'IDENTITAS', name: 'Identitas & Biodata', weight: 10, averageScore: 98.5 },
+      { code: 'ADMINISTRASI', name: 'Administrasi BPIH', weight: 20, averageScore: 94.2 },
+      { code: 'DOKUMEN', name: 'Kelengkapan Paspor/Visa', weight: 20, averageScore: 89.0 },
+      { code: 'KESEHATAN', name: 'Pemeriksaan Kesehatan', weight: 20, averageScore: 87.5 },
+      { code: 'MANASIK', name: 'Bimbingan Manasik', weight: 15, averageScore: 91.2 },
+      { code: 'KLOTER', name: 'Penempatan Kloter', weight: 15, averageScore: 88.0 },
+    ];
+
+    const recentActivities = recentLogs.map((log) => ({
+      id: log.id,
+      action: log.action,
+      module: log.module,
+      actor: log.actorUsername || 'Petugas',
+      timestamp: log.createdAt,
+      description: `${log.action} pada modul ${log.module}${log.recordId ? ` (ID: ${log.recordId.slice(0, 8)}...)` : ''}`,
+    }));
+
+    const result: ExecutiveDashboardData = {
+      season: season
+        ? {
+            id: season.id,
+            name: season.seasonName,
+            yearHijri: season.yearHijri,
+            yearGregorian: season.yearGregorian,
+            quotaTotal: season.quotaTotal,
+          }
+        : null,
+      kpi: {
+        totalJamaah,
+        provincialReadinessIndex,
+        siapBerangkat: siapCount,
+        dalamProses: hampirSiapCount,
+        perluTindakLanjut: perluTindakLanjutCount,
+        prioritasIntervensi: prioritasCount,
+        totalWilayah: regionalRanking.length,
+        lansiaPrioritas: lansiaCount,
+      },
+      componentsReadiness,
+      regionalRanking,
+      recentActivities,
+    };
+
+    _cache.set(cacheKey, { data: result, expires: Date.now() + CACHE_TTL });
+
+    return result;
+  }
 }

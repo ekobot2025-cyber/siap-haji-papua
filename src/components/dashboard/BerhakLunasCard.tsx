@@ -22,9 +22,10 @@ import { BERHAK_LUNAS_PAPUA_1448 } from '@/data/berhak-lunas-papua';
 
 interface Props {
   summary: BerhakLunasSummary;
+  isPublic?: boolean;
 }
 
-export function BerhakLunasCard({ summary }: Props) {
+export function BerhakLunasCard({ summary, isPublic = false }: Props) {
   const [activeTab, setActiveTab] = useState<'table' | 'charts' | 'regions' | 'kloter'>('table');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedKab, setSelectedKab] = useState('ALL');
@@ -178,7 +179,7 @@ export function BerhakLunasCard({ summary }: Props) {
               {summary.plansiaCount}
             </div>
             <div className="text-[11px] text-purple-700/80 mt-0.5 font-medium">
-              Afirmasi Lansia (Usia $\ge 65$)
+              Afirmasi Lansia (Usia ≥ 65 Tahun)
             </div>
           </div>
 
@@ -257,7 +258,18 @@ export function BerhakLunasCard({ summary }: Props) {
       {activeTab === 'table' && (
         <div>
           {/* Filter Bar */}
-          <div className="p-4 sm:p-5 bg-white border-b border-[#e8dfc8]">
+          <div className="p-4 sm:p-5 bg-white border-b border-[#e8dfc8] space-y-2.5">
+            {isPublic && (
+              <div className="p-2.5 rounded-xl bg-[#fbf8ee] border border-[#e8dfc8] text-xs text-[#8a6d2b] flex items-center justify-between gap-2">
+                <span className="flex items-center gap-1.5 font-medium">
+                  <ShieldCheck className="w-4 h-4 text-[#b8941e] shrink-0" />
+                  Kepatuhan UU PDP No. 27/2022: Nomor porsi disensor parsial pada domain publik. Gunakan fitur Cek Porsi untuk verifikasi mandiri.
+                </span>
+                <a href="/cek-porsi" className="underline font-bold text-stone-900 shrink-0">
+                  Cek Porsi &rarr;
+                </a>
+              </div>
+            )}
             <div className="flex flex-col sm:flex-row gap-2.5">
               <div className="relative flex-1">
                 <Search className="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -354,13 +366,13 @@ export function BerhakLunasCard({ summary }: Props) {
                           {rowNumber}
                         </td>
                         <td className="py-3 px-4 font-mono font-bold text-blue-900 whitespace-nowrap">
-                          {j.porsi}
+                          {isPublic ? `${j.porsi.slice(0, 4)}****${j.porsi.slice(-2)}` : j.porsi}
                         </td>
                         <td className="py-3 px-4">
                           <span className="font-bold text-[#1A1410]">{j.nama}</span>
                         </td>
-                        <td className="py-3 px-4 text-stone-600 max-w-[200px] truncate" title={j.alamat}>
-                          {j.alamat || '-'}
+                        <td className="py-3 px-4 text-stone-600 max-w-[200px] truncate" title={isPublic ? j.kabKota : j.alamat}>
+                          {isPublic ? `Wilayah ${j.kabKota}, Papua` : (j.alamat || '-')}
                         </td>
                         <td className="py-3 px-4 font-medium text-stone-800 whitespace-nowrap">
                           {j.kabKota}
@@ -554,7 +566,7 @@ export function BerhakLunasCard({ summary }: Props) {
                 {/* Lansia Risti Tinggi (75+) */}
                 <div>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-purple-800 font-bold">Usia $\ge 75$ Tahun (Pendampingan Intensif)</span>
+                    <span className="text-purple-800 font-bold">Usia ≥ 75 Tahun (Pendampingan Intensif)</span>
                     <strong className="font-mono text-purple-900">{summary.ageGroups.age75Plus} Jamaah ({Math.round((summary.ageGroups.age75Plus / summary.total) * 1000) / 10}%)</strong>
                   </div>
                   <div className="w-full bg-stone-200 rounded-full h-3 overflow-hidden">

@@ -104,7 +104,7 @@ export default function SimulasiKuotaPage() {
             <div className="flex justify-between items-center">
               <label className="font-bold text-gray-700">Ambang Batas Kesiapan Minimal:</label>
               <span className="font-mono text-base font-black text-[#8a6d2b] bg-[#fbf8ee] px-2.5 py-0.5 rounded-lg border border-[#e8dfc8]">
-                $\ge$ {minScore}%
+                ≥ {minScore}%
               </span>
             </div>
             <input
@@ -133,7 +133,7 @@ export default function SimulasiKuotaPage() {
               Daftar Rekomendasi Teratas Jamaah Cadangan ({candidates.length} Calon Teridentifikasi)
             </span>
             <p className="text-[11px] text-gray-400">
-              Diurutkan otomatis dengan prioritas: Kesiapan Tertinggi $\to$ Nomor Porsi Terdahulu (FIFO)
+              Diurutkan otomatis dengan prioritas: Kesiapan Tertinggi → Nomor Porsi Terdahulu (FIFO)
             </p>
           </div>
 

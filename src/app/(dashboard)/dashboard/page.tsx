@@ -162,7 +162,7 @@ export default async function DashboardPage() {
               {kpi.lansiaPrioritas}
             </div>
             <div className="text-[11px] text-purple-700 font-semibold mt-1 flex items-center justify-between">
-              <span>Usia $\ge 65$ Tahun</span>
+              <span>Usia ≥ 65 Tahun</span>
               <span className="text-red-700 font-bold">Prioritas: {kpi.prioritasIntervensi}</span>
             </div>
           </div>

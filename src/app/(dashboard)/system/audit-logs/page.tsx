@@ -72,7 +72,7 @@ export default async function AuditLogsPage({ searchParams }: AuditLogsPageProps
                 <th className="py-3 px-4">Aktor / Pengguna</th>
                 <th className="py-3 px-4">Aksi & Modul</th>
                 <th className="py-3 px-4">ID Rekaman</th>
-                <th className="py-3 px-4">Perubahan State (Before $\to$ After)</th>
+                <th className="py-3 px-4">Perubahan State (Before → After)</th>
                 <th className="py-3 px-4 text-right">IP Address</th>
               </tr>
             </thead>

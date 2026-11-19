@@ -5,19 +5,14 @@ import { DashboardService } from '@/application/services/dashboard.service';
 
 export async function GET(request: NextRequest) {
   const session = await getSessionFromRequest(request);
-
-  if (!session) {
-    return NextResponse.json(
-      { success: false, message: 'Autentikasi diperlukan untuk mengakses dashboard komando' },
-      { status: 401 }
-    );
-  }
-
   const { searchParams } = new URL(request.url);
   const regionId = searchParams.get('regionId') || undefined;
 
   try {
-    const data = await DashboardService.getExecutiveData(session, regionId);
+    const data = session
+      ? await DashboardService.getExecutiveData(session, regionId)
+      : await DashboardService.getPublicExecutiveData(regionId);
+
     return NextResponse.json({
       success: true,
       data,

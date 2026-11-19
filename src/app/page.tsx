@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BeritaLiveCarousel } from '@/components/informasi/BeritaLiveCarousel';
 import { KabupatenRadarSlider } from '@/components/home/KabupatenRadarSlider';
+import { PublicTransparencySection } from '@/components/home/PublicTransparencySection';
 import {
   Sparkles,
   ShieldCheck,
@@ -146,6 +147,12 @@ export default function ShowcaseLandingPage() {
               Beranda
             </a>
             <a
+              href="#transparansi-kuota"
+              className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-[#8a6d2b] hover:text-[#1A1410] hover:bg-white transition-all whitespace-nowrap"
+            >
+              Transparansi 924 Kuota
+            </a>
+            <a
               href="#pilar"
               className="px-3.5 py-1.5 rounded-full text-xs font-semibold text-stone-600 hover:text-[#8a6d2b] hover:bg-white transition-all whitespace-nowrap"
             >
@@ -215,6 +222,13 @@ export default function ShowcaseLandingPage() {
               className="block px-3.5 py-2 rounded-xl text-xs font-semibold text-stone-700 hover:text-[#8a6d2b] hover:bg-[#fbf8ee] transition-colors"
             >
               Beranda
+            </a>
+            <a
+              href="#transparansi-kuota"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block px-3.5 py-2 rounded-xl text-xs font-semibold text-[#8a6d2b] hover:bg-[#fbf8ee] transition-colors"
+            >
+              Transparansi 924 Kuota
             </a>
             <a
               href="#pilar"
@@ -388,6 +402,13 @@ export default function ShowcaseLandingPage() {
             </span>
           ))}
         </div>
+      </div>
+
+      {/* =========================================================================
+          4.5. PUSAT TRANSPARANSI & STATISTIK KUOTA PELAYANAN PUBLIK (924 JAMAAH RIIL)
+          ========================================================================= */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <PublicTransparencySection />
       </div>
 
       {/* =========================================================================
