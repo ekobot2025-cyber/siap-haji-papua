@@ -143,7 +143,7 @@ export default function ShowcaseLandingPage() {
                   SIAP <span className="text-[#b8941e]">HAJI</span> PAPUA
                 </span>
                 <span className="hidden xl:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-bold text-[#8a6d2b] bg-[#fbf8ee] border border-[#e8dfc8] whitespace-nowrap shrink-0">
-                  1447 H / 2026 M
+                  1448 H / 2026-2027 M
                 </span>
               </div>
               <p className="text-[11px] text-stone-500 font-medium tracking-tight whitespace-nowrap hidden sm:block">
@@ -350,8 +350,8 @@ export default function ShowcaseLandingPage() {
                 <div className="text-[11px] sm:text-xs text-stone-500 font-medium mt-0.5">Kabupaten & Kota</div>
               </div>
               <div className="border-x border-[#e8dfc8] px-4">
-                <div className="text-2xl sm:text-4xl font-black font-mono text-[#967412]">1.076</div>
-                <div className="text-[11px] sm:text-xs text-stone-500 font-medium mt-0.5">Total Kuota Papua</div>
+                <div className="text-2xl sm:text-4xl font-black font-mono text-[#967412]">924</div>
+                <div className="text-[11px] sm:text-xs text-stone-500 font-medium mt-0.5">Total Kuota Papua (Riil)</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-4xl font-black font-mono text-[#967412]">96.2%</div>
@@ -374,7 +374,7 @@ export default function ShowcaseLandingPage() {
                   </span>
                 </div>
                 <span className="text-[11px] font-mono font-bold text-white px-2 py-0.5 rounded bg-white/10 border border-[#c9a961]/30">
-                  1447 H / 2026 M
+                  1448 H / 2026-2027 M
                 </span>
               </div>
 
@@ -709,7 +709,7 @@ export default function ShowcaseLandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-xs">
                       <span className="text-stone-400">Status Keberangkatan:</span>
-                      <span className="text-[#8a6d2b] font-bold bg-[#fbf8ee] border border-[#e8dfc8] px-2 py-0.5 rounded">SIAP BERANGKAT 1447H</span>
+                      <span className="text-[#8a6d2b] font-bold bg-[#fbf8ee] border border-[#e8dfc8] px-2 py-0.5 rounded">SIAP BERANGKAT 1448H</span>
                     </div>
                   </div>
                 </div>

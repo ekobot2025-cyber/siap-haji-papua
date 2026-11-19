@@ -2,30 +2,14 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock, User, ShieldCheck, ArrowRight, AlertCircle, Info } from 'lucide-react';
-import { DemoBanner } from '@/components/layout/DemoBanner';
+import { Lock, User, ShieldCheck, ArrowRight, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [identifier, setIdentifier] = useState('superadmin');
-  const [password, setPassword] = useState('AdminPapua2026!');
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const demoAccounts = [
-    { label: 'Super Admin', username: 'superadmin', role: 'SUPER_ADMIN', desc: 'Akses Penuh Seluruh Sistem' },
-    { label: 'Pimpinan', username: 'pimpinan', role: 'LEADER', desc: 'Executive Monitoring (Read-Only)' },
-    { label: 'Admin Provinsi', username: 'adminprov', role: 'PROV_ADMIN', desc: 'Komando & Operasional Provinsi' },
-    { label: 'Petugas Kesehatan', username: 'petugaskesehatan', role: 'PETUGAS_KESEHATAN', desc: 'Pemeriksaan & Istitha’ah RSUD / BKKP' },
-    { label: 'Admin Kota Jayapura', username: 'adminkotajpr', role: 'REGION_ADMIN', desc: 'Scoped: Kota Jayapura' },
-    { label: 'Petugas Kloter', username: 'petugaskloter', role: 'OFFICER', desc: 'Scoped: Kloter 01' },
-  ];
-
-  const handleQuickSelect = (username: string) => {
-    setIdentifier(username);
-    setPassword('AdminPapua2026!');
-    setErrorMessage('');
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +26,7 @@ export default function LoginPage() {
       const json = await res.json();
 
       if (!res.ok || !json.success) {
-        setErrorMessage(json.message || 'Login gagal');
+        setErrorMessage(json.message || 'Login gagal. Periksa kembali username dan kata sandi Anda.');
         setIsLoading(false);
         return;
       }
@@ -57,8 +41,6 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] flex flex-col justify-between">
-      <DemoBanner />
-
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 bg-white rounded-2xl shadow-xl border border-[#e8dfc8] overflow-hidden">
           {/* Left Column: Visual Brand Identity */}
@@ -100,15 +82,17 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* Right Column: Login Form & Demo Selector */}
-          <div className="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+          {/* Right Column: Official Login Form */}
+          <div className="md:col-span-7 p-6 sm:p-10 flex flex-col justify-center">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h2 className="text-xl font-bold text-stone-900">Masuk ke Portal</h2>
-                  <p className="text-xs text-stone-500">Silakan masukkan kredensial administratif Anda</p>
+                  <p className="text-xs text-stone-500 mt-0.5">
+                    Silakan masukkan kredensial administratif resmi Anda
+                  </p>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-[#fbf8ee] text-[#8a6d2b] flex items-center justify-center border border-[#e8dfc8]">
+                <div className="w-9 h-9 rounded-full bg-[#fbf8ee] text-[#8a6d2b] flex items-center justify-center border border-[#e8dfc8]">
                   <Lock className="w-4 h-4" />
                 </div>
               </div>
@@ -123,7 +107,7 @@ export default function LoginPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-stone-700 mb-1" htmlFor="username">
-                    Username atau Email
+                    Username atau Email Resmi
                   </label>
                   <div className="relative">
                     <User className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
@@ -133,8 +117,8 @@ export default function LoginPage() {
                       required
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
-                      placeholder="e.g. superadmin / adminprov"
-                      className="w-full pl-9 pr-3 py-2 text-sm border border-[#e8dfc8] rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
+                      placeholder="Masukkan username atau email terdaftar"
+                      className="w-full pl-9 pr-3 py-2.5 text-sm border border-[#e8dfc8] rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
                     />
                   </div>
                 </div>
@@ -152,48 +136,26 @@ export default function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-9 pr-3 py-2 text-sm border border-[#e8dfc8] rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
+                      className="w-full pl-9 pr-3 py-2.5 text-sm border border-[#e8dfc8] rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
                     />
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="btn-kemenhaj-primary w-full py-2.5 px-4 rounded-xl text-sm font-bold shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-                >
-                  {isLoading ? 'Memverifikasi...' : 'Masuk ke Command Center'}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
-
-            {/* Quick Demo Role Selector */}
-            <div className="mt-6 pt-5 border-t border-[#e8dfc8]">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-stone-700 mb-2">
-                <Info className="w-3.5 h-3.5 text-[#8a6d2b]" />
-                <span>Pilih Akun Demo Uji Coba (1-Click) :</span>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {demoAccounts.map((acc) => (
+                <div className="pt-2">
                   <button
-                    key={acc.username}
-                    type="button"
-                    onClick={() => handleQuickSelect(acc.username)}
-                    className={`p-2 rounded-xl border text-left transition-all text-xs cursor-pointer ${
-                      identifier === acc.username
-                        ? 'border-[#c9a961] bg-[#fbf8ee] text-[#8a6d2b] font-bold shadow-2xs'
-                        : 'border-[#e8dfc8] bg-white text-stone-700 hover:bg-[#fbf8ee]'
-                    }`}
+                    type="submit"
+                    disabled={isLoading}
+                    className="btn-kemenhaj-primary w-full py-2.5 px-4 rounded-xl text-sm font-bold shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
-                    <div className="truncate font-semibold">{acc.label}</div>
-                    <div className="text-[10px] text-stone-500 font-mono truncate">{acc.username}</div>
+                    {isLoading ? 'Memverifikasi...' : 'Masuk ke Command Center'}
+                    <ArrowRight className="w-4 h-4" />
                   </button>
-                ))}
+                </div>
+              </form>
+
+              <div className="mt-8 pt-4 border-t border-stone-100 text-[11px] text-stone-400 text-center">
+                Portal khusus petugas dan pengelola haji Kementerian Haji &amp; Umrah RI Provinsi Papua.
               </div>
-              <p className="text-[10px] text-stone-500 mt-2 text-center">
-                Kata sandi untuk seluruh akun demo: <code className="bg-[#fbf8ee] border border-[#e8dfc8] px-1 py-0.5 rounded font-mono text-[#8a6d2b]">AdminPapua2026!</code>
-              </p>
             </div>
           </div>
         </div>

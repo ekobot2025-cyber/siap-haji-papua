@@ -54,7 +54,7 @@ export default async function DashboardPage() {
               Executive Command Center
             </h1>
             <span className="bg-[#fbf8ee] text-[#8a6d2b] text-xs font-bold px-2.5 py-0.5 rounded-full border border-[#e8dfc8]">
-              Musim Aktif: {season?.yearHijri || 1447} H
+              Musim Aktif: {season?.yearHijri || 1448} H / {season?.yearGregorian || 2027} M
             </span>
           </div>
           <p className="text-xs sm:text-sm text-stone-600">
@@ -89,8 +89,8 @@ export default async function DashboardPage() {
               {kpi.totalJamaah}
             </div>
             <div className="text-[11px] text-gray-500 mt-1 flex items-center justify-between">
-              <span>Kuota Musim: {season?.quotaTotal || 1080}</span>
-              <span className="font-semibold text-[#8a6d2b]">{Math.round((kpi.totalJamaah / (season?.quotaTotal || 1080)) * 100)}%</span>
+              <span>Kuota Musim: {season?.quotaTotal || 924}</span>
+              <span className="font-semibold text-[#8a6d2b]">{Math.round((kpi.totalJamaah / (season?.quotaTotal || 924)) * 100)}%</span>
             </div>
           </div>
         </div>
