@@ -20,6 +20,7 @@ import { prisma } from '@/infrastructure/database/prisma.client';
 import { ReadinessBadge, DataSourceBadge } from '@/components/ui/StatusBadge';
 import { JamaahFilters } from '@/components/jamaah/JamaahFilters';
 import { redirect } from 'next/navigation';
+import { SatuHajiSyncButton } from '@/components/jamaah/SatuHajiSyncButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -73,6 +74,9 @@ export default async function JamaahListPage({ searchParams }: JamaahPageProps) 
 
   const { items, meta } = data;
   const isRegionAdmin = session?.roles.includes('REGION_ADMIN');
+  const canSync = !!session?.roles.some((r) =>
+    ['SUPER_ADMIN', 'PROV_ADMIN', 'REGION_ADMIN'].includes(r)
+  );
 
   return (
     <div className="space-y-6">
@@ -95,6 +99,7 @@ export default async function JamaahListPage({ searchParams }: JamaahPageProps) 
         </div>
 
         <div className="flex items-center gap-2">
+          <SatuHajiSyncButton canSync={canSync} />
           {/* Add Jamaah modal/trigger button for Admins */}
           {session?.roles.some((r) => ['SUPER_ADMIN', 'PROV_ADMIN', 'REGION_ADMIN'].includes(r)) && (
             <Link
@@ -198,6 +203,9 @@ export default async function JamaahListPage({ searchParams }: JamaahPageProps) 
 
                       {/* Action */}
                       <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                        <span className="inline-flex mr-2 align-middle">
+                          <SatuHajiSyncButton porsiNumber={j.porsiNumber} compact canSync={canSync} />
+                        </span>
                         <Link
                           href={`/jamaah/${j.id}`}
                           className="inline-flex items-center gap-1 btn-kemenhaj-primary px-3 py-1.5 rounded-lg text-xs font-bold shadow-2xs"
