@@ -149,7 +149,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
 
                 <div className="flex items-center gap-1">
                   <MapPin className="w-3.5 h-3.5 text-[#b8941e] shrink-0" />
-                  <span className="font-medium text-stone-800">{jamaah.region.name}</span>
+                  <span className="font-medium text-stone-800">{jamaah.region?.name || 'Papua'}</span>
                 </div>
 
                 <div className="flex items-center gap-1">
@@ -158,27 +158,13 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
                 </div>
               </div>
 
-              {/* NIK & Unmask Privilege */}
-              <div className="flex items-center gap-2 mt-3 pt-2 border-t border-stone-100 text-xs font-mono">
-                <span className="text-stone-500 font-sans">NIK:</span>
-                <span className="font-bold text-stone-800 bg-stone-100 px-2 py-0.5 rounded border border-stone-200">
-                  {jamaah.nik}
+              {/* Kategori Kuota & Status Kemenhaj */}
+              <div className="flex flex-wrap items-center gap-2 mt-3 pt-2 border-t border-stone-100 text-xs">
+                <span className="text-stone-500 font-sans">Kategori Kuota 1448 H:</span>
+                <span className="font-bold text-[#8a6d2b] bg-[#fbf8ee] px-2.5 py-0.5 rounded-lg border border-[#e8dfc8]">
+                  {jamaah.isPriorityElderly ? 'Prioritas Lansia' : 'Reguler Urut Porsi'} • Tahap 1
                 </span>
-
-                {jamaah.canUnmask && (
-                  <Link
-                    href={`/jamaah/${jamaah.id}${jamaah.isUnmasked ? '' : '?unmask=true'}`}
-                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-[11px] font-sans font-semibold border transition-colors ${
-                      jamaah.isUnmasked
-                        ? 'bg-amber-50 text-amber-800 border-amber-300'
-                        : 'bg-stone-50 hover:bg-[#fbf8ee] text-stone-700 border-[#e8dfc8]'
-                    }`}
-                    title={jamaah.isUnmasked ? 'Sembunyikan NIK lengkap' : 'Buka penyamaran NIK (Tercatat di Audit Log)'}
-                  >
-                    {jamaah.isUnmasked ? <EyeOff className="w-3 h-3 text-amber-600" /> : <Eye className="w-3 h-3 text-stone-500" />}
-                    <span>{jamaah.isUnmasked ? 'Mask Data' : 'Buka Masking'}</span>
-                  </Link>
-                )}
+                <span className="text-stone-400 font-mono text-[11px]">(Satu Data haji.go.id)</span>
               </div>
             </div>
           </div>
@@ -192,19 +178,19 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
               <span className="text-3xl sm:text-4xl font-black text-[#967412] font-mono">
                 {Number(jamaah?.readiness?.score ?? 0).toFixed(1)}%
               </span>
-              <ReadinessBadge category={jamaah.readiness.category} showScore={false} size="sm" />
+              <ReadinessBadge category={jamaah?.readiness?.category || 'PRIORITAS'} showScore={false} size="sm" />
             </div>
 
             <div className="w-full bg-stone-100 rounded-full h-2.5 overflow-hidden border border-[#e8dfc8]">
               <div
                 className={`h-full rounded-full ${
-                  jamaah.readiness.score >= 90
+                  (jamaah?.readiness?.score ?? 0) >= 90
                     ? 'bg-gradient-to-r from-[#c9a961] to-[#b8941e]'
-                    : jamaah.readiness.score >= 75
+                    : (jamaah?.readiness?.score ?? 0) >= 75
                     ? 'bg-blue-600'
                     : 'bg-amber-500'
                 }`}
-                style={{ width: `${Math.min(100, Math.max(5, jamaah.readiness.score))}%` }}
+                style={{ width: `${Math.min(100, Math.max(5, jamaah?.readiness?.score ?? 0))}%` }}
               />
             </div>
             <span className="text-[10px] text-stone-400 mt-1 italic">

@@ -123,7 +123,7 @@ export default async function JamaahListPage({ searchParams }: JamaahPageProps) 
             <thead>
               <tr className="bg-[#FAF9F5] border-b border-[#e8dfc8] text-stone-600 text-xs uppercase tracking-wider font-semibold">
                 <th className="py-3 px-4">No. Porsi</th>
-                <th className="py-3 px-4">Nama Lengkap & NIK</th>
+                <th className="py-3 px-4">Nama Lengkap & Kategori</th>
                 <th className="py-3 px-4">Kabupaten / Kota</th>
                 <th className="py-3 px-4 text-center">Gender / Usia</th>
                 <th className="py-3 px-4">Indeks Kesiapan</th>
@@ -166,8 +166,8 @@ export default async function JamaahListPage({ searchParams }: JamaahPageProps) 
                             </span>
                           )}
                         </div>
-                        <div className="text-[11px] text-gray-500 font-mono mt-0.5">
-                          NIK: {j.nikMasked}
+                        <div className="text-[11px] text-[#8a6d2b] font-medium mt-0.5">
+                          {j.isPriorityElderly ? 'Prioritas Lansia' : 'Reguler Urut Porsi'} • Tahap 1
                         </div>
                       </td>
 

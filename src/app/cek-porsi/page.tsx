@@ -30,6 +30,37 @@ export default function CekPorsiPage() {
   const [result, setResult] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showSmartPass, setShowSmartPass] = useState(false);
+  const [calculationInfo, setCalculationInfo] = useState<{
+    type: 'AGE' | 'YEAR';
+    age: number;
+    year: number;
+  } | null>(null);
+
+  const handleBirthInput = (val: string) => {
+    setBirthYear(val);
+    const num = parseInt(val, 10);
+    if (!isNaN(num)) {
+      if (num >= 1 && num <= 120) {
+        // Input is age! e.g. 68 -> birth year = 2026 - 68 = 1958
+        setCalculationInfo({
+          type: 'AGE',
+          age: num,
+          year: 2026 - num,
+        });
+      } else if (num >= 1920 && num <= 2026) {
+        // Input is birth year! e.g. 1958 -> age = 2026 - 1958 = 68
+        setCalculationInfo({
+          type: 'YEAR',
+          age: 2026 - num,
+          year: num,
+        });
+      } else {
+        setCalculationInfo(null);
+      }
+    } else {
+      setCalculationInfo(null);
+    }
+  };
 
   // Auto-lookup if opened with query params (e.g. from QR Code scan on phone)
   useEffect(() => {
@@ -40,15 +71,18 @@ export default function CekPorsiPage() {
 
       if (urlPorsi && urlTh) {
         setPorsi(urlPorsi);
-        setBirthYear(urlTh);
+        handleBirthInput(urlTh);
         setLoading(true);
+
+        const parsed = parseInt(urlTh.trim(), 10);
+        const effectiveYear = parsed <= 120 ? 2026 - parsed : parsed;
 
         fetch('/api/public/cek-porsi', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             porsiNumber: urlPorsi.trim(),
-            birthYear: parseInt(urlTh.trim(), 10),
+            birthYear: effectiveYear,
           }),
         })
           .then((res) => res.json())
@@ -67,6 +101,9 @@ export default function CekPorsiPage() {
     e.preventDefault();
     if (!porsi.trim() || !birthYear.trim()) return;
 
+    const parsedNum = parseInt(birthYear.trim(), 10);
+    const effectiveYear = parsedNum <= 120 ? 2026 - parsedNum : parsedNum;
+
     setLoading(true);
     setError(null);
     setResult(null);
@@ -77,7 +114,7 @@ export default function CekPorsiPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           porsiNumber: porsi.trim(),
-          birthYear: parseInt(birthYear.trim(), 10),
+          birthYear: effectiveYear,
         }),
       });
 
@@ -96,8 +133,13 @@ export default function CekPorsiPage() {
   };
 
   const handleDemoFill = () => {
-    setPorsi('2600021828');
-    setBirthYear('1981');
+    setPorsi('2600021367');
+    setBirthYear('68');
+    setCalculationInfo({
+      type: 'AGE',
+      age: 68,
+      year: 1958,
+    });
   };
 
   return (
@@ -185,7 +227,7 @@ export default function CekPorsiPage() {
                   type="text"
                   required
                   maxLength={10}
-                  placeholder="Contoh: 2700192001"
+                  placeholder="Contoh: 2600021367"
                   value={porsi}
                   onChange={(e) => setPorsi(e.target.value.replace(/\D/g, ''))}
                   className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-[#e8dfc8] text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961]"
@@ -194,21 +236,54 @@ export default function CekPorsiPage() {
             </div>
 
             <div>
-              <label className="text-xs font-bold text-stone-700 block mb-1">
-                Tahun Lahir Jamaah (Verifikasi Keamanan)
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="text-xs font-bold text-stone-700">
+                  Usia atau Tahun Lahir Jamaah
+                </label>
+                <span className="text-[11px] font-semibold text-[#8a6d2b] bg-[#fbf8ee] px-2 py-0.5 rounded border border-[#e8dfc8]">
+                  Hitung Otomatis
+                </span>
+              </div>
               <input
                 type="number"
                 required
-                min={1920}
-                max={2015}
-                placeholder="Contoh: 1951"
+                min={1}
+                max={2026}
+                placeholder="Ketik Usia (cth: 68) atau Tahun Lahir (cth: 1958)"
                 value={birthYear}
-                onChange={(e) => setBirthYear(e.target.value)}
+                onChange={(e) => handleBirthInput(e.target.value)}
                 className="w-full px-3 py-2.5 rounded-xl border border-[#e8dfc8] text-sm font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961]"
               />
+
+              {/* Live Auto-Calculation Box */}
+              {calculationInfo && (
+                <div className="mt-2 p-2.5 rounded-xl bg-[#fbf8ee] border border-[#e8dfc8] text-xs flex items-center justify-between text-[#8a6d2b] font-medium animate-in fade-in">
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-[#b8941e] shrink-0" />
+                    <span>
+                      {calculationInfo.type === 'AGE' ? (
+                        <>
+                          Input Usia: <strong>{calculationInfo.age} Tahun</strong> &rarr; Terhitung Tahun Lahir:{' '}
+                          <strong className="text-stone-900 underline">{calculationInfo.year}</strong>{' '}
+                          <span className="text-[10px] text-stone-500">(2026 - {calculationInfo.age})</span>
+                        </>
+                      ) : (
+                        <>
+                          Input Tahun Lahir: <strong>{calculationInfo.year}</strong> &rarr; Terhitung Usia:{' '}
+                          <strong className="text-stone-900 underline">{calculationInfo.age} Tahun</strong>{' '}
+                          <span className="text-[10px] text-stone-500">(2026 - {calculationInfo.year})</span>
+                        </>
+                      )}
+                    </span>
+                  </div>
+                  <span className="text-[10px] uppercase font-bold text-[#b8941e] bg-white px-2 py-0.5 rounded border border-[#e8dfc8]">
+                    Valid
+                  </span>
+                </div>
+              )}
+
               <span className="text-[11px] text-stone-400 mt-1 block">
-                Sesuai Undang-Undang Perlindungan Data Pribadi (UU PDP), verifikasi tahun lahir melindungi data pribadi Anda.
+                Sesuai Undang-Undang Perlindungan Data Pribadi (UU PDP), verifikasi usia atau tahun lahir melindungi privasi data Anda.
               </span>
             </div>
 
@@ -227,7 +302,7 @@ export default function CekPorsiPage() {
               onClick={handleDemoFill}
               className="text-xs text-[#8a6d2b] hover:text-[#1A1410] hover:underline font-semibold cursor-pointer"
             >
-              ✨ Isi Contoh Nomor Porsi Resmi Papua (2600021828)
+              ✨ Contoh: No. Porsi 2600021367 • Usia 68 Th (Tahun Lahir 1958 - Kab. Merauke)
             </button>
           </div>
 
@@ -385,8 +460,8 @@ export default function CekPorsiPage() {
               porsiNumber: result.porsiNumber,
               regionName: result.regionName,
               bloodType: result.bloodType || 'B',
-              age: 75,
-              gender: 'FEMALE',
+              age: result.age || 68,
+              gender: result.gender || 'FEMALE',
               kloterCode: result.kloter?.code || 'UPG-02',
               kloterNumber: result.kloter?.number || 2,
               embarkation: result.kloter?.embarkation || 'Embarkasi Hasanuddin Makassar (UPG)',

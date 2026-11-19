@@ -51,7 +51,7 @@ export function JamaahFilters({ regions, isRegionAdmin, userRegionId }: JamaahFi
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
-            placeholder="Cari Nama, No Porsi, atau NIK..."
+            placeholder="Cari Nama Lengkap atau No. Porsi..."
             className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm border border-[#e8dfc8] rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
           />
         </div>

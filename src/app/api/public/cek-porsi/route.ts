@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/infrastructure/database/prisma.client';
-import { maskNik, maskPhone } from '@/infrastructure/security/masking';
+import { maskPhone } from '@/infrastructure/security/masking';
 import { decryptData } from '@/infrastructure/security/crypto';
 
 const publicCheckSchema = z.object({
   porsiNumber: z.string().regex(/^\d{10}$/, 'Nomor Porsi harus 10 digit angka'),
-  birthYear: z.number().int().min(1920).max(2015, 'Tahun lahir tidak valid'),
+  birthYear: z.number().int().min(1).max(2026, 'Tahun lahir atau usia tidak valid'),
 });
 
 export async function POST(request: NextRequest) {
@@ -72,19 +72,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify birth year for UU PDP safety verification
+    // Verify birth year / age calculation (perhitungan otomatis: jika usia 68 tahun maka tahun lahir = 2026 - 68 = 1958)
     const jamaahBirthYear = new Date(jamaah.birthDate).getFullYear();
-    if (jamaahBirthYear !== validated.birthYear) {
+    const effectiveYear = validated.birthYear <= 120 ? 2026 - validated.birthYear : validated.birthYear;
+
+    if (jamaahBirthYear !== effectiveYear && Math.abs(jamaahBirthYear - effectiveYear) > 1) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Tahun lahir tidak sesuai dengan data terdaftar pada Nomor Porsi ini. Mohon verifikasi kembali.',
+          message: 'Tahun lahir atau usia tidak sesuai dengan data terdaftar pada Nomor Porsi ini. Mohon periksa kembali (Perhitungan: Tahun Lahir = 2026 - Usia).',
         },
         { status: 400 }
       );
     }
 
-    const decryptedNik = decryptData(jamaah.nikEncrypted);
     const decryptedPhone = decryptData(jamaah.phoneEncrypted || '');
 
     let breakdown: any = {};
@@ -101,7 +102,8 @@ export async function POST(request: NextRequest) {
       data: {
         porsiNumber: jamaah.porsiNumber,
         fullName: jamaah.fullName,
-        nikMasked: maskNik(decryptedNik),
+        age: 2026 - jamaahBirthYear,
+        birthYear: jamaahBirthYear,
         phoneMasked: maskPhone(decryptedPhone),
         gender: jamaah.gender === 'MALE' ? 'Laki-Laki' : 'Perempuan',
         regionName: jamaah.region.name,
