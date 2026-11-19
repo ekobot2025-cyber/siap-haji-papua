@@ -932,7 +932,7 @@ export default function ShowcaseLandingPage() {
           <div>
             <h2 className="text-2xl sm:text-3xl font-black text-[#1A1410]">Informasi Resmi</h2>
             <p className="text-xs sm:text-sm text-stone-600 mt-1">
-              Kanal publik resmi Kemenhaj: Instagram, portal haji, dan berita Kemenag.
+              Berita dan pengumuman dari haji.go.id, papua.haji.go.id, dan kanal resmi Kemenhaj.
             </p>
           </div>
           <Link href="/informasi-resmi" className="text-xs font-bold text-[#8a6d2b] hover:underline whitespace-nowrap">
@@ -1018,4 +1018,5 @@ export default function ShowcaseLandingPage() {
     </div>
   );
 }
+
 

@@ -20,7 +20,7 @@ export default function InformasiResmiPage() {
           </h1>
         </div>
         <p className="text-xs sm:text-sm text-stone-600">
-          Kanal informasi publik resmi. Konten dibuka langsung di sumber aslinya.
+          Berita dan pengumuman dari haji.go.id dan papua.haji.go.id. Konten dibuka langsung di sumber aslinya.
         </p>
       </div>
 
@@ -46,5 +46,6 @@ export default function InformasiResmiPage() {
     </div>
   );
 }
+
 
 
