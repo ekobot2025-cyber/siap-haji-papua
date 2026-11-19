@@ -484,7 +484,7 @@ export function KabupatenRadarSlider() {
             <div className="min-w-0 flex-1">
               <div className="flex justify-between items-center">
                 <strong className="text-white text-[11px] font-bold">Alokasi Penerbangan Kloter:</strong>
-                <span className="text-[10px] font-mono text-emerald-400 font-bold">SIAP EM点评</span>
+                <span className="text-[10px] font-mono text-emerald-400 font-bold">SIAP EMBARKASI</span>
               </div>
               <p className="text-[11px] text-gray-300 truncate mt-0.5">{current.kloter}</p>
             </div>
@@ -508,17 +508,31 @@ export function KabupatenRadarSlider() {
         ))}
       </div>
 
-      {/* 4. Card Footer: Verification & Direct Action */}
-      <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-gray-300">
-        <span className="flex items-center gap-1.5">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#c9a961]" /> SISKOHAT &amp; haji.go.id Riil
-        </span>
+      {/* 4. Card Footer: Official Source Link & Direct Action */}
+      <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-300">
+        <a
+          href="https://haji.go.id/estimasi-keberangkatan?tab=berhak-lunas"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 text-stone-300 hover:text-[#c9a961] transition-colors group cursor-pointer"
+          title="Buka portal resmi Kementerian Haji & Umrah RI"
+        >
+          <ShieldCheck className="w-3.5 h-3.5 text-[#c9a961] shrink-0" />
+          <span className="text-[11px]">
+            Sumber Data:{' '}
+            <strong className="font-mono underline text-white group-hover:text-[#c9a961]">
+              haji.go.id/estimasi-keberangkatan
+            </strong>
+          </span>
+          <ExternalLink className="w-3 h-3 text-[#c9a961] opacity-80 group-hover:opacity-100" />
+        </a>
+
         <Link
           href="/dashboard"
           className="font-mono text-[#c9a961] hover:text-[#e8dfc8] font-bold flex items-center gap-1 text-[11px] transition-colors"
         >
           <span>Eksplor 924 Jamaah</span>
-          <ExternalLink className="w-3 h-3" />
+          <ChevronRight className="w-3.5 h-3.5" />
         </Link>
       </div>
     </div>
