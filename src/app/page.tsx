@@ -623,7 +623,7 @@ export default function ShowcaseLandingPage() {
                 <div className="lg:col-span-6 bg-[#1A1410] text-white rounded-2xl p-5 border border-white/10 space-y-3">
                   <div className="flex items-center justify-between text-xs font-mono pb-2 border-b border-white/10">
                     <span className="text-stone-400">SIMULASI NOMOR PORSI:</span>
-                    <span className="text-[#c9a961]">DEMO ONLINE</span>
+                    <span className="text-[#c9a961]">SISTEM RESMI ONLINE</span>
                   </div>
                   <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
                     <div className="flex justify-between items-center text-xs">
