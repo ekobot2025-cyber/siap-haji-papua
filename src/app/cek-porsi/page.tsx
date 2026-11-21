@@ -296,16 +296,6 @@ export default function CekPorsiPage() {
             </button>
           </form>
 
-          <div className="pt-2 text-center">
-            <button
-              type="button"
-              onClick={handleDemoFill}
-              className="text-xs text-[#8a6d2b] hover:text-[#1A1410] hover:underline font-semibold cursor-pointer"
-            >
-              ✨ Contoh: No. Porsi 2600021367 • Usia 68 Th (Tahun Lahir 1958 - Kab. Merauke)
-            </button>
-          </div>
-
           {error && (
             <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-start gap-2">
               <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />

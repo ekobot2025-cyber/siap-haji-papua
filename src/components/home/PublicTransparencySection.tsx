@@ -96,7 +96,7 @@ export function PublicTransparencySection({ initialSummary }: Props) {
             TRANSPARANSI PELAYANAN PUBLIK &amp; KUOTA HAJI PAPUA
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-[#1A1410] tracking-tight">
-            Dashboard Informasi Publik (924 Jamaah Riil)
+            Dashboard Informasi Publik Kuota Haji Papua
           </h2>
           <p className="text-xs sm:text-sm text-stone-600 mt-1 max-w-2xl">
             Pemantauan terbuka alokasi kuota berhak lunas, komposisi usia, capaian kesiapan administratif 6 pilar, serta sebaran 18 Kabupaten/Kota Se-Papua Raya terintegrasi dari Satu Data Kementerian Haji dan Umrah RI.

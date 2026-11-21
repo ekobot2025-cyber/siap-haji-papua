@@ -350,7 +350,7 @@ export default function ShowcaseLandingPage() {
               </div>
               <div className="border-x border-[#e8dfc8] px-4">
                 <div className="text-2xl sm:text-4xl font-black font-mono text-[#967412]">924</div>
-                <div className="text-[11px] sm:text-xs text-stone-500 font-medium mt-0.5">Total Kuota Papua (Riil)</div>
+                <div className="text-[11px] sm:text-xs text-stone-500 font-medium mt-0.5">Total Kuota Papua</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-4xl font-black font-mono text-[#967412]">96.2%</div>
@@ -405,7 +405,7 @@ export default function ShowcaseLandingPage() {
       </div>
 
       {/* =========================================================================
-          4.5. PUSAT TRANSPARANSI & STATISTIK KUOTA PELAYANAN PUBLIK (924 JAMAAH RIIL)
+          4.5. PUSAT TRANSPARANSI & STATISTIK KUOTA PELAYANAN PUBLIK (924 JAMAAH)
           ========================================================================= */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <PublicTransparencySection />
@@ -731,13 +731,13 @@ export default function ShowcaseLandingPage() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <p className="text-xs font-mono font-bold uppercase tracking-[0.24em] text-[#8a6d2b]">
-              DATA RIIL SATU DATA HAJI.GO.ID • 1448 H / 2026-2027 M
+              SATU DATA HAJI.GO.ID • 1448 H / 2026-2027 M
             </p>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-[#1A1410] mt-1">
               18 Wilayah Penyelenggara Haji Papua
             </h2>
             <p className="text-xs text-stone-600 mt-1">
-              Sebaran alokasi 924 calon jamaah riil berhak lunas dari 18 kabupaten/kota se-Papua Raya.
+              Sebaran alokasi 924 calon jamaah berhak lunas dari 18 kabupaten/kota se-Papua Raya.
             </p>
           </div>
           <Link
@@ -766,7 +766,7 @@ export default function ShowcaseLandingPage() {
               <div className="text-xs text-stone-600 space-y-1 pt-2 border-t border-stone-100">
                 <div className="flex justify-between">
                   <span className="text-stone-500">Alokasi Kuota:</span>
-                  <strong className="text-stone-900 font-mono">{reg.quota} Jamaah (Riil)</strong>
+                  <strong className="text-stone-900 font-mono">{reg.quota} Jamaah</strong>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-stone-500">Titik Transit:</span>

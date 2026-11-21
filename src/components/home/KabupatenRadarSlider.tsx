@@ -435,7 +435,7 @@ export function KabupatenRadarSlider() {
           {/* Dial / Big Number */}
           <div className="col-span-5 text-center border-r border-white/10 pr-2">
             <span className="text-[10px] text-gray-400 font-mono uppercase tracking-wider block">
-              Alokasi Kuota Riil
+              Alokasi Kuota Wilayah
             </span>
             <div className="text-3xl sm:text-4xl font-black font-mono text-[#c9a961] my-0.5">
               {current.total}

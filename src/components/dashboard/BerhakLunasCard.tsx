@@ -26,7 +26,7 @@ interface Props {
 }
 
 export function BerhakLunasCard({ summary, isPublic = false }: Props) {
-  const [activeTab, setActiveTab] = useState<'table' | 'charts' | 'regions' | 'kloter'>('table');
+  const [activeTab, setActiveTab] = useState<'table' | 'charts' | 'regions'>('table');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedKab, setSelectedKab] = useState('ALL');
   const [selectedKat, setSelectedKat] = useState('ALL');
@@ -62,46 +62,6 @@ export function BerhakLunasCard({ summary, isPublic = false }: Props) {
     validPage * pageSize
   );
 
-  // 4 Kloter distribution
-  const kloterStats = [
-    {
-      kloterNumber: '01',
-      code: 'KLOTER-01-UPG',
-      wilayah: 'Kota Jayapura & Kab. Keerom',
-      total: 305,
-      capacity: 450,
-      transitHub: 'Sentani (DJJ) -> UPG',
-      badgeColor: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-    },
-    {
-      kloterNumber: '02',
-      code: 'KLOTER-02-UPG',
-      wilayah: 'Saireri: Biak Numfor, Yapen, Waropen, Sarmi, Supiori',
-      total: 97,
-      capacity: 450,
-      transitHub: 'Frans Kaisiepo (BIK) -> UPG',
-      badgeColor: 'bg-blue-50 text-blue-800 border-blue-200',
-    },
-    {
-      kloterNumber: '03',
-      code: 'KLOTER-03-UPG',
-      wilayah: 'Papua Tengah: Mimika, Nabire, Paniai',
-      total: 231,
-      capacity: 450,
-      transitHub: 'Mozes Kilangin (TIM) -> UPG',
-      badgeColor: 'bg-purple-50 text-purple-800 border-purple-200',
-    },
-    {
-      kloterNumber: '04',
-      code: 'KLOTER-04-UPG',
-      wilayah: 'Papua Selatan & Pegunungan: Merauke, Boven Digoel, Asmat, Mappi, Jayawijaya, Yahukimo',
-      total: 291,
-      capacity: 450,
-      transitHub: 'Mopah Merauke (MKQ) & Wamena (WMX) -> UPG',
-      badgeColor: 'bg-amber-50 text-amber-800 border-amber-200',
-    },
-  ];
-
   return (
     <div className="bg-white rounded-2xl border border-[#e8dfc8] shadow-xs overflow-hidden">
       {/* 1. Header Banner */}
@@ -111,7 +71,7 @@ export function BerhakLunasCard({ summary, isPublic = false }: Props) {
             <div className="flex items-center gap-2 flex-wrap">
               <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-black px-2.5 py-0.5 rounded-full">
                 <Database className="w-3.5 h-3.5" />
-                <span>100% DATA RIIL SATU DATA KEMENHAJ RI</span>
+                <span>SATU DATA KEMENHAJ RI</span>
               </span>
               <span className="bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8] text-xs font-bold px-2.5 py-0.5 rounded-full">
                 Musim 1448 H / 2026-2027 M
@@ -237,19 +197,6 @@ export function BerhakLunasCard({ summary, isPublic = false }: Props) {
           >
             <BarChart3 className="w-3.5 h-3.5" />
             <span>Grafik Sebaran 18 Kab/Kota</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('kloter')}
-            className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-              activeTab === 'kloter'
-                ? 'bg-[#1A1410] text-[#c9a961] shadow-xs'
-                : 'bg-white text-stone-600 border border-[#e8dfc8] hover:bg-[#fbf8ee]'
-            }`}
-          >
-            <Plane className="w-3.5 h-3.5" />
-            <span>Alokasi 4 Kloter (UPG)</span>
           </button>
         </div>
       </div>
@@ -622,76 +569,6 @@ export function BerhakLunasCard({ summary, isPublic = false }: Props) {
                     className="bg-gradient-to-r from-[#c9a961] to-[#b8941e] h-full rounded-full transition-all duration-500"
                     style={{ width: `${(r.count / summary.regencyBreakdown[0].count) * 100}%` }}
                   />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* TAB 4: ALOKASI 4 KLOTER EMBARKASI MAKASSAR */}
-      {activeTab === 'kloter' && (
-        <div className="p-6 space-y-4">
-          <div className="flex items-center justify-between pb-2 border-b border-[#e8dfc8]">
-            <div>
-              <h3 className="font-bold text-[#1A1410] text-sm flex items-center gap-2">
-                <Plane className="w-4 h-4 text-[#8a6d2b]" />
-                <span>Distribusi Manifest 4 Kloter Embarkasi Hasanuddin Makassar (UPG)</span>
-              </h3>
-              <p className="text-xs text-stone-500 mt-0.5">
-                Seluruh 924 calon jamaah riil Papua telah terbagi ke dalam kelompok terbang resmi
-              </p>
-            </div>
-            <span className="text-xs bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold px-2.5 py-1 rounded-full">
-              100% Teralokasi
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            {kloterStats.map((k) => (
-              <div
-                key={k.code}
-                className="p-4 bg-[#FAF9F5] rounded-2xl border border-[#e8dfc8] space-y-3 shadow-2xs"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-1 rounded-lg bg-[#1A1410] text-[#c9a961] font-mono font-bold text-xs">
-                      Kloter {k.kloterNumber}
-                    </span>
-                    <span className="text-xs font-mono font-semibold text-stone-500">
-                      {k.code}
-                    </span>
-                  </div>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${k.badgeColor}`}>
-                    {k.total} Kursi Terisi
-                  </span>
-                </div>
-
-                <div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-stone-400">
-                    Cakupan Wilayah:
-                  </div>
-                  <p className="text-xs font-bold text-stone-800 mt-0.5">
-                    {k.wilayah}
-                  </p>
-                </div>
-
-                <div className="text-xs text-stone-500 bg-white p-2.5 rounded-xl border border-[#e8dfc8]">
-                  <span className="font-bold text-stone-700">Rute Transit:</span> {k.transitHub}
-                </div>
-
-                {/* Progress bar kursi */}
-                <div>
-                  <div className="flex justify-between text-[11px] mb-1 font-mono text-stone-500">
-                    <span>Okupansi Kuota Kloter</span>
-                    <span className="font-bold text-stone-800">{k.total} / {k.capacity} Pax</span>
-                  </div>
-                  <div className="w-full bg-stone-200 rounded-full h-2 overflow-hidden">
-                    <div
-                      className="bg-emerald-600 h-full rounded-full"
-                      style={{ width: `${(k.total / k.capacity) * 100}%` }}
-                    />
-                  </div>
                 </div>
               </div>
             ))}

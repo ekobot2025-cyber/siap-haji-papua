@@ -29,7 +29,7 @@ export default function VideoWallPage() {
   const [data, setData] = useState<any | null>(null);
   const [currentTime, setCurrentTime] = useState<string>('');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [activeView, setActiveView] = useState<'OVERVIEW' | 'CHARTS' | 'REGIONS' | 'KLOTER'>('OVERVIEW');
+  const [activeView, setActiveView] = useState<'OVERVIEW' | 'CHARTS' | 'REGIONS'>('OVERVIEW');
   const [autoRotate, setAutoRotate] = useState(true);
 
   const summary = useMemo(() => BerhakLunasService.getSummary(), []);
@@ -73,7 +73,7 @@ export default function VideoWallPage() {
   // Auto-rotate views every 18 seconds for wall display
   useEffect(() => {
     if (!autoRotate) return;
-    const views: Array<'OVERVIEW' | 'CHARTS' | 'REGIONS' | 'KLOTER'> = ['OVERVIEW', 'CHARTS', 'REGIONS', 'KLOTER'];
+    const views: Array<'OVERVIEW' | 'CHARTS' | 'REGIONS'> = ['OVERVIEW', 'CHARTS', 'REGIONS'];
     const timer = setInterval(() => {
       setActiveView((prev) => {
         const nextIdx = (views.indexOf(prev) + 1) % views.length;
@@ -125,45 +125,6 @@ export default function VideoWallPage() {
 
   const provIndex = Number(kpi?.provincialReadinessIndex ?? 84.9);
 
-  const kloterStats = [
-    {
-      kloterNumber: '01',
-      code: 'KLOTER-01-UPG',
-      wilayah: 'Kota Jayapura & Kab. Keerom',
-      total: 305,
-      capacity: 450,
-      transitHub: 'Bandara Sentani (DJJ) -> UPG',
-      flight: 'GA-1101 (Garuda Indonesia)',
-    },
-    {
-      kloterNumber: '02',
-      code: 'KLOTER-02-UPG',
-      wilayah: 'Biak Numfor, Yapen, Waropen, Sarmi, Supiori',
-      total: 97,
-      capacity: 450,
-      transitHub: 'Frans Kaisiepo (BIK) -> UPG',
-      flight: 'GA-1102 (Garuda Indonesia)',
-    },
-    {
-      kloterNumber: '03',
-      code: 'KLOTER-03-UPG',
-      wilayah: 'Mimika, Nabire, Paniai',
-      total: 231,
-      capacity: 450,
-      transitHub: 'Mozes Kilangin (TIM) -> UPG',
-      flight: 'GA-1103 (Garuda Indonesia)',
-    },
-    {
-      kloterNumber: '04',
-      code: 'KLOTER-04-UPG',
-      wilayah: 'Merauke, Boven Digoel, Asmat, Mappi, Jayawijaya, Yahukimo',
-      total: 291,
-      capacity: 450,
-      transitHub: 'Mopah Merauke (MKQ) -> UPG',
-      flight: 'GA-1104 (Garuda Indonesia)',
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-[#0A0806] text-stone-100 p-4 sm:p-6 flex flex-col justify-between select-none">
       {/* 1. TOP COMMAND BAR */}
@@ -185,7 +146,7 @@ export default function VideoWallPage() {
               </span>
               <span className="inline-block w-2 h-2 rounded-full bg-[#c9a961] animate-ping" />
               <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
-                100% DATA RIIL 924 JAMAAH
+                SATU DATA 924 JAMAAH
               </span>
             </div>
             <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">
@@ -220,14 +181,6 @@ export default function VideoWallPage() {
               }`}
             >
               18 Kab/Kota
-            </button>
-            <button
-              onClick={() => { setActiveView('KLOTER'); setAutoRotate(false); }}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                activeView === 'KLOTER' ? 'bg-[#c9a961] text-[#1A1410] shadow-sm' : 'text-stone-400 hover:text-white'
-              }`}
-            >
-              4 Kloter UPG
             </button>
           </div>
 
@@ -526,7 +479,7 @@ export default function VideoWallPage() {
                   <span>Peringkat &amp; Sebaran Alokasi Kuota di 18 Kab/Kota Se-Papua Raya</span>
                 </h3>
                 <p className="text-xs text-stone-400 mt-0.5">
-                  Distribusi kuota riil dan tingkat kesiapan administratif jamaah per wilayah
+                  Distribusi kuota dan tingkat kesiapan administratif jamaah per wilayah
                 </p>
               </div>
               <span className="text-xs font-mono font-bold text-[#c9a961] bg-white/5 px-3 py-1 rounded-full">
@@ -557,44 +510,6 @@ export default function VideoWallPage() {
                 </div>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* VIEW 4: ALOKASI 4 KLOTER UPG */}
-        {activeView === 'KLOTER' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-in fade-in duration-300">
-            {kloterStats.map((k) => (
-              <div key={k.code} className="bg-[#14100D] p-5 rounded-3xl border border-[#c9a961]/30 flex flex-col justify-between space-y-4 shadow-xl">
-                <div>
-                  <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                    <span className="text-xs font-mono font-black text-[#c9a961] bg-black/40 px-2.5 py-1 rounded-lg border border-[#c9a961]/30">
-                      KLOTER {k.kloterNumber}
-                    </span>
-                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
-                      SIAP UPG
-                    </span>
-                  </div>
-
-                  <h4 className="text-base font-bold text-white mt-3">{k.code}</h4>
-                  <p className="text-xs text-stone-400 mt-1 line-clamp-2">{k.wilayah}</p>
-
-                  <div className="my-4 p-3 rounded-2xl bg-black/40 border border-white/5 space-y-1 text-xs">
-                    <div className="flex justify-between">
-                      <span className="text-stone-400">Total Jamaah:</span>
-                      <strong className="font-mono text-white text-sm">{k.total} Orang</strong>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-stone-400">Penerbangan:</span>
-                      <strong className="text-stone-300 font-mono text-[11px]">{k.flight}</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="text-[11px] text-[#c9a961] border-t border-white/10 pt-2 font-mono">
-                  Transit: {k.transitHub}
-                </div>
-              </div>
-            ))}
           </div>
         )}
       </div>

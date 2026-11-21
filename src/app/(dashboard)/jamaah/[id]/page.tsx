@@ -80,7 +80,7 @@ export default async function JamaahDetailPage({ params, searchParams }: JamaahD
             className="inline-flex items-center gap-1.5 btn-kemenhaj-primary px-4 py-2.5 rounded-xl text-xs font-bold shadow-xs"
           >
             <ChevronLeft className="w-4 h-4" />
-            <span>Buka Daftar 924 Calon Jamaah Riil Papua</span>
+            <span>Buka Daftar 924 Calon Jamaah Papua</span>
           </Link>
         </div>
       </div>
