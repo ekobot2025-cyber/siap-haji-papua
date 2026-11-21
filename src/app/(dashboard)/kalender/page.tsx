@@ -111,7 +111,7 @@ export default function KalenderPage() {
           </span>
           <div>
             <h1 className="text-xl font-black text-[#1A1410] tracking-tight">
-              KALENDER OPERASIONAL & TIMELINE HAJI 1447 H / 2026 M
+              KALENDER OPERASIONAL & TIMELINE HAJI 1448 H / 2027 M
             </h1>
             <p className="text-xs text-gray-500 font-medium">
               Jadwal tahapan terpadu, batas waktu krusial, bimbingan manasik, dan operasional Embarkasi Makassar (UPG)

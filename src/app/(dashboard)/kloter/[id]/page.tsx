@@ -164,10 +164,10 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
               KANTOR WILAYAH PROVINSI PAPUA • PPIH EMBARKASI MAKASSAR (UPG)
             </h3>
             <h1 className="text-sm font-black uppercase text-black mt-0.5">
-              PANITIA PENYELENGGARA IBADAH HAJI (PPIH) EMBARKASI HAJI 1447 H / 2026 M
+              PANITIA PENYELENGGARA IBADAH HAJI (PPIH) EMBARKASI HAJI 1448 H / 2027 M
             </h1>
             <p className="text-[10px] text-gray-700 italic">
-              DAFTAR NOMINATIF & MANIFEST RESMI PENERBANGAN HAJI 1447 H / 2026 M
+              DAFTAR NOMINATIF & MANIFEST RESMI PENERBANGAN HAJI 1448 H / 2027 M
             </p>
           </div>
           <div className="border border-black p-2 text-center text-[9px] font-mono font-bold leading-tight">
@@ -225,7 +225,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <span className="text-xs uppercase font-bold text-[#c9a961] tracking-wider block">
-              Manifest Resmi PPIH — Embarkasi Haji 1447 H / 2026 M
+              Manifest Resmi PPIH — Embarkasi Haji 1448 H / 2027 M
             </span>
             <h1 className="text-2xl font-black mt-1 text-white">
               Kloter {kloter.kloterNumber} ({kloter.kloterCode})

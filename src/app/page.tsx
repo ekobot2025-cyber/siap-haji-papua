@@ -309,13 +309,13 @@ export default function ShowcaseLandingPage() {
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-[#1A1410]">
               Satu Data • Satu Monitoring • Satu Layanan.{' '}
               <span className="bg-gradient-to-r from-[#c9a961] via-[#d4af37] to-[#b8941e] bg-clip-text text-transparent block mt-1">
-                Haji Papua Siap 2026 M.
+                Haji Papua Siap 1448 H/2027 M.
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-sm sm:text-base text-stone-600 leading-relaxed max-w-2xl font-normal">
-              Platform komando digital terpadu <strong>Kementerian Haji dan Umrah Wilayah Kerja Papua</strong> untuk pemantauan real-time kesiapan administrasi, bio visa, penetapan istitha&apos;ah medis RSUD, dan alokasi 4 Kloter jamaah di 11 Kabupaten/Kota.
+              Platform komando digital terpadu <strong>Kementerian Haji dan Umrah Wilayah Kerja Papua</strong> untuk pemantauan real-time kesiapan administrasi, bio visa, penetapan istitha&apos;ah medis RSUD, dan pelayanan jamaah di 18 Kabupaten/Kota Se-Papua Raya.
             </p>
 
             {/* CTAs */}

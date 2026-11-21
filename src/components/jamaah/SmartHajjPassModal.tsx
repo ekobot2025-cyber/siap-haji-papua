@@ -119,7 +119,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                 Kartu Digital Jamaah Haji (Smart Hajj Pass)
               </h2>
               <p className="text-[11px] text-gray-500">
-                Dokumen Identitas Resmi PPIH Provinsi Papua 1447 H / 2026 M
+                Dokumen Identitas Resmi PPIH Provinsi Papua 1448 H / 2027 M
               </p>
             </div>
           </div>
@@ -198,7 +198,7 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
                 PANITIA PENYELENGGARA IBADAH HAJI (PPIH) EMBARKASI PAPUA
               </h2>
               <p className="text-[10px] text-gray-700">
-                Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji (SIAP HAJI PAPUA) • Musim 1447 H / 2026 M
+                Sistem Informasi Administrasi, Monitoring, dan Pelayanan Haji (SIAP HAJI PAPUA) • Musim 1448 H / 2027 M
               </p>
             </div>
             <div className="w-12 h-12 flex flex-col items-center justify-center border border-black text-[8px] font-mono font-bold leading-tight">

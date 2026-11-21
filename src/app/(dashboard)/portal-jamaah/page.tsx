@@ -195,7 +195,7 @@ export default async function PortalJamaahPage() {
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c9a961]/20 border border-[#c9a961]/40 text-[#c9a961] text-xs font-bold tracking-wide">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>PORTAL MANDIRI JAMAAH HAJI PAPUA • 1447 H / 2026 M</span>
+              <span>PORTAL MANDIRI JAMAAH HAJI PAPUA • 1448 H / 2027 M</span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">

@@ -72,7 +72,7 @@ export function Header({ session, config }: HeaderProps) {
         {/* Center: Active Season */}
         <div className="hidden lg:flex items-center gap-2 bg-[#fbf8ee] border border-[#e8dfc8] px-3.5 py-1 rounded-full text-xs text-[#7a6122] shadow-2xs">
           <Calendar className="w-3.5 h-3.5 text-[#b8941e]" />
-          <span className="font-semibold text-[#1A1410]">{config.activeSeasonName || 'Musim Haji 1447 H / 2026 M'}</span>
+          <span className="font-semibold text-[#1A1410]">{config.activeSeasonName || 'Musim Haji 1448 H / 2027 M'}</span>
         </div>
 
         {/* Right: Actions, Accessibility Toggle, User Profile & Logout */}

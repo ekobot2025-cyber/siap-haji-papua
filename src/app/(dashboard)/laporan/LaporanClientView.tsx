@@ -94,7 +94,7 @@ export function LaporanClientView({
     const filename = `Rekapitulasi_Haji_Papua_1447H_${new Date().toISOString().slice(0, 10)}`;
 
     exportToExcel({
-      title: 'Rekapitulasi Kesiapan Haji Provinsi Papua 1447 H / 2026 M',
+      title: 'Rekapitulasi Kesiapan Haji Provinsi Papua 1448 H / 2027 M',
       headers,
       rows,
       filename,
@@ -132,8 +132,8 @@ export function LaporanClientView({
     const filename = `Rekapitulasi_Haji_Papua_1447H_${new Date().toISOString().slice(0, 10)}`;
 
     exportToPdf({
-      title: 'Rekapitulasi Kesiapan Haji Provinsi Papua 1447 H / 2026 M',
-      subtitle: `Musim 1447 H / 2026 M - Dicetak: ${new Date().toLocaleDateString('id-ID', { dateStyle: 'long' })}`,
+      title: 'Rekapitulasi Kesiapan Haji Provinsi Papua 1448 H / 2027 M',
+      subtitle: `Musim 1448 H / 2027 M - Dicetak: ${new Date().toLocaleDateString('id-ID', { dateStyle: 'long' })}`,
       headers,
       rows,
       filename,
@@ -172,7 +172,7 @@ export function LaporanClientView({
               BIDANG PENYELENGGARAAN HAJI DAN UMRAH (PHU)
             </h1>
             <p className="text-[10px] text-gray-700 italic">
-              LAPORAN AUDIT & REKAPITULASI KESIAPAN OPERASIONAL HAJI PROVINSI PAPUA 1447 H / 2026 M
+              LAPORAN AUDIT & REKAPITULASI KESIAPAN OPERASIONAL HAJI PROVINSI PAPUA 1448 H / 2027 M
             </p>
           </div>
           <div className="border border-black p-2 text-center text-[9px] font-mono font-bold leading-tight">
@@ -182,7 +182,7 @@ export function LaporanClientView({
         </div>
 
         <div className="grid grid-cols-4 gap-2 pt-2.5 text-[10px] text-left border-t border-black/30 font-mono mt-3 text-black">
-          <div>Musim: <strong>{season?.seasonName || 'Musim 1447 H / 2026 M'}</strong></div>
+          <div>Musim: <strong>{season?.seasonName || 'Musim 1448 H / 2027 M'}</strong></div>
           <div>Total Kuota: <strong>{totalQuota} Jamaah</strong></div>
           <div>Indeks Provinsi: <strong>{provincialAverage}%</strong></div>
           <div>Tanggal Cetak: <strong>{new Date().toLocaleDateString('id-ID', { dateStyle: 'long' })}</strong></div>
@@ -198,7 +198,7 @@ export function LaporanClientView({
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
               PUSAT LAPORAN & AUDIT
             </span>
-            <span className="text-xs text-gray-500 font-mono">1447 H / 2026 M</span>
+            <span className="text-xs text-gray-500 font-mono">1448 H / 2027 M</span>
           </div>
           <h1 className="text-xl font-black text-gray-900">
             Laporan Resmi Penyelenggaraan Haji Papua
@@ -385,7 +385,7 @@ export function LaporanClientView({
             <h2 className="text-sm font-bold text-gray-900">
               Rekapitulasi 4 Kloter Papua (Embarkasi Hasanuddin Makassar UPG)
             </h2>
-            <span className="text-xs text-gray-500 font-mono">Musim 1447 H / 2026 M</span>
+            <span className="text-xs text-gray-500 font-mono">Musim 1448 H / 2027 M</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">

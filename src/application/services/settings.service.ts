@@ -71,7 +71,7 @@ export class SettingsService {
         nationalPortalUrl: settingsMap.NATIONAL_PORTAL_URL || DEFAULT_SETTINGS.NATIONAL_PORTAL_URL,
         provincialPortalUrl: settingsMap.PROVINCIAL_PORTAL_URL || DEFAULT_SETTINGS.PROVINCIAL_PORTAL_URL,
         activeSeasonId: activeSeason?.id,
-        activeSeasonName: activeSeason?.seasonName || 'Musim Haji 1447 H / 2026 M',
+        activeSeasonName: activeSeason?.seasonName || 'Musim Haji 1448 H / 2027 M',
       };
 
       cachedConfig = config;
@@ -91,7 +91,7 @@ export class SettingsService {
         nationalMinistryName: DEFAULT_SETTINGS.NATIONAL_MINISTRY_NAME,
         nationalPortalUrl: DEFAULT_SETTINGS.NATIONAL_PORTAL_URL,
         provincialPortalUrl: DEFAULT_SETTINGS.PROVINCIAL_PORTAL_URL,
-        activeSeasonName: 'Musim Haji 1447 H / 2026 M',
+        activeSeasonName: 'Musim Haji 1448 H / 2027 M',
       };
     }
   }
