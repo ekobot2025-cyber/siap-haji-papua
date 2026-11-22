@@ -178,10 +178,6 @@ export default function VideoWallPage() {
               <span className="text-[10px] font-black uppercase tracking-widest text-[#c9a961] bg-[#1A1410] px-2.5 py-0.5 rounded border border-[#c9a961]/40">
                 PROVINCIAL COMMAND CENTER • BIG SCREEN NOC MODE
               </span>
-              <span className="inline-block w-2 h-2 rounded-full bg-[#c9a961] animate-ping" />
-              <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
-                SATU DATA 924 JAMAAH
-              </span>
             </div>
             <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">
               SIAP HAJI PAPUA — MONITORING OPERASIONAL TERPADU 1448 H
