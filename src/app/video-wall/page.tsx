@@ -22,6 +22,7 @@ import {
   ShieldCheck,
   Layers,
   Calendar,
+  Megaphone,
 } from 'lucide-react';
 import { BerhakLunasService } from '@/application/services/berhak-lunas.service';
 
@@ -29,8 +30,10 @@ export default function VideoWallPage() {
   const [data, setData] = useState<any | null>(null);
   const [currentTime, setCurrentTime] = useState<string>('');
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [activeView, setActiveView] = useState<'OVERVIEW' | 'CHARTS' | 'REGIONS'>('OVERVIEW');
+  const [activeView, setActiveView] = useState<'OVERVIEW' | 'CHARTS' | 'REGIONS' | 'PROMOTIONS'>('OVERVIEW');
   const [autoRotate, setAutoRotate] = useState(true);
+  const [promotions, setPromotions] = useState<any[]>([]);
+  const [promoIdx, setPromoIdx] = useState(0);
 
   const summary = useMemo(() => BerhakLunasService.getSummary(), []);
 
@@ -64,16 +67,46 @@ export default function VideoWallPage() {
     }
   }, []);
 
+  const fetchPromotions = useCallback(async () => {
+    try {
+      const res = await fetch('/api/promotions?channel=TV&active=true');
+      const d = await res.json();
+      if (d.success && Array.isArray(d.data)) {
+        setPromotions(d.data);
+      }
+    } catch (err) {
+      console.warn('Error fetching promotions for Video Wall:', err);
+    }
+  }, []);
+
   useEffect(() => {
     fetchData();
-    const autoRefresh = setInterval(fetchData, 15000); // 15 seconds
+    fetchPromotions();
+    const autoRefresh = setInterval(() => {
+      fetchData();
+      fetchPromotions();
+    }, 15000); // 15 seconds
     return () => clearInterval(autoRefresh);
-  }, [fetchData]);
+  }, [fetchData, fetchPromotions]);
 
-  // Auto-rotate views every 18 seconds for wall display
+  // Auto-rotate individual promo slides if promotions view is active
+  useEffect(() => {
+    if (promotions.length <= 1) return;
+    const promoTimer = setInterval(() => {
+      setPromoIdx((prev) => (prev + 1) % promotions.length);
+    }, 9000);
+    return () => clearInterval(promoTimer);
+  }, [promotions.length]);
+
+  // Auto-rotate main views every 18 seconds for wall display
   useEffect(() => {
     if (!autoRotate) return;
-    const views: Array<'OVERVIEW' | 'CHARTS' | 'REGIONS'> = ['OVERVIEW', 'CHARTS', 'REGIONS'];
+    const views: Array<'OVERVIEW' | 'CHARTS' | 'REGIONS' | 'PROMOTIONS'> = [
+      'OVERVIEW',
+      'CHARTS',
+      'REGIONS',
+      ...(promotions.length > 0 ? ['PROMOTIONS' as const] : []),
+    ];
     const timer = setInterval(() => {
       setActiveView((prev) => {
         const nextIdx = (views.indexOf(prev) + 1) % views.length;
@@ -81,7 +114,7 @@ export default function VideoWallPage() {
       });
     }, 18000);
     return () => clearInterval(timer);
-  }, [autoRotate]);
+  }, [autoRotate, promotions.length]);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -181,6 +214,15 @@ export default function VideoWallPage() {
               }`}
             >
               18 Kab/Kota
+            </button>
+            <button
+              onClick={() => { setActiveView('PROMOTIONS'); setAutoRotate(false); }}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                activeView === 'PROMOTIONS' ? 'bg-[#c9a961] text-[#1A1410] shadow-sm' : 'text-stone-400 hover:text-white'
+              }`}
+            >
+              <Megaphone className="w-3.5 h-3.5" />
+              <span>Media &amp; Layanan</span>
             </button>
           </div>
 
@@ -512,7 +554,128 @@ export default function VideoWallPage() {
             </div>
           </div>
         )}
+
+        {/* VIEW 4: MEDIA PROMOSI & LAYANAN PUBLIK KEMENHAJ */}
+        {activeView === 'PROMOTIONS' && (
+          <div className="bg-[#14100D] p-6 sm:p-8 rounded-3xl border border-[#c9a961]/35 shadow-2xl animate-in fade-in duration-300">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+              <div>
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Megaphone className="w-5 h-5 text-[#c9a961]" />
+                  <span>Media Promosi, Informasi &amp; Iklan Layanan Masyarakat</span>
+                </h3>
+                <p className="text-xs text-stone-400 mt-0.5">
+                  Sosialisasi resmi Kantor Wilayah Kementerian Haji dan Umrah Papua
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono font-bold text-[#c9a961] bg-white/5 px-3 py-1 rounded-full">
+                  Slide {promotions.length > 0 ? `${promoIdx + 1} / ${promotions.length}` : '0 / 0'}
+                </span>
+              </div>
+            </div>
+
+            {promotions.length === 0 ? (
+              <div className="py-16 text-center text-stone-400 space-y-2">
+                <Megaphone className="w-10 h-10 text-[#c9a961] mx-auto opacity-40" />
+                <p className="text-white font-bold">Belum ada slide promosi TV yang aktif</p>
+                <p className="text-xs text-stone-500">Materi promosi dapat diinput oleh Admin melalui Dashboard hajipapua.id</p>
+              </div>
+            ) : (
+              (() => {
+                const current = promotions[promoIdx] || promotions[0];
+                return (
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[380px]">
+                    {/* Visual Media Flyer / Graphic */}
+                    <div className="lg:col-span-5 flex items-center justify-center bg-black/50 p-4 rounded-2xl border border-white/10 relative overflow-hidden group">
+                      {current.gambar ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={current.gambar}
+                          alt={current.judul}
+                          className="max-h-[340px] w-auto object-contain rounded-xl shadow-lg transition-transform duration-700 group-hover:scale-105"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <div className="py-16 text-center space-y-3">
+                          <Sparkles className="w-12 h-12 text-[#c9a961] mx-auto animate-pulse" />
+                          <span className="text-xs text-stone-400 block uppercase font-mono">
+                            Informasi Resmi Kemenhaj Papua
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Content Typography */}
+                    <div className="lg:col-span-7 space-y-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold uppercase tracking-widest bg-[#c9a961]/20 text-[#c9a961] border border-[#c9a961]/40 px-3 py-1 rounded-full">
+                          {current.kategori || 'Pengumuman Resmi'}
+                        </span>
+                        <span className="text-xs font-mono text-stone-400">
+                          {current.sumber}
+                        </span>
+                      </div>
+
+                      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight">
+                        {current.judul}
+                      </h2>
+
+                      <p className="text-base sm:text-lg text-stone-300 leading-relaxed">
+                        {current.ringkas}
+                      </p>
+
+                      {current.runningText && (
+                        <div className="p-3.5 rounded-2xl bg-[#c9a961]/10 border border-[#c9a961]/30 text-[#c9a961] text-sm font-medium flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#c9a961] animate-ping shrink-0" />
+                          <span>Pesan Petugas: {current.runningText}</span>
+                        </div>
+                      )}
+
+                      {/* Slide Indicator Dots */}
+                      <div className="flex items-center gap-1.5 pt-2">
+                        {promotions.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setPromoIdx(i)}
+                            className={`h-2 rounded-full transition-all cursor-pointer ${
+                              i === promoIdx ? 'w-8 bg-[#c9a961]' : 'w-2 bg-white/20 hover:bg-white/40'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()
+            )}
+          </div>
+        )}
       </div>
+
+      {/* TICKER RUNNING TEXT PROMOSI & PENGUMUMAN */}
+      {promotions.some((p) => p.runningText) && (
+        <div className="bg-[#14100D] border border-[#c9a961]/30 rounded-2xl p-2.5 flex items-center gap-3 overflow-hidden shadow-lg">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-[#1A1410] font-black text-[11px] uppercase tracking-wider shrink-0">
+            <Megaphone className="w-3.5 h-3.5" />
+            <span>PENGUMUMAN</span>
+          </div>
+          <div className="relative overflow-hidden w-full whitespace-nowrap">
+            <div className="inline-block animate-marquee text-xs text-stone-200 font-medium">
+              {promotions
+                .filter((p) => p.runningText)
+                .map((p, idx) => (
+                  <span key={idx} className="mx-6 inline-flex items-center gap-2">
+                    <span className="text-[#c9a961]">◆</span>
+                    <span>{p.runningText}</span>
+                  </span>
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* 4. FOOTER STATUS BAR */}
       <footer className="pt-3 border-t border-[#2A2018] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-400">

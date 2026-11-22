@@ -99,10 +99,11 @@ export function Sidebar({ session }: SidebarProps) {
           ],
         },
         {
-          title: 'LAYANAN PUBLIK',
+          title: 'LAYANAN PUBLIK & DISPLAY',
           items: [
             { label: 'Showcase Beranda', href: '/', icon: Sparkles, active: pathname === '/' },
             { label: 'Portal Cek Porsi Mandiri', href: '/cek-porsi', icon: QrCode, active: pathname === '/cek-porsi', badge: 'WARGA', badgeColor: 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' },
+            { label: 'Media Promosi & TV', href: '/media-promosi', icon: Tv, active: pathname === '/media-promosi', badge: 'CMS', badgeColor: 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-white font-bold' },
           ],
         },
         {

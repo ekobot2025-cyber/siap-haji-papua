@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { BeritaLiveCarousel } from '@/components/informasi/BeritaLiveCarousel';
+import { HomeHeroDisplay } from '@/components/home/HomeHeroDisplay';
 import { KabupatenRadarSlider } from '@/components/home/KabupatenRadarSlider';
 import { PublicTransparencySection } from '@/components/home/PublicTransparencySection';
 import {
@@ -359,10 +360,10 @@ export default function ShowcaseLandingPage() {
             </div>
           </div>
 
-          {/* Right Column: Interactive Real Data Slider per Kabupaten / Kota */}
+          {/* Right Column: TV Display Layanan & Promosi (Hotel / Public Office Style) & Radar 18 Wilayah */}
           <div className="lg:col-span-5 relative">
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#c9a961]/25 to-[#b8941e]/25 blur-2xl opacity-70" />
-            <KabupatenRadarSlider />
+            <HomeHeroDisplay />
           </div>
         </div>
       </section>
