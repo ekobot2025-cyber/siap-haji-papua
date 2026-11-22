@@ -22,6 +22,8 @@ import {
   Video,
   X,
   Play,
+  Instagram,
+  Download,
 } from 'lucide-react';
 import type { PromotionSlide } from '@/application/services/promotion.service';
 import { parseVideoUrl } from '@/lib/video-helper';
@@ -55,6 +57,14 @@ export default function PromosiDashboardPage() {
   const [endDate, setEndDate] = useState('');
   const [runningText, setRunningText] = useState('');
   const [isActive, setIsActive] = useState(true);
+
+  // News Sync & Instagram Adoption States
+  const [newsSyncLoading, setNewsSyncLoading] = useState(false);
+  const [isIgModalOpen, setIsIgModalOpen] = useState(false);
+  const [igUrlInput, setIgUrlInput] = useState('');
+  const [igTargetChannel, setIgTargetChannel] = useState<'ALL' | 'WEB' | 'TV'>('ALL');
+  const [igLoading, setIgLoading] = useState(false);
+  const [igPosts, setIgPosts] = useState<any[]>([]);
 
   const fetchSlides = useCallback(async () => {
     try {
@@ -209,6 +219,80 @@ export default function PromosiDashboardPage() {
     }
   };
 
+  const handleSyncNews = async () => {
+    try {
+      setNewsSyncLoading(true);
+      setFeedback(null);
+      const res = await fetch('/api/sync/news', { method: 'POST' });
+      const json = await res.json();
+      if (json.success) {
+        setFeedback({
+          type: 'success',
+          message: json.message || 'Berita resmi papua.haji.go.id berhasil disinkronkan ke TV Display & Web!',
+        });
+        await fetchSlides();
+      } else {
+        setFeedback({ type: 'error', message: json.error || 'Gagal sinkronisasi berita resmi.' });
+      }
+    } catch {
+      setFeedback({ type: 'error', message: 'Terjadi kesalahan jaringan saat sinkronisasi berita.' });
+    } finally {
+      setNewsSyncLoading(false);
+    }
+  };
+
+  const openIgModal = async () => {
+    setIsIgModalOpen(true);
+    if (igPosts.length === 0) {
+      try {
+        const res = await fetch('/api/sync/instagram');
+        const json = await res.json();
+        if (json.success && Array.isArray(json.posts)) {
+          setIgPosts(json.posts);
+        }
+      } catch (err) {
+        console.warn('Could not load curated IG posts:', err);
+      }
+    }
+  };
+
+  const handleAdoptInstagram = async (urlToAdopt?: string) => {
+    const targetUrl = urlToAdopt || igUrlInput;
+    if (!targetUrl.trim()) {
+      setFeedback({ type: 'error', message: 'Masukkan link postingan Instagram terlebih dahulu!' });
+      return;
+    }
+
+    try {
+      setIgLoading(true);
+      setFeedback(null);
+      const res = await fetch('/api/sync/instagram', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          url: targetUrl,
+          targetChannel: igTargetChannel,
+        }),
+      });
+      const json = await res.json();
+      if (json.success) {
+        setFeedback({
+          type: 'success',
+          message: json.message || 'Postingan Instagram berhasil diadopsi dan ditayangkan!',
+        });
+        setIgUrlInput('');
+        setIsIgModalOpen(false);
+        await fetchSlides();
+      } else {
+        setFeedback({ type: 'error', message: json.error || 'Gagal mengadopsi postingan Instagram.' });
+      }
+    } catch {
+      setFeedback({ type: 'error', message: 'Terjadi kesalahan saat mengadopsi postingan Instagram.' });
+    } finally {
+      setIgLoading(false);
+    }
+  };
+
   // Filtered Slides
   const filteredSlides = slides.filter((s) => {
     if (channelFilter !== 'ALL' && s.targetChannel !== 'ALL' && s.targetChannel !== channelFilter) {
@@ -295,6 +379,46 @@ export default function PromosiDashboardPage() {
             <span className="text-2xl font-black text-amber-300">{totalTv}</span>
             <span className="text-stone-400 text-[10px] block font-sans">Digital Signage</span>
           </div>
+        </div>
+      </div>
+
+      {/* Auto Sync & Adopsi Toolbar */}
+      <div className="bg-gradient-to-r from-amber-900/10 via-[#c9a961]/15 to-stone-900/5 p-4 sm:p-5 rounded-3xl border border-[#c9a961]/30 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#c9a961] text-[#1A1410] uppercase">
+              Auto Sync &amp; Adopsi
+            </span>
+            <span className="text-xs sm:text-sm font-bold text-[#1A1410]">
+              Integrasi Berita papua.haji.go.id &amp; Instagram @kemenhajkotajayapura
+            </span>
+          </div>
+          <p className="text-xs text-stone-600 mt-1 max-w-2xl leading-relaxed">
+            Perbarui otomatis materi tayang Layar TV Lobi Asrama dan Web dari portal resmi <strong>papua.haji.go.id</strong> serta adopsi foto/video dari Instagram <strong>@kemenhajkotajayapura</strong>.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2.5 flex-wrap w-full md:w-auto shrink-0">
+          <button
+            type="button"
+            onClick={handleSyncNews}
+            disabled={newsSyncLoading}
+            className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-white hover:bg-stone-50 border border-[#e8dfc8] text-xs font-bold text-[#8a6d2b] shadow-2xs hover:shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            title="Tarik berita dan pengumuman resmi terbaru dari papua.haji.go.id &amp; haji.go.id"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${newsSyncLoading ? 'animate-spin' : ''}`} />
+            <span>{newsSyncLoading ? 'Menyinkronkan...' : 'Sync papua.haji.go.id'}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={openIgModal}
+            className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white text-xs font-bold shadow-2xs hover:shadow-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
+            title="Buka panel adopsi postingan Instagram @kemenhajkotajayapura"
+          >
+            <Instagram className="w-3.5 h-3.5" />
+            <span>Adopsi Instagram</span>
+          </button>
         </div>
       </div>
 
@@ -934,6 +1058,148 @@ export default function PromosiDashboardPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* Instagram Adoption Modal */}
+      {isIgModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto animate-in fade-in">
+          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[#e8dfc8]">
+            <div className="p-6 bg-gradient-to-r from-pink-600 via-rose-600 to-amber-600 text-white flex items-center justify-between sticky top-0 z-10">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center">
+                  <Instagram className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold leading-tight">
+                    Adopsi Postingan Instagram
+                  </h3>
+                  <p className="text-xs text-white/80 font-normal">
+                    Akun Resmi: @kemenhajkotajayapura
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsIgModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4 text-white" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-6">
+              {/* Option 1: Paste any Instagram URL */}
+              <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200">
+                <span className="text-xs font-bold text-stone-800 uppercase tracking-wider block mb-2">
+                  Metode 1 — Paste Link Postingan / Reel
+                </span>
+                <p className="text-xs text-stone-500 mb-3">
+                  Salin tautan foto atau video reel dari Instagram, sistem akan otomatis mengadopsinya menjadi materi slide.
+                </p>
+                <div className="space-y-3">
+                  <input
+                    type="url"
+                    value={igUrlInput}
+                    onChange={(e) => setIgUrlInput(e.target.value)}
+                    placeholder="https://www.instagram.com/p/... atau shortcode"
+                    className="w-full px-4 py-2.5 text-xs rounded-xl border border-stone-300 focus:border-rose-500 bg-white outline-hidden font-mono"
+                  />
+
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-bold text-stone-600">Target Kanal:</span>
+                      <select
+                        value={igTargetChannel}
+                        onChange={(e) => setIgTargetChannel(e.target.value as any)}
+                        className="px-3 py-1.5 text-xs rounded-xl border border-stone-200 bg-white font-medium"
+                      >
+                        <option value="ALL">Layar TV &amp; Web (Rekomendasi)</option>
+                        <option value="TV">Khusus Layar TV Lobi</option>
+                        <option value="WEB">Khusus Web hajipapua.id</option>
+                      </select>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleAdoptInstagram()}
+                      disabled={igLoading || !igUrlInput.trim()}
+                      className="px-5 py-2 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white text-xs font-bold shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                    >
+                      <Download className={`w-3.5 h-3.5 ${igLoading ? 'animate-bounce' : ''}`} />
+                      <span>{igLoading ? 'Mengadopsi...' : 'Tarik & Tayangkan ke TV'}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Option 2: Curated / Latest Posts from @kemenhajkotajayapura */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-bold text-stone-800 uppercase tracking-wider">
+                    Metode 2 — Pilih dari Postingan Terbaru @kemenhajkotajayapura
+                  </span>
+                  <a
+                    href="https://www.instagram.com/kemenhajkotajayapura/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[11px] font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1"
+                  >
+                    <span>Buka Profil Instagram</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+
+                <div className="space-y-3">
+                  {igPosts.length === 0 ? (
+                    <div className="p-6 text-center text-xs text-stone-500 rounded-2xl border border-dashed border-stone-200">
+                      Memuat katalog postingan resmi...
+                    </div>
+                  ) : (
+                    igPosts.map((post) => (
+                      <div
+                        key={post.shortcode}
+                        className="p-3.5 rounded-2xl border border-stone-200 hover:border-[#c9a961] bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition-colors"
+                      >
+                        <div className="flex items-start gap-3 flex-1 min-w-0">
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-amber-500 flex items-center justify-center text-white shrink-0 shadow-2xs">
+                            <Instagram className="w-5 h-5" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <span className="text-[10px] font-mono font-bold text-stone-400 block mb-0.5">
+                              ID: {post.shortcode} • {post.author}
+                            </span>
+                            <p className="text-xs font-bold text-stone-800 line-clamp-2 leading-snug">
+                              {post.caption}
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleAdoptInstagram(post.url || post.shortcode)}
+                          disabled={igLoading}
+                          className="w-full sm:w-auto px-4 py-2 rounded-xl border border-stone-200 hover:border-rose-400 bg-stone-50 hover:bg-rose-50 text-xs font-bold text-stone-700 hover:text-rose-700 transition-colors flex items-center justify-center gap-1.5 shrink-0 cursor-pointer disabled:opacity-50"
+                        >
+                          <Plus className="w-3.5 h-3.5 text-rose-600" />
+                          <span>Adopsi ke TV</span>
+                        </button>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="p-4 border-t border-stone-200 bg-stone-50 flex items-center justify-end rounded-b-3xl">
+              <button
+                type="button"
+                onClick={() => setIsIgModalOpen(false)}
+                className="px-5 py-2 rounded-xl border border-stone-200 bg-white hover:bg-stone-100 text-xs font-bold text-stone-600 transition-colors cursor-pointer"
+              >
+                Tutup
+              </button>
+            </div>
           </div>
         </div>
       )}
