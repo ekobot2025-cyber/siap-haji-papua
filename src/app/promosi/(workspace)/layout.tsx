@@ -1,7 +1,7 @@
 import React from 'react';
 import { redirect } from 'next/navigation';
 import { getServerSession } from '@/infrastructure/security/jwt';
-import { PromosiHeader } from './PromosiHeader';
+import { PromosiHeader } from '../PromosiHeader';
 
 export const dynamic = 'force-dynamic';
 
