@@ -210,14 +210,7 @@ export default function PromosiLoginPage() {
               </div>
             </form>
 
-            {/* Default Account Hint for Convenience */}
-            <div className="mt-6 p-3.5 rounded-2xl bg-[#fbf8ee] border border-[#e8dfc8] text-xs text-stone-600">
-              <span className="font-bold text-[#8a6d2b] block mb-1">Akun Akses Pengelola Humas:</span>
-              <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
-                <div>Username: <strong className="text-stone-900">admin.promosi</strong></div>
-                <div>Password: <strong className="text-stone-900">PromosiPapua2026!</strong></div>
-              </div>
-            </div>
+
 
             {/* Discrete Link to Technical Operational SIAP Haji */}
             <div className="mt-6 pt-4 border-t border-stone-200 text-center">
