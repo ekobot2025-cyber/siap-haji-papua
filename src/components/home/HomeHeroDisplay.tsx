@@ -62,7 +62,7 @@ const DEFAULT_PROMOS: PromotionSlide[] = [
     judul: 'Waspada Tawaran Haji Cepat Tanpa Antre & Visa Non-Resmi',
     ringkas:
       'Kemenhaj Papua mengimbau seluruh warga waspada terhadap penipuan berkedok haji furoda menggunakan visa kerja atau turis. Pastikan izin resmi travel berizin PPIU/PIHK.',
-    sumber: 'Humas Kemenhaj Papua',
+    sumber: 'Kemenhaj Papua',
     url: '/cek-porsi',
     gambar: '',
     targetChannel: 'ALL',

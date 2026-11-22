@@ -23,7 +23,7 @@ export default async function PromosiLayout({
         {children}
       </main>
       <footer className="w-full border-t border-[#e8dfc8] bg-white py-4 text-center text-xs text-stone-400">
-        &copy; {new Date().getFullYear()} Kementerian Haji dan Umrah Wilayah Kerja Papua • Panel Khusus Humas &amp; Layanan Publik
+        &copy; {new Date().getFullYear()} Kementerian Haji dan Umrah Wilayah Kerja Papua • Panel Pengelola Media &amp; Layanan Publik
       </footer>
     </div>
   );

@@ -7,7 +7,6 @@ import {
   Globe,
   LogOut,
   User,
-  Sparkles,
   ExternalLink,
 } from 'lucide-react';
 import type { UserSessionPayload } from '@/infrastructure/security/jwt';
@@ -43,10 +42,6 @@ export function PromosiHeader({ session }: { session: UserSessionPayload }) {
               <h1 className="text-sm sm:text-base font-extrabold text-[#1A1410] tracking-tight leading-none">
                 PANEL MEDIA PROMOSI &amp; TV DISPLAY
               </h1>
-              <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
-                <Sparkles className="w-2.5 h-2.5 text-[#b8941e]" />
-                HUMAS KEMENHAJ
-              </span>
             </div>
             <p className="text-[11px] text-stone-500 font-medium mt-0.5 hidden sm:block">
               Kementerian Haji dan Umrah • Wilayah Kerja Papua

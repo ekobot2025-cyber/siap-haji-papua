@@ -64,7 +64,7 @@ const SEED_SLIDES: PromotionSlide[] = [
     judul: 'Waspada Penipuan Haji Cepat Tanpa Antre & Visa Non-Resmi',
     ringkas:
       'Kemenhaj Papua mengimbau seluruh masyarakat untuk berhati-hati terhadap tawaran haji furoda/mujamalah ilegal menggunakan visa turis, kerja, atau ziarah. Berhaji secara sah hanya menggunakan Visa Haji resmi Pemerintah Arab Saudi.',
-    sumber: 'Humas Kemenhaj Papua',
+    sumber: 'Kemenhaj Papua',
     url: '/cek-porsi',
     gambar: '',
     targetChannel: 'ALL',

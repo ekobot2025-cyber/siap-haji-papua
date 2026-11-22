@@ -92,7 +92,7 @@ export default function PromosiLoginPage() {
 
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#c9a961]/20 text-[#c9a961] border border-[#c9a961]/40 mb-3">
                 <Sparkles className="w-3 h-3 text-[#c9a961]" />
-                PANEL HUMAS &amp; INFORMASI
+                PANEL MEDIA &amp; INFORMASI
               </div>
 
               <h1 className="text-2xl font-black tracking-tight text-white mb-2 leading-tight">
@@ -132,7 +132,7 @@ export default function PromosiLoginPage() {
                 Masuk ke Panel Promosi
               </h2>
               <p className="text-xs text-stone-500 mt-1">
-                Silakan masukkan kredensial akun Humas / Pengelola Media Anda.
+                Silakan masukkan kredensial akun Pengelola Media Promosi Anda.
               </p>
             </div>
 
