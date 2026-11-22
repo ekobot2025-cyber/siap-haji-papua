@@ -24,8 +24,10 @@ import {
   Sliders,
   Check,
   X,
+  Video,
 } from 'lucide-react';
 import type { PromotionSlide } from '@/application/services/promotion.service';
+import { parseVideoUrl } from '@/lib/video-helper';
 
 export default function MediaPromosiPage() {
   const [slides, setSlides] = useState<PromotionSlide[]>([]);
@@ -43,7 +45,9 @@ export default function MediaPromosiPage() {
   const [ringkas, setRingkas] = useState('');
   const [sumber, setSumber] = useState('papua.haji.go.id');
   const [url, setUrl] = useState('https://papua.haji.go.id');
+  const [mediaType, setMediaType] = useState<'IMAGE' | 'VIDEO'>('IMAGE');
   const [gambar, setGambar] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
   const [targetChannel, setTargetChannel] = useState<'ALL' | 'WEB' | 'TV'>('ALL');
   const [priority, setPriority] = useState<number>(1);
   const [startDate, setStartDate] = useState('');
@@ -77,7 +81,9 @@ export default function MediaPromosiPage() {
     setRingkas('');
     setSumber('papua.haji.go.id');
     setUrl('https://papua.haji.go.id');
+    setMediaType('IMAGE');
     setGambar('/logo-kemenhaj.png');
+    setVideoUrl('');
     setTargetChannel('ALL');
     setPriority(slides.length + 1);
     setStartDate('');
@@ -94,7 +100,9 @@ export default function MediaPromosiPage() {
     setRingkas(slide.ringkas);
     setSumber(slide.sumber);
     setUrl(slide.url);
+    setMediaType(slide.mediaType || (slide.videoUrl ? 'VIDEO' : 'IMAGE'));
     setGambar(slide.gambar || '');
+    setVideoUrl(slide.videoUrl || '');
     setTargetChannel(slide.targetChannel);
     setPriority(slide.priority);
     setStartDate(slide.startDate || '');
@@ -111,6 +119,11 @@ export default function MediaPromosiPage() {
       return;
     }
 
+    if (mediaType === 'VIDEO' && !videoUrl.trim()) {
+      setFeedback({ type: 'error', message: 'Masukkan URL Link Video (YouTube / MP4) untuk format video!' });
+      return;
+    }
+
     try {
       setActionLoading(true);
       setFeedback(null);
@@ -122,7 +135,9 @@ export default function MediaPromosiPage() {
         ringkas,
         sumber,
         url,
-        gambar,
+        mediaType,
+        gambar: mediaType === 'IMAGE' ? gambar : '',
+        videoUrl: mediaType === 'VIDEO' ? videoUrl.trim() : '',
         targetChannel,
         priority: Number(priority),
         startDate: startDate || undefined,
@@ -373,7 +388,12 @@ export default function MediaPromosiPage() {
 
                   {/* Thumbnail */}
                   <div className="w-24 h-16 rounded-xl bg-stone-100 border border-[#e8dfc8] overflow-hidden shrink-0 flex items-center justify-center relative">
-                    {s.gambar ? (
+                    {s.mediaType === 'VIDEO' || s.videoUrl ? (
+                      <div className="text-center p-2 bg-[#1A1410] text-[#c9a961] w-full h-full flex flex-col items-center justify-center">
+                        <Video className="w-5 h-5 text-[#c9a961] mb-0.5" />
+                        <span className="text-[9px] font-bold text-white block">Video Link</span>
+                      </div>
+                    ) : s.gambar ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={s.gambar}
@@ -397,6 +417,17 @@ export default function MediaPromosiPage() {
                       <span className="text-[10px] font-bold uppercase tracking-wider bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8] px-2 py-0.5 rounded-full">
                         {s.kategori}
                       </span>
+                      {s.mediaType === 'VIDEO' || s.videoUrl ? (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-1">
+                          <Video className="w-3 h-3 text-rose-600" />
+                          Video
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-stone-100 text-stone-600 border border-stone-200 flex items-center gap-1">
+                          <ImageIcon className="w-3 h-3 text-stone-500" />
+                          Flyer
+                        </span>
+                      )}
                       <span
                         className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                           s.targetChannel === 'ALL'
@@ -558,56 +589,156 @@ export default function MediaPromosiPage() {
                 />
               </div>
 
-              {/* Row 3: Gambar / Flyer Media & Preset */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-[#1A1410] uppercase tracking-wider flex items-center justify-between">
-                  <span>URL Gambar / Flyer Poster (Rasio 16:9 Disarankan)</span>
-                  <span className="text-[11px] font-normal text-stone-500">Bisa diisi URL gambar lokal atau link internet</span>
-                </label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={gambar}
-                    onChange={(e) => setGambar(e.target.value)}
-                    placeholder="Contoh: /logo-kemenhaj.png atau https://.../flyer.jpg"
-                    className="flex-1 px-3.5 py-2.5 text-sm rounded-xl border border-[#e8dfc8] focus:border-[#c9a961] outline-hidden"
-                  />
-                  {gambar && (
+              {/* Row 3: Pilihan Format Media: Flyer Gambar atau Video */}
+              <div className="space-y-3 p-4 rounded-2xl bg-[#fbf8ee]/60 border border-[#e8dfc8]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <label className="text-xs font-bold text-[#1A1410] uppercase tracking-wider flex items-center gap-1.5">
+                    <span>Format Media Slide</span>
+                    <span className="text-stone-400 font-normal">|</span>
+                    <span className="text-[11px] text-[#8a6d2b] font-normal lowercase">pilih jenis media iklan</span>
+                  </label>
+                  <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-[#e8dfc8] self-start sm:self-auto">
                     <button
                       type="button"
-                      onClick={() => setGambar('')}
-                      className="px-3 py-2 text-xs text-stone-500 hover:text-stone-800 border border-stone-200 rounded-xl"
+                      onClick={() => setMediaType('IMAGE')}
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                        mediaType === 'IMAGE'
+                          ? 'bg-[#c9a961] text-white shadow-2xs'
+                          : 'text-stone-600 hover:text-stone-900'
+                      }`}
                     >
-                      Clear
+                      <ImageIcon className="w-3.5 h-3.5" />
+                      <span>Poster Gambar</span>
                     </button>
-                  )}
+                    <button
+                      type="button"
+                      onClick={() => setMediaType('VIDEO')}
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                        mediaType === 'VIDEO'
+                          ? 'bg-[#c9a961] text-white shadow-2xs'
+                          : 'text-stone-600 hover:text-stone-900'
+                      }`}
+                    >
+                      <Video className="w-3.5 h-3.5" />
+                      <span>Video (Link YouTube / MP4)</span>
+                    </button>
+                  </div>
                 </div>
 
-                {/* Preset Fast Select */}
-                <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
-                  <span className="text-stone-400 text-[11px]">Pilihan cepat:</span>
-                  <button
-                    type="button"
-                    onClick={() => setGambar('/logo-kemenhaj.png')}
-                    className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-[#fbf8ee] border border-stone-200 text-stone-700 text-[11px]"
-                  >
-                    Logo Resmi Kemenhaj
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGambar('/assets/branding/logo-horizontal.svg')}
-                    className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-[#fbf8ee] border border-stone-200 text-stone-700 text-[11px]"
-                  >
-                    Logo Horizontal
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setGambar('')}
-                    className="px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-[#fbf8ee] border border-stone-200 text-stone-700 text-[11px]"
-                  >
-                    Tanpa Gambar (Teks Only)
-                  </button>
-                </div>
+                {mediaType === 'VIDEO' ? (
+                  <div className="space-y-2 pt-1">
+                    <label className="text-xs font-semibold text-stone-700 flex items-center justify-between">
+                      <span>URL Link Video (YouTube / Shorts / MP4) <span className="text-rose-500">*</span></span>
+                      <span className="text-[11px] text-[#8a6d2b] font-normal">Cukup paste link video di sini</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="url"
+                        value={videoUrl}
+                        onChange={(e) => setVideoUrl(e.target.value)}
+                        placeholder="Contoh: https://www.youtube.com/watch?v=... atau https://youtu.be/... atau link file .mp4"
+                        className="flex-1 px-3.5 py-2.5 text-sm rounded-xl border border-[#e8dfc8] bg-white focus:border-[#c9a961] outline-hidden"
+                      />
+                      {videoUrl && (
+                        <button
+                          type="button"
+                          onClick={() => setVideoUrl('')}
+                          className="px-3 py-2 text-xs text-stone-500 hover:text-stone-800 border border-stone-200 rounded-xl bg-white cursor-pointer"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+                    <p className="text-[11px] text-stone-500 leading-relaxed">
+                      💡 <strong>Petunjuk Admin:</strong> Cukup paste tautan video dari channel YouTube resmi Kemenhaj atau tautan file MP4. Video akan otomatis di-embed dan diputar langsung pada slide banner beranda dan Layar TV Kantor Layanan.
+                    </p>
+
+                    {/* Live Video Preview inside Modal */}
+                    {videoUrl && (() => {
+                      const vInfo = parseVideoUrl(videoUrl);
+                      if (vInfo.type === 'youtube' && vInfo.embedUrl) {
+                        return (
+                          <div className="mt-2 rounded-xl overflow-hidden border border-[#e8dfc8] bg-black aspect-video max-h-48 relative">
+                            <iframe
+                              src={vInfo.embedUrl}
+                              title="Preview Video Promosi"
+                              className="w-full h-full border-0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            />
+                          </div>
+                        );
+                      }
+                      if (vInfo.type === 'direct' && vInfo.directUrl) {
+                        return (
+                          <div className="mt-2 rounded-xl overflow-hidden border border-[#e8dfc8] bg-black aspect-video max-h-48 relative">
+                            <video
+                              src={vInfo.directUrl}
+                              controls
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        );
+                      }
+                      return (
+                        <div className="text-[11px] text-amber-600 bg-amber-50 p-2 rounded-lg border border-amber-200">
+                          Format link belum dapat di-preview. Pastikan link YouTube atau link file video langsung (.mp4).
+                        </div>
+                      );
+                    })()}
+                  </div>
+                ) : (
+                  <div className="space-y-2 pt-1">
+                    <label className="text-xs font-semibold text-stone-700 flex items-center justify-between">
+                      <span>URL Gambar / Flyer Poster (Rasio 16:9 Disarankan)</span>
+                      <span className="text-[11px] font-normal text-stone-500">Bisa diisi URL gambar lokal atau link internet</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={gambar}
+                        onChange={(e) => setGambar(e.target.value)}
+                        placeholder="Contoh: /logo-kemenhaj.png atau https://.../flyer.jpg"
+                        className="flex-1 px-3.5 py-2.5 text-sm rounded-xl border border-[#e8dfc8] bg-white focus:border-[#c9a961] outline-hidden"
+                      />
+                      {gambar && (
+                        <button
+                          type="button"
+                          onClick={() => setGambar('')}
+                          className="px-3 py-2 text-xs text-stone-500 hover:text-stone-800 border border-stone-200 rounded-xl bg-white cursor-pointer"
+                        >
+                          Clear
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Preset Fast Select */}
+                    <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
+                      <span className="text-stone-400 text-[11px]">Pilihan cepat:</span>
+                      <button
+                        type="button"
+                        onClick={() => setGambar('/logo-kemenhaj.png')}
+                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#fbf8ee] border border-stone-200 text-stone-700 text-[11px] cursor-pointer"
+                      >
+                        Logo Resmi Kemenhaj
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setGambar('/assets/branding/logo-horizontal.svg')}
+                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#fbf8ee] border border-stone-200 text-stone-700 text-[11px] cursor-pointer"
+                      >
+                        Logo Horizontal
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setGambar('')}
+                        className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#fbf8ee] border border-stone-200 text-stone-700 text-[11px] cursor-pointer"
+                      >
+                        Tanpa Gambar (Teks Only)
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Row 4: Kanal Tayang & Tautan Link */}

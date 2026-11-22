@@ -25,6 +25,7 @@ import {
   Megaphone,
 } from 'lucide-react';
 import { BerhakLunasService } from '@/application/services/berhak-lunas.service';
+import { parseVideoUrl } from '@/lib/video-helper';
 
 export default function VideoWallPage() {
   const [data, setData] = useState<any | null>(null);
@@ -586,9 +587,46 @@ export default function VideoWallPage() {
                 const current = promotions[promoIdx] || promotions[0];
                 return (
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[380px]">
-                    {/* Visual Media Flyer / Graphic */}
-                    <div className="lg:col-span-5 flex items-center justify-center bg-black/50 p-4 rounded-2xl border border-white/10 relative overflow-hidden group">
-                      {current.gambar ? (
+                    {/* Visual Media Flyer / Graphic or Video Player */}
+                    <div className="lg:col-span-5 flex items-center justify-center bg-black/60 p-3 rounded-2xl border border-white/10 relative overflow-hidden group min-h-[260px]">
+                      {current.mediaType === 'VIDEO' && current.videoUrl ? (
+                        (() => {
+                          const vInfo = parseVideoUrl(current.videoUrl);
+                          if (vInfo.type === 'youtube' && vInfo.embedUrl) {
+                            return (
+                              <div className="w-full aspect-video rounded-xl overflow-hidden border border-[#c9a961]/30 bg-black shadow-2xl relative">
+                                <iframe
+                                  src={vInfo.embedUrl}
+                                  title={current.judul}
+                                  className="w-full h-full border-0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowFullScreen
+                                />
+                              </div>
+                            );
+                          }
+                          if (vInfo.type === 'direct' && vInfo.directUrl) {
+                            return (
+                              <div className="w-full aspect-video rounded-xl overflow-hidden border border-[#c9a961]/30 bg-black shadow-2xl relative">
+                                <video
+                                  src={vInfo.directUrl}
+                                  controls
+                                  playsInline
+                                  muted
+                                  autoPlay
+                                  loop
+                                  className="w-full h-full object-contain"
+                                />
+                              </div>
+                            );
+                          }
+                          return (
+                            <div className="py-12 text-center text-xs text-stone-400">
+                              Format tautan video tidak dikenali
+                            </div>
+                          );
+                        })()
+                      ) : current.gambar ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={current.gambar}

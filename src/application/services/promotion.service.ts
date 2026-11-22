@@ -10,6 +10,8 @@ export interface PromotionSlide {
   sumber: string;
   url: string;
   gambar?: string;
+  mediaType?: 'IMAGE' | 'VIDEO';
+  videoUrl?: string;
   targetChannel: 'ALL' | 'WEB' | 'TV';
   isActive: boolean;
   priority: number;
@@ -155,6 +157,8 @@ export class PromotionService {
       savedSlide = {
         ...slides[existingIndex],
         ...slideData,
+        mediaType: slideData.mediaType || (slideData.videoUrl ? 'VIDEO' : slides[existingIndex].mediaType || 'IMAGE'),
+        videoUrl: slideData.videoUrl !== undefined ? slideData.videoUrl : slides[existingIndex].videoUrl,
         updatedAt: nowIso,
         updatedBy: session?.fullName || session?.username || 'Admin Kemenhaj',
       };
@@ -169,6 +173,8 @@ export class PromotionService {
         sumber: slideData.sumber || 'Kemenhaj Papua',
         url: slideData.url || 'https://papua.haji.go.id',
         gambar: slideData.gambar || '',
+        mediaType: slideData.mediaType || (slideData.videoUrl ? 'VIDEO' : 'IMAGE'),
+        videoUrl: slideData.videoUrl || '',
         targetChannel: slideData.targetChannel || 'ALL',
         isActive: slideData.isActive !== undefined ? slideData.isActive : true,
         priority: slideData.priority || slides.length + 1,

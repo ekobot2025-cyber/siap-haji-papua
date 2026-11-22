@@ -17,9 +17,11 @@ import {
   HeartPulse,
   BookOpen,
   ArrowRight,
+  Video,
 } from 'lucide-react';
 import { KabupatenRadarSlider } from './KabupatenRadarSlider';
 import type { PromotionSlide } from '@/application/services/promotion.service';
+import { parseVideoUrl } from '@/lib/video-helper';
 
 const DEFAULT_PROMOS: PromotionSlide[] = [
   {
@@ -244,8 +246,41 @@ export function HomeHeroDisplay() {
               </span>
             </div>
 
-            {/* Media Image / Visual Flyer (if available) */}
-            {currentPromo.gambar ? (
+            {/* Media Image / Visual Flyer / Video Player */}
+            {currentPromo.mediaType === 'VIDEO' && currentPromo.videoUrl ? (
+              (() => {
+                const vInfo = parseVideoUrl(currentPromo.videoUrl);
+                if (vInfo.type === 'youtube' && vInfo.embedUrl) {
+                  return (
+                    <div className="w-full aspect-video max-h-44 rounded-2xl bg-black border border-[#c9a961]/30 overflow-hidden relative shadow-lg">
+                      <iframe
+                        src={vInfo.embedUrl}
+                        title={currentPromo.judul}
+                        className="w-full h-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  );
+                }
+                if (vInfo.type === 'direct' && vInfo.directUrl) {
+                  return (
+                    <div className="w-full aspect-video max-h-44 rounded-2xl bg-black border border-[#c9a961]/30 overflow-hidden relative shadow-lg">
+                      <video
+                        src={vInfo.directUrl}
+                        controls
+                        playsInline
+                        muted
+                        autoPlay
+                        loop
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })()
+            ) : currentPromo.gambar ? (
               <div className="w-full h-32 rounded-2xl bg-black/60 border border-white/10 overflow-hidden flex items-center justify-center p-2 relative group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
