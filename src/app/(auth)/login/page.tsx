@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Lock, User, ShieldCheck, ArrowRight, AlertCircle } from 'lucide-react';
 
@@ -31,7 +32,12 @@ export default function LoginPage() {
         return;
       }
 
-      const targetPath = json.data?.user?.roles?.includes('PETUGAS_KESEHATAN') ? '/kesehatan' : '/dashboard';
+      let targetPath = '/dashboard';
+      if (json.data?.user?.roles?.includes('ADMIN_PROMOSI')) {
+        targetPath = '/promosi';
+      } else if (json.data?.user?.roles?.includes('PETUGAS_KESEHATAN')) {
+        targetPath = '/kesehatan';
+      }
       window.location.href = targetPath;
     } catch {
       setErrorMessage('Terjadi kesalahan jaringan');
@@ -153,8 +159,13 @@ export default function LoginPage() {
                 </div>
               </form>
 
-              <div className="mt-8 pt-4 border-t border-stone-100 text-[11px] text-stone-400 text-center">
-                Portal khusus petugas dan pengelola haji Kementerian Haji &amp; Umrah RI Provinsi Papua.
+              <div className="mt-8 pt-4 border-t border-stone-100 text-[11px] text-stone-500 text-center space-y-1">
+                <div>Portal khusus petugas dan pengelola haji Kementerian Haji &amp; Umrah RI Provinsi Papua.</div>
+                <div>
+                  <Link href="/promosi/login" className="text-[#8a6d2b] font-semibold hover:underline">
+                    Masuk ke Portal Pengelola Media Promosi &amp; TV &rarr;
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
