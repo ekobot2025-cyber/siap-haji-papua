@@ -50,7 +50,7 @@ export function Sidebar({ session }: SidebarProps) {
         {
           title: 'LAYANAN KESEHATAN HAJI',
           items: [
-            { label: 'Monitoring Kesehatan', href: '/kesehatan', icon: HeartPulse, active: pathname.startsWith('/kesehatan'), badge: '17 Risti', badgeColor: 'bg-rose-50 text-rose-700 border border-rose-200' },
+            { label: 'Monitoring Kesehatan', href: '/kesehatan', icon: HeartPulse, active: pathname.startsWith('/kesehatan') },
             { label: 'Early Warning Risiko', href: '/monitoring/early-warning', icon: ShieldAlert, active: pathname.startsWith('/monitoring/early-warning'), badge: 'MEDIS', badgeColor: 'bg-amber-50 text-amber-700 border border-amber-200' },
             { label: 'Data Medis Jamaah', href: '/jamaah', icon: Users, active: pathname.startsWith('/jamaah') },
             { label: 'Kalender Pemeriksaan', href: '/kalender', icon: Calendar, active: pathname.startsWith('/kalender') },
@@ -60,7 +60,7 @@ export function Sidebar({ session }: SidebarProps) {
           title: 'MONITORING & EMBARKASI',
           items: [
             { label: 'Executive Dashboard', href: '/dashboard', icon: LayoutDashboard, active: pathname === '/dashboard' },
-            { label: 'Manifest & Kloter', href: '/kloter', icon: Plane, active: pathname.startsWith('/kloter'), badge: '4 Kloter', badgeColor: 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' },
+            { label: 'Manifest & Kloter', href: '/kloter', icon: Plane, active: pathname.startsWith('/kloter') },
             { label: 'Peta Spasial Papua', href: '/monitoring/peta-wilayah', icon: Compass, active: pathname.startsWith('/monitoring/peta-wilayah') },
             { label: 'Laporan Rekapitulasi', href: '/laporan', icon: FileText, active: pathname === '/laporan', badge: 'RESMI', badgeColor: 'bg-gradient-to-r from-[#c9a961] to-[#b8941e] text-white font-bold' },
           ],
@@ -90,11 +90,11 @@ export function Sidebar({ session }: SidebarProps) {
           title: 'OPERASIONAL TAHAPAN',
           items: [
             { label: 'Data Jamaah', href: '/jamaah', icon: Users, active: pathname.startsWith('/jamaah') },
-            { label: 'Dokumen & Paspor', href: '/dokumen', icon: FileCheck, active: pathname.startsWith('/dokumen'), badge: '21', badgeColor: 'bg-amber-50 text-amber-700 border border-amber-200' },
-            { label: 'Administrasi BPIH', href: '/administrasi', icon: CreditCard, active: pathname.startsWith('/administrasi'), badge: '19', badgeColor: 'bg-blue-50 text-blue-700 border border-blue-200' },
-            { label: 'Monitoring Kesehatan', href: '/kesehatan', icon: HeartPulse, active: pathname.startsWith('/kesehatan'), badge: '17', badgeColor: 'bg-rose-50 text-rose-700 border border-rose-200' },
-            { label: 'Bimbingan Manasik', href: '/manasik', icon: BookOpen, active: pathname.startsWith('/manasik'), badge: '8', badgeColor: 'bg-purple-50 text-purple-700 border border-purple-200' },
-            { label: 'Manajemen Kloter', href: '/kloter', icon: Plane, active: pathname.startsWith('/kloter'), badge: '4 Kloter', badgeColor: 'bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]' },
+            { label: 'Dokumen & Paspor', href: '/dokumen', icon: FileCheck, active: pathname.startsWith('/dokumen') },
+            { label: 'Administrasi BPIH', href: '/administrasi', icon: CreditCard, active: pathname.startsWith('/administrasi') },
+            { label: 'Monitoring Kesehatan', href: '/kesehatan', icon: HeartPulse, active: pathname.startsWith('/kesehatan') },
+            { label: 'Bimbingan Manasik', href: '/manasik', icon: BookOpen, active: pathname.startsWith('/manasik') },
+            { label: 'Manajemen Kloter', href: '/kloter', icon: Plane, active: pathname.startsWith('/kloter') },
             { label: 'Simulasi Kuota Cadangan', href: '/monitoring/simulasi-kuota', icon: Sparkles, active: pathname.startsWith('/monitoring/simulasi-kuota'), badge: 'DSS', badgeColor: 'bg-indigo-50 text-indigo-700 border border-indigo-200' },
           ],
         },

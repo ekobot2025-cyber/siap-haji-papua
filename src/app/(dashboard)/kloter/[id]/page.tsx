@@ -46,7 +46,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
       m.jamaah.fullName,
       m.jamaah.gender === 'MALE' ? 'L' : 'P',
       m.jamaah.region?.name || 'Provinsi Papua',
-      m.group ? m.group.name : 'Regu 1',
+      m.group ? m.group.name : '-',
       m.jamaah.readinessScore?.totalScore?.toFixed(0) || '100',
       m.jamaah.status || 'SIAP_BERANGKAT',
       m.jamaah.isPriorityElderly ? `Prioritas Lansia (${m.jamaah.elderlyAge} Th)` : 'Reguler',
@@ -83,7 +83,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
       m.jamaah.fullName,
       m.jamaah.gender === 'MALE' ? 'L' : 'P',
       m.jamaah.region?.name || 'Provinsi Papua',
-      m.group ? m.group.name : 'Regu 1',
+      m.group ? m.group.name : '-',
       m.jamaah.isPriorityElderly ? 'Lansia' : 'Reguler',
     ]);
 
@@ -231,7 +231,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
               Kloter {kloter.kloterNumber} ({kloter.kloterCode})
             </h1>
             <p className="text-xs text-gray-300 mt-1">
-              {kloter.embarkationName} • Maskapai {kloter.airlineName || 'Garuda Indonesia'} ({kloter.flightNumber || 'GA-1101'})
+              {kloter.embarkationName} • Maskapai: {kloter.airlineName ? `${kloter.airlineName} (${kloter.flightNumber || '-'})` : 'Menunggu Penetapan Maskapai'}
             </p>
           </div>
 
@@ -248,9 +248,9 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
         </div>
 
         {/* Officers Row */}
-        {kloter.officers && kloter.officers.length > 0 && (
-          <div className="pt-3 border-t border-white/10">
-            <span className="text-[11px] font-bold text-[#c9a961] block mb-2">Petugas PPIH Kloter Terpadu:</span>
+        <div className="pt-3 border-t border-white/10">
+          <span className="text-[11px] font-bold text-[#c9a961] block mb-2">Petugas PPIH Kloter Terpadu:</span>
+          {kloter.officers && kloter.officers.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
               {kloter.officers.map((off: any) => (
                 <div key={off.id} className="bg-black/40 p-2.5 rounded-xl border border-[#c9a961]/20 text-xs">
@@ -259,8 +259,12 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="text-xs text-stone-400 bg-black/40 p-3 rounded-xl border border-white/10">
+              Petugas kloter (TPHI, TPIHI, TKHI, dan TPHD) belum ditetapkan resmi oleh Panitia Penyelenggara Ibadah Haji (PPIH) Embarkasi Makassar.
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Manifest Search & Table */}
@@ -296,48 +300,56 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
               </tr>
             </thead>
             <tbody className="divide-y divide-[#e8dfc8]/60 print:divide-black">
-              {filteredMembers.map((m: any) => (
-                <tr key={m.id} className="hover:bg-[#fbf8ee]/30 transition-colors print:border-b print:border-black">
-                  <td className="p-3.5 print:p-2 print:border print:border-black font-mono font-bold text-[#8a6d2b] print:text-black">
-                    {m.seatNumber || '-'}
-                  </td>
-                  <td className="p-3.5 print:p-2 print:border print:border-black">
-                    <span className="font-bold text-[#1A1410] print:text-black block">
-                      {m.jamaah.fullName}
-                    </span>
-                    <div className="flex items-center gap-1.5 font-mono text-gray-500 print:text-black text-[11px]">
-                      <span>No. Porsi: {m.jamaah.porsiNumber}</span>
-                      {m.jamaah.isPriorityElderly && (
-                        <span className="text-[9px] bg-purple-100 print:bg-transparent print:border print:border-black text-purple-800 print:text-black px-1 rounded font-bold font-sans">
-                          Lansia ({m.jamaah.elderlyAge} th)
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                  <td className="p-3.5 print:p-2 print:border print:border-black font-medium text-gray-700 print:text-black">
-                    {m.jamaah.region?.name || '-'}
-                  </td>
-                  <td className="p-3.5 print:p-2 print:border print:border-black text-gray-600 print:text-black">
-                    {m.jamaah.gender === 'MALE' ? 'L' : 'P'}
-                  </td>
-                  <td className="p-3.5 print:p-2 print:border print:border-black font-medium text-gray-800 print:text-black">
-                    {m.group ? `${m.group.name}` : 'Regu 1'}
-                  </td>
-                  <td className="p-3.5 print:p-2 print:border print:border-black">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#fbf8ee] border border-[#e8dfc8] print:bg-transparent text-[#8a6d2b] print:text-black font-mono">
-                      {m.jamaah.readinessScore?.totalScore?.toFixed(0) || 100}%
-                    </span>
-                  </td>
-                  <td className="no-print p-3.5 text-right">
-                    <Link
-                      href={`/jamaah/${m.jamaah.id}`}
-                      className="px-2.5 py-1 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-[#8a6d2b] hover:bg-[#fbf8ee] inline-block transition-colors"
-                    >
-                      Profil 360°
-                    </Link>
+              {filteredMembers.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="p-8 text-center text-stone-500 text-xs">
+                    Belum ada jamaah yang dialokasikan secara definitif ke dalam kloter ini. Menunggu Surat Keputusan (SK) resmi pembagian kloter oleh PPIH Embarkasi.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                filteredMembers.map((m: any) => (
+                  <tr key={m.id} className="hover:bg-[#fbf8ee]/30 transition-colors print:border-b print:border-black">
+                    <td className="p-3.5 print:p-2 print:border print:border-black font-mono font-bold text-[#8a6d2b] print:text-black">
+                      {m.seatNumber || '-'}
+                    </td>
+                    <td className="p-3.5 print:p-2 print:border print:border-black">
+                      <span className="font-bold text-[#1A1410] print:text-black block">
+                        {m.jamaah.fullName}
+                      </span>
+                      <div className="flex items-center gap-1.5 font-mono text-gray-500 print:text-black text-[11px]">
+                        <span>No. Porsi: {m.jamaah.porsiNumber}</span>
+                        {m.jamaah.isPriorityElderly && (
+                          <span className="text-[9px] bg-purple-100 print:bg-transparent print:border print:border-black text-purple-800 print:text-black px-1 rounded font-bold font-sans">
+                            Lansia ({m.jamaah.elderlyAge} th)
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="p-3.5 print:p-2 print:border print:border-black font-medium text-gray-700 print:text-black">
+                      {m.jamaah.region?.name || '-'}
+                    </td>
+                    <td className="p-3.5 print:p-2 print:border print:border-black text-gray-600 print:text-black">
+                      {m.jamaah.gender === 'MALE' ? 'L' : 'P'}
+                    </td>
+                    <td className="p-3.5 print:p-2 print:border print:border-black font-medium text-gray-800 print:text-black">
+                      {m.group ? `${m.group.name}` : '-'}
+                    </td>
+                    <td className="p-3.5 print:p-2 print:border print:border-black">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#fbf8ee] border border-[#e8dfc8] print:bg-transparent text-[#8a6d2b] print:text-black font-mono">
+                        {m.jamaah.readinessScore?.totalScore?.toFixed(0) || 100}%
+                      </span>
+                    </td>
+                    <td className="no-print p-3.5 text-right">
+                      <Link
+                        href={`/jamaah/${m.jamaah.id}`}
+                        className="px-2.5 py-1 rounded-lg border border-[#e8dfc8] text-xs font-semibold text-[#8a6d2b] hover:bg-[#fbf8ee] inline-block transition-colors"
+                      >
+                        Profil 360°
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
@@ -357,7 +369,7 @@ export default function KloterDetailPage({ params }: { params: Promise<{ id: str
           <span className="block text-[10px] text-gray-700">Disahkan Oleh,</span>
           <strong className="block font-bold">Ketua Kloter {kloter.kloterCode} (TPHI)</strong>
           <div className="h-16" />
-          <span className="block font-bold underline">({kloter.officers?.[0]?.fullName || 'H. Abdul Karim, S.Ag'})</span>
+          <span className="block font-bold underline">({kloter.officers?.[0]?.fullName || '...................................................'})</span>
           <span className="block text-[10px] text-gray-600">Petugas PPIH Kloter Terpadu</span>
         </div>
 

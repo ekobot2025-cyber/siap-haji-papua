@@ -66,6 +66,14 @@ export default function KloterPage() {
       {/* Kloter Cards Grid */}
       {loading ? (
         <div className="text-center py-12 text-stone-400">Memuat data kloter...</div>
+      ) : kloters.length === 0 ? (
+        <div className="bg-white rounded-3xl border border-[#e8dfc8] p-12 text-center shadow-xs space-y-3">
+          <Plane className="w-12 h-12 text-[#c9a961] mx-auto opacity-50" />
+          <h2 className="text-lg font-bold text-[#1A1410]">Belum Ada Penetapan Kloter &amp; Petugas Resmi</h2>
+          <p className="text-xs text-stone-500 max-w-lg mx-auto leading-relaxed">
+            Kelompok terbang (Kloter), maskapai, jadwal penerbangan, serta penugasan resmi petugas kloter (TPHI, TPIHI, TKHI, dan TPHD) Provinsi Papua masih menunggu Surat Keputusan (SK) resmi dari Panitia Penyelenggara Ibadah Haji (PPIH) Embarkasi dan Kementerian Haji dan Umrah. Seluruh data rekayasa/dummy telah dinonaktifkan.
+          </p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {kloters.map((k) => {
@@ -103,13 +111,13 @@ export default function KloterPage() {
                   <div className="space-y-1">
                     <span className="text-stone-500 block">Masuk Asrama:</span>
                     <p className="font-medium text-stone-700">
-                      {k.dormitoryInDate ? new Date(k.dormitoryInDate).toLocaleDateString('id-ID') : '18 Mei 2026'}
+                      {k.dormitoryInDate ? new Date(k.dormitoryInDate).toLocaleDateString('id-ID') : 'Menunggu Jadwal PPIH'}
                     </p>
                   </div>
                   <div className="space-y-1">
                     <span className="text-stone-500 block">Keberangkatan Udara:</span>
                     <p className="font-medium text-stone-700">
-                      {k.flightDepartureDate ? new Date(k.flightDepartureDate).toLocaleDateString('id-ID') : '19 Mei 2026'}
+                      {k.flightDepartureDate ? new Date(k.flightDepartureDate).toLocaleDateString('id-ID') : 'Menunggu Jadwal PPIH'}
                     </p>
                   </div>
                 </div>

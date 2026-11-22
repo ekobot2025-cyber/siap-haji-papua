@@ -577,11 +577,11 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                   <div>
                     <span className="text-xs font-semibold text-gray-500">Nomor Kloter</span>
                     <h3 className="text-xl font-bold text-[#1A1410]">
-                      Kloter {jamaah.kloterMembership?.kloter?.kloterNumber || 1} ({jamaah.kloterMembership?.kloter?.kloterCode || 'UPG-01'})
+                      Kloter {jamaah.kloterMembership?.kloter?.kloterNumber ?? '-'} ({jamaah.kloterMembership?.kloter?.kloterCode ?? 'Menunggu SK'})
                     </h3>
                   </div>
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
-                    STATUS: {jamaah.kloterMembership?.kloter?.status || 'SIAP'}
+                    STATUS: {jamaah.kloterMembership?.kloter?.status || 'MENUNGGU SK'}
                   </span>
                 </div>
 
@@ -593,7 +593,7 @@ export function Jamaah360Tabs({ jamaah, birthDateFormatted }: Jamaah360TabsProps
                   <div>
                     <span className="text-xs font-semibold text-gray-500 block">Maskapai & No. Penerbangan:</span>
                     <span className="font-medium text-gray-800">
-                      {jamaah.kloterMembership?.kloter?.airlineName || 'Garuda Indonesia'} ({jamaah.kloterMembership?.kloter?.flightNumber || 'GA-1101'})
+                      {jamaah.kloterMembership?.kloter?.airlineName || 'Menunggu SK Maskapai'} ({jamaah.kloterMembership?.kloter?.flightNumber || '-'})
                     </span>
                   </div>
                   <div>

@@ -13,7 +13,7 @@ interface SmartPassProps {
     age: number;
     gender: string;
     kloterCode: string;
-    kloterNumber: number;
+    kloterNumber?: number;
     embarkation: string;
     airline: string;
     flightNumber: string;

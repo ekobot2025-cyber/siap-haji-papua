@@ -30,7 +30,7 @@ export interface SmartHajjPassProps {
     age: number;
     gender: string;
     kloterCode: string;
-    kloterNumber: number;
+    kloterNumber?: number;
     embarkation: string;
     airline: string;
     flightNumber: string;
@@ -93,11 +93,11 @@ export function SmartHajjPassModal({ isOpen, onClose, jamaah }: SmartHajjPassPro
     }, 150);
   };
 
-  const passportNumber = jamaah.passportNumber || `B${8000000 + parseInt(jamaah.porsiNumber.slice(-3) || '1', 10)}`;
-  const maktab = jamaah.maktabMakkah || 'Sektor 4 Syisyah (Maktab 48 - Kiswah)';
-  const hotelMadinah = jamaah.hotelMadinah || 'Markaziyah Sektor 2 (Front Taiba)';
-  const tphi = jamaah.tphiName || 'H. Abdul Karim, S.Ag (0811-4800-101)';
-  const tkhi = jamaah.tkhiName || 'dr. Sarah Wulandari, Sp.PD (0811-4800-103)';
+  const passportNumber = jamaah.passportNumber || 'Tahap Penerbitan';
+  const maktab = jamaah.maktabMakkah || 'Menunggu Penempatan Maktab';
+  const hotelMadinah = jamaah.hotelMadinah || 'Menunggu Penempatan Hotel';
+  const tphi = jamaah.tphiName || 'Menunggu Penetapan PPIH';
+  const tkhi = jamaah.tkhiName || 'Menunggu Penetapan PPIH';
 
   return (
     <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">

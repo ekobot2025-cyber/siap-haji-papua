@@ -210,43 +210,53 @@ export default function ManasikPage() {
       </div>
 
       {/* Events Selector Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {events.map((ev) => {
-          const isSelected = ev.id === selectedEventId;
-          return (
-            <div
-              key={ev.id}
-              onClick={() => setSelectedEventId(ev.id)}
-              className={`p-4 rounded-2xl border text-left cursor-pointer transition-all ${
-                isSelected
-                  ? 'border-[#c9a961] ring-2 ring-[#c9a961] bg-[#fbf8ee] shadow-xs'
-                  : 'bg-white border-[#e8dfc8] hover:border-[#c9a961]/50'
-              }`}
-            >
-              <div className="flex items-center justify-between pb-2 border-b border-[#e8dfc8]/60">
-                <span className="text-[10px] font-bold text-[#8a6d2b] uppercase bg-[#fbf8ee] border border-[#e8dfc8] px-2 py-0.5 rounded">
-                  Sesi {ev.sessionNumber}
-                </span>
-                <span className="text-xs font-mono font-bold text-gray-700">
-                  {ev._count?.attendances || 0} Hadir
-                </span>
-              </div>
+      {events.length === 0 ? (
+        <div className="bg-white rounded-3xl border border-[#e8dfc8] p-12 text-center shadow-xs space-y-3">
+          <BookOpen className="w-12 h-12 text-[#c9a961] mx-auto opacity-50" />
+          <h2 className="text-lg font-bold text-[#1A1410]">Belum Ada Agenda Bimbingan Manasik Resmi</h2>
+          <p className="text-xs text-stone-500 max-w-lg mx-auto leading-relaxed">
+            Jadwal bimbingan manasik massal tingkat Kabupaten/Kota dan bimbingan manasik KUA Kecamatan se-Papua masih menunggu penetapan jadwal resmi dari Seksi PHU Kemenhaj Papua. Seluruh data rekayasa/dummy telah dinonaktifkan.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {events.map((ev) => {
+            const isSelected = ev.id === selectedEventId;
+            return (
+              <div
+                key={ev.id}
+                onClick={() => setSelectedEventId(ev.id)}
+                className={`p-4 rounded-2xl border text-left cursor-pointer transition-all ${
+                  isSelected
+                    ? 'border-[#c9a961] ring-2 ring-[#c9a961] bg-[#fbf8ee] shadow-xs'
+                    : 'bg-white border-[#e8dfc8] hover:border-[#c9a961]/50'
+                }`}
+              >
+                <div className="flex items-center justify-between pb-2 border-b border-[#e8dfc8]/60">
+                  <span className="text-[10px] font-bold text-[#8a6d2b] uppercase bg-[#fbf8ee] border border-[#e8dfc8] px-2 py-0.5 rounded">
+                    Sesi {ev.sessionNumber}
+                  </span>
+                  <span className="text-xs font-mono font-bold text-gray-700">
+                    {ev._count?.attendances || 0} Hadir
+                  </span>
+                </div>
 
-              <div className="mt-2 space-y-1">
-                <h3 className="text-xs font-bold text-gray-900 leading-snug line-clamp-2">{ev.title}</h3>
-                <p className="text-[11px] text-gray-500 flex items-center gap-1 pt-1">
-                  <Calendar className="w-3 h-3 text-slate-400" />
-                  {new Date(ev.eventDate).toLocaleDateString('id-ID')} ({ev.startTime} - {ev.endTime})
-                </p>
-                <p className="text-[11px] text-gray-500 flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-slate-400" />
-                  {ev.location}
-                </p>
+                <div className="mt-2 space-y-1">
+                  <h3 className="text-xs font-bold text-gray-900 leading-snug line-clamp-2">{ev.title}</h3>
+                  <p className="text-[11px] text-gray-500 flex items-center gap-1 pt-1">
+                    <Calendar className="w-3 h-3 text-slate-400" />
+                    {new Date(ev.eventDate).toLocaleDateString('id-ID')} ({ev.startTime} - {ev.endTime})
+                  </p>
+                  <p className="text-[11px] text-gray-500 flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-slate-400" />
+                    {ev.location}
+                  </p>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Detailed Info for Selected Event */}
       {selectedEvent && (

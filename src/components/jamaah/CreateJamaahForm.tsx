@@ -191,7 +191,7 @@ export function CreateJamaahForm({
             required
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            placeholder="e.g. H. Achmad Subarjo Mansyur"
+            placeholder="Masukkan nama lengkap jamaah sesuai KTP/Paspor"
             className="w-full px-3 py-2 text-sm border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#c9a961] focus:border-[#c9a961] outline-none"
           />
           <span className="text-[11px] text-gray-500 mt-1 block">

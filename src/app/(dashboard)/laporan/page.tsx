@@ -122,17 +122,17 @@ export default async function LaporanPage() {
       number: k.kloterNumber,
       code: k.kloterCode,
       embarkation: k.embarkationName,
-      airline: k.airlineName || 'Garuda Indonesia',
-      flight: k.flightNumber || 'GA-1101',
+      airline: k.airlineName || 'Menunggu SK',
+      flight: k.flightNumber || '-',
       capacity: k.capacityTotal,
       filled: k._count.members,
       status: k.status,
       departureDate: k.flightDepartureDate
         ? k.flightDepartureDate.toLocaleDateString('id-ID', { dateStyle: 'medium' })
-        : '12 Mei 2026',
+        : 'Menunggu Jadwal PPIH',
       dormitoryDate: k.dormitoryInDate
         ? k.dormitoryInDate.toLocaleDateString('id-ID', { dateStyle: 'medium' })
-        : '11 Mei 2026',
+        : 'Menunggu Jadwal PPIH',
       leaderName: k.officers[0]?.fullName || 'H. Abdul Karim, S.Ag',
     })),
   };

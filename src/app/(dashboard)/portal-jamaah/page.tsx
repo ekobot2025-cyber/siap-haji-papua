@@ -71,10 +71,10 @@ export default async function PortalJamaahPage() {
     include: jamaahIncludeConfig,
   });
 
-  // Fallback demo pilgrim jika user adalah petugas yang membuka preview portal jamaah
+  // Fallback ke jamaah pertama di database jika user adalah petugas yang membuka preview portal jamaah
   if (!jamaah) {
     jamaah = await prisma.jamaah.findFirst({
-      where: { porsiNumber: '2700192001' },
+      orderBy: { porsiNumber: 'asc' },
       include: jamaahIncludeConfig,
     });
   }
@@ -216,7 +216,7 @@ export default async function PortalJamaahPage() {
                 Wilayah: <strong className="text-white">{jamaah.region.name}</strong>
               </span>
               <span className="bg-white/10 px-3 py-1.5 rounded-xl text-[#FAF9F5] border border-white/10">
-                Kloter: <strong className="text-[#c9a961]">{kloter ? kloter.kloterCode : 'UPG-02'}</strong>
+                Kloter: <strong className="text-[#c9a961]">{kloter ? kloter.kloterCode : 'Menunggu Penetapan'}</strong>
               </span>
             </div>
           </div>
@@ -244,18 +244,18 @@ export default async function PortalJamaahPage() {
                 fullName: jamaah.fullName,
                 porsiNumber: jamaah.porsiNumber,
                 regionName: jamaah.region.name,
-                bloodType: jamaah.bloodType || 'B',
+                bloodType: jamaah.bloodType || '-',
                 age: 2026 - jamaah.birthDate.getFullYear(),
                 gender: jamaah.gender,
-                kloterCode: kloter ? kloter.kloterCode : 'UPG-02',
-                kloterNumber: kloter ? kloter.kloterNumber : 2,
+                kloterCode: kloter ? kloter.kloterCode : 'Menunggu Penetapan',
+                kloterNumber: kloter ? kloter.kloterNumber : undefined,
                 embarkation: kloter ? kloter.embarkationName : 'Embarkasi Hasanuddin Makassar (UPG)',
-                airline: kloter?.airlineName || 'Garuda Indonesia',
-                flightNumber: kloter?.flightNumber || 'GA-1102',
-                seatNumber: jamaah.kloterMembership?.seatNumber || '14-B',
-                groupName: group?.name || 'Rombongan 2 (Regu 1)',
-                dormitoryDate: kloter?.dormitoryInDate ? kloter.dormitoryInDate.toLocaleDateString('id-ID', { dateStyle: 'medium' }) : '14 Mei 2026',
-                departureDate: kloter?.flightDepartureDate ? kloter.flightDepartureDate.toLocaleDateString('id-ID', { dateStyle: 'medium' }) : '15 Mei 2026',
+                airline: kloter?.airlineName || 'Menunggu SK Maskapai',
+                flightNumber: kloter?.flightNumber || '-',
+                seatNumber: jamaah.kloterMembership?.seatNumber || 'Belum Diatur',
+                groupName: group?.name || 'Belum Diatur',
+                dormitoryDate: kloter?.dormitoryInDate ? kloter.dormitoryInDate.toLocaleDateString('id-ID', { dateStyle: 'medium' }) : 'Menunggu Jadwal PPIH',
+                departureDate: kloter?.flightDepartureDate ? kloter.flightDepartureDate.toLocaleDateString('id-ID', { dateStyle: 'medium' }) : 'Menunggu Jadwal PPIH',
               }}
             />
           </div>
@@ -464,7 +464,9 @@ export default async function PortalJamaahPage() {
                 Informasi Kloter & Narahubung Petugas PPIH
               </h2>
               <p className="text-xs text-gray-500">
-                Tim Petugas Penyelenggara Ibadah Haji (PPIH) Kloter {kloter ? kloter.kloterCode : 'UPG-02'} Embarkasi Makassar siap melayani ibadah dan kesehatan Anda
+                {kloter
+                  ? `Tim Petugas Penyelenggara Ibadah Haji (PPIH) Kloter ${kloter.kloterCode} Embarkasi Makassar siap melayani ibadah dan kesehatan Anda`
+                  : 'Penetapan kloter dan petugas resmi menunggu Surat Keputusan resmi PPIH Embarkasi Makassar'}
               </p>
             </div>
           </div>
@@ -477,64 +479,45 @@ export default async function PortalJamaahPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-[#fbf8ee]/60 border border-[#e8dfc8] text-xs">
           <div>
             <span className="text-[10px] text-gray-500 uppercase font-bold block">Maskapai & Nomor Flight:</span>
-            <strong className="text-[#1A1410] font-bold">{kloter?.airlineName || 'Garuda Indonesia'} ({kloter?.flightNumber || 'GA-1102'})</strong>
+            <strong className="text-[#1A1410] font-bold">
+              {kloter?.airlineName ? `${kloter.airlineName} (${kloter.flightNumber || '-'})` : 'Menunggu Penetapan Maskapai'}
+            </strong>
           </div>
           <div>
             <span className="text-[10px] text-gray-500 uppercase font-bold block">Masuk Asrama Haji Sudiang UPG:</span>
-            <strong className="text-[#1A1410] font-bold">14 Mei 2026 (Wajib Tiba 08:00 WITA)</strong>
+            <strong className="text-[#1A1410] font-bold">
+              {kloter?.dormitoryInDate ? kloter.dormitoryInDate.toLocaleDateString('id-ID', { dateStyle: 'long' }) : 'Menunggu Jadwal Masuk Asrama'}
+            </strong>
           </div>
           <div>
-            <span className="text-[10px] text-gray-500 uppercase font-bold block">Terbang ke Bandara AMAA Madinah:</span>
-            <strong className="text-[#1A1410] font-bold">15 Mei 2026 (Pukul 08:00 WITA)</strong>
+            <span className="text-[10px] text-gray-500 uppercase font-bold block">Pemberangkatan ke Arab Saudi:</span>
+            <strong className="text-[#1A1410] font-bold">
+              {kloter?.flightDepartureDate ? kloter.flightDepartureDate.toLocaleDateString('id-ID', { dateStyle: 'long' }) : 'Menunggu Jadwal Penerbangan'}
+            </strong>
           </div>
         </div>
 
         {/* Officers Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <div className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#e8dfc8] space-y-1">
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
-              TPHI (Ketua Kloter)
-            </span>
-            <h4 className="text-xs font-bold text-[#1A1410] pt-1">H. Abdul Karim, S.Ag</h4>
-            <div className="flex items-center gap-1.5 text-xs text-gray-600 pt-1">
-              <Phone className="w-3.5 h-3.5 text-[#b8941e]" />
-              <span className="font-mono">0811-4800-101</span>
-            </div>
+        {kloter?.officers && kloter.officers.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {kloter.officers.map((off: any) => (
+              <div key={off.id} className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#e8dfc8] space-y-1">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
+                  {off.roleType}
+                </span>
+                <h4 className="text-xs font-bold text-[#1A1410] pt-1">{off.fullName}</h4>
+                <div className="flex items-center gap-1.5 text-xs text-gray-600 pt-1">
+                  <Phone className="w-3.5 h-3.5 text-[#b8941e]" />
+                  <span className="font-mono">{off.phoneNumber || '-'}</span>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#e8dfc8] space-y-1">
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
-              TPIHI (Pembimbing Ibadah)
-            </span>
-            <h4 className="text-xs font-bold text-[#1A1410] pt-1">Drs. H. Syarifuddin, M.Pd</h4>
-            <div className="flex items-center gap-1.5 text-xs text-gray-600 pt-1">
-              <Phone className="w-3.5 h-3.5 text-[#b8941e]" />
-              <span className="font-mono">0811-4800-102</span>
-            </div>
+        ) : (
+          <div className="p-4 rounded-2xl bg-[#fbf8ee] border border-[#e8dfc8] text-xs text-stone-600 text-center">
+            Nama petugas kloter (Ketua Kloter / TPHI, Pembimbing Ibadah / TPIHI, Dokter & Tenaga Medis / TKHI, dan Petugas Daerah / TPHD) akan ditampilkan otomatis di sini setelah diterbitkannya Surat Keputusan resmi PPIH Embarkasi Makassar.
           </div>
-
-          <div className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#e8dfc8] space-y-1">
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-50 text-rose-800 border border-rose-200">
-              TKHI (Dokter Kloter)
-            </span>
-            <h4 className="text-xs font-bold text-[#1A1410] pt-1">dr. Sarah Wulandari, Sp.PD</h4>
-            <div className="flex items-center gap-1.5 text-xs text-gray-600 pt-1">
-              <Phone className="w-3.5 h-3.5 text-rose-600" />
-              <span className="font-mono">0811-4800-103</span>
-            </div>
-          </div>
-
-          <div className="p-3.5 rounded-2xl bg-[#FAF9F5] border border-[#e8dfc8] space-y-1">
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#fbf8ee] text-[#8a6d2b] border border-[#e8dfc8]">
-              TPHD (Pelayanan Umum)
-            </span>
-            <h4 className="text-xs font-bold text-[#1A1410] pt-1">H. M. Mansyur</h4>
-            <div className="flex items-center gap-1.5 text-xs text-gray-600 pt-1">
-              <Phone className="w-3.5 h-3.5 text-[#b8941e]" />
-              <span className="font-mono">0811-4800-104</span>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* 6. Catatan Penting & Bantuan */}

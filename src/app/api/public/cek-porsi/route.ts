@@ -123,9 +123,11 @@ export async function POST(request: NextRequest) {
               code: jamaah.kloterMembership.kloter.kloterCode,
               embarkation: jamaah.kloterMembership.kloter.embarkationName,
               departureDate: jamaah.kloterMembership.kloter.flightDepartureDate,
-              airline: `${jamaah.kloterMembership.kloter.airlineName || 'Garuda Indonesia'} (${jamaah.kloterMembership.kloter.flightNumber || 'GA-1101'})`,
+              airline: jamaah.kloterMembership.kloter.airlineName
+                ? `${jamaah.kloterMembership.kloter.airlineName} (${jamaah.kloterMembership.kloter.flightNumber || '-'})`
+                : 'Menunggu SK Maskapai',
               seatNumber: jamaah.kloterMembership.seatNumber || 'Akan Diumumkan',
-              groupName: jamaah.kloterMembership.group?.name || 'Regu Terdaftar',
+              groupName: jamaah.kloterMembership.group?.name || 'Akan Ditetapkan',
             }
           : null,
         documentsSummary: jamaah.documents.map((d) => ({
