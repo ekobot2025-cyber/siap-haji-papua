@@ -294,22 +294,14 @@ export default function ShowcaseLandingPage() {
                 <Sparkles className="w-3.5 h-3.5 text-[#b8941e] animate-pulse" />
                 SISTEM INFORMASI & MONITORING HAJI PROVINSI PAPUA
               </div>
-              <a
-                href="https://haji.go.id/estimasi-keberangkatan?tab=berhak-lunas"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition-colors shadow-2xs"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>924 Kuota Berhak Lunas 1448 H Resmi Teradopsi</span>
-                <ArrowUpRight className="w-3 h-3 text-emerald-700" />
-              </a>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-[#1A1410]">
-              Satu Data • Satu Monitoring • Satu Layanan.{' '}
-              <span className="bg-gradient-to-r from-[#c9a961] via-[#d4af37] to-[#b8941e] bg-clip-text text-transparent block mt-1">
+            {/* Main Headline (2 Baris Rapi) */}
+            <h1 className="font-black tracking-tight text-[#1A1410] space-y-1 sm:space-y-2">
+              <span className="block text-2xl sm:text-3xl md:text-4xl xl:text-[40px] leading-tight text-[#1A1410]">
+                Satu Data • Satu Monitoring • Satu Layanan.
+              </span>
+              <span className="block text-2xl sm:text-3xl md:text-4xl xl:text-[44px] leading-tight bg-gradient-to-r from-[#c9a961] via-[#d4af37] to-[#b8941e] bg-clip-text text-transparent">
                 Haji Papua Siap 1448 H/2027 M.
               </span>
             </h1>
